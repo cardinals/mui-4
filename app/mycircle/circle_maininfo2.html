@@ -1,0 +1,264 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="UTF-8">
+		<title>首页</title>
+		<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+		<link href="../../css/mui.css" rel="stylesheet" />
+		<link href="../../css/gloab.css" rel="stylesheet" />
+		<link href="../../css/xmui.pullToRefresh.material.css" rel="stylesheet" />
+		<link href="../../css/swiper.min.css" rel="stylesheet">
+		<link href="../../css/mui.picker.css" rel="stylesheet">
+		<link href="../../css/mui.poppicker.css" rel="stylesheet">
+		<style>
+			.swiper-slide {
+				width: 100px;
+			}
+			
+			input[type=radio][name=type-choice] {
+				display: none;
+				opacity: 0;
+			}
+			
+			input[type=radio][name=type-choice]+label {
+				font-size: 14px;
+				display: inline-block;
+				width: 100%;
+				text-align: center;
+				line-height: 34px;
+			}
+			
+			input[type=radio][name=type-choice]:checked+label {
+				border-bottom: 1px solid #FE7E00;
+				color: #FE7E00;
+			}
+			
+			.bg-title {
+				background-color: #c70321;
+			}
+			
+			.my-swiper {
+				background-color: white;
+				height: 35px;
+			}
+			
+			.cell-ji {
+				text-align: center;
+				background-color: #ffffff;
+			}
+			
+			.cell-ou {
+				text-align: center;
+				background-color: #F9F9F9;
+			}
+			
+			.bg-title {
+				background-color: #FB5C5F;
+			}
+			
+			.mui-input-group .mui-input-row:after {
+				height: 0px;
+			}
+			
+			.red-font {
+				color: #DE2D29;
+				font-size: 14px;
+			}
+			
+			input[type='text'] {
+				font-size: 14px;
+			}
+		</style>
+
+	</head>
+
+	<body>
+		<header class="mui-bar mui-bar-nav bg-title">
+			<a class="mui-action-back mui-icon mui-icon-left-nav mui-pull-left color-white"></a>
+			<h1 class="mui-title color-white titlecolor">圈子</h1>
+		</header>
+
+		<div class="mui-content mui-scroll-wrapper bg-bai">
+			<div class="mui-scroll pl10 pr10" id="station-list" style="padding-bottom: 50px;">
+
+				<!--单个div start-->
+				<div class="wd100 bg-bai pt10 pb10 mt10">
+					<div class="dis_table wd100">
+						<div class="dis_table_cell wd70 textcenter" style="width: 65px;">
+							<div style="width: 50px;height: 50px;display: inline-block;border: 0px solid #999;overflow: hidden;border-radius: 60px;background-color: white;">
+								<img src="../../images/icon/userheard.png" width="50" height="50">
+							</div>
+						</div>
+						<div class="dis_table_cell textleft">
+							<span style="font-size: 14px;color: #000000;line-height: 30px;">飞狐4568</span><br />
+							<span style="color: #999999">3小时前</span>
+						</div>
+						<div class="dis_table_cell wd15 textcenter">
+							<div class="" style="color: #FFA422;border: 1px solid #FFA422;border-radius: 3px;">+关注</div>
+						</div>
+					</div>
+
+					<!--视频 -->
+					<div class="wd100">
+						<video poster="http://p05vxiv8z.bkt.clouddn.com/Fp17PkgC6BJZA7JonCnRQ69G3Cob" src="http://pic.ibaotu.com/00/58/54/18g888piCCWz.mp4" style="width: 100%;margin-bottom: -20px;" height="240" loop="loop">
+							您的浏览器不支持此视频的播放. </video>
+						<div class="textcenter" style="color: #E4E4E4;">建议在wifi环境下播放</div>
+					</div>
+					<!-- 音频 -->
+					<div class="wd100">
+						<audio preload="preload" src="http://www.0772music.cn/uploadfiles/article/admin/2008-12/2008122309035034344.mp3" style="width: 100%;" controls="controls">
+							您的浏览器不支持 audio 标签。
+						</audio>
+					</div>
+					<!-- 直播按钮 -->
+					<div class="wd100 mt10">
+						<button class="bg-red wd100 ft18" style="">观看直播</button>
+						<button class="bg-gray wd100 mt10 ft18">即将开播</button>
+					</div>
+					<div class="wd100 mt15 ft16" id="content1">
+						百度（纳斯达克：BIDU），全球最大的中文搜索引擎、最大的中文网站。1999年底,身在美国硅谷的李彦宏看到了中国互联网及中文搜索引擎服务的巨大发展潜力，抱着技术改变世界的梦想，他毅然辞掉硅谷的高薪工作，携搜索引擎专利技术，于 2000年...
+					</div>
+				</div>
+				<div class="ft14 mt10" style="color: #000000;padding: 10px;background-color: #F0F0F0;">
+					全部评论 1
+				</div>
+				<div class="bg-bai textcenter">
+					<!--单个留言start-->
+					<div style="border-bottom: 1px solid #EEEEEE; transform: rotateY(0.5);"></div>
+					<div style="margin-top: 10px;margin-bottom: 10px;">
+						<div class="wd94 dis_table">
+							<div class="dis_table_cell" style="width: 60px;text-align: left;vertical-align: top;">
+								<div style="width: 50px;height: 50px;display: inline-block;border: 0px solid #999;overflow: hidden;border-radius: 50px;background-color: white;">
+									<img id="show_headimg" src="../../images/icon/userheard.png" width="50" height="50">
+								</div>
+							</div>
+							<div class="dis_table_cell textleft" style="vertical-align: top;padding-top: 5px;">
+								<span style="color: #DF823B;font-size: 14px;">莆田运动鞋</span><br />
+								<span class="ft14" style="">擎、最大的中文网站。1999年底,身在美国硅谷的李彦宏看到了中国互联网及</span><br />
+								<span class="ft12 inline-block" style="background-color: #F6F6F6;width: 100%;padding:5px 0px 5px 10px">
+							回复：是的
+						</span><br>
+								<div style="padding-top: 10px;">
+									<span style="font-size: 12px;">11-8 13:53</span>
+									<span style="float: right;padding-right: 5px;"><a href="#saydiv"><img src="../../images/icon/icon-message.png" style="width: 20px;height: 20px;" alt="" /></a></span>
+								</div>
+							</div>
+						</div>
+					</div>
+
+					<!--单个留言end-->
+					<!--单个留言start-->
+					<div style="border-bottom: 1px solid #EEEEEE; transform: rotateY(0.5);"></div>
+					<div style="margin-top: 10px;margin-bottom: 10px;">
+						<div class="wd94 dis_table">
+							<div class="dis_table_cell" style="width: 60px;text-align: left;vertical-align: top;">
+								<div style="width: 50px;height: 50px;display: inline-block;border: 0px solid #999;overflow: hidden;border-radius: 50px;background-color: white;">
+									<img id="show_headimg" src="../../images/icon/userheard.png" width="50" height="50">
+								</div>
+							</div>
+							<div class="dis_table_cell textleft" style="vertical-align: top;padding-top: 5px;">
+								<span style="color: #DF823B;font-size: 14px;">莆田运动鞋</span><br />
+								<span class="ft14" style="">擎、最大的中文网站。1999年底,身在美国硅谷的李彦宏看到了中国互联网及</span><br />
+								<span class="ft12 inline-block" style="background-color: #F6F6F6;width: 100%;padding:5px 0px 5px 10px">
+							回复：是的
+						</span><br>
+								<div style="padding-top: 10px;">
+									<span style="font-size: 12px;">11-8 13:53</span>
+									<span style="float: right;padding-right: 5px;"><a href="#saydiv"><img src="../../images/icon/icon-message.png" style="width: 20px;height: 20px;" alt="" /></a></span>
+								</div>
+							</div>
+						</div>
+					</div>
+
+					<!--单个留言end-->
+					<!--单个留言start-->
+					<div style="border-bottom: 1px solid #EEEEEE; transform: rotateY(0.5);"></div>
+					<div style="margin-top: 10px;margin-bottom: 10px;">
+						<div class="wd94 dis_table">
+							<div class="dis_table_cell" style="width: 60px;text-align: left;vertical-align: top;">
+								<div style="width: 50px;height: 50px;display: inline-block;border: 0px solid #999;overflow: hidden;border-radius: 50px;background-color: white;">
+									<img id="show_headimg" src="../../images/icon/userheard.png" width="50" height="50">
+								</div>
+							</div>
+							<div class="dis_table_cell textleft" style="vertical-align: top;padding-top: 5px;">
+								<span style="color: #DF823B;font-size: 14px;">莆田运动鞋</span><br />
+								<span class="ft14" style="">擎、最大的中文网站。1999年底,身在美国硅谷的李彦宏看到了中国互联网及</span><br />
+								<span class="ft12 inline-block" style="background-color: #F6F6F6;width: 100%;padding:5px 0px 5px 10px">
+							回复：是的
+						</span><br>
+								<div style="padding-top: 10px;">
+									<span style="font-size: 12px;">11-8 13:53</span>
+									<span style="float: right;padding-right: 5px;"><a href="#saydiv"><img src="../../images/icon/icon-message.png" style="width: 20px;height: 20px;" alt="" /></a></span>
+								</div>
+							</div>
+						</div>
+					</div>
+					<!--单个留言end-->
+
+				</div>
+			</div>
+			<div class="fixed bottom0 wd100 textcenter pt10 pb10 ft16 z997 bg-bai" style="border-top: 1px solid #EEEEEE;">
+				<a href="#saydiv">
+					<img src="../../images/icon/icon-message.png" style="width: 20px;height: 20px;display: inline-block;margin-right: 10px;" alt="" />
+					<span>
+				评论
+			</span>
+				</a>
+			</div>
+
+		</div>
+		<div id="saydiv" class="box mui-popover mui-popover-action mui-popover-bottom" style="z-index:999">
+			<!--<input type="text" name="" id="" value="" style="position:relative;"/>-->
+			<div class="bg-bai pt10">
+				<div class="wd96 dis_table">
+					<div class="dis_table_cell " style="width: 85%;">
+						<textarea name="newmessage" rows="3" cols="" placeholder="说两句话吧~"></textarea>
+					</div>
+					<div class="dis_table_cell">
+						<span style="font-size: 16px;" id="sendmsg">发送</span>
+					</div>
+				</div>
+			</div>
+		</div>
+
+		<script src="../../js/h.min.js"></script>
+		<script src="../../js/mui.min.js"></script>
+		<script src="../../js/immersed.js"></script>
+		<script src="../../js/com.js"></script>
+		<script src="../../js/xmui-globalEvent.js"></script>
+		<script src="../../js/mui.pullToRefresh.js"></script>
+		<script src="../../js/mui.pullToRefresh.material.js"></script>
+		<script src="../../js/com.js"></script>
+		<script src="../../js/swiper.min.js"></script>
+		<script src="../../js/com.data.js"></script>
+		<script src="../../js/com.mui.js"></script>
+		<script src="../../js/mui.picker.js"></script>
+		<script src="../../js/mui.poppicker.js"></script>
+
+		<script>
+			mui.ready(function() {
+				var swiper = new Swiper('.swiper-container', {
+					pagination: '.swiper-pagination',
+					slidesPerView: 5,
+					paginationClickable: true,
+					spaceBetween: 0,
+					freeMode: true
+				});
+				mui(".mui-scroll-wrapper").scroll({
+					bounce: true, //是否启用回弹
+					indicators: true, //是否显示滚动条
+					deceleration: 0.0005 //flick 减速系数，系数越大，滚动速度越慢，滚动距离越小，默认值0.0006
+				});
+			});
+			mui.plusReady(function() {
+
+				mui('body').on('tap', '#sendmsg', function() {
+					location.reload();
+				});
+
+			})
+		</script>
+	</body>
+
+</html>

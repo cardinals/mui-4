@@ -1,0 +1,105 @@
+
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <title>首页</title>
+    <meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+    <link href="../../css/mui.css" rel="stylesheet" />
+    <link href="../../css/gloab.css" rel="stylesheet" />
+    <link href="../../css/xmui.pullToRefresh.material.css" rel="stylesheet" />
+    <link href="../../css/swiper.min.css" rel="stylesheet">
+    <style>
+        
+        .bg-title{
+            background-color:#c70321;
+        }
+        #holder {
+			border: solid 0px #bbb;
+			border-radius: 5px;
+			margin: 50px auto;
+			background-color: #fff;
+		}
+		#showinfo {
+            color: #FE7E00;
+			text-align: center;
+			padding: 20px 10px;
+            font-size: 16px;
+            margin-top: 60px;
+		}
+    </style>
+
+</head>
+<body>
+<header class="mui-bar mui-bar-nav bg-title">
+    <a class="mui-action-back mui-icon mui-icon-left-nav mui-pull-left color-white"></a>
+    <h1 class="mui-title color-white titlecolor">修改手势密码</h1>
+</header>
+
+<div class="mui-content mui-scroll-wrapper bg-bai" >
+    <div class="mui-scroll" id="station-list" style="padding-bottom: 50px;">
+        <div id='showinfo'>输入手势解锁密码</div>
+		<div id='holder' class="mui-locker" data-locker-options='{"ringColor":"rgba(254,126,0,1)","fillColor":"#ffffff","pointColor":"rgba(254,126,0,1)","lineColor":"rgba(0,136,204,1)"}' data-locker-width='330' data-locker-height='330'></div>
+    </div>
+</div>
+
+
+<script src="../../js/h.min.js"></script>
+		<script src="../../js/mui.min.js"></script>
+		<script src="../../js/immersed.js"></script>
+<script src="../../js/com.js"></script>
+<script src="../../js/xmui-globalEvent.js"></script>
+<script src="../../js/mui.pullToRefresh.js"></script>
+<script src="../../js/mui.pullToRefresh.material.js"></script>
+<script src="../../js/com.js"></script>
+<script src="../../js/swiper.min.js"></script>
+<script src="../../js/com.data.js"></script>
+<script src="../../js/com.mui.js"></script>
+<script src="../../js/mui.locker.js"></script>
+<script>
+    mui.ready(function () {
+        mui(".mui-scroll-wrapper").scroll({
+            bounce: true,//是否启用回弹
+            indicators: true,//是否显示滚动条
+            deceleration:  0.0005 //flick 减速系数，系数越大，滚动速度越慢，滚动距离越小，默认值0.0006
+        });
+    });
+    mui.plusReady(function(){
+
+    })
+    (function($, doc) {
+				$.init();
+				var holder = doc.querySelector('#holder'),
+					showinfo = doc.querySelector('#showinfo'),
+					record = [];
+				//处理事件
+				holder.addEventListener('done', function(event) {
+					var rs = event.detail;
+					if (rs.points.length < 4) {
+						showinfo.innerText = '设定的手势太简单了';
+						record = [];
+						rs.sender.clear();
+						return;
+					}
+
+					console.log(rs.points.join(''));
+					record.push(rs.points.join(''));
+					if (record.length >= 2) {
+						if (record[0] == record[1]){
+							showinfo.innerText = '手势设定完成';
+						} else {
+							showinfo.innerText = '两次手势设定不一致';
+						}
+						rs.sender.clear();
+						record = [];
+					} else {
+						showinfo.innerText = '请确认手势设定';
+						rs.sender.clear();
+					}
+				});
+			}(mui, document));
+</script>
+</body>
+
+</html>

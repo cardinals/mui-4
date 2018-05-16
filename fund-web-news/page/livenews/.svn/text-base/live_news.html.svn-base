@@ -1,0 +1,515 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>财经日历</title>
+</head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black">
+<link rel="stylesheet" type="text/css" href="../../plug-in/weui/css/weui.min.css">
+<link rel="stylesheet" type="text/css" href="../../plug-in/weui/css/jquery-weui.css">
+<link rel="stylesheet" type="text/css" href="../../plug-in/fonts/iconfont.css">
+<script type="text/javascript" src="../../plug-in/fonts/iconfont.js"></script>
+<link rel="stylesheet" type="text/css" href="../../css/new.css">
+<script type="text/javascript" src="../../plug-in/jquery1.12.4/jquery.min.js"></script>
+<script type="text/javascript" src="../../plug-in/weui/js/jquery-weui.js"></script>
+<script type="text/javascript" src="../../plug-in/URI1.18.12/URI.js"></script>
+<script type="text/javascript" src="../../js/common.js"></script>
+<script type="text/javascript" src="../../js/dataformat.js"></script>
+<script type="text/javascript">
+	
+var arry=new Array();
+var nextCursor="";
+var channel="";
+$(function(){
+//	var cursor=new Date().getTime();
+//	channel="commodity-channel";
+//	var html=getNewsList(cursor,"0");
+	var html=getCalendars();
+	if(html!=""){
+		$("#news_list_div").append(html);
+	}	
+	
+	//loadmore btn不可用 TODO
+	//$('.loadmore').hide();
+	
+})
+
+function loadMore(){
+	if(nextCursor!=""){
+		var html=getNewsList(nextCursor,"0");
+		$("#news_list_div").append(html);
+	}else{
+		//loadmore btn不可用 TODO
+		$('.loadmore').hide();
+		
+	}
+}
+//取得商品期货新闻
+function getNewsList(cursor,auto){
+	$.showLoading();
+	$('.loadmore').show();
+	var html="";
+	var url='https://dedicated.wallstreetcn.com/api/v1/livenews?channel='+channel+'&score=1,2,3&limit=10';
+	if(cursor!==""){
+		url=url+"&cursor="+cursor;
+	}
+	$.ajax({
+		url : url,
+		type : 'get',
+		dataType:"JSON",
+		async: false,
+		data:{},
+		success:function(data){
+			//成功
+			if(data.code=="20000"){
+				nextCursor=data.data.next_cursor;
+				var newsList=data.data.items;
+				if(newsList!=null && newsList.length!=0){
+					
+					$.each(newsList,function(n,map){
+//						//定时器自动运行
+						if(auto=="1"){
+							if(!arry.hasOwnProperty(map.id)){
+
+      							html=html+"<div class=\"weui-panel kuaixun\">";
+						        html=html+"<div class=\"weui-panel__bd\">";
+						        html=html+"<div class=\"weui-media-box weui-media-box_text\">";
+						        html=html+"<p class=\"weui-media-box__desc\">"+map.content+"</p>";
+								if(map.image_uris.length>0){
+						
+									$.each(map.image_uris,function(n1,value){
+										//图片
+										html=html+"<img width=100% src=\""+value+"\">";
+						
+									});
+						
+								}
+					            html=html+"<ul class=\"weui-media-box__info\">";
+					            html=html+"<li class=\"weui-media-box__info__meta\">"+getLocalTime(map.display_time)+"</li>";
+					            html=html+"</ul>";
+					            html=html+"</div>";
+					            html=html+"</div>";
+					            html=html+"</div>";
+							    arry[map.id]="";
+							}
+						}else{
+      						html=html+"<div class=\"weui-panel kuaixun\">";
+        					html=html+"<div class=\"weui-panel__bd\">";
+          					html=html+"<div class=\"weui-media-box weui-media-box_text\">";
+            				html=html+"<p class=\"weui-media-box__desc\">"+map.content+"</p>";
+							if(map.image_uris.length>0){
+								$.each(map.image_uris,function(n1,value){
+									//图片
+									html=html+"<img width=100% src=\""+value+"\">";
+								});
+							}
+            				html=html+"<ul class=\"weui-media-box__info\">";
+              				html=html+"<li class=\"weui-media-box__info__meta\">"+getLocalTime(map.display_time)+"</li>";
+            				html=html+"</ul>";
+          					html=html+"</div>";
+        					html=html+"</div>";
+      						html=html+"</div>";
+						    arry[map.id]="";
+					  }
+					});
+				}else{
+					next_cursor="";
+				}
+			}
+			$.hideLoading();
+		}
+	});
+	return html;
+}
+
+
+var newsTimer;
+
+function newsMenu(menuPara){
+	if(channel!=menuPara){
+		$("#news_list_div").html("");
+		
+		if(menuPara=="calendars"){
+			if(newsTimer!=null){
+				clearInterval(newsTimer);
+			}
+			//loadmore btn不可见 TODO
+			
+			channel="";
+			var html=getCalendars();
+			if(html!=""){
+				$("#news_list_div").append(html);
+			}
+		}else{
+			
+			channel=menuPara;
+			//var cursor=$.myTime.DateToUnix(new Date().format("yyyy-MM-dd"));
+	
+			var html=getNewsList("","0");
+			if(html!=""){
+				$("#news_list_div").append(html);
+			}else{
+				//loadmore btn不可用 TODO
+			}
+			
+			//定时器
+			newsTimer=setInterval(function(){
+				
+				var html=getNewsList("","1");
+				if(html!=""){
+					$("#news_list_div").prepend(html);
+				}
+			},60*1800);
+		}
+	}
+}
+
+//取得日历
+function getCalendars(){
+	$.showLoading();
+	$('.loadmore').hide();
+	var html="";
+//	var start=getStartDateTime(new Date()).getTime();
+//	var end=new Date().getTime();
+	var start=$.myTime.DateToUnix(new Date().format("yyyy-MM-dd")+" 00:00:00");
+	var temp=addDay(new Date().format("yyyy-MM-dd"),1);
+	
+	var end=$.myTime.DateToUnix(new Date().format("yyyy-MM-dd")+" 23:59:59");
+	$.ajax({
+		url : 'https://api-prod.wallstreetcn.com/apiv1/finfo/calendars',
+		type : 'get',
+		dataType:"JSON",
+		async: false,
+		data:{'start':start,'end':end},
+		success:function(data){
+			//成功
+			if(data.code=="20000"){
+				var newsList=data.data.items;
+				if(newsList!=null && newsList.length!=0){
+					$.each(newsList,function(n,map){
+						var stars=map.stars;//星级					
+						
+						var actual=map.actual;//今值
+							if(actual=="") actual="--";
+						var forecast=map.forecast;//预期
+							if(forecast=="") forecast="--";
+						var previous=map.previous;//前值
+							if(previous=="") previous="--";
+								
+						
+						html=html+"<a href=\"javascript:;\" class=\"rili-box\" onclick=\"goCalendarDetail(\'"+map.ticker+"\',\'"+getLocalTime(map.timestamp)+"\',\'"+map.flagURL+"\',\'"+map.country+"\',\'"+map.stars+"\',\'"+map.title+"\',\'"+actual+"\',\'"+forecast+"\',\'"+previous+"\')\">";
+						html=html+"<div class=\"rili-list\">";
+						html=html+"    <div class=\"weui-flex t1\">";
+						html=html+"        <div class=\"r-time\"><div class=\"placeholder\"><i class=\"iconfont icon-time-o\"></i> "+ getLocalTime(map.timestamp) +"</div></div>";
+						html=html+"       <div class=\"weui-flex__item r-guo\"><div class=\"placeholder\"><img src=\""+ map.flagURL +"\" class=\"flag\"> "+ map.country +"</div></div>";
+						if(stars==1){
+							html=html+"  <div class=\"r-xing\"><div class=\"placeholder\">";
+							html=html+"        	<svg class=\"icon\" aria-hidden=\"true\"><use xlink:href=\"#icon-star\"></use></svg>";
+							html=html+"        	<svg class=\"icon\" aria-hidden=\"true\"><use xlink:href=\"#icon-xingcopy\"></use></svg>";
+							html=html+"        	<svg class=\"icon\" aria-hidden=\"true\"><use xlink:href=\"#icon-xingcopy\"></use></svg>";
+							html=html+"        </div></div>";
+						}
+						if(stars==2){
+							html=html+"   <div class=\"r-xing\"><div class=\"placeholder\">";
+							html=html+"        	<svg class=\"icon\" aria-hidden=\"true\"><use xlink:href=\"#icon-star\"></use></svg>";
+							html=html+"        	<svg class=\"icon\" aria-hidden=\"true\"><use xlink:href=\"#icon-star\"></use></svg>";
+							html=html+"        	<svg class=\"icon\" aria-hidden=\"true\"><use xlink:href=\"#icon-xingcopy\"></use></svg>";
+							html=html+"        </div></div>";
+						}
+						if(stars==3){
+							html=html+"  <div class=\"r-xing\"><div class=\"placeholder\">";
+							html=html+"        	<svg class=\"icon\" aria-hidden=\"true\"><use xlink:href=\"#icon-xing\"></use></svg>";
+							html=html+"        	<svg class=\"icon\" aria-hidden=\"true\"><use xlink:href=\"#icon-xing\"></use></svg>";
+							html=html+"        	<svg class=\"icon\" aria-hidden=\"true\"><use xlink:href=\"#icon-xing\"></use></svg>";
+							html=html+"        </div></div>";
+						}
+						html=html+"    </div>";
+						html=html+"    <div class=\"weui-flex t2\">";
+						html=html+"        <div class=\"weui-flex__item r-title\"><div class=\"placeholder\">"+ map.title +"</div></div>";
+						html=html+"    </div>";
+						html=html+"    <div class=\"weui-flex t3\">";
+						html=html+"        <div class=\"weui-flex__item r-va1\"><div class=\"placeholder\">今值 <i>"+ actual +"</i></div></div>";
+						html=html+"        <div class=\"weui-flex__item r-va2\"><div class=\"placeholder\">预期 <i>"+ forecast +"</i></div></div>";
+						html=html+"        <div class=\"weui-flex__item r-va3\"><div class=\"placeholder\">前值 <i>"+ previous +"</i></div></div>";
+						html=html+"    </div>";
+						html=html+"</div>";
+						html=html+"</a>";
+						
+
+					});
+				}
+				
+			}
+			$.hideLoading();
+		}
+	});
+	return html;
+}
+function goCalendarDetail(ticker,timestamp,flagURL,country,stars,title,actual,forecast,previous){
+	//windowHref('../calendars/calendar_detail.html','paras='+para);
+
+//alert("ticker="+ticker);
+    $("#detail-popup").popup();
+	$('.weui-loadmore_loading').show();
+	
+	var html="";
+					
+	$("#detail_header").html("");
+	$(".rili-par").html("");
+	$(".detail").html("");
+	
+	html=html+"<div class=\"rili-list\">";
+	html=html+"    <div class=\"weui-flex t1\">";
+	html=html+"        <div class=\"r-time\"><div class=\"placeholder\"><i class=\"iconfont icon-time-o\"></i> "+ timestamp +"</div></div>";
+	html=html+"       <div class=\"weui-flex__item r-guo\"><div class=\"placeholder\"><img src=\""+ flagURL +"\" class=\"flag\"> "+ country +"</div></div>";
+	if(stars==1){
+		html=html+"        <div class=\"r-xing\"><div class=\"placeholder\">";
+		html=html+"        	<svg class=\"icon\" aria-hidden=\"true\" style=\"font-size: 1em;\"><use xlink:href=\"#icon-star\"></use></svg>";
+		html=html+"        	<svg class=\"icon\" aria-hidden=\"true\" style=\"font-size: 1em;\"><use xlink:href=\"#icon-xingcopy\"></use></svg>";
+		html=html+"        	<svg class=\"icon\" aria-hidden=\"true\" style=\"font-size: 1em;\"><use xlink:href=\"#icon-xingcopy\"></use></svg>";
+		html=html+"        </div></div>";
+		html=html+"    </div>";
+	}
+	if(stars==2){
+		html=html+"        <div class=\"r-xing\"><div class=\"placeholder\">";
+		html=html+"        	<svg class=\"icon\" aria-hidden=\"true\" style=\"font-size: 1em;\"><use xlink:href=\"#icon-star\"></use></svg>";
+		html=html+"        	<svg class=\"icon\" aria-hidden=\"true\" style=\"font-size: 1em;\"><use xlink:href=\"#icon-star\"></use></svg>";
+		html=html+"        	<svg class=\"icon\" aria-hidden=\"true\" style=\"font-size: 1em;\"><use xlink:href=\"#icon-xingcopy\"></use></svg>";
+		html=html+"        </div></div>";
+		html=html+"    </div>";
+	}
+	if(stars==3){
+		html=html+"        <div class=\"r-xing\"><div class=\"placeholder\">";
+		html=html+"        	<svg class=\"icon\" aria-hidden=\"true\" style=\"font-size: 1em;\"><use xlink:href=\"#icon-xing\"></use></svg>";
+		html=html+"        	<svg class=\"icon\" aria-hidden=\"true\" style=\"font-size: 1em;\"><use xlink:href=\"#icon-xing\"></use></svg>";
+		html=html+"        	<svg class=\"icon\" aria-hidden=\"true\" style=\"font-size: 1em;\"><use xlink:href=\"#icon-xing\"></use></svg>";
+		html=html+"        </div></div>";
+		html=html+"    </div>";
+	}
+	html=html+"    <div class=\"weui-flex t2\">";
+	html=html+"        <div class=\"weui-flex__item r-title\"><div class=\"placeholder\">"+ title +"</div></div>";
+	html=html+"    </div>";
+	html=html+"    <div class=\"weui-flex t3\">";
+	html=html+"        <div class=\"weui-flex__item r-va1\"><div class=\"placeholder\">今值 <i>"+ actual +"</i></div></div>";
+	html=html+"        <div class=\"weui-flex__item r-va2\"><div class=\"placeholder\">预期 <i>"+ forecast +"</i></div></div>";
+	html=html+"        <div class=\"weui-flex__item r-va3\"><div class=\"placeholder\">前值 <i>"+ previous +"</i></div></div>";
+	html=html+"    </div>";
+	html=html+"</div>";
+	
+	$("#detail_header").html(html);
+	
+	$.ajax({
+		url : 'https://api-prod.wallstreetcn.com/apiv1/finfo/ticker/detail',
+		type : 'get',
+		dataType:"JSON",
+		async: false,
+		data:{'ticker':ticker},
+		success:function(data){
+		
+			//成功
+			if(data.code=="20000"){
+				var calendar=data.data;
+				
+				if(calendar!=null){
+					
+					
+					html="";
+					
+					html=html+"<div class=\"weui-form-preview\">";
+					html=html+"<div class=\"weui-form-preview__bd\">";
+					html=html+"<div class=\"weui-form-preview__item\">";
+					html=html+"<label class=\"weui-form-preview__label\">下次公布时间</label>";
+					html=html+"<span class=\"weui-form-preview__value\">"+getLocalTime(calendar.next_fab_time)+"</span>";
+					html=html+"</div>";
+					html=html+"<div class=\"weui-form-preview__item\">";
+					html=html+"<label class=\"weui-form-preview__label\">数据公布机构</label>";
+					html=html+"<span class=\"weui-form-preview__value\">"+calendar.public_organization+"</span>";
+					html=html+"</div>";
+					html=html+"<div class=\"weui-form-preview__item\">";
+					html=html+"<label class=\"weui-form-preview__label\">发布频率</label>";
+					html=html+"<span class=\"weui-form-preview__value\">"+calendar.release_frequency+"</span>";
+					html=html+"</div>";
+					html=html+"<div class=\"weui-form-preview__item\">";
+					html=html+"<label class=\"weui-form-preview__label\">统计方法</label>";
+					html=html+"<span class=\"weui-form-preview__value\">"+calendar.statistical_method+"</span>";
+					html=html+"</div>";
+					html=html+"</div>";
+					html=html+"</div>";
+					
+				
+					$(".rili-par").html(html);
+					
+					
+					
+					html="";
+					
+				
+				    html=html+"<article class=\"weui-article\">";
+					html=html+"	<section><h3>数据影响</h3><p>"+calendar.data_influence+"</p></section>";
+					html=html+"	 <section><h3>数据释义</h3><p>"+calendar.data_paraphrase+"</p></section>";      
+					html=html+"	 <section><h3>关注理由</h3><p>"+calendar.focus_reason+"</p></section>";
+					html=html+"</article>";
+
+
+					$(".detail").html(html);
+					html="";	
+				}
+				$('#news_detail_div').show();
+			}else{
+				$('.weui-loadmore_line').show();
+			}
+		}
+	});
+	
+	
+	
+	
+}
+</script>
+<body>
+	
+	
+	
+	
+
+	
+	
+	
+	
+
+        	
+        	
+ <!--主内容区 begin-->  
+
+<div class="frame"> 
+	
+	
+	
+<!-- 头导航 -->
+<header class="header-m">
+<div class="weui-flex">
+  <!--<div class="weui-flex__item hl"><a href="javascript:history.back()"><i class="iconfont icon-back"></i></a></div>-->
+  <div class="weui-flex__item hl" id="goback"><i class="iconfont icon-back"></i></div>
+  <div class="weui-flex__item ht">财经日历</div>
+  <div class="weui-flex__item hr"></div>
+</div>
+</header>
+<!-- 头导航 //-->	
+	
+	
+	
+	
+<div class="wrapper wrapper03" id="wrapper03">
+<div class="scroller">
+	<ul class="clearfix">
+		<li><a>财经日历</a></li>
+		<li><a>商品快讯</a></li>
+		<li><a>对冲研投</a></li>
+	</ul>
+</div>
+</div>
+	
+	
+	
+<div class="weui-flex__item hr" id="news_list_div"></div>
+
+
+
+	<div class="weui-form-preview__ft loadmore">
+		<a class="weui-form-preview__btn weui-form-preview__btn_default"  href="javascript:void(0);" onclick="loadMore()">加载更多</a>
+	</div>
+	
+	
+</div>  
+  <!-- 主内容区 end -->        
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!--详情 popup begin -->
+<div id="detail-popup" class="weui-popup__container">
+  <div class="weui-popup__overlay"></div>
+  <div class="weui-popup__modal" style="background: #FFF;">
+ <!-- 头导航 -->
+<header class="header-m" style="background: none;">
+<div class="weui-flex">
+  <div class="weui-flex__item hl"><a href="javascript:;" class='close-popup'><i class="iconfont icon-back" style="color: #000;"> 关闭</i> </a></div>
+  <div class="weui-flex__item ht"></div>
+  <div class="weui-flex__item hr"></div>
+</div>
+</header>
+<!-- 头导航 //-->	
+
+
+
+	<div id="news_detail_div" class="hid">
+		<div class="rili-box" id="detail_header"></div>
+		<div class="rili-par"></div>
+		<div class="detail"></div>
+	</div>
+  
+  
+  
+  
+  
+  
+  </div>
+</div>
+<!--详情 popup end -->
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<script type="text/javascript" src="../../plug-in/navbarscroll/flexible.js"></script>
+<script type="text/javascript" src="../../plug-in/navbarscroll/iscroll.js"></script>
+<script type="text/javascript" src="../../plug-in/navbarscroll/navbarscroll.js"></script>
+<script type="text/javascript">
+$(function(){
+	$('#wrapper03').navbarscroll({
+		defaultSelect:0,
+		endClickScroll:function(obj){
+			if(obj.text()=="财经日历"){
+				newsMenu('calendars');
+			}else if(obj.text()=="商品快讯"){
+				newsMenu('commodity-channel');
+			}else{
+				newsMenu('bestanalyst-channel');
+			}
+		}
+	});
+});
+</script>	
+	
+	
+<script type="text/javascript" src="../../js/mui.js"></script>
+<script>
+  mui('body').on('tap', '#goback', function () {
+      mui.back();
+      //alert();
+  });
+</script>	
+	
+</body>
+</html>

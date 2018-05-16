@@ -1,0 +1,280 @@
+
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <title>首页</title>
+    <meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+    <link href="../../css/mui.css" rel="stylesheet" />
+    <link href="../../css/gloab.css" rel="stylesheet" />
+    <link href="../../css/xmui.pullToRefresh.material.css" rel="stylesheet" />
+    <link href="../../css/swiper.min.css" rel="stylesheet">
+    <style>
+        .swiper-slide{
+            width: 100px;
+        }
+        input[type=radio][name=type-choice]{
+            display: none;
+            opacity: 0;
+        }
+
+        input[type=radio][name=type-choice]+label{
+            font-size: 14px;
+            display: inline-block;
+            width: 100%;
+            text-align: center;
+            line-height: 34px;
+        }
+
+        input[type=radio][name=type-choice]:checked+label {
+            border-bottom: 1px solid #FE7E00;
+            color: #FE7E00;
+        }
+        .bg-title{
+            background-color:#c70321;
+        }
+        .my-swiper{
+            background-color: white;
+            height: 35px;
+        }
+        .cell-ji{
+            text-align: center;
+            background-color: #ffffff;
+        }
+        .cell-ou{
+            text-align: center;
+            background-color: #F9F9F9;
+
+        }
+       
+        .mui-input-group .mui-input-row:after{
+            height: 0px;
+        }
+        input[type='text'],input[type='password']{
+            font-size: 14px;
+        }
+        .can-next{
+            background-color: #FB5C60;
+        }
+        .not-next{
+            background-color: #DDDDDD;
+        }
+    </style>
+
+</head>
+<body>
+<header class="mui-bar mui-bar-nav bg-title">
+    <a class="mui-action-back mui-icon mui-icon-left-nav mui-pull-left color-white"></a>
+    <h1 class="mui-title color-white titlecolor" id="showtital">忘记密码</h1>
+</header>
+
+<div class="mui-content mui-scroll-wrapper">
+    <div class="mui-scroll" id="" style="padding-bottom: 50px;">
+
+        <div id="vue-body">
+            <form class="mui-input-group">
+                <div class="wd100" style="border-bottom: 1px solid #EEEEEE;">
+                    <div class="dis_table wd90">
+                        <div class="dis_table_cell wd20 textleft ft14">
+                            手机号
+                        </div>
+                        <div class="dis_table_cell" style="">
+                            <div class="mui-input-row">
+                                <input type="text" v-model="phone" class="mui-input-clear" placeholder="请输入手机号">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="wd100" style="border-bottom: 1px solid #EEEEEE;">
+                    <div class="dis_table wd100">
+                        <div class="dis_table_cell" style="width: 5%;">
+                        </div>
+                        <div class="dis_table_cell  textleft ft14" style="width: 18%;">
+                            验证码
+                        </div>
+                        <div class="dis_table_cell" style="">
+                            <input type="text" v-model="phonecode" class="mui-input-clear" placeholder="填写验证码">
+                        </div>
+                        <div class="dis_table_cell wd30" style="border-left: 1px solid #EEEEEE;;">
+                            <input class="mui-btn" type="button" name="send_code" id="send_code" :value="send_btn" @click="reqCode" style="display: block;width: 100%;height: 100%;background-color: white;color: #999;"/>
+                        </div>
+                    </div>
+                </div>
+                <div class="wd100" style="border-bottom: 1px solid #EEEEEE;">
+                    <div class="dis_table wd90">
+                        <div class="dis_table_cell wd20 textleft ft14">
+                            新密码
+                        </div>
+                        <div class="dis_table_cell" style="">
+                            <div class="mui-input-row">
+                                <input type="password"  v-model="pwd" class="mui-input-password" placeholder="请输入密码">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="wd100" style="border-bottom: 1px solid #EEEEEE;">
+                    <div class="dis_table wd90">
+                        <div class="dis_table_cell wd20 textleft ft14">
+                            确认密码
+                        </div>
+                        <div class="dis_table_cell" style="">
+                            <div class="mui-input-row">
+                                <input type="password" v-model="repwd" class="mui-input-password" placeholder="再次输入登录密码">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </form>
+            <div class="wd90" style="margin-top: 30px;">
+                <button type="button"  :class="switchNext?'can-next':'not-next'" class="" @click="nextStep"  class="" id="next_step" style="width: 100%;height: 40px;color: white;border: 0px;">完成</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<script src="../../js/h.min.js"></script>
+		<script src="../../js/mui.min.js"></script>
+		<script src="../../js/immersed.js"></script>
+<script src="../../js/com.js"></script>
+<script src="../../js/xmui-globalEvent.js"></script>
+<script src="../../js/mui.pullToRefresh.js"></script>
+<script src="../../js/mui.pullToRefresh.material.js"></script>
+<script src="../../js/com.js"></script>
+<script src="../../js/swiper.min.js"></script>
+<script src="../../js/com.data.js"></script>
+<script src="../../js/com.mui.js"></script>
+
+<script src="../../js/vue.js"></script>
+<script src="../../js/jquery.min_1.8.3.js"></script>
+<script src="../../js/md5.js"></script>
+<script src="../../js/fundsfunction.js"></script>
+
+
+<script>
+    mui.ready(function () {
+        mui(".mui-scroll-wrapper").scroll({
+            bounce: true,//是否启用回弹
+            indicators: true,//是否显示滚动条
+            deceleration:  0.0005 //flick 减速系数，系数越大，滚动速度越慢，滚动距离越小，默认值0.0006
+        });
+    });
+    var vue_body = new Vue({
+        el:"#vue-body",
+        data:{
+            changeType:0,//0修改登录密码 1修改交易密码
+            title:"",
+            oldpwd:"",
+            phonecode:"",
+            pwd:"",
+            repwd:"",
+            phone:"",
+            send_btn:'发送验证码',
+            wait_time:30,//发送短信等待时间
+            switchNext:false,
+        },
+        methods:{
+            reqCode:function(){
+                var this_ = this;
+                if(this_.send_btn=="发送验证码"){
+                    var phone = this.phone;
+//                   alert(phone);
+                    var myreg = /^1[3|4|5|7|8][0-9]{9}$/;
+                    if(!myreg.test(phone)){
+                        mui.toast('请输入有效的手机号码！');
+                        return false;
+                    }
+                    com.data.funds.forgetpwdMsg({
+                        mobile_tel:phone
+                    },function (data){
+                        //alert(JSON.stringify(data));
+                    })
+
+
+
+                    //无论成不成功都等待30s
+                    var time_count = this_.wait_time;
+                    this_.send_btn = time_count+"s后重发";
+
+                    var t1 = window.setInterval(function (){
+                        console.log(time_count);
+                        if(time_count<=0){
+                            this_.send_btn="发送验证码"
+                            window.clearInterval(t1);
+                            return;
+                        }
+                        time_count--;
+                        this_.send_btn = time_count+"s后重发";
+                    },1000);
+                }
+            },
+            nextStep:function(){
+//				alert(this.switchNext)
+                if(this.switchNext){
+                    if(vue_body.pwd!=vue_body.repwd){
+                        mui.toast("两次输入的密码不一致");
+                        return;
+                    }
+                    if(vue_body.pwd.length<6){
+                        mui.toast("密码长度必须大于6位");
+                        return;
+                    }
+                    
+                    
+                    com.data.funds.forgetpwd({
+                        mobile_tel:vue_body.phone,
+                        verificationCode:vue_body.phonecode,
+                        login_password:vue_body.pwd,
+                    },function(data){
+                        com.plus.openWindowX('changepwd_success.html', {});
+                    })
+
+
+                }
+            },
+            checkNext:function(){
+//				oldpwd:"",
+//				phonecode:"",
+//				pwd:"",
+//				repwd:"",
+                if(this.phone==""||this.phonecode==""||this.pwd==""||this.repwd==""){
+                    this.switchNext = false;
+                }else{
+                    this.switchNext = true;
+                }
+            }
+        },
+        watch:{
+            oldpwd:function(){
+                this.checkNext();
+            },
+            phonecode:function(){
+                this.checkNext();
+            },
+            pwd:function(){
+                this.checkNext();
+            },
+            repwd:function(){
+                this.checkNext();
+            }
+        }
+    });
+
+    mui.plusReady(function(){
+        changeType = com.plus.getCurrWebview().self.changeType;
+        vue_body.changeType = changeType;
+//        if(changeType==0){
+//            $("#showtital").html("修改登录密码");
+//        }else{
+//            $("#showtital").html("修改交易密码");
+//        }
+
+
+
+
+    })
+</script>
+</body>
+
+</html>

@@ -1,0 +1,320 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="UTF-8">
+		<title>首页</title>
+		<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+		<link href="../../css/mui.css" rel="stylesheet" />
+		<link href="../../css/gloab.css" rel="stylesheet" />
+		<link href="../../css/xmui.pullToRefresh.material.css" rel="stylesheet" />
+		<link href="../../css/swiper.min.css" rel="stylesheet">
+		<style>
+			.titlecolor {
+				color: white;
+			}
+			
+			.mui-bar {
+				background-color: #c70321;
+			}
+			
+			.test-funds-more {
+				transition: background-color .2s!important
+			}
+			
+			.test-funds-more:active {
+				background-color: #FFE6E7!important;
+			}
+		</style>
+
+	</head>
+
+	<body>
+		<header class="mui-bar mui-bar-nav">
+			<h1 class="mui-title titlecolor">高端理财</h1>
+		</header>
+
+		<div class="mui-content mui-scroll-wrapper">
+			<div class="mui-scroll" id="station-list">
+				<div id="vue-body-gaoduanlicai">
+					<div v-if="!online" style="font-size: 20px; line-height: 80vh; text-align: center;">
+						即将上线
+					</div>
+					<!-- 基金4个iocn -->
+					<div class="bg-bai pt15 pb15"  v-if="online">
+						<div class="wd90 dis_table">
+
+							<div class="dis_table_cell textcenter" id="fund_self" funds_type="2" style="padding: 5px 0px 5px 0px;border-right: 1px solid #eee;">
+								<img src="../../images/icon/1.png" height="25" width="35" />
+								<div style="padding-top:10px;">
+									<span style="color: #000000;">私募基金</span>
+								</div>
+							</div>
+							<div class="dis_table_cell textcenter funds-button" funds_type="3" style="padding: 5px 0px 5px 0px;border-right: 1px solid #eee;">
+								<img src="../../images/icon/1.png" height="25" width="35" />
+								<div style="padding-top:10px;">
+									<span style="color: #000000;">资产管理</span>
+								</div>
+							</div>
+							<div class="dis_table_cell textcenter funds-button" funds_type="4" style="padding: 5px 0px 5px 0px;">
+								<img src="../../images/icon/1.png" height="25" width="35" />
+								<div style="padding-top:10px;">
+									<span style="color: #000000;">OTC产品</span>
+								</div>
+							</div>
+						</div>
+					</div>
+					<!-- 基金4个iocn end -->
+
+					<!--&lt;!&ndash;推荐产品&ndash;&gt;-->
+					<!--<div>-->
+					<!--<div style="color: #000000;font-size: 16px;padding: 10px 0px 5px 10px;background-color: white;border-bottom: 1px solid #EEEEEE;margin-top: 10px">-->
+					<!--私募推荐-->
+					<!--</div>-->
+					<!--&lt;!&ndash;单个内容div&ndash;&gt;-->
+					<!--<div v-for="(item,index) in upFunds" class=" bg-bai advance-list " style="border-bottom: 1px solid #EEEEEE;padding:15px 0px;">-->
+					<!--<div class="dis_table wd90" style="text-align: left">-->
+
+					<!--<div v-if="upFunds[index].ofund_type==2" class="dis_table_cell" style="width: 35%;border-right: 1px solid #eee;text-align: left;padding-right: 10px;">-->
+					<!--<div style="color: #FB5C5F;font-size: 20px;margin-bottom:5px;text-align: center">{{Math.round(upFunds[index].fund_curr_ratio*100)/100}}</div>-->
+					<!--<div style="color: black;text-align: center">近7日年化</div>-->
+					<!--</div>-->
+					<!--<div v-if="upFunds[index].ofund_type!=2" class="dis_table_cell" style="width: 35%;border-right: 1px solid #eee;text-align: left;padding-right: 10px;">-->
+					<!--<div style="color: #FB5C5F;font-size: 20px;margin-bottom:5px;text-align: center">{{upFunds[index].nav_total}}</div>-->
+					<!--<div style="color: black;text-align: center">累计净值</div>-->
+					<!--</div>-->
+
+					<!--<div class="dis_table_cell" style="text-align: left;padding-left: 20px">-->
+					<!--<div style="color: #000000;;font-size: 14px;padding-bottom: 5px;">{{upFunds[index].fund_name}}</div>-->
+					<!--<div style=";padding-bottom: 5px;">{{upFunds[index].fund_full_name}}</div>-->
+					<!--<div>-->
+					<!--<span class="inline-block" style="border-radius: 10px;background-color: #FFE6E7;padding: 0px 5px;font-weight: bold;color: #FD777A;">-->
+					<!--费率:-->
+					<!--<span style="background-color: #FFE6E7;text-decoration: line-through;color: #FD777A;">-->
+					<!--1.50%-->
+					<!--</span> 0.15%-->
+					<!--</span>-->
+					<!--<span v-for="(item2,index2) in upFunds[index].TradeLimits" >-->
+					<!--<span v-if="index2=='022'||index2=='020'" class="inline-block" style="border-radius: 10px;background-color: #FFE6E7;padding: 0px 5px;font-weight: bold;color: #FD777A;">-->
+					<!--{{upFunds[index].TradeLimits[index2].min_value}}元起投-->
+					<!--</span>-->
+					<!--</span>-->
+
+					<!--</div>-->
+					<!--</div>-->
+					<!--</div>-->
+					<!--</div>-->
+					<!--&lt;!&ndash;单个内容div end&ndash;&gt;-->
+
+					<!--</div>-->
+					<!--&lt;!&ndash;推荐产品end&ndash;&gt;-->
+
+					<!--近期热点-->
+					<div  v-if="online">
+						<div style="color: #000000;;font-size: 16px;padding: 10px 0px 5px 10px;background-color: white;border-bottom: 1px solid #EEEEEE;margin-top: 10px">
+							私募推荐
+						</div>
+
+						<!--单个内容div-->
+						<div v-for="(item,index) in simuFunds" class=" bg-bai test-funds-more" style="border-bottom: 1px solid #EEEEEE;padding:15px 0px">
+							<div class="dis_table wd90" style="text-align: left">
+
+								<div v-if="simuFunds[index].ofund_type==2" class="dis_table_cell" style="width: 35%;border-right: 1px solid #eee;text-align: left;padding-right: 10px;">
+									<div style="color: #FB5C5F;font-size: 20px;margin-bottom:5px;text-align: center" v-text="Math.round(simuFunds[index].fund_curr_ratio*100)/100"></div>
+									<div style="color: #000000;;text-align: center">近一年收益率</div>
+								</div>
+								<div v-else class="dis_table_cell" style="width: 35%;border-right: 1px solid #eee;text-align: left;padding-right: 10px;">
+									<div style="color: #FB5C5F;font-size: 20px;margin-bottom:5px;text-align: center" v-text="simuFunds[index].nav_total"></div>
+									<div style="color: #000000;;text-align: center">累计净值</div>
+								</div>
+
+								<div class="dis_table_cell" style="text-align: left;padding-left: 20px">
+									<div style="color: #000000;;font-size: 14px;padding-bottom: 5px;" v-text="simuFunds[index].fund_name"></div>
+									<div style="padding-bottom: 5px;" v-text="fundtype(simuFunds[index].ofund_type)">布局优质蓝筹，追求稳健增值</div>
+									<div>
+										<span class="inline-block" style="border-radius: 10px;background-color: #FFE6E7;padding: 0px 5px;font-weight: bold;color: #FD777A;" v-text="riskLevel(simuFunds[index].ofund_risklevel)"></span>
+										</span>
+										<span class="inline-block" style="border-radius: 10px;background-color: #FFE6E7;padding: 0px 5px;font-weight: bold;color: #FD777A;">
+							10元起投
+						</span>
+									</div>
+								</div>
+							</div>
+						</div>
+						<!--单个内容div end-->
+					</div>
+					<!--近期热点end-->
+
+					<!--资管推荐-->
+					<div  v-if="online">
+						<div style="color: #000000;;font-size: 16px;padding: 10px 0px 5px 10px;background-color: white;border-bottom: 1px solid #EEEEEE;margin-top: 10px">
+							资管推荐
+						</div>
+
+						<!--单个内容div-->
+						<div v-for="(item,index) in otcFunds" class=" bg-bai test-funds-more" style="border-bottom: 1px solid #EEEEEE;padding:15px 0px">
+							<div class="dis_table wd90" style="text-align: left">
+
+								<div v-if="otcFunds[index].ofund_type==2" class="dis_table_cell" style="width: 35%;border-right: 1px solid #eee;text-align: left;padding-right: 10px;">
+									<div style="color: #FB5C5F;font-size: 20px;margin-bottom:5px;text-align: center" v-text="Math.round(otcFunds[index].fund_curr_ratio*100)/100"></div>
+									<div style="color: #000000;;text-align: center">近一年收益率</div>
+								</div>
+								<div v-else class="dis_table_cell" style="width: 35%;border-right: 1px solid #eee;text-align: left;padding-right: 10px;">
+									<div style="color: #FB5C5F;font-size: 20px;margin-bottom:5px;text-align: center" v-text="otcFunds[index].nav_total"></div>
+									<div style="color: #000000;;text-align: center">累计净值</div>
+								</div>
+
+								<div class="dis_table_cell" style="text-align: left;padding-left: 20px">
+									<div style="color: #000000;;font-size: 14px;padding-bottom: 5px;" v-text="otcFunds[index].fund_name"></div>
+									<div style="padding-bottom: 5px;" v-text="fundtype(otcFunds[index].ofund_type)">布局优质蓝筹，追求稳健增值</div>
+									<div>
+										<span class="inline-block" style="border-radius: 10px;background-color: #FFE6E7;padding: 0px 5px;font-weight: bold;color: #FD777A;" v-text="riskLevel(otcFunds[index].ofund_risklevel)"></span>
+										</span>
+										<span class="inline-block" style="border-radius: 10px;background-color: #FFE6E7;padding: 0px 5px;font-weight: bold;color: #FD777A;">
+							10元起投
+						</span>
+									</div>
+								</div>
+							</div>
+						</div>
+						<!--单个内容div end-->
+
+					</div>
+					<!--资管推荐end-->
+
+					<!--OTC推荐-->
+					<div v-if="online">
+						<div style="color: #000000;;font-size: 16px;padding: 10px 0px 5px 10px;background-color: white;border-bottom: 1px solid #EEEEEE;margin-top: 10px">
+							OTC推荐
+						</div>
+
+						<!--单个内容div-->
+						<div v-for="(item,index) in ziguanFunds" class=" bg-bai test-funds-more" style="border-bottom: 1px solid #EEEEEE;padding:15px 0px">
+							<div class="dis_table wd90" style="text-align: left">
+
+								<div v-if="ziguanFunds[index].ofund_type==2" class="dis_table_cell" style="width: 35%;border-right: 1px solid #eee;text-align: left;padding-right: 10px;">
+									<div style="color: #FB5C5F;font-size: 20px;margin-bottom:5px;text-align: center" v-text="Math.round(ziguanFunds[index].fund_curr_ratio*100)/100"></div>
+									<div style="color: #000000;;text-align: center">近一年收益率</div>
+								</div>
+								<div v-else class="dis_table_cell" style="width: 35%;border-right: 1px solid #eee;text-align: left;padding-right: 10px;">
+									<div style="color: #FB5C5F;font-size: 20px;margin-bottom:5px;text-align: center" v-text="ziguanFunds[index].nav_total"></div>
+									<div style="color: #000000;;text-align: center">累计净值</div>
+								</div>
+
+								<div class="dis_table_cell" style="text-align: left;padding-left: 20px">
+									<div style="color: #000000;;font-size: 14px;padding-bottom: 5px;" v-text="ziguanFunds[index].fund_name"></div>
+									<div style="padding-bottom: 5px;" v-text="fundtype(ziguanFunds[index].ofund_type)">布局优质蓝筹，追求稳健增值</div>
+									<div>
+										<span class="inline-block" style="border-radius: 10px;background-color: #FFE6E7;padding: 0px 5px;font-weight: bold;color: #FD777A;" v-text="riskLevel(ziguanFunds[index].ofund_risklevel)"></span>
+										</span>
+										<span class="inline-block" style="border-radius: 10px;background-color: #FFE6E7;padding: 0px 5px;font-weight: bold;color: #FD777A;">
+							10元起投
+						</span>
+									</div>
+								</div>
+							</div>
+						</div>
+						<!--单个内容div end-->
+
+					</div>
+					<!--OTC推荐end-->
+
+				</div>
+
+			</div>
+		</div>
+
+		<script src="../../js/h.min.js"></script>
+		<script src="../../js/mui.min.js"></script>
+		<script src="../../js/immersed.js"></script>
+		<script src="../../js/com.js"></script>
+		<script src="../../js/xmui-globalEvent.js"></script>
+		<script src="../../js/mui.pullToRefresh.js"></script>
+		<script src="../../js/mui.pullToRefresh.material.js"></script>
+		<script src="../../js/com.js"></script>
+		<script src="../../js/com.data.js"></script>
+		<script src="../../js/com.mui.js"></script>
+		<script src="../../js/vue.js"></script>
+		<script src="../../js/jquery.min_1.8.3.js"></script>
+		<script src="../../js/md5.js"></script>
+		<script src="../../js/fundsfunction.js"></script>
+
+		<script>
+			mui.ready(function() {
+				mui(".mui-scroll-wrapper").scroll({
+					bounce: true, //是否启用回弹
+					indicators: true, //是否显示滚动条
+					deceleration: 0.0005 //flick 减速系数，系数越大，滚动速度越慢，滚动距离越小，默认值0.0006
+				});
+			});
+			mui.plusReady(function() {
+
+				mui('body').on('tap', '#gongmu', function() {
+					var type = this.getAttribute("funds_type");
+					com.plus.openWindowX('../fundspage/fundslist_public.html', {
+						type: type
+					});
+				});
+				mui('body').on('tap', '.funds-button', function() {
+					var type = this.getAttribute("funds_type");
+					com.plus.openWindowX('../fundspage/fundslist.html', {
+						type: type
+					});
+				})
+
+				//
+				mui('body').on('tap', '#fund_self', function() {
+					var type = this.getAttribute("funds_type");
+					com.plus.openWindowX('../fundspage/fundslist_self.html', {});
+				})
+
+				mui('body').on('tap', '.test-funds-more', function() {
+					//            var type = this.getAttribute("funds_type");
+					com.plus.openWindowX('../fundspage/funds_more.html', {});
+				});
+
+				var vue_body = new Vue({
+					el: "#vue-body-gaoduanlicai",
+					data: {
+						upFunds: {},
+						simuFunds: {},
+						ziguanFunds: {},
+						otcFunds: {},
+						online: false
+					},
+					methods: {
+						riskLevel: function(fundRiskLevel) {
+							return getFundRiskLevelName(fundRiskLevel);
+						},
+						fundtype: function(fundtype) {
+							return getFundTypeNameByType(fundtype);
+						}
+					},
+					mounted: function() {
+						var this_ = this;
+						//              com.data.funds.getFundsUpByType({
+						//                  ofundType:2 //私募推荐
+						//              },function(data){
+						//                  vue_body.simuFunds=data.result_list;
+						//              });
+						//
+						//
+						//              com.data.funds.getFundsUpByType({
+						//                  ofundType:3 //资管
+						//              },function(data){
+						//                  vue_body.ziguanFunds=data.result_list;
+						//              });
+						//
+						//              com.data.funds.getFundsUpByType({
+						//                  ofundType:4 //OTC推荐
+						//              },function(data){
+						//                  vue_body.otcFunds=data.result_list;
+						//              });
+					}
+				});
+
+			})
+		</script>
+	</body>
+
+</html>

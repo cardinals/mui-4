@@ -1,0 +1,448 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="UTF-8">
+		<title>首页</title>
+		<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+		<link href="../../css/mui.css" rel="stylesheet" />
+		<link href="../../css/gloab.css" rel="stylesheet" />
+		<link href="../../css/xmui.pullToRefresh.material.css" rel="stylesheet" />
+		<link href="../../css/swiper.min.css" rel="stylesheet">
+		<link href="../../css/mui.picker.css" rel="stylesheet">
+		<link href="../../css/mui.poppicker.css" rel="stylesheet">
+		<link href="../../css/mui.dtpicker.css" rel="stylesheet">
+		<style>
+			.titlecolor {
+				color: white;
+			}
+			
+			.mui-bar {
+				background-color: #c70321;
+			}
+			
+			.mui-input-group .mui-input-row:after {
+				height: 0px;
+			}
+			
+			input[type='text'],
+			input[type='number'],
+			input[type='password'] {
+				font-size: 14px;
+			}
+			
+			.can-next {
+				background-color: #FB5C60;
+			}
+			
+			.not-next {
+				background-color: #DDDDDD;
+			}
+		</style>
+
+	</head>
+
+	<body>
+		<header class="mui-bar mui-bar-nav bg-title">
+			<a class="mui-action-back mui-icon mui-icon-left-nav mui-pull-left color-white"></a>
+			<h1 class="mui-title color-white titlecolor">添加银行卡</h1>
+		</header>
+
+		<div class="mui-content mui-scroll-wrapper bg-bai">
+			<div id="vue-body">
+
+				<div class="mui-scroll" id="station-list">
+					<form class="mui-input-group">
+						<div class="wd100" style="border-bottom: 1px solid #EEEEEE;">
+							<div class="dis_table wd90">
+								<div class="dis_table_cell  wd25 textleft">
+									银行
+								</div>
+								<div class="dis_table_cell" style="text-align: left;">
+
+									<div class="mui-input-row">
+										<span id="bank_type" @click="choiceBank" style="font-size: 14px;display: inline-block;margin-left: 15px;padding-top: 9px;" v-text="bankName"></span>
+									</div>
+								</div>
+							</div>
+						</div>
+
+						<div class="wd100" style="border-bottom: 1px solid #EEEEEE;">
+							<div class="dis_table wd90">
+								<div class="dis_table_cell  wd25 textleft">
+									卡号
+								</div>
+								<div class="dis_table_cell" style="">
+									<div class="mui-input-row">
+										<input type="number" v-model="cardNo" class="mui-input-clear" @blur="cardNoBlur" placeholder="请输入银行卡卡号">
+									</div>
+								</div>
+							</div>
+						</div>
+
+						<div class="wd100" style="border-bottom: 1px solid #EEEEEE;">
+							<div class="dis_table wd90">
+								<div class="dis_table_cell  wd25 textleft">
+									银行户名
+								</div>
+								<div class="dis_table_cell" style="">
+									<div class="mui-input-row">
+										<input type="text" v-model="bankHuName" class="mui-input-clear" placeholder="请输入银行户名">
+									</div>
+								</div>
+							</div>
+						</div>
+
+						<div class="wd100" style="border-bottom: 1px solid #EEEEEE;">
+							<div class="dis_table wd90">
+								<div class="dis_table_cell  wd25 textleft">
+									开户行所在地
+								</div>
+								<div class="dis_table_cell" style="text-align: left;">
+
+									<div class="mui-input-row">
+										<span id="bankAddr" @click="choiceBankAddr" style="font-size: 14px;display: inline-block;margin-left: 15px;padding-top: 9px;" v-text="bankAddr"></span>
+									</div>
+								</div>
+							</div>
+						</div>
+
+						<div class="wd100" style="border-bottom: 1px solid #EEEEEE;">
+							<div class="dis_table wd90">
+								<div class="dis_table_cell  wd25 textleft">
+									账户收益人
+								</div>
+								<div class="dis_table_cell" style="">
+									<div class="mui-input-row">
+										<input type="text" v-model="openGetPersion" class="mui-input-clear" placeholder="请输入账户收益人">
+
+									</div>
+								</div>
+							</div>
+						</div>
+						<div class="wd100" style="border-bottom: 1px solid #EEEEEE;">
+							<div class="dis_table wd90">
+								<div class="dis_table_cell  wd25 textleft">
+									账户控制人
+								</div>
+								<div class="dis_table_cell" style="">
+									<div class="mui-input-row">
+										<input type="text" v-model="openControlPersion" class="mui-input-clear" placeholder="请输入账户控制人">
+
+									</div>
+								</div>
+							</div>
+						</div>
+						<template v-if="hasCardNum==null||hasCardNum==0">
+
+							<div class="wd100" style="border-bottom: 1px solid #EEEEEE;">
+								<div style="width: 90%;margin: 0 auto;padding: 10px 0px;color: #666;">
+									为了您的资金安全，首次绑定银行卡请先设置交易密码。该密码在账户资金变动、修改账户信息时需要输入，同时请牢记。
+								</div>
+							</div>
+
+							<div class="wd100" style="border-bottom: 1px solid #EEEEEE;">
+								<div class="dis_table wd90">
+									<div class="dis_table_cell  wd25 textleft">
+										设置交易密码
+									</div>
+									<div class="dis_table_cell" style="">
+										<div class="mui-input-row">
+											<input type="password" v-model="pwd" class="mui-input-clear" placeholder="请输入交易密码">
+										</div>
+									</div>
+								</div>
+							</div>
+
+							<div class="wd100" style="border-bottom: 1px solid #EEEEEE;">
+								<div class="dis_table wd90">
+									<div class="dis_table_cell wd25 textleft">
+										确认交易密码
+									</div>
+									<div class="dis_table_cell textleft" style="">
+										<div class="mui-input-row">
+											<input type="password" v-model="repwd" class="mui-input-clear" placeholder="请输入确认密码">
+										</div>
+									</div>
+								</div>
+							</div>
+
+						</template>
+
+					</form>
+
+					<div class="wd90" style="margin-top: 30px;">
+						<button type="button" @click="nextstep" :class="switchNext ? 'can-next' : 'not-next'" class="" id="next_step" style="width: 100%;height: 40px;color: white;border: 0px;">下一步</button>
+					</div>
+
+				</div>
+			</div>
+
+		</div>
+
+		<script src="../../js/h.min.js"></script>
+		<script src="../../js/mui.min.js"></script>
+		<script src="../../js/immersed.js"></script>
+		<script src="../../js/com.js"></script>
+		<script src="../../js/xmui-globalEvent.js"></script>
+		<script src="../../js/mui.pullToRefresh.js"></script>
+		<script src="../../js/mui.pullToRefresh.material.js"></script>
+		<script src="../../js/com.js"></script>
+		<script src="../../js/com.data.js"></script>
+		<script src="../../js/com.mui.js"></script>
+
+		<script src="../../js/mui.picker.js"></script>
+		<script src="../../js/mui.poppicker.js"></script>
+		<script src="../../js/mui.dtpicker.js"></script>
+		<script src="../../js/data.city.js"></script>
+
+		<script src="../../js/vue.js"></script>
+		<script src="../../js/jquery.min_1.8.3.js"></script>
+		<script src="../../js/md5.js"></script>
+
+		<script>
+			var isReg = -1;
+			mui.ready(function() {
+				mui(".mui-scroll-wrapper").scroll({
+					bounce: true, //是否启用回弹
+					indicators: true, //是否显示滚动条
+					deceleration: 0.0005 //flick 减速系数，系数越大，滚动速度越慢，滚动距离越小，默认值0.0006
+				});
+			});
+
+			var vue_body = new Vue({
+				el: "#vue-body",
+				data: {
+					switchNext: false,
+					cardNo: '',
+					bankName: '请选择',
+					bankId: -1,
+					bankHuName: '',
+					bankAddr: '请选择开户行所在地',
+					bankSheng: "",
+					bankCity: "",
+					openGetPersion: '',
+					openControlPersion: '',
+					pwd: '',
+					repwd: '',
+					hasCardNum: 0,
+					bankName_: null
+				},
+				methods: {
+					cardNoBlur: function(v) {
+						console.log(this.cardNo)
+						console.log(this.getBankNameByCode(this.cardNo,this.bankId))
+					},
+					// 根据银行卡号获取银行名称
+					getBankNameByCode: function(bank_account,bankId) {
+						if(bank_account == "") {
+							return "";
+						}
+
+						//卡号前6位
+						//bank_account = bank_account.slice(0, 6);
+						//var jsonFile = pageURL + "js/bankData.json";
+						
+						//农业银行
+						if("003"==bankId){
+							//卡号前5位
+							bank_account=bank_account.slice(0,5);
+						}else{
+							//卡号前6位
+							bank_account=bank_account.slice(0,6);
+						}
+						
+						
+						var bankName = "";
+
+						$.ajax({
+							url: '../../json/bankData.json',
+							data: {},
+							async: false,
+							dataType: 'json',
+							success: function(data) {
+								$.each(data, function(infoIndex, info) {
+									if(bank_account == info["bin"]) {
+										bankName = info["bankName"];
+										vue_body.bankName_ = bankName
+										if(vue_body.bankName_ && vue_body.bankName_.indexOf(vue_body.bankName) < 0) {
+											alert('银行卡号与所选银行不一致')
+										}
+										return false;
+									}
+								});
+
+							}
+						});
+
+						return bankName;
+					},
+					nextstep: function() {
+						//    			    //测试转跳
+						//                    if(isReg==1){
+						//                        com.plus.openWindowX('../tools/addbank_success.html',{});
+						//                    }else {
+						//                        mui.ge.fireEvent("openbanksuccess", {}, function (args) {
+						//                            mui.back();
+						//                        });
+						//                    }
+						//                    return;
+
+						if(this.switchNext) {
+
+							if(this.hasCardNum > 0) {
+								com.data.user.addBankCard({
+									bank_name: encodeURIComponent(encodeURIComponent(this.bankName)), //银行名称
+									bank_no: this.bankId, //银行编号
+									bank_account: this.cardNo, //银行账号
+									bank_account_name: encodeURIComponent(encodeURIComponent(this.bankHuName)), //银行户名
+									beneficiary: encodeURIComponent(encodeURIComponent(this.openGetPersion)), //账户收益人
+									holding_name: encodeURIComponent(encodeURIComponent(this.openControlPersion)), //账户控制人
+									open_province: encodeURIComponent(encodeURIComponent(this.bankSheng)), //省
+									open_city: encodeURIComponent(encodeURIComponent(this.bankCity)), //市/区
+								}, function(data) {
+									if(isReg == 1) {
+										com.plus.openWindowX('../tools/addbank_success.html', {});
+									} else {
+										mui.ge.fireEvent("openbanksuccess", {}, function(args) {
+											mui.back();
+										});
+									}
+								})
+							} else {
+								if(this.pwd != this.repwd) {
+									mui.toast("两次输入的密码不一致");
+									return;
+								}
+								com.data.user.addBankCard({
+									bank_name: encodeURIComponent(encodeURIComponent(this.bankName)), //银行名称
+									bank_no: this.bankId, //银行编号
+									bank_account: this.cardNo, //银行账号
+									bank_account_name: encodeURIComponent(encodeURIComponent(this.bankHuName)), //银行户名
+									beneficiary: encodeURIComponent(encodeURIComponent(this.openGetPersion)), //账户收益人
+									holding_name: encodeURIComponent(encodeURIComponent(this.openControlPersion)), //账户控制人
+									open_province: encodeURIComponent(encodeURIComponent(this.bankSheng)), //省
+									open_city: encodeURIComponent(encodeURIComponent(this.bankCity)), //市/区
+									password: this.pwd //交易密码
+								}, function(data) {
+									console.log(JSON.stringify(data))
+									if(isReg == 1) {
+										com.plus.openWindowX('../tools/addbank_success.html', {});
+									} else {
+										mui.ge.fireEvent("openbanksuccess", {}, function(args) {
+											mui.back();
+										});
+									}
+								})
+							}
+
+						} else {
+
+						}
+
+					},
+					choiceBank: function() {
+						com.plus.openWindowX('../tools/choice_bankcard.html', {});
+					},
+					choiceBankAddr: function() {
+						//选择省市
+						var city_picker1 = new mui.PopPicker({
+							layer: 3
+						});
+						city_picker1.setData(init_city_picker);
+						setTimeout(function() {
+							city_picker1.show(function(items) {
+								vue_body.bankAddr = items[0].text + items[2].text;
+								vue_body.bankSheng = items[0].text;
+								vue_body.bankCity = items[2].text;
+							});
+						}, 200);
+					},
+					checkCanNext: function() {
+						if(this.hasCardNum > 0) {
+							if(vue_body.cardNo != "" &&
+								vue_body.bankId != -1 &&
+								vue_body.bankHuName != "" &&
+								vue_body.bankSheng != "" &&
+								vue_body.bankCity != "" &&
+								vue_body.openGetPersion != "" &&
+								vue_body.openControlPersion != "" &&
+								this.bankName_.indexOf(this.bankName) >= 0
+							) {
+								vue_body.switchNext = true;
+							} else {
+								vue_body.switchNext = false;
+							}
+						} else {
+							if(vue_body.cardNo != "" &&
+								vue_body.bankId != -1 &&
+								vue_body.bankHuName != "" &&
+								vue_body.bankSheng != "" &&
+								vue_body.bankCity != "" &&
+								vue_body.openGetPersion != "" &&
+								vue_body.openControlPersion != "" &&
+								this.bankName_.indexOf(this.bankName) >= 0 &&
+								vue_body.pwd != "" &&
+								vue_body.repwd != "") {
+								vue_body.switchNext = true;
+							} else {
+								vue_body.switchNext = false;
+							}
+						}
+
+					}
+
+				},
+				watch: {
+					cardNo: function() {
+						vue_body.checkCanNext();
+					},
+					bankId: function() {
+						vue_body.checkCanNext();
+					},
+					bankHuName: function() {
+						vue_body.checkCanNext();
+					},
+					bankSheng: function() {
+						vue_body.checkCanNext();
+					},
+					bankCity: function() {
+						vue_body.checkCanNext();
+					},
+					openGetPersion: function() {
+						vue_body.checkCanNext();
+					},
+					openControlPersion: function() {
+						vue_body.checkCanNext();
+					},
+					pwd: function() {
+						vue_body.checkCanNext();
+					},
+					repwd: function() {
+						vue_body.checkCanNext();
+					}
+				},
+				mounted: function() {
+					//				com.data.user.checkHaveBankCard({},function(){
+					//					
+					//				})
+				}
+			});
+
+			mui.plusReady(function() {
+
+				isReg = com.plus.getCurrWebview().self.isReg;
+				vue_body.hasCardNum = com.plus.getCurrWebview().self.hasCardNum;
+
+				mui.ge.addListener("chocie_bank", function(args) {
+					vue_body.bankId = args.detail.bankId;
+					vue_body.bankName = args.detail.bankName;
+					//			scroll.refresh();
+					mui.ge.callback(args, {})
+				});
+
+			})
+		</script>
+	</body>
+
+</html>

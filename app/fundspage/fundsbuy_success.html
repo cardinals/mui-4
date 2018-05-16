@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+	<meta charset="UTF-8">
+	<title>首页</title>
+	<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+	<link href="../../css/mui.css" rel="stylesheet" />
+	<link href="../../css/gloab.css" rel="stylesheet" />
+	<link href="../../css/xmui.pullToRefresh.material.css" rel="stylesheet" />
+	<link href="../../css/swiper.min.css" rel="stylesheet">
+	<style>
+		.titlecolor{
+			color: white;
+		}
+		.mui-bar{
+			background-color: #c70321;
+		}
+	</style>
+
+</head>
+<body>
+    <header class="mui-bar mui-bar-nav bg-title">
+        <a class="mui-action-back mui-icon mui-icon-left-nav mui-pull-left color-white"></a>
+        <h1 class="mui-title color-white titlecolor">成功</h1>
+    </header>
+
+<div class="mui-content mui-scroll-wrapper bg-bai">
+	<div class="mui-scroll" id="station-list">
+		<div id="vue-body">
+
+			<div class="ft18" style="text-align: center;padding-top: 100px;padding-bottom: 60px;font-weight: bold;vertical-align:middle">
+				<img src="../../images/icon/icon_true.png" width="35" height="35" alt="" />
+				<template v-if="type==1">
+					&nbsp;基金申购成功
+				</template>
+				<template v-if="type==2">
+					&nbsp;基金定投成功
+				</template>
+				<template v-if="type==3">
+					&nbsp;基金赎回成功
+				</template>
+				<template v-if="type==4">
+					&nbsp;基金变更成功
+				</template>
+				<template v-if="type==5">
+					&nbsp;基金预约成功
+				</template>
+
+			</div>
+			<!--<div style="text-align: center;">您的申购申请已提交，将于-->
+				<!--&lt;!&ndash;<span class="" style="color: #FB5C60;">2017-09-12</span>&ndash;&gt;-->
+				<!--近期内进行确认</div>-->
+			<div class="wd90" style="margin-top: 30px;">
+				<button type="button" class="" id="next_step" style="width: 100%;height: 40px;background-color: #FB5C60;color: white;border: 0px;">确定</button>
+			</div>
+
+		</div>
+
+	</div>
+</div>
+
+
+<script src="../../js/h.min.js"></script>
+		<script src="../../js/mui.min.js"></script>
+		<script src="../../js/immersed.js"></script>
+<script src="../../js/com.js"></script>
+<script src="../../js/xmui-globalEvent.js"></script>
+<script src="../../js/mui.pullToRefresh.js"></script>
+<script src="../../js/mui.pullToRefresh.material.js"></script>
+<script src="../../js/com.js"></script>
+<script src="../../js/com.data.js"></script>
+	<script src="../../js/com.mui.js"></script>
+	<script src="../../js/vue.js"></script>
+
+<script>
+    mui.ready(function () {
+        mui(".mui-scroll-wrapper").scroll({
+            bounce: true,//是否启用回弹
+            indicators: true,//是否显示滚动条
+            deceleration:  0.0005 //flick 减速系数，系数越大，滚动速度越慢，滚动距离越小，默认值0.0006
+        });
+    });
+    var vue_body = new Vue({
+		el:"#vue-body",
+		data:{
+		    type:1
+		}
+	});
+    mui.plusReady(function(){
+        vue_body.type  = com.plus.getCurrWebview().self.type;
+
+//        if(type==1){
+            mui('body').on('tap', '#next_step', function (){
+				if(vue_body.type==4){
+                    mui.ge.fireEvent("changeDingReload", {}, function (args) {
+                        mui.back();
+                    });
+				}else {
+                    mui.back();
+				}
+            });
+//		}
+    })
+</script>
+</body>
+
+</html>

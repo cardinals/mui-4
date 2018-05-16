@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="UTF-8">
+		<title>首页</title>
+		<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+		<link rel="stylesheet" href="../css/font-awesome-4.7.0/css/font-awesome.min.css">
+		<link href="../../css/mui.css" rel="stylesheet" />
+		<link href="../../css/gloab.css" rel="stylesheet" />
+		<link href="../../css/xmui.pullToRefresh.material.css" rel="stylesheet" />
+		<link href="../../css/swiper.min.css" rel="stylesheet">
+		<style>
+			.mui-icon {
+				background-size: contain;
+				background-position: center;
+				background-repeat: no-repeat;
+			}
+			
+			.bg-title {
+				background-color: #c70321;
+			}
+		</style>
+
+	</head>
+
+	<body>
+		<header class="mui-bar mui-bar-nav bg-title" style="position: fixed;">
+			<a class="mui-action-back mui-icon mui-icon-left-nav mui-pull-left color-white"></a>
+			<h1 class="mui-title color-white titlecolor">期货行情</h1>
+		</header>
+		<div style="margin-top: 50px;" id="hangqing-html">
+			<!--<iframe name="myframe" src="http://222.73.7.157:81/dzqh/index.html" frameborder="0" scrolling="auto" width="100%" height="100%" onload="document.all['myframe'].style.width=myframe.document.body.scrollWidth"></iframe>-->
+			<!--<iframe width="100" height="100" style="border: 0px;" src="http://222.73.7.157:81/dzqh/index.html"></iframe>-->
+		</div>
+
+		<script src="../../js/h.min.js"></script>
+		<script src="../../js/mui.min.js"></script>
+		<script src="../../js/immersed.js"></script>
+		<script src="../../js/com.js"></script>
+		<script src="../../js/com.data.js"></script>
+		<script src="../../js/com.data.huaerjie.js"></script>
+
+		<script>
+			mui.init({
+				subpages: [{
+					url: 'http://222.73.7.157:81/dzqh/index.html', //子页面HTML地址，支持本地地址和网络地址
+					id: 'index.html', //子页面标志
+					styles: {
+						top: '45px', //子页面顶部位置
+					},
+					extras: {} //额外扩展参数
+				}]
+			});
+		</script>
+	</body>
+
+</html>

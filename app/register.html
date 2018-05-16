@@ -1,0 +1,274 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="UTF-8">
+		<title>首页</title>
+		<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+		<link href="../css/mui.css" rel="stylesheet" />
+
+		<link href="../css/xmui.pullToRefresh.material.css" rel="stylesheet" />
+		<link href="../css/swiper.min.css" rel="stylesheet">
+		<link href="../css/gloab.css" rel="stylesheet">
+		<style>
+			.mui-input-group .mui-input-row:after{
+				height: 0px;
+			}
+			.bg-title{
+				background-color: #c70321;
+			}
+			input[type='text'],input[type='password'],input[type='number']{
+				font-size: 14px;
+			}
+			input[type='checkbox'][name=aggrent]{
+				display: none;
+			}
+			input[type='checkbox'][name=aggrent]+label {
+	            display: inline-block;
+	            width: 18px;
+	            height: 18px;
+				background-image: url(../images/icon/icon_unchecked.png);
+	           	position: relative;
+	           	top: 3px;
+        	}
+        	input[type='checkbox'][name=aggrent]:checked+label {
+	           	background-image: url(../images/icon/icon_checked18.png);
+        		
+
+        	}
+			.can-next{
+				background-color: #FB5C60;
+			}
+			.not-next{
+				background-color: #DDDDDD;
+			}
+		</style>
+	</head>
+	<body>
+
+    <header class="mui-bar mui-bar-nav bg-title">
+        <a class="mui-action-back mui-icon mui-icon-left-nav mui-pull-left color-white"></a>
+        <h1 class="mui-title color-white titlecolor">注册</h1>
+    </header>
+		<div class="mui-content mui-scroll-wrapper">
+			<div id="vue-body">
+				<form class="mui-input-group" style="margin-top: 10px;">
+					<div class="wd100" style="border-bottom: 1px solid #EEEEEE;">
+						<div class="dis_table wd90">
+							<div class="dis_table_cell wd10">
+								<img src="../images/icon/icon_phone.png" height="25" width="30"/>
+							</div>
+							<div class="dis_table_cell" style="">
+								<div class="mui-input-row">
+									<input type="number" class="mui-input-clear" value="" v-model="phone" placeholder="请填写手机号" >
+								</div>
+							</div>
+						</div>
+					</div>
+					<div class="wd100" style="border-bottom: 1px solid #EEEEEE;">
+						<div class="dis_table wd100">
+							<div class="dis_table_cell" style="width: 5%;">
+							</div>
+							<div class="dis_table_cell wd10">
+								<img src="../images/icon/icon-code.png" height="25" width="25"/>
+							</div>
+							<div class="dis_table_cell" style="">
+								<input type="text" class="mui-input-clear" value="" v-model="code" placeholder="填写验证码">
+							</div>
+							<div class="dis_table_cell wd30" style="border-left: 1px solid #DDDDDD;">
+								<input class="mui-btn" type="button" value="发送验证码" v-model="send_btn" @click="reqCode" name="send_code" id="send_code" style="display: block;width: 100%;height: 100%;background-color: white;color: #999;"/>
+							</div>
+						</div>
+					</div>
+					
+					<div class="wd100" style="border-bottom: 1px solid #EEEEEE;">
+						<div class="dis_table wd90">
+							<div class="dis_table_cell wd10">
+								<img src="../images/icon/icon_pwd2.png" height="25" width="25"/>
+							</div>
+							<div class="dis_table_cell" style="">
+								<div class="mui-input-row">
+									<input type="password" class="mui-input-password" value="" v-model="pwd" placeholder="请输入密码">
+								</div>
+							</div>
+						</div>
+					</div>
+					<div class="wd100" style="border-bottom: 1px solid #EEEEEE;">
+						<div class="dis_table wd90">
+							<div class="dis_table_cell wd10">
+								<img src="../images/icon/icon_pwd2.png" height="25" width="25"/>
+							</div>
+							<div class="dis_table_cell" style="">
+								<div class="mui-input-row">
+									<input type="password" class="mui-input-password" value="" v-model="repwd" placeholder="再次输入登录密码">
+								</div>
+							</div>
+						</div>
+					</div>
+				</form>
+				<div class="wd90" style="margin-top: 30px;">
+					<button type="button"  :class="switchNext ? 'can-next' : 'not-next'" class="" @click="nextStep" id="next_step" style="width: 100%;height: 40px;color: white;border: 0px;">下一步</button>
+				</div>
+				<div class="wd100 textcenter" style="margin-top: 60px;margin-bottom: 20px;color: #999999;">
+					点击上面的“下一步”按钮，即表示您已同意
+				</div>
+				<div class="wd100">
+					<div class="dis_table wd90">
+						<div class="dis_table_cell" style="width: 10%;"><input type="checkbox" name="aggrent" id="aggrent" v-model="agreeXieYi" checked="checked"/><label for="aggrent"></label></div>
+						<div class="dis_table_cell textleft">同意<a href="#" id="to_xieyi">《东证赢家开户手机协议》</a></div>
+					</div>
+				</div>
+				<div class="wd100 textcenter" style="margin-top: 130px;">
+					<input type="button" name="to_login" id="to_login" value="登录" style="width: 80px;border: 1px solid #E6716D;color: #E6716D;background-color: #EFEFF4;"/><br>
+					<span class="inline-block " style="color: #999999;margin-top: 20px;">如果您已有东证赢家账户，请点击"登录"按钮</span>
+				</div>
+			</div>
+		</div>
+
+		<script src="../js/h.min.js"></script>
+		<script src="../js/mui.min.js"></script>
+		<script src="../js/immersed.js"></script>
+		<script src="../js/xmui-globalEvent.js"></script>
+		<script src="../js/mui.pullToRefresh.js"></script>
+		<script src="../js/mui.pullToRefresh.material.js"></script>
+		<!-- 滚动条 -->
+		<script src="../js/swiper.min.js"></script>
+		<!-- 图片缓存-->
+		<script src="../js/DMobileFrame.js"></script>
+		<script src="../js/jquery.min_1.8.3.js"></script>
+		<script src="../js/md5.js"></script>
+		<script src="../js/com.js"></script>
+		<script src="../js/com.data.js"></script>
+		<script src="../js/com.mui.js"></script>
+		<script src="../js/vue.js"></script>
+		<script>
+			
+			var vu = new Vue({
+				el:"#vue-body",
+				data:{
+				    send_btn:'发送验证码',
+				    wait_time:30,//发送短信等待时间
+				    phone:'',
+				    code:'',
+				    pwd:'',
+				    repwd:'',
+					switchNext:false,
+					agreeXieYi:true,
+				},
+				methods:{
+					reqCode:function(){
+					    var this_ = this;
+						if(this_.send_btn=="发送验证码"){
+                            var phone = this_.phone;
+
+                            var myreg = /^1[3|4|5|7|8][0-9]{9}$/;
+                            if(!myreg.test(phone))
+                            {
+                                mui.toast('请输入有效的手机号码！');
+                                return false;
+                            }
+//                              alert(phone);
+                            //说明可以发送 请求发送验证码
+							com.data.user.getPhoneCode({
+                                mobile_tel:phone
+							},function (data){
+//									alert(JSON.stringify(data));
+                            })
+							//无论成不成功都等待30s
+							var time_count = this_.wait_time;
+                            this_.send_btn = time_count+"s后重发";
+
+                            var t1 = window.setInterval(function (){
+                                console.log(time_count);
+                                if(time_count<=0){
+                                	this_.send_btn="发送验证码"
+                                	window.clearInterval(t1);
+                                	return;
+                                }
+                                time_count--;
+                                this_.send_btn = time_count+"s后重发";
+                            },1000);
+
+                        }
+					},
+                    nextStep:function(){
+                      var mobile_tel = this.phone;
+                      var verificationCode = this.code;
+                      var login_password = this.pwd;
+                      var re_pwd = this.repwd;
+//                      //测试转跳
+//						com.plus.openWindowX('tools/reg_success.html',{});
+
+
+						if(!this.switchNext){
+							return;
+						}
+
+                      if(login_password!=re_pwd){
+                      		mui.toast("两次输入的密码不一致");
+                      		return;
+						}
+                      com.data.user.register({
+                          mobile_tel:mobile_tel,
+                          verificationCode:verificationCode,
+                      	login_password:login_password
+						},function (data,msg,token){
+//								alert(JSON.stringify(data));
+//							console.log(data.result_map.token);
+                            com.data.loginToken.update(token);
+                            com.plus.openWindowX('tools/reg_success.html',{});
+                      })
+
+
+                    },
+					checkNext:function(){
+                        var phone = this.phone;
+                        var code = this.code;
+                        var pwd = this.pwd;
+                        var repwd = this.repwd;
+                        var agreeXieYi = this.agreeXieYi;
+                        if(phone!=""&&code!=""&&pwd!=""&&repwd!=""&&agreeXieYi!=""){
+                            this.switchNext = true;
+                        }else{
+                            this.switchNext = false;
+                        }
+					}
+				}
+				,watch:{
+					phone:function(newval,oldval){
+                        this.checkNext();
+					},
+					code:function(newval,oldval){
+                        this.checkNext();
+					},
+					pwd:function(newval,oldval){
+                        this.checkNext();
+					},
+					repwd:function(newval,oldval){
+                        this.checkNext();
+					},
+					agreeXieYi:function (val){
+                        this.checkNext();
+                    }
+				}
+			})
+			
+			mui.plusReady(function(){
+
+				mui('body').on('tap', '#to_login', function(){
+                    com.plus.openWindowX('login.html',{
+                    });
+				});
+
+				mui('body').on('tap', '#to_xieyi', function() {
+                    com.plus.openWindowX('tools/reg_xieyi.html',{
+                    });
+				});
+
+			})
+
+
+		</script>
+	</body>
+
+</html>

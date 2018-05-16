@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="UTF-8">
+		<title>首页</title>
+		<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+		<link rel="stylesheet" href="../css/font-awesome-4.7.0/css/font-awesome.min.css">
+		<link href="../../css/mui.css" rel="stylesheet" />
+		<link href="../../css/gloab.css" rel="stylesheet" />
+		<link href="../../css/xmui.pullToRefresh.material.css" rel="stylesheet" />
+		<link href="../../css/swiper.min.css" rel="stylesheet">
+		<style>
+			.mui-icon {
+				background-size: contain;
+				background-position: center;
+				background-repeat: no-repeat;
+			}
+			
+			.bg-title {
+				background-color: #c70321;
+			}
+			
+		</style>
+
+	</head>
+
+	<body>
+		<header class="mui-bar mui-bar-nav bg-title">
+			<a class="mui-action-back mui-icon mui-icon-left-nav mui-pull-left color-white"></a>
+			<h1 class="mui-title color-white titlecolor">财经日历</h1>
+		</header>
+		<script src="../../js/h.min.js"></script>
+		<script src="../../js/mui.min.js"></script>
+		<script src="../../js/immersed.js"></script>
+		<script type="text/javascript">
+			mui.plusReady(function(){
+			    plus.nativeUI.showWaiting();//这里是开始显示原生等待框
+			})  
+		</script>
+		<script>
+			mui.init({
+				subpages: [{
+//					url: 'https://newsjijin.dzqh.com.cn/page/livenews/live_news.html?'+Math.random(), //子页面HTML地址，支持本地地址和网络地址
+					url:'../../fund-web-news/page/livenews/live_news.html',
+					id: 'caijingrili', //子页面标志
+					styles: {
+						top: '64px', //子页面顶部位置
+						bottom: '0', 
+						statusbar:{
+							immersed:true
+						}
+					},
+					extras: {
+						
+					} //额外扩展参数
+				}]
+			});
+		</script>
+	</body>
+
+</html>

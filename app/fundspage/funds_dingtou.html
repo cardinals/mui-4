@@ -1,0 +1,551 @@
+
+<!DOCTYPE html>
+<html>
+
+<head>
+	<meta charset="UTF-8">
+	<title>首页</title>
+	<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+	<link href="../../css/mui.css" rel="stylesheet" />
+	<link href="../../css/gloab.css" rel="stylesheet" />
+	<link href="../../css/xmui.pullToRefresh.material.css" rel="stylesheet" />
+	<link href="../../css/swiper.min.css" rel="stylesheet">
+		<link href="../../css/mui.picker.css" rel="stylesheet">
+	<link href="../../css/mui.poppicker.css" rel="stylesheet">
+<style>
+        .swiper-slide{
+            width: 100px;
+        }
+        input[type=radio][name=type-choice]{
+            display: none;
+            opacity: 0;
+        }
+
+        input[type=radio][name=type-choice]+label {
+            font-size: 14px;
+            display: inline-block;
+            width: 100%;
+            text-align: center;
+            line-height: 34px;
+        }
+
+        input[type=radio][name=type-choice]:checked+label {
+            border-bottom: 1px solid #FE7E00;
+            color: #FE7E00;
+        }
+        .bg-title{
+            background-color:#c70321;
+        }
+        .my-swiper{
+            background-color: white;
+            height: 35px;
+        }
+        .cell-ji{
+            text-align: center;
+            background-color: #ffffff;
+        }
+        .cell-ou{
+            text-align: center;
+            background-color: #F9F9F9;
+
+        }
+        .bg-title{
+            background-color:#FB5C5F;
+        }
+        
+        .mui-input-group .mui-input-row:after{
+			height: 0px;
+		}
+		.red-font{
+			color: #DE2D29;
+			font-size: 14px;
+		}
+		.requestion{
+		}
+		input[type='text'],input[type='password']{
+			font-size: 14px;
+		}
+		.mui-input-row .mui-input-clear ~ .mui-icon-clear, .mui-input-row .mui-input-speech ~ .mui-icon-speech, .mui-input-row .mui-input-password ~ .mui-icon-eye{
+			top: 0px;
+		}
+		.mui-icon-clear{
+			display: none;
+		}
+
+		.can-next{
+			background-color: #FB5C60;
+		}
+		.not-next{
+			background-color: #DDDDDD;
+		}
+
+    </style>
+
+</head>
+<body>
+    <header class="mui-bar mui-bar-nav bg-title">
+        <a class="mui-action-back mui-icon mui-icon-left-nav mui-pull-left color-white"></a>
+        <h1 class="mui-title color-white titlecolor">基金定投</h1>
+    </header>
+
+<div class="mui-content mui-scroll-wrapper" >
+		
+	<div class="mui-scroll" id="station-list" style="padding-bottom: 50px;">
+		
+		
+		<div id="vue-body">
+		
+			<form class="mui-input-group" style="background-color: #EFEFF4;">
+				<div class="wd100 bg-bai" style="border-bottom: 1px solid #E0E0E0;">
+					<div class="dis_table wd90" style="margin: 0px auto;">
+						<div class="dis_table_cell textleft ft14 pt10 pb10 wd25">基金名称</div>
+						<div id="" class="dis_table_cell textleft ft14 pt10 pb10" style="" v-text="fundinfo.fund_name+' ('+fundinfo.fund_code+')'"></div>
+					</div>
+				</div>
+				<!--<div class="wd100 bg-bai" style="border-bottom: 1px solid #E0E0E0;">
+					<div class="dis_table wd90" style="margin: 0px auto;">
+						<div class="dis_table_cell textleft ft14 pt10 pb10 wd25">收费方式</div>
+						<div class="dis_table_cell textleft ft14 pt10 pb10" style="">前端收费</div>
+						<div class="dis_table_cell textleft ft14 pt10 pb10 textright wd10" style=""><img src="../../images/icon/right.png" style="height: 15px;width: 15px;" alt="" /></div>
+					</div>
+				</div>-->
+				
+				
+				<div class="wd100 bg-bai" style="border-bottom: 1px solid #E0E0E0;">
+					<div class="dis_table wd90" style="margin: 0px auto;">
+						<div class="dis_table_cell textleft ft14 pt10 pb10 wd25">交易账户</div>
+						<div class="choice_bank dis_table_cell textleft ft14 pt10 pb10" style="" v-text="userChoice.bankShow"></div>
+						<div class="choice_bank dis_table_cell textleft ft14 pt10 pb10 textright wd10" style=""><img src="../../images/icon/right.png" style="height: 15px;width: 15px;" alt="" /></div>
+					</div>
+				</div>
+				
+				
+				<!--<div class="wd100 bg-bai" style="border-bottom: 1px solid #E0E0E0;">
+					<div class="dis_table wd90" style="margin: 0px auto;">
+						<div class="dis_table_cell textleft ft14 pt10 pb10 wd25">定投方式</div>
+						<div class="dis_table_cell textleft ft14 pt10 pb10" style="">定期定额</div>
+						<div class="dis_table_cell textleft ft14 pt10 pb10 textright wd10" style=""><img src="../../images/icon/right.png" style="height: 15px;width: 15px;" alt="" /></div>
+					</div>
+				</div>-->
+				
+				
+				<div class="wd100 bg-bai" style="border-bottom: 1px solid #E0E0E0;" id="choice_type1">
+					<div class="dis_table wd90" style="margin: 0px auto;">
+						<div class="dis_table_cell textleft ft14 pt10 pb10 wd25">扣款周期</div>
+						<div class="dis_table_cell textleft ft14 pt10 pb10" style="" v-text="userChoice.type1_show"></div>
+						<div class="dis_table_cell textleft ft14 pt10 pb10 textright wd10" style=""><img src="../../images/icon/right.png" style="height: 15px;width: 15px;" alt="" /></div>
+					</div>
+				</div>
+				
+				
+				<div class="wd100 bg-bai" style="border-bottom: 1px solid #E0E0E0;" id="choice_type2">
+					<div class="dis_table wd90" style="margin: 0px auto;">
+						<div class="dis_table_cell textleft ft14 pt10 pb10 wd25">扣款日期</div>
+						<div class="dis_table_cell textleft ft14 pt10 pb10" style="" v-text="userChoice.type2_show"></div>
+						<div class="dis_table_cell textleft ft14 pt10 pb10 textright wd10" style=""><img src="../../images/icon/right.png" style="height: 15px;width: 15px;" alt="" /></div>
+					</div>
+				</div>
+				
+				<div class="wd100 bg-bai" style="border-bottom: 1px solid #E0E0E0;">
+					<div class="dis_table wd90" style="margin: 0px auto;">
+						<div class="dis_table_cell textleft ft14 pt10 pb10 wd30">购买金额</div>
+						<div class="dis_table_cell textleft ft14 pt10 pb10" style="">
+							
+							<div style="position: relative;left: -18px;">
+								<div class="mui-input-row" style="height: 20px;">
+							        <input v-model="userChoice.orderMoney" type="text" class="mui-input-clear" placeholder="请输入起投金额" style="position: relative;top: -9px;">
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+				
+				<div class="wd100 bg-bai" style="border-bottom: 1px solid #E0E0E0;">
+					<div class="dis_table wd90" style="margin: 0px auto;">
+						<div class="dis_table_cell textleft ft14 pt10 pb10 wd30">手续费</div>
+						<div class="dis_table_cell textleft ft14 pt10 pb10" style="">{{ratioShow}}</div>
+					</div>
+				</div>
+				
+				<div class="wd100 bg-bai" style="border-bottom: 1px solid #E0E0E0;">
+					<div class="dis_table wd90" style="margin: 0px auto;">
+						<div class="dis_table_cell textleft ft14 pt10 pb10 wd30">交易密码</div>
+						<div class="dis_table_cell textleft ft14 pt10 pb10" style="">
+							<div style="position: relative;left: -18px;">
+								<div class="mui-input-row" style="height: 20px;">
+							        <input v-model="userChoice.pwd" type="password" class="mui-input-password" placeholder="请输入交易密码" style="position: relative;top: -9px;">
+								</div>
+							</div>
+	
+						</div>
+					</div>
+				</div>
+				<template  v-if="userrisk==1">
+					<div class="wd100 bg-bai" style="border-bottom: 1px solid #E0E0E0;">
+						<div class="dis_table wd90" style="margin: 0px auto;">
+							<div class="dis_table_cell" style="width: 10%;text-align: left;padding: 13px 0px;"><input type="checkbox" name="aggrent" id="aggrent" v-model="agreeXieYi" checked="checked"/><label for="aggrent" class="inline-block" style="position: relative;font-size: 14px;top: 2px;left: 7px;">我已知悉并自愿购买该产品</label></div>
+							<!--<div class="dis_table_cell textleft ft14" style="line-height: 30px;"></div>-->
+						</div>
+					</div>
+				</template>
+
+				
+					<!--<div class="wd100 bg-bai mt10" style="border-bottom: 1px solid #E0E0E0;">-->
+						<!--<div class="dis_table wd90" style="margin: 0px auto;">-->
+							<!--<div class="dis_table_cell textleft ft14 pt10 pb10">-->
+								<!--您的适当型评估结果位<span class="red-font">安全型</span>，该产品为<span class="red-font">中低风险</span>基金，超出您当前的风险承受能力。-->
+							<!--</div>-->
+						<!--</div>-->
+					<!--</div>-->
+					<!--<div class="wd100 bg-bai requestion" style="border-bottom: 1px solid #E0E0E0;">-->
+						<!--<div class="dis_table wd90" style="margin: 0px auto;">-->
+							<!--<div class="dis_table_cell textleft ft14 pt10 pb10 wd30" style="color: #6C7596;">重新测评</div>-->
+							<!--<div class="dis_table_cell textleft ft14 pt10 pb10 textright" style=""><img src="../../images/icon/right.png" style="height: 20px;width: 20;" alt="" /></div>-->
+						<!--</div>-->
+					<!--</div>-->
+
+				<template  v-if="userrisk==1">
+
+					<div  class="wd100 bg-bai mt10" style="border-bottom: 1px solid #E0E0E0;">
+						<div class="dis_table wd90" style="margin: 0px auto;">
+							<div class="dis_table_cell textleft ft14 pt10 pb10" v-text="warningContent">
+								<!--您的适当型评估结果位<span class="red-font">安全型</span>，该产品为<span class="red-font">中低风险</span>基金，超出您当前的风险承受能力。-->
+
+							</div>
+						</div>
+					</div>
+
+					<div  class="wd100 bg-bai requestion" style="border-bottom: 1px solid #E0E0E0;">
+						<div class="dis_table wd90" style="margin: 0px auto;">
+							<div class="dis_table_cell textleft ft14 pt10 pb10 wd30" style="color: #6C7596;">重新测评</div>
+							<div class="dis_table_cell textleft ft14 pt10 pb10 textright" style=""><img src="../../images/icon/right.png" style="height: 20px;width: 20px;" alt="" /></div>
+						</div>
+					</div>
+
+				</template>
+
+					
+			</form>
+			<div class="wd90" style="margin-top: 30px;">
+				<button @click="nextStep" type="button" :class="nextSwitch?'can-next':'not-next'" id="next_step" style="width: 100%;height: 40px;color: white;border: 0px;">确认购买</button>
+			</div>
+		
+		</div>
+		
+		
+	</div>
+</div>
+
+
+<script src="../../js/h.min.js"></script>
+<script src="../../js/mui.min.js"></script>
+<script src="../../js/immersed.js"></script>
+<script src="../../js/com.js"></script>
+<script src="../../js/xmui-globalEvent.js"></script>
+<script src="../../js/mui.pullToRefresh.js"></script>
+<script src="../../js/mui.pullToRefresh.material.js"></script>
+<script src="../../js/com.js"></script>
+<script src="../../js/swiper.min.js"></script>
+<script src="../../js/com.data.js"></script>
+<script src="../../js/com.mui.js"></script>
+<script src="../../js/mui.picker.js"></script>
+	<script src="../../js/mui.poppicker.js"></script>
+	
+	
+	<script src="../../js/vue.js"></script>
+	<script src="../../js/jquery.min_1.8.3.js"></script>
+	<script src="../../js/md5.js"></script>
+	<script src="../../js/fundsfunction.js"></script>
+	
+
+<script>
+    mui.ready(function () {
+	    var swiper = new Swiper('.swiper-container',{
+	        pagination: '.swiper-pagination',
+	        slidesPerView: 5,
+	        paginationClickable: true,
+	        spaceBetween: 0,
+	        freeMode: true
+	    });
+        mui(".mui-scroll-wrapper").scroll({
+            bounce: true,//是否启用回弹
+            indicators: true,//是否显示滚动条
+            deceleration:  0.0005 //flick 减速系数，系数越大，滚动速度越慢，滚动距离越小，默认值0.0006
+        });
+    });
+    var vue_body = new Vue({
+        el:"#vue-body",
+        data:{
+			fundinfo:{},
+			userrisk:-1,
+			userChoice:{
+                bankShow:"请选择银行",
+                bankName:"",
+                bankNo:"",
+                bankNum:"",
+                orderMoney:"",
+                pwd:"",
+                type1_id:"0",
+                type2_id:"-1",
+                type1_show:"按月",
+                type2_show:"请选择时间",
+			},
+            warningContent:"",
+			nextSwitch:false,
+			agreeXieYi:false,
+            ratioShow:"--"
+        },
+        methods:{
+            getProtocolPeriodName:function(protocol_period_unit,protocol_fix_day){
+				return getProtocolPeriodName(protocol_period_unit,protocol_fix_day);
+			},
+			checkNext:function () {
+
+			if(vue_body.userrisk!=1){
+				vue_body.agreeXieYi=true
+			}
+
+			if(vue_body.ratioShow!="输入范围有误"&&vue_body.agreeXieYi==true&&vue_body.userChoice.bankNo!=""&&vue_body.userChoice.orderMoney!=''&&vue_body.userChoice.pwd!=""&&vue_body.userChoice.type2_id!=-1){
+                    vue_body.nextSwitch = true;
+				}else {
+                    vue_body.nextSwitch = false;
+				}
+
+            },
+            nextStep:function(){
+                if(vue_body.nextSwitch){
+//         			风险等级不对需要进行留痕处理
+					
+                    if(vue_body.userrisk==1){
+                        com.data.funds.saveMark({
+                            ofund_risklevel:vue_body.fundinfo.ofund_risklevel,
+                            fund_code:vue_body.fundinfo.fund_code,
+                            mark_content:encodeURIComponent(encodeURIComponent(vue_body.warningContent)),
+                            warning_no:vue_body.warning_no,
+                        },function (data){
+//							alert(JSON.stringify(data));
+                            commitOrder(vue_body.fundinfo.fund_code,vue_body.fundinfo.share_type,vue_body.userChoice.orderMoney,vue_body.userChoice.type1_id,vue_body.userChoice.type2_id,vue_body.userChoice.bankNo,vue_body.userChoice.pwd);
+//                                                           fund_code,                      share_type,                         balance,                       protocol_period_unit              ,protocol_fix_day,               bank_no,                 password
+                        })
+                    }else{
+                        commitOrder(vue_body.fundinfo.fund_code,vue_body.fundinfo.share_type,vue_body.userChoice.orderMoney,vue_body.userChoice.type1_id,vue_body.userChoice.type2_id,vue_body.userChoice.bankNo,vue_body.userChoice.pwd);
+                    }
+
+                }
+            },
+            calcFundsRatio:function(money,ratioSection){
+                return calcFundsRatio(money,ratioSection);
+            }
+        },
+        watch:{
+            'userChoice.bankNo':function () {
+                this.checkNext();
+            },
+            'userChoice.orderMoney':function (nval,oval) {
+                vue_body.ratioShow = vue_body.calcFundsRatio(nval,vue_body.rateSection);
+                this.checkNext();
+            },
+            'userChoice.pwd':function () {
+                this.checkNext();
+            },
+            'userChoice.type1_id':function () {
+                this.checkNext();
+            },
+            'userChoice.type2_id':function () {
+                this.checkNext();
+            },
+            agreeXieYi:function(){
+            	this.checkNext();
+            }
+        },
+        mounted:function(){
+
+        }
+
+    });
+
+//    {
+//        "accept_hq_date": "20171213",
+//        "en_minshare": "0.00",
+//        "error_code": "",
+//        "error_info": "",
+//        "forbid_modi_autobuy_flag": "",
+//        "fund_code": "X11004",
+//        "fund_curr_income": "0.00",
+//        "fund_curr_ratio": "0.0000000000000",
+//        "fund_full_name": "LOF前后收费基金",
+//        "fund_name": "LOF前后收费基金",
+//        "fund_share": "0.00",
+//        "fund_status": "8",
+//        "hq_date": "20171212",
+//        "nav": "1.0000",
+//        "nav_total": "0.0000",
+//        "ofund_risklevel": "3",
+//        "ofund_type": "6",
+//        "per_myriad_income": "0.00000000",
+//        "pre_income_ratio": "0",
+//        "private_flag": "0",
+//        "prod_term": "0",
+//        "rowcount": "11",
+//        "scheduled_protocol_id": "",
+//        "share_type": "A",
+//        "success_type": "0",
+//        "ta_no": "98",
+//        "total_count": "0"
+//    }
+    mui.plusReady(function(){
+    	vue_body.fundinfo = com.plus.getCurrWebview().self.fundinfo;
+        vue_body.userrisk = com.plus.getCurrWebview().self.levelresult;
+        vue_body.rateSection = com.plus.getCurrWebview().self.rateSection;
+
+        com.data.user.showMyInfo({},function (data) {
+            vue_body.userInfo = data.result_map;
+//            do_success(0);
+            if(vue_body.userrisk==1){
+//			if(vue_body.userrisk==0){
+                com.data.funds.getWarningInfo({
+                    warning_type:"C"
+                },function(data){
+                    vue_body.warningContent=data.result_map.warningContent;
+                    vue_body.warningContent = vue_body.warningContent.replace("{0}",vue_body.fundinfo.fund_name+"("+vue_body.fundinfo.fund_code+")");
+                    vue_body.warningContent = vue_body.warningContent.replace("{1}",getFundRiskLevelName(vue_body.fundinfo.ofund_risklevel));
+//                  alert(JSON.stringify(vue_body.warningContent));
+                    vue_body.warning_no=data.result_map.warning_no;
+                })
+            }
+        })
+
+
+//        mui('body').on('tap', '#next_step', function(){
+//            com.plus.openWindowX('fundsbuy_success.html',{
+//            });
+//        });
+        
+        mui('body').on('tap', '.choice_bank', function(){
+            com.plus.openWindowX('choice_bank.html',{
+                listenType:"order"
+            });
+        });
+        
+        mui('body').on('tap', '#choice_type1', function(){
+			var picker = new mui.PopPicker();
+			picker.setData([{value:0,text:'按月'},{value:1,text:'按周'}]);
+			picker.show(function (selectItems){
+//			   console.log(selectItems[0].text);//智子
+//			   console.log(selectItems[0].value);//zz
+                vue_body.userChoice.type1_show = selectItems[0].text;
+                vue_body.userChoice.type1_id = selectItems[0].value;
+
+                vue_body.userChoice.type2_show = "请选择时间";
+                vue_body.userChoice.type2_id = -1;
+
+			})
+        });
+        
+        mui('body').on('tap', '#choice_type2', function(){
+			var picker = new mui.PopPicker();
+			if(vue_body.userChoice.type1_id==0){
+                picker.setData([
+						{value:1,text:'1日'},
+						{value:2,text:'2日'},
+						{value:3,text:'3日'},
+						{value:4,text:'4日'},
+						{value:5,text:'5日'},
+						{value:6,text:'6日'},
+						{value:7,text:'7日'},
+						{value:8,text:'8日'},
+						{value:9,text:'9日'},
+						{value:10,text:'10日'},
+						{value:11,text:'11日'},
+						{value:12,text:'12日'},
+						{value:13,text:'13日'},
+						{value:14,text:'14日'},
+						{value:15,text:'15日'},
+						{value:16,text:'16日'},
+						{value:17,text:'17日'},
+						{value:18,text:'18日'},
+						{value:19,text:'19日'},
+						{value:20,text:'20日'},
+						{value:21,text:'21日'},
+						{value:22,text:'22日'},
+						{value:23,text:'23日'},
+						{value:24,text:'24日'},
+						{value:25,text:'25日'},
+						{value:26,text:'26日'},
+						{value:27,text:'27日'},
+						{value:28,text:'28日'}
+					]);
+			}else{
+                picker.setData([
+						{value:2,text:'周一'},
+						{value:3,text:'周二'},
+						{value:4,text:'周三'},
+						{value:5,text:'周四'},
+						{value:6,text:'周五'}
+					]);
+			}
+			picker.show(function (selectItems){
+                vue_body.userChoice.type2_show = selectItems[0].text;
+                vue_body.userChoice.type2_id = selectItems[0].value;
+			})
+        });
+        
+        mui('body').on('tap', '.requestion', function(){
+			com.plus.openWindowX('../tools/reg_question.html',{
+            });
+        });
+
+        //添加监听
+
+        mui.ge.addListener("choiceCardOrder", function(args) {
+            var card_no = args.detail.card_no;
+            var card_name = args.detail.card_name;
+            var card_num = args.detail.card_num;
+
+            vue_body.userChoice.bankNo = card_no;
+            vue_body.userChoice.bankNum = card_name;
+            vue_body.userChoice.bankName = card_num;
+            vue_body.userChoice.bankShow = card_name+"("+card_num+")";
+            mui.ge.callback(args, {})
+        });
+    })
+
+    var commitOrder = function (fund_code,share_type,balance,protocol_period_unit,protocol_fix_day,bank_no,password) {
+//        alert(bank_no);
+
+
+//        fund_code
+//        share_type
+//        balance
+//        protocol_period_unit
+//        protocol_fix_day
+//        bank_no
+//        password
+
+//		if(protocol_fix_day < 10){
+//			protocol_fix_day = "0"+protocol_fix_day
+//		}
+
+        com.data.funds.doFundsOrder({
+            fund_code:fund_code,
+            share_type:share_type,
+            balance:balance,
+            protocol_period_unit:protocol_period_unit,
+            protocol_fix_day:protocol_fix_day,
+            bank_no:bank_no,
+            password:password,
+        },function (data){
+//			alert(JSON.stringify(data));
+            //执行监听时间
+          mui.ge.fireEvent("orderFunctionSuccess", {}, function (args) {
+              mui.back();
+          });
+        })
+//			mui.ge.fireEvent("orderFundSuccess", {}, function (args) {
+//                mui.back();
+//            });
+    }
+</script>
+</body>
+
+</html>

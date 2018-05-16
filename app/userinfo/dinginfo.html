@@ -1,0 +1,298 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+	<meta charset="UTF-8">
+	<title>首页</title>
+	<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+	<link href="../../css/mui.css" rel="stylesheet" />
+	<link href="../../css/gloab.css" rel="stylesheet" />
+	<link href="../../css/xmui.pullToRefresh.material.css" rel="stylesheet" />
+	<link href="../../css/swiper.min.css" rel="stylesheet">
+	<style>
+		.titlecolor{
+			color: white;
+		}
+		.mui-bar{
+			background-color: #c70321;
+		}
+		.mui-pull-bottom-tips {
+			display: none !important;
+		}
+	</style>
+
+</head>
+<body>
+    <header class="mui-bar mui-bar-nav bg-title">
+        <a class="mui-action-back mui-icon mui-icon-left-nav mui-pull-left color-white"></a>
+        <h1 class="mui-title color-white titlecolor">定投明细</h1>
+    </header>
+
+<div class="mui-content mui-scroll-wrapper">
+	<div class="mui-scroll" id="station-list-dinginfo" style="padding-bottom: 55px">
+		<div>
+			<div class="wd100 bg-bai pt10 pb10" style="border-bottom: 1px solid #EEEEEE;">
+				<div class="dis_table wd90">
+					<div class="dis_table_cell textleft ft14" style="color: #999999;">基金名称</div>
+					<div class="dis_table_cell textright" style="font-size: 14px;color: #000000;" v-text="fundinfo.fund_name"></div>
+				</div>
+			</div>
+			<div class="wd100 bg-bai pt10 pb10" style="border-bottom: 1px solid #EEEEEE;">
+				<div class="dis_table wd90">
+					<div class="dis_table_cell textleft ft14" style="color: #999999;">基金代码</div>
+					<div class="dis_table_cell textright" style="font-size: 14px;color: #000000;" v-text="fundinfo.fund_code"></div>
+				</div>
+			</div>
+			<div class="wd100 bg-bai pt10 pb10" style="border-bottom: 1px solid #EEEEEE;">
+				<div class="dis_table wd90">
+					<div class="dis_table_cell textleft ft14" style="color: #999999;">交易账户</div>
+					<!--<div class="dis_table_cell textright" style="font-size: 14px;color: #000000;" v-text="getBankName(fundinfo.bank_no)+'('+currtBankNum(fundinfo.bank_account)+')'"></div>-->
+					<div class="dis_table_cell textright" style="font-size: 14px;color: #000000;" v-text="getBank(fundinfo.bank_no,fundinfo.bank_account)"></div>
+				</div>
+			</div>
+
+			<div class="wd100 bg-bai pt10 pb10" style="border-bottom: 1px solid #EEEEEE;">
+				<div class="dis_table wd90">
+					<div class="dis_table_cell textleft ft14" style="color: #999999;">扣款周期</div>
+					<div class="dis_table_cell textright" style="font-size: 14px;color: #000000;" v-text="getProtocolPeriodName(fundinfo.protocol_period_unit,fundinfo.protocol_fix_day)"></div>
+				</div>
+			</div>
+
+			<div class="wd100 bg-bai pt10 pb10" style="border-bottom: 1px solid #EEEEEE;">
+				<div class="dis_table wd90">
+					<div class="dis_table_cell textleft ft14" style="color: #999999;">定投金额</div>
+					<div class="dis_table_cell textright" style="font-size: 14px;color: #000000;" v-text="fundinfo.balance"></div>
+				</div>
+			</div>
+			<div class="wd100 bg-bai pt10 pb10" style="border-bottom: 1px solid #EEEEEE;">
+				<div class="dis_table wd90">
+					<div class="dis_table_cell textleft ft14" style="color: #999999;">下次扣款时间</div>
+					<div class="dis_table_cell textright" style="font-size: 14px;color: #000000;" v-text="fundinfo.next_fixrequest_date"></div>
+				</div>
+			</div>
+
+			
+
+
+			<div class="wd100 bg-bai pt10 pb10 mt5" style="border-bottom: 1px solid #EEEEEE;">
+				<div class="dis_table wd90">
+					<div class="dis_table_cell textleft ft14" style="color: #999999;">定投记录</div>
+					<div class="dis_table_cell textright" style="font-size: 14px;color: #000000;"></div>
+				</div>
+			</div>
+			
+			<template v-for="(item,index) in recordlist">
+			
+				<div class="wd100 bg-bai pt10 pb10" style="border-bottom: 1px solid #EEEEEE;">
+					<div class="dis_table wd90">
+						<div class="dis_table_cell textleft ft14" style="color: #000000;" v-text="recordlist[index].apply_date"></div>
+						<div class="dis_table_cell textleft" style="font-size: 14px;color: #000000;" v-text="getDeductStatus(recordlist[index].deduct_status)"></div>
+					</div>
+				</div>
+				
+			</template>
+			
+			
+
+
+			<div id="inpwd" class="" style="display: none;">
+				<div style="padding-top: 20px">
+					<input class="password" type="password" name="pwd1" id="password" style="padding: 0px;width: 200px;"/>
+				</div>
+			</div>
+		</div>
+
+	</div>
+	<!--底部按钮 start-->
+	<div id="vue-footer" >
+		<div v-if="fundinfo.fix_state!='H'" class="bg-bai fixed bottom0"style="z-index: 999;border-top: 1px solid #DDDDDD">
+			<div class="dis_table wd100">
+				<div class="dis_table_cell wd33" id="change" style="height: 50px;border-right: 1px solid #EEDDEE;">
+					<span style="font-size: 16px;color: #666666;">变更</span>
+				</div>
+				<div class="dis_table_cell wd33" id="stop" style="height: 50px;border-right: 1px solid #EEDDEE;">
+					<span style="font-size: 16px;color: #666666;">终止</span>
+				</div>
+			</div>
+		</div>
+	</div>
+
+	<!--底部按钮 end-->
+</div>
+
+
+
+<script src="../../js/h.min.js"></script>
+		<script src="../../js/mui.min.js"></script>
+		<script src="../../js/immersed.js"></script>
+<script src="../../js/com.js"></script>
+<script src="../../js/xmui-globalEvent.js"></script>
+<script src="../../js/mui.pullToRefresh.js"></script>
+<script src="../../js/mui.pullToRefresh.material.js"></script>
+<script src="../../js/com.js"></script>
+<script src="../../js/com.data.js"></script>
+	<script src="../../js/com.mui.js"></script>
+
+
+	<script src="../../js/vue.js"></script>
+	<script src="../../js/jquery.min_1.8.3.js"></script>
+	<script src="../../js/md5.js"></script>
+	<script src="../../js/fundsfunction.js"></script>
+
+	<script>
+    mui.ready(function () {
+        mui(".mui-scroll-wrapper").scroll({
+            bounce: true,//是否启用回弹
+            indicators: true,//是否显示滚动条
+            deceleration:  0.0005 //flick 减速系数，系数越大，滚动速度越慢，滚动距离越小，默认值0.0006
+        });
+    });
+
+    var vue_body= new  Vue({
+        el:"#station-list-dinginfo",
+        data:{
+            fundinfo:{},
+            recordlist:{},
+            inputpwd:'1'
+        },
+        methods:{
+        	getBank:function(bank_no,bank_account){
+        		var BankName = "";
+        		var BankNum = "";
+        		if(!bank_account){
+					BankNum = ""
+				}else{
+					BankNum = "("+bank_account.substring(bank_account.length-4)+")";
+				}
+        		if(bank_no=="" || bank_no==null){
+					BankName = "";
+				}else{
+					BankName = getBankName(bank_no);
+				}
+        		
+        		return BankName+BankNum;
+        	},
+			getBankName:function(bank_no){
+				if(bank_no=="" || bank_no==null){
+					return "";
+				}else{
+					
+					return getBankName(bank_no);
+				}
+			},
+			currtBankNum:function(bank_account){
+				if(!bank_account){
+					return ""
+				}
+				
+				return bank_account.substring(bank_account.length-4);
+			},
+			getProtocolPeriodName:function(protocol_period_unit,protocol_fix_day){
+                return getProtocolPeriodName(protocol_period_unit,protocol_fix_day)
+            },
+            getDeductStatus:function (fund_status){
+				return getDeductStatus(fund_status);
+            }
+        },
+        mounted: function(){
+
+        }
+    });
+
+    var vue_footer= new  Vue({
+        el:"#vue-footer",
+        data:{
+            fundinfo:{},
+            recordlist:{},
+        },
+        methods:{
+
+        },
+        mounted: function(){
+
+        }
+    });
+
+    mui.plusReady(function(){
+        var scheduled_protocol_id = com.plus.getCurrWebview().self.scheduled_protocol_id;
+        var trade_acco = com.plus.getCurrWebview().self.trade_acco;
+        var scroll = new com.mui.muiScroll(
+            document.querySelector("#station-list-dinginfo"),
+            function(index, size, do_success, do_error) {
+				com.data.funds.getDingMore({
+					scheduled_protocol_id:scheduled_protocol_id,
+					trade_acco:trade_acco
+				},function(data){
+					vue_body.fundinfo = data.result_list[0];
+                    vue_footer.fundinfo = data.result_list[0];
+					com.data.funds.getDingTouRecord({
+						scheduled_protocol_id:scheduled_protocol_id,
+						fund_busin_code:'039',
+					},function(data2){
+                        vue_body.recordlist = data2.result_list;
+                        vue_footer.recordlist = data2.result_list;
+						do_success(0)
+					});
+				})
+
+            }
+        )
+        scroll.refresh();
+//        DingTouReload
+        mui.ge.addListener("changeDingReload", function(args) {
+            scroll.refresh();
+            mui.ge.callback(args, {})
+        });
+
+
+
+
+
+        mui('body').on('tap', '#change', function (){
+        	console.log(JSON.stringify(vue_body.fundinfo))
+            com.plus.openWindowX('dingchange.html',{
+                fundinfo:vue_body.fundinfo
+            });
+        });
+        mui('body').on('tap', '#stop', function (){
+              mui.confirm(document.getElementById("inpwd").innerHTML, '请输入交易密码', null, function(e) {
+              	if(e.index==1){
+              		
+              		$(".password").each(function(i){
+              			if(i==1){
+              				vue_body.inputpwd = $(this).val();
+              				//发送请求
+              				com.data.funds.stopDingTou({
+              					password:vue_body.inputpwd,
+              					scheduled_protocol_id:scheduled_protocol_id,
+              					trade_acco:trade_acco,
+              					fix_state:"H",
+              				},function(data){
+//            					alert(JSON.stringify(data));
+							    mui.ge.fireEvent("DingTouReload", {}, function (args) {
+							      mui.back();
+							    });
+								 
+              				})
+              				
+              			}
+              		})
+              		
+              	}
+              },'div');
+        });
+        mui('body').on('tap', '#palse', function (){
+              mui.confirm(document.getElementById("inpwd").innerHTML, '请输入交易密码', null, function(e) {},'div');
+        });
+
+        mui.ge.addListener("changeFundSuccess", function(args){
+            com.plus.openWindowX('../fundspage/fundsbuy_success.html',{
+                type:4
+            });
+            mui.ge.callback(args, {})
+        });
+    })
+</script>
+</body>
+
+</html>

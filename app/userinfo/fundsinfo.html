@@ -1,0 +1,377 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+	<meta charset="UTF-8">
+	<title>首页</title>
+	<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+	<link href="../../css/mui.css" rel="stylesheet" />
+	<link href="../../css/gloab.css" rel="stylesheet" />
+	<link href="../../css/xmui.pullToRefresh.material.css" rel="stylesheet" />
+	<link href="../../css/swiper.min.css" rel="stylesheet">
+	<style>
+		.titlecolor{
+			color: white;
+		}
+		.mui-bar{
+			background-color: #c70321;
+		}
+	</style>
+
+</head>
+<body>
+    <header class="mui-bar mui-bar-nav bg-title">
+        <a class="mui-action-back mui-icon mui-icon-left-nav mui-pull-left color-white"></a>
+        <h1 class="mui-title color-white titlecolor">基金交易明细</h1>
+    </header>
+
+<div class="mui-content mui-scroll-wrapper">
+	<div class="mui-scroll" id="vue-body-founds-info">
+
+		<div>
+			<div class="bg-bai textcenter mb15 " style="padding: 15px 0px;border-bottom: 1px solid #ddd;">
+				<div class="inline-block ft16" style="padding-bottom: 20px;" v-text="fundinfo.fund_name+'('+fundinfo.fund_code+')'"></div>
+				<br>
+				<div class="inline-block ft14" style="color: #888;">
+					参考市值(元)
+				</div>
+				<br>
+				<div class="inline-block ft16" style="color: #FB5C5E;" v-text="fundinfo.total_income"></div>
+			</div>
+
+
+			<div class="wd100 bg-bai pt10 pb10" style="border-bottom: 1px solid #EEEEEE;">
+				<div class="dis_table wd90">
+					<div class="dis_table_cell textleft ft14" style="color: #999999;">持有份额(份)</div>
+					<div class="dis_table_cell textright" style="font-size: 14px;color: #000000;" v-text="fundinfo.current_share"></div>
+				</div>
+			</div>
+			<div class="wd100 bg-bai pt10 pb10" style="border-bottom: 1px solid #EEEEEE;">
+				<div class="dis_table wd90">
+					<div class="dis_table_cell textleft ft14" style="color: #999999;">可用份额(份)</div>
+					<div class="dis_table_cell textright" style="font-size: 14px;color: #000000;" v-text="fundinfo.enable_shares"></div>
+				</div>
+			</div>
+			<div class="wd100 bg-bai pt10 pb10" style="border-bottom: 1px solid #EEEEEE;">
+				<div class="dis_table wd90">
+					<div class="dis_table_cell textleft ft14" style="color: #999999;">持有成本(元)</div>
+					<div class="dis_table_cell textright" style="font-size: 14px;color: #000000;" v-text="fundinfo.cost"></div>
+				</div>
+			</div>
+
+			<div class="wd100 bg-bai pt10 pb10" style="border-bottom: 1px solid #EEEEEE;">
+				<div class="dis_table wd90">
+					<div class="dis_table_cell textleft ft14" style="color: #999999;">持有盈亏(元)</div>
+					<div class="dis_table_cell textright" style="font-size: 14px;color: #000000;" v-text="fixedNum(fundinfo.total_income-fundinfo.cost)"></div>
+				</div>
+			</div>
+
+
+			<div @click="showDingTou(fundinfo.fund_code)" class="wd100 bg-bai pt10 pb10 mt15" style="border-bottom: 1px solid #EEEEEE;">
+				<div class="dis_table wd90">
+					<div class="dis_table_cell textleft ft14" style="color: #999999;">定投明细</div>
+					<div class="dis_table_cell textright" style="font-size: 14px;color: #000000;text-align: right" >
+						<!--<template>
+							<span class="" style="color: #FB5C60;" v-if="fundinfo.scheduled_protocol_id">定投</span>
+						</template>-->
+						<img src="../../images/icon/right.png" style="width: 20px;height: 20px;vertical-align:middle;" />
+					</div>
+				</div>
+			</div>
+
+			<div @click="showRecord(fundinfo.fund_code)" class="wd100 bg-bai pt10 pb10" style="border-bottom: 1px solid #EEEEEE;">
+				<div class="dis_table wd90">
+					<div class="dis_table_cell textleft ft14" style="color: #999999;">交易记录</div>
+					<div class="dis_table_cell textright" style="font-size: 14px;color: #000000;text-align: right" >
+						<img src="../../images/icon/right.png" style="width: 20px;height: 20px;vertical-align:middle" />
+					</div>
+				</div>
+			</div>
+
+			
+
+		
+			<!--<div class="wd90" style="margin-top: 30px;">
+				<button type="button" class="" id="next_step" style="width: 100%;height: 40px;background-color: #FB5C60;color: white;border: 0px;">撤销</button>
+			</div>-->
+		
+		</div>
+		
+	</div>
+	<div class="fixed wd100 bottom0 dis_table">
+		<div id="fundbuy" class="dis_table_cell wd50 ft16" style="height: 50px;background-color: #F7F7FA;border-right: 1px solid #EfEfEf;border-top: 1px solid #E0E0E0;">申购</div>
+		<div id="fundreturn" class="dis_table_cell wd50 ft16" style="height: 50px;background-color: #F7F7FA;border-top: 1px solid #E0E0E0; color: #FB5C5F;">赎回</div>
+	</div>
+</div>
+
+
+	<script src="../../js/h.min.js"></script>
+		<script src="../../js/mui.min.js"></script>
+		<script src="../../js/immersed.js"></script>
+	<script src="../../js/com.js"></script>
+	<script src="../../js/xmui-globalEvent.js"></script>
+	<script src="../../js/mui.pullToRefresh.js"></script>
+	<script src="../../js/mui.pullToRefresh.material.js"></script>
+	<script src="../../js/com.js"></script>
+	<script src="../../js/com.data.js"></script>
+	<script src="../../js/com.mui.js"></script>
+
+
+	<script src="../../js/vue.js"></script>
+	<script src="../../js/jquery.min_1.8.3.js"></script>
+	<script src="../../js/md5.js"></script>
+	<script src="../../js/fundsfunction.js"></script>
+
+	<script>
+	var fundinfo = {};
+    mui.ready(function () {
+        mui(".mui-scroll-wrapper").scroll({
+            bounce: true,//是否启用回弹
+            indicators: true,//是否显示滚动条
+            deceleration:  0.0005 //flick 减速系数，系数越大，滚动速度越慢，滚动距离越小，默认值0.0006
+        });
+    });
+
+//    fundinfo：{
+//        "accum_income": "0.00",
+//        "auto_buy": "0",
+//        "available_due_share": "3772.09",
+//        "bank_account": "6226621234567890",
+//        "bank_no": "009",
+//        "business_frozen_amount": "2.70",
+//        "c_flag": "",
+//        "capital_mode": "3",
+//        "cost": "0",
+//        "current_share": "3774.79",
+//        "enable_shares": "3772.09",
+//        "error_code": "",
+//        "error_info": "",
+//        "excetrans_in_total_quota": "0",
+//        "excetrans_out_total_quota": "0",
+//        "fast_transfer_flag": "",
+//        "frozen_shares": "0.00",
+//        "fund_code": "C40001",
+//        "fund_name": "测试基金低风险",
+//        "fund_status": "0",
+//        "lock_share": "0.0",
+//        "nav": 1,
+//        "nav_date": "20171208",
+//        "quick_exceed_enable_share": "0",
+//        "rowcount": "2",
+//        "scheduled_protocol_id": "201711102157",
+//        "share_type": "A",
+//        "success_type": "0",
+//        "ta_acco": "C41000000059",
+//        "today_apply_total_quota": "0",
+//        "today_exceed_total_quota": "0",
+//        "today_income": "0.00",
+//        "today_pay_bala": "",
+//        "today_transin_total_quota": "0",
+//        "today_transout_total_quota": "0",
+//        "total_count": "0",
+//        "total_income": 3774.79,
+//        "trade_acco": "0290",
+//        "unpaid_income": "0.00",
+//        "worth_value": "3774.79"
+//    }
+
+
+    var vue_body = new Vue({
+        el:"#vue-body-founds-info",
+        data:{
+			fundinfo:{},
+            buyRules:{},
+            rateList:{},
+            rateSection:[],
+        },
+        methods:{
+			showRecord:function(fund_code){
+				com.plus.openWindowX('myRecord.html', {fund_code:fund_code});
+			},
+			showDingTou:function(fund_code){
+				com.plus.openWindowX('myding.html',{fund_code:fund_code});
+			},
+			fixedNum:num=>{
+			    return toFix2(num);
+			}
+
+        },
+        watch:{
+
+        },
+        mounted:function(){
+
+        }
+
+    });
+
+    mui.plusReady(function(){
+        vue_body.fundinfo = com.plus.getCurrWebview().self.fundinfo;
+//      console.log(JSON.stringify(fundinfo))
+//		alert(JSON.stringify(fundinfo));
+
+
+//        var scroll = new com.mui.muiScroll(
+//            document.querySelector("#station-list"),
+//            function(index, size, do_success, do_error) {
+//                com.data.user.showMyInfo({},function (data){
+//                    vue_body.userInfo = data.result_map;
+//                    do_success(0);
+//                })
+//
+//            }
+//        )
+//        scroll.refresh();
+
+        mui.ge.addListener("openOrderSuccessMore", function(args){
+            com.plus.openWindowX('../fundspage/fundsbuy_success.html',{
+                type:1,
+            });
+            mui.ge.callback(args, {})
+        });
+
+
+
+        mui('body').on('tap', '#fundbuy', function (){
+
+//          vue_body.fundinfo = com.plus.getCurrWebview().self.fundinfo;
+//          vue_body.userrisk = com.plus.getCurrWebview().self.levelresult;
+
+
+            com.data.funds.getFundMoreInfo({
+                fund_code:vue_body.fundinfo.fund_code
+            },function(data){
+                var morefundinfo = data.result_map;
+                com.data.funds.checkUserLevel({
+                    ofund_risklevel:morefundinfo.ofund_risklevel
+                },function(data0){
+
+                    com.data.funds.getBuyRate({
+                        fund_code:morefundinfo.fund_code,
+                        share_type:morefundinfo.share_type,
+                        fund_status:morefundinfo.fund_status,
+                    },function (data3){
+//                              console.log("3------------->"+JSON.stringify(data3))
+//                              alert(JSON.stringify(data3));
+                        getRateFun(data3);
+                        com.plus.openWindowX('../fundspage/funds_buy.html',{
+                            levelresult:data0.result_map.is_risk,
+                            fundinfo:morefundinfo,
+                            rateSection:vue_body.rateSection,
+                            whereFrom:'morePage',
+                        });
+                    })
+
+
+
+                })
+
+            })
+        });
+        mui('body').on('tap', '#fundreturn', function (){
+           com.plus.openWindowX('moneyreturn.html',{
+           		fundinfo:vue_body.fundinfo
+           });
+        });
+
+        mui.ge.addListener("returnFundSuccess", function(args){
+            com.plus.openWindowX('../fundspage/fundsbuy_success.html',{
+                type:3
+            });
+            mui.ge.callback(args, {})
+        });
+
+    })
+
+
+
+    var getRateFun = function (data){
+        var obj = data.result_map;
+        var resultList = [];
+        if(obj!=null){
+
+            $.each(obj,function(key,list){
+
+                if(key=="022"){
+
+                    if(list!=null){
+                        var rateInfo = {text:"申购费率",more:[]};
+
+                        var n=1;
+
+                        $.each(list,function(key,map1){
+                            var quinfo = {qudecr:'',rate:''};
+                            var ratioSection ={min:0,max:0,ratio:0};
+                            //没有设置区间
+                            if(map1.min_balance=="0.00" && map1.max_balance=="0.00"){
+                                quinfo.qudecr = "费用比例"
+                                quinfo.rate = map1.ratio;
+                                ratioSection.ratio = map1.ratio;
+//                              rateInfo.more.push(n+".费用比例"+map1.ratio)
+                            }else{
+                                quinfo.qudecr = map1.min_balance+"元~"+map1.max_balance+"元";
+                                quinfo.rate = map1.ratio;
+                                ratioSection.min = map1.min_balance;
+                                ratioSection.max = map1.max_balance;
+                                ratioSection.ratio = map1.ratio;
+
+//                              rateInfo.more.push(n+"."+map1.min_balance+"元~"+map1.max_balance+"元：费率（"+map1.ratio+"）")
+                            }
+                            n++;
+                            rateInfo.more.push(quinfo);
+                            vue_body.rateSection.push(ratioSection);
+                        });
+                        resultList.push(rateInfo)
+                    }
+
+                }else if(key=="024"){
+                    if(list!=null){
+                        var rateInfo = {text:"赎回费率",more:[]};
+                        var n=1;
+                        $.each(list,function(key,map1){
+                            var quinfo = {qudecr:'',rate:''};
+                            //区间编号
+                            if(map1.min_balance=="0.00"&&map1.max_balance=="0.00"){
+                                quinfo.qudecr = "费用比例"
+                                quinfo.rate = map1.ratio;
+                            }else{
+                                quinfo.qudecr = map1.min_balance+"元~"+map1.max_balance+"元";
+                                quinfo.rate = map1.ratio;
+                            }
+                            n++;
+                            rateInfo.more.push(quinfo);
+                        });
+                        resultList.push(rateInfo)
+                    }
+                }else if(key=="020"){
+                    if(list!=null){
+
+                        var rateInfo = {text:"认购费率",more:[]};
+                        var n=1;
+
+                        $.each(list,function(key,map1){
+                            var quinfo = {qudecr:'',rate:''};
+                            //区间编号
+                            if(map1.min_balance=="0.00" && map1.max_balance=="0.00"){
+                                quinfo.qudecr = "费用比例"
+                                quinfo.rate = map1.ratio;
+//                              rateInfo.more.push(n+".费用比例 "+map1.ratio)
+                            }else{
+                                quinfo.qudecr = map1.min_balance+"元~"+map1.max_balance+"元";
+                                quinfo.rate = map1.ratio;
+//                              rateInfo.more.push(n+"."+map1.min_balance+"元~"+map1.max_balance+"元：费率（"+map1.ratio+"）")
+                            }
+                            n++;
+                            rateInfo.more.push(quinfo);
+                        });
+                        resultList.push(rateInfo)
+                    }
+                }
+            });
+        }
+        vue_body.rateList = resultList;
+    }
+</script>
+</body>
+
+</html>

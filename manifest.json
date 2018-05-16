@@ -1,0 +1,3048 @@
+{
+	"@platforms": [
+		"android",
+		"iPhone",
+		"iPad"
+	],
+	"id": "H5C0B9798",/*应用的标识，创建应用时自动生成，勿手动修改*/
+	"name": "东证赢家财富版",/*应用名称，程序桌面图标名称*/
+	"version": {
+		"name": "1.0",/*应用版本名称*/
+		"code": "2001"
+	},
+	"description": "",/*应用描述信息*/
+	"icons": {
+		"72": "icon.png"
+	},
+	"launch_path": "first.html",/*应用的入口页面，默认为根目录下的index.html；支持网络地址，必须以http://或https://开头*/
+	"developer": {
+		"name": "dzqh",/*开发者名称*/
+		"email": "online@orientfutures.com",/*开发者邮箱地址*/
+		"url": "www.dzqh.com.cn"
+	},
+	"permissions": {
+		"Accelerometer": {},
+		"Cache": {
+			"description": "管理应用缓存"
+		},
+        "openaccount": {
+            "description": "开户"
+        },
+        "pbmobile": {
+            "description": "pbmobile"
+        },
+		"Console": {
+			"description": "跟踪调试输出日志"
+		},
+		"Contacts": {},
+		"Downloader": {},
+		"Events": {
+			"description": "应用扩展事件"
+		},
+		"File": {},
+		"Gallery": {},
+		"Invocation": {},
+		"Storage": {},
+		"Uploader": {},
+		"Runtime": {},
+		"XMLHttpRequest": {},
+		"Webview": {},
+		"NativeUI": {},
+		"Navigator": {},
+		"NativeObj": {},
+		"OAuth": {},
+		"Device": {}
+	},
+	"plus": {
+		//2018年4月20日 绽曙-添加状态栏样式
+        "statusbar":{
+            "immersed": true
+        },
+		"splashscreen": {
+			"autoclose": false,/*是否自动关闭程序启动界面，true表示应用加载应用入口页面后自动关闭；false则需调plus.navigator.closeSplashscreen()关闭*/
+			"waiting": true,/*是否在启动时显示等待雪花，true等待*/
+			"delay": "0"
+		},
+		"popGesture": "none",/*设置应用默认侧滑返回关闭Webview窗口，"none"为无侧滑返回功能，"hide"为侧滑隐藏Webview窗口。参考http://ask.dcloud.net.cn/article/102*/
+		"runmode": "liberate",/*应用的首次启动运行模式，可取liberate或normal，liberate模式在第一次启动时将解压应用资源（Android平台File API才可正常访问_www目录）*/
+		"signature": "Sk9JTiBVUyBtYWlsdG86aHIyMDEzQGRjbG91ZC5pbw==",/*可选，保留给应用签名，暂不使用*/
+		"distribute": {
+			"plugins": {
+				"push": {},
+				"oauth": {
+					"weixin": {
+						"appid": "wx1c2d9180044e6134",
+						"appsecret": "223ba2684fc33daad9a7041471d62650"
+					}
+				},
+				"share": {},
+				"payment": {},
+				"maps": {}
+			},
+			"apple": {
+				"appid": "",/*iOS应用标识，苹果开发网站申请的appid，如io.dcloud.HelloH5*/
+				"mobileprovision": "",/*iOS应用打包配置文件*/
+				"password": "",/*iOS应用打包个人证书导入密码*/
+				"p12": "",/*iOS应用打包个人证书，打包配置文件关联的个人证书*/
+				"devices": "universal",/*iOS应用支持的设备类型，可取值iphone/ipad/universal*/
+				"frameworks": [],
+				"UIReserveStatusbarOffset": true
+			},
+			"google": {
+				"packagename": "",/*Android应用包名，如io.dcloud.HelloH5*/
+				"keystore": "",/*Android应用打包使用的密钥库文件*/
+				"password": "",/*Android应用打包使用密钥库中证书的密码*/
+				"aliasname": "",/*Android应用打包使用密钥库中证书的别名*/
+				"permissions": [
+					"<uses-permission android:name=\"android.permission.GET_ACCOUNTS\"/>",
+					"<uses-permission android:name=\"android.permission.MODIFY_AUDIO_SETTINGS\"/>",
+					"<uses-permission android:name=\"android.permission.READ_CONTACTS\"/>",
+					"<uses-permission android:name=\"android.permission.READ_PHONE_STATE\"/>",
+					"<uses-permission android:name=\"android.permission.VIBRATE\"/>",
+					"<uses-permission android:name=\"android.permission.WAKE_LOCK\"/>",
+					"<uses-permission android:name=\"android.permission.CALL_PHONE\"/>",
+					"<uses-permission android:name=\"android.permission.ACCESS_WIFI_STATE\"/>",
+					"<uses-permission android:name=\"android.permission.WRITE_CONTACTS\"/>",
+					"<uses-permission android:name=\"android.permission.ACCESS_NETWORK_STATE\"/>",
+					"<uses-permission android:name=\"android.permission.WRITE_SETTINGS\"/>"
+				],
+				"ImmersedStatusbar":true
+			},
+			"orientation": [
+				"portrait-primary"
+			],/*应用支持的方向，portrait-primary：竖屏正方向；portrait-secondary：竖屏反方向；landscape-primary：横屏正方向；landscape-secondary：横屏反方向*/
+			"icons": {
+				"ios": {
+					"prerendered": true, /*应用图标是否已经高亮处理，在iOS6及以下设备上有效*/
+					/*应用图标，分辨率：512x512，用于自动生成各种尺寸程序图标*/
+					"iphone": {
+						"normal": "unpackage/res/icons/57x57.png", /*iPhone3/3GS程序图标，分辨率：57x57*/
+						"retina": "unpackage/res/icons/114x114.png", /*iPhone4程序图标，分辨率：114x114*/
+						/*iPhone4S/5/6程序图标，分辨率：120x120*/
+						/*iPhone6 Plus程序图标，分辨率：180x180*/
+						"spotlight-normal": "unpackage/res/icons/29x29.png", /*iPhone3/3GS Spotlight搜索程序图标，分辨率：29x29*/
+						"spotlight-retina": "unpackage/res/icons/58x58.png", /*iPhone4 Spotlight搜索程序图标，分辨率：58x58*/
+						/*iPhone4S/5/6 Spotlight搜索程序图标，分辨率：80x80*/
+						"settings-normal": "unpackage/res/icons/29x29.png", /*iPhone4设置页面程序图标，分辨率：29x29*/
+						/*iPhone4S/5/6设置页面程序图标，分辨率：58x58*/
+						"app@3x": "unpackage/res/icons/180x180.png",
+						"app@2x": "unpackage/res/icons/120x120.png",
+						"settings@2x": "unpackage/res/icons/58x58.png",
+						"settings@3x": "unpackage/res/icons/87x87.png",
+						"spotlight@2x": "unpackage/res/icons/80x80.png",
+						"spotlight@3x": "unpackage/res/icons/120x120.png",
+						"notification@2x": "unpackage/res/icons/40x40.png",
+						"notification@3x": "unpackage/res/icons/60x60.png"
+					},
+					"ipad": {
+						"normal": "unpackage/res/icons/72x72.png", /*iPad普通屏幕程序图标，分辨率：72x72*/
+						"retina": "unpackage/res/icons/144x144.png", /*iPad高分屏程序图标，分辨率：144x144*/
+						/*iPad iOS7程序图标，分辨率：76x76*/
+						/*iPad iOS7高分屏程序图标，分辨率：152x152*/
+						"spotlight-normal": "unpackage/res/icons/50x50.png", /*iPad Spotlight搜索程序图标，分辨率：50x50*/
+						"spotlight-retina": "unpackage/res/icons/100x100.png", /*iPad高分屏Spotlight搜索程序图标，分辨率：100x100*/
+						/*iPad iOS7 Spotlight搜索程序图标，分辨率：40x40*/
+						/*iPad iOS7高分屏Spotlight搜索程序图标，分辨率：80x80*/
+						/*iPad设置页面程序图标，分辨率：29x29*/
+						"app": "unpackage/res/icons/76x76.png",
+						"app@2x": "unpackage/res/icons/152x152.png",
+						"settings": "unpackage/res/icons/29x29.png",
+						"spotlight": "unpackage/res/icons/40x40.png",
+						"proapp@2x": "unpackage/res/icons/167x167.png",
+						"settings@2x": "unpackage/res/icons/58x58.png",
+						"spotlight@2x": "unpackage/res/icons/80x80.png",
+						"notification": "unpackage/res/icons/20x20.png",
+						"notification@2x": "unpackage/res/icons/40x40.png"
+					},
+					"appstore": "unpackage/res/icons/1024x1024.png"
+				},
+				"android": {
+					"mdpi": "unpackage/res/icons/48x48.png", /*普通屏程序图标，分辨率：48x48*/
+					"ldpi": "unpackage/res/icons/48x48.png", /*大屏程序图标，分辨率：48x48*/
+					"hdpi": "unpackage/res/icons/72x72.png", /*高分屏程序图标，分辨率：72x72*/
+					"xhdpi": "unpackage/res/icons/96x96.png",/*720P高分屏程序图标，分辨率：96x96*/
+					"xxhdpi": "unpackage/res/icons/144x144.png",
+					"xxxhdpi": "unpackage/res/icons/192x192.png"
+				}
+			},
+			"splashscreen": {
+				"ios": {
+					"iphone": {
+						"iphonex": "images/openimg/ios/1242x2208.png",
+						"retina55": "images/openimg/ios/1242x2208.png",
+						"retina47": "images/openimg/Android/720x1280.png",
+						"retina35": "images/openimg/Android/480x854.png",
+						"retina40": "images/openimg/ios/640x1136.png"
+					},
+					"ipad": {}
+				},
+				"android": {
+					"mdpi": "img/mian.png", /*普通屏启动图片，分辨率：240x282*/
+					"ldpi": "img/mian.png",
+					"hdpi": "images/openimg/Android/480x854.png",
+					"xhdpi": "images/openimg/Android/720x1280.png",
+					"xxhdpi": "images/openimg/Android/1080x1920.png"
+				}
+			}
+		},
+		"ads": {
+			"rp": false,
+			"splash": false,
+			"push": false,
+			"spot": false
+		},
+		"adid": ""
+	},
+	"dependencies": {
+		"pages": {
+			"app/home.html": {
+				"resources": [
+					"js/com.data.js",
+					"js/xmui-globalEvent.js",
+					"js/mui.min.js",
+					"js/com.js",
+					"css/gloab.css",
+					"css/mui.css",
+					"js/swiper.min.js",
+					"css/swiper.min.css",
+					"js/DMobileFrame.js",
+					"js/doT.min.js",
+					"fonts/mui.ttf"
+				],
+				"refer": [
+					"app/busoil/list.html",
+					"app/busshop/list.html",
+					"app/wallet/mywallet.html",
+					"app/mecenter/card_list.html",
+					"app/setting.html",
+					"app/wallet/bill_more.html",
+					"app/wallet/integral_show.html",
+					"app/wallet/bill_more.html",
+					"app/mecenter/index_myprize.html",
+					"app/mecenter/index.html",
+					"app/news/reduce_show.html",
+					"app/news/message.html",
+					"app/news/newslist.html",
+					"app/about.html",
+					"app/busoil/detail.html",
+					"app/mecenter/QRCode.html",
+					"app/mecenter/paymoney.html",
+					"app/wallet/money_show.html",
+					"app/wallet/goldbean_show.html",
+					"app/mecenter/realprizeInfo.html",
+					"app/mecenter/suggest.html"
+				],
+				"priority": 0
+			},
+			"index.html": {
+				"resources": [
+					"img/logo.png",
+					"css/common.css",
+					"js/immersed.js"
+				],
+				"refer": [],
+				"priority": 0
+			},
+			"app/test/kongjiantest.html": {
+				"resources": [
+					"js/mui.pullToRefresh.js",
+					"js/com.mui.js",
+					"js/com.data.js",
+					"js/mui.min.js",
+					"js/mui.pullToRefresh.material.js",
+					"fonts/mui.ttf",
+					"js/com.js",
+					"css/gloab.css",
+					"js/jquery.min_1.8.3.js",
+					"css/mui.css"
+				],
+				"refer": [],
+				"priority": 0
+			},
+			"first.html": {
+				"resources": [
+					"img/start.png",
+					"js/com.data.app_pro.js",
+					"js/com.data.js",
+					"js/xmui-globalEvent.js",
+					"js/mui.min.js",
+					"js/com.js",
+					"css/gloab.css",
+					"css/mui.min.css",
+					"js/doT.min.js",
+					"img/login.png",
+					"img/mian.png"
+				],
+				"refer": [
+					"app/common/login.html",
+					"app/home.html",
+					"app/usermain/index.html",
+					"app/home_user.html",
+					"app/usermain/lottery_results.html"
+				],
+				"priority": 0
+			},
+			"app/common/login.html": {
+				"resources": [
+					"img/icon/icon_phone.png",
+					"img/logo.png",
+					"img/icon/icon_pwd.png",
+					"css/mui.css",
+					"app/common/register.html",
+					"app/common/pwd_forget.html",
+					"js/com.data.js",
+					"js/xmui-globalEvent.js",
+					"js/mui.min.js",
+					"js/com.js",
+					"css/gloab.css"
+				],
+				"refer": [],
+				"priority": 0
+			},
+			"app/common/register.html": {
+				"resources": [
+					"img/icon/icon_code_img.png",
+					"img/icon/icon_refresh_fff.png",
+					"js/jquery.min_1.8.3.js",
+					"img/icon/icon_code_sms.png",
+					"app/common/login.html",
+					"img/icon/icon_phone.png",
+					"js/com.data.js",
+					"js/mui.min.js",
+					"js/com.js",
+					"css/gloab.css",
+					"img/logo.png",
+					"img/icon/icon_pwd.png",
+					"css/mui.css"
+				],
+				"refer": [],
+				"priority": 0
+			},
+			"app/common/pwd_forget.html": {
+				"resources": [
+					"app/common/login.html",
+					"img/icon/icon_code_img.png",
+					"img/icon/icon_refresh_fff.png",
+					"js/jquery.min_1.8.3.js",
+					"img/icon/icon_code_sms.png"
+				],
+				"refer": [],
+				"priority": 0
+			},
+			"app/busoil/list.html": {
+				"resources": [
+					"img/icon/icon_star_def.png",
+					"img/icon/icon_position.png",
+					"img/icon/icon_star.png",
+					"fonts/mui.ttf",
+					"img/icon/icon_def.png",
+					"js/mui.pullToRefresh.js",
+					"js/com.mui.js",
+					"js/mui.pullToRefresh.material.js",
+					"js/jquery.min_1.8.3.js",
+					"js/com.data.js",
+					"js/mui.min.js",
+					"js/com.js",
+					"css/gloab.css",
+					"css/mui.css",
+					"js/DMobileFrame.js",
+					"js/xmui-globalEvent.js",
+					"js/doT.min.js",
+					"css/xmui.pullToRefresh.material.css",
+					"img/icon/def_no_data.png",
+					"img/icon/icon_dw.png",
+					"js/swiper.min.js"
+				],
+				"refer": [
+					"app/busoil/detail.html"
+				],
+				"priority": 0
+			},
+			"app/busshop/list.html": {
+				"resources": [
+					"fonts/mui.ttf",
+					"img/icon/icon_dw.png",
+					"js/com.mui.js",
+					"js/mui.pullToRefresh.js",
+					"js/DMobileFrame.js",
+					"js/com.data.js",
+					"js/mui.min.js",
+					"js/mui.pullToRefresh.material.js",
+					"js/com.js",
+					"css/gloab.css",
+					"css/xmui.pullToRefresh.material.css",
+					"css/mui.css",
+					"js/doT.min.js",
+					"img/icon/icon_star_def.png",
+					"img/icon/icon_position.png",
+					"img/icon/icon_star.png",
+					"img/icon/icon_def.png",
+					"img/icon/def_no_data.png"
+				],
+				"refer": [
+					"app/busshop/list_goods.html",
+					"app/busshop/list_goods_detail.html"
+				],
+				"priority": 0
+			},
+			"app/busshop/list_goods.html": {
+				"resources": [
+					"img/wallet/money_img.png",
+					"js/com.mui.js",
+					"js/mui.pullToRefresh.js",
+					"js/DMobileFrame.js",
+					"js/xmui-globalEvent.js",
+					"js/mui.pullToRefresh.material.js",
+					"fonts/mui.ttf",
+					"css/gloab.css",
+					"img/icon/icon_def.png",
+					"css/mui.css",
+					"js/doT.min.js",
+					"js/com.data.js",
+					"js/mui.min.js",
+					"css/xmui.pullToRefresh.material.css",
+					"js/com.js",
+					"img/icon/icon_default_forDB.png",
+					"img/icon/def_no_data.png"
+				],
+				"refer": [
+					"app/busshop/list_goods_detail.html"
+				],
+				"priority": 0
+			},
+			"app/busshop/list_goods_detail.html": {
+				"resources": [
+					"img/wallet/money_img.png",
+					"js/mui.min.js",
+					"js/com.mui.js",
+					"js/mui.pullToRefresh.js",
+					"js/DMobileFrame.js",
+					"js/xmui-globalEvent.js",
+					"js/mui.pullToRefresh.material.js",
+					"css/gloab.css",
+					"js/swiper.min.js",
+					"css/mui.css",
+					"js/doT.min.js",
+					"js/com.data.js",
+					"img/icon/def_no_data.png",
+					"css/xmui.pullToRefresh.material.css",
+					"css/swiper.min.css",
+					"js/com.js",
+					"img/icon/icon_def.png"
+				],
+				"refer": [],
+				"priority": 0
+			},
+			"app/wallet/mywallet.html": {
+				"resources": [
+					"fonts/mui.ttf",
+					"js/jquery.min_1.8.3.js",
+					"img/wallet/more.png",
+					"js/com.mui.js",
+					"js/mui.pullToRefresh.js",
+					"js/DMobileFrame.js",
+					"js/com.data.js",
+					"js/mui.min.js",
+					"js/mui.pullToRefresh.material.js",
+					"js/com.js",
+					"css/gloab.css",
+					"css/mui.css",
+					"js/doT.min.js",
+					"css/xmui.pullToRefresh.material.css",
+					"js/xmui-globalEvent.js"
+				],
+				"refer": [
+					"app/wallet/bankcard.html",
+					"app/wallet/money_show.html",
+					"app/wallet/goldbean_show.html"
+				],
+				"priority": 0
+			},
+			"app/wallet/bankcard.html": {
+				"resources": [
+					"js/jquery.min_1.8.3.js",
+					"img/wallet/bankcard_bg.png",
+					"js/com.data.js",
+					"js/mui.min.js",
+					"fonts/mui.ttf",
+					"js/com.js",
+					"css/gloab.css",
+					"css/mui.css",
+					"js/mui.pullToRefresh.js",
+					"js/com.mui.js",
+					"js/DMobileFrame.js",
+					"js/xmui-globalEvent.js",
+					"js/mui.pullToRefresh.material.js",
+					"js/swiper.min.js",
+					"js/doT.min.js",
+					"css/xmui.pullToRefresh.material.css",
+					"css/swiper.min.css",
+					"img/wallet/edit.png"
+				],
+				"refer": [
+					"app/wallet/bankcard_add.html",
+					"app/wallet/bankcard_edit.html"
+				],
+				"priority": 0
+			},
+			"app/mecenter/card_list.html": {
+				"resources": [
+					"img/card/cardticket_bg.png",
+					"js/com.mui.js",
+					"js/mui.pullToRefresh.js",
+					"js/mui.pullToRefresh.material.js",
+					"fonts/mui.ttf",
+					"css/xmui.pullToRefresh.material.css",
+					"img/wallet/bankcard_bg.png",
+					"js/mui.min.js",
+					"img/icon/def_no_data.png",
+					"js/com.data.js",
+					"js/xmui-globalEvent.js",
+					"js/com.js",
+					"css/mui.css",
+					"js/doT.min.js",
+					"css/gloab.css"
+				],
+				"refer": [],
+				"priority": 0
+			},
+			"app/wallet/goldbean_show.html": {
+				"resources": [
+					"img/wallet/goldbean.png",
+					"js/com.mui.js",
+					"js/mui.pullToRefresh.js",
+					"js/DMobileFrame.js",
+					"js/xmui-globalEvent.js",
+					"js/mui.pullToRefresh.material.js",
+					"fonts/mui.ttf",
+					"css/gloab.css",
+					"js/swiper.min.js",
+					"css/mui.css",
+					"js/doT.min.js",
+					"js/mui.min.js",
+					"js/com.data.js",
+					"css/swiper.min.css",
+					"js/com.js",
+					"css/xmui.pullToRefresh.material.css"
+				],
+				"refer": [],
+				"priority": 0
+			},
+			"app/wallet/money_show.html": {
+				"resources": [
+					"js/com.data.js",
+					"js/mui.min.js",
+					"fonts/mui.ttf",
+					"img/wallet/money_img.png",
+					"js/com.js",
+					"css/gloab.css",
+					"css/swiper.min.css",
+					"css/xmui.pullToRefresh.material.css",
+					"js/jquery.min_1.8.3.js",
+					"css/mui.css",
+					"js/com.mui.js",
+					"js/mui.pullToRefresh.js",
+					"js/DMobileFrame.js",
+					"js/xmui-globalEvent.js",
+					"js/mui.pullToRefresh.material.js",
+					"js/swiper.min.js",
+					"js/doT.min.js"
+				],
+				"refer": [
+					"app/wallet/drawals.html"
+				],
+				"priority": 0
+			},
+			"app/wallet/bankcard_add.html": {
+				"resources": [
+					"js/com.data.js",
+					"js/mui.min.js",
+					"fonts/mui.ttf",
+					"js/com.js",
+					"css/gloab.css",
+					"js/jquery.min_1.8.3.js",
+					"css/mui.css"
+				],
+				"refer": [
+					"app/wallet/mywallet.html"
+				],
+				"priority": 0
+			},
+			"app/setting.html": {
+				"resources": [
+					"fonts/mui.ttf",
+					"img/wallet/more.png",
+					"js/jquery.min_1.8.3.js",
+					"js/com.mui.js",
+					"js/DMobileFrame.js",
+					"js/mui.pullToRefresh.material.js",
+					"js/com.data.app_pro.js",
+					"js/xmui-globalEvent.js",
+					"js/com.data.js",
+					"js/mui.min.js",
+					"js/com.js",
+					"css/mui.css",
+					"css/gloab.css"
+				],
+				"refer": [
+					"app/mecenter/update_phone.html",
+					"app/mecenter/update_pwd.html"
+				],
+				"priority": 0
+			},
+			"app/wallet/bill_more.html": {
+				"resources": [
+					"fonts/mui.ttf",
+					"img/wallet/money_remain.png",
+					"js/mui.min.js",
+					"js/com.mui.js",
+					"js/mui.pullToRefresh.js",
+					"js/DMobileFrame.js",
+					"js/xmui-globalEvent.js",
+					"js/mui.pullToRefresh.material.js",
+					"css/gloab.css",
+					"js/swiper.min.js",
+					"css/mui.css",
+					"js/doT.min.js",
+					"js/com.data.js",
+					"img/wallet/goldbean.png",
+					"js/com.js",
+					"css/xmui.pullToRefresh.material.css",
+					"css/swiper.min.css",
+					"img/icon/def_no_data.png"
+				],
+				"refer": [],
+				"priority": 0
+			},
+			"app/wallet/integral_show.html": {
+				"resources": [
+					"js/com.mui.js",
+					"js/mui.pullToRefresh.js",
+					"js/DMobileFrame.js",
+					"js/mui.pullToRefresh.material.js",
+					"fonts/mui.ttf",
+					"js/com.data.js",
+					"js/xmui-globalEvent.js",
+					"js/mui.min.js",
+					"js/com.js",
+					"css/gloab.css",
+					"js/swiper.min.js",
+					"img/wallet/integral.png",
+					"css/mui.css",
+					"js/doT.min.js",
+					"css/xmui.pullToRefresh.material.css",
+					"img/icon/def_no_data.png"
+				],
+				"refer": [],
+				"priority": 0
+			},
+			"app/busoil/detail.html": {
+				"resources": [
+					"img/icon/daohang.png",
+					"img/icon/icon_position_show.png",
+					"img/icon/changebus.png",
+					"img/icon/icon_distance.png",
+					"img/icon/icon_star_def.png",
+					"fonts/mui.ttf",
+					"css/gloab.css",
+					"img/icon/icon_def.png",
+					"css/mui.css",
+					"js/mui.min.js",
+					"js/com.data.js",
+					"img/icon/icon_star.png",
+					"js/com.js",
+					"js/com.mui.js",
+					"js/mui.pullToRefresh.js",
+					"js/DMobileFrame.js",
+					"js/xmui-globalEvent.js",
+					"js/mui.pullToRefresh.material.js",
+					"js/swiper.min.js",
+					"js/doT.min.js",
+					"img/icon/def_no_data.png",
+					"css/xmui.pullToRefresh.material.css",
+					"img/icon/icon_default_forDB.png"
+				],
+				"refer": [
+					"app/mecenter/QRCode.html",
+					"app/mecenter/paymoney.html"
+				],
+				"priority": 0
+			},
+			"app/mecenter/index_myprize.html": {
+				"resources": [
+					"js/com.mui.js",
+					"js/mui.pullToRefresh.js",
+					"js/DMobileFrame.js",
+					"js/mui.pullToRefresh.material.js",
+					"fonts/mui.ttf",
+					"css/xmui.pullToRefresh.material.css",
+					"plug_in/choujiang/js/jquery-1.10.2.js",
+					"plug_in/choujiang/js/awardRotate.js",
+					"js/xmui-globalEvent.js",
+					"css/gloab.css",
+					"css/mui.css",
+					"js/mui.min.js",
+					"js/com.data.js",
+					"js/com.js",
+					"js/doT.min.js",
+					"img/me/choujiang_bg.png",
+					"plug_in/choujiang/images/turnplate-pointer.png",
+					"plug_in/choujiang/images/turnplate-bg.png"
+				],
+				"refer": [
+					"app/wallet/money_show.html"
+				],
+				"priority": 0
+			},
+			"app/mecenter/index.html": {
+				"resources": [
+					"img/icon/icon_edit.png",
+					"img/icon/icon_more.png",
+					"fonts/mui.ttf",
+					"js/com.mui.js",
+					"js/mui.pullToRefresh.js",
+					"js/DMobileFrame.js",
+					"js/mui.pullToRefresh.material.js",
+					"css/xmui.pullToRefresh.material.css",
+					"img/icon/icon_def_head.png",
+					"js/xmui-globalEvent.js",
+					"css/gloab.css",
+					"css/mui.css",
+					"js/com.data.js",
+					"js/mui.min.js",
+					"js/com.js"
+				],
+				"refer": [
+					"app/tools/uploadHeadImg.html"
+				],
+				"priority": 0
+			},
+			"app/news/reduce_show.html": {
+				"resources": [
+					"img/icon/icon_more_red.png",
+					"js/com.mui.js",
+					"js/mui.pullToRefresh.js",
+					"js/DMobileFrame.js",
+					"js/mui.pullToRefresh.material.js",
+					"css/xmui.pullToRefresh.material.css",
+					"fonts/mui.ttf",
+					"js/xmui-globalEvent.js",
+					"js/swiper.min.js",
+					"css/mui.css",
+					"js/doT.min.js",
+					"js/mui.min.js",
+					"js/com.data.js",
+					"js/com.js",
+					"css/gloab.css"
+				],
+				"refer": [
+					"app/news/activityinfo.html"
+				],
+				"priority": 0
+			},
+			"app/news/message.html": {
+				"resources": [
+					"img/icon/message_red.png",
+					"js/jquery.min_1.8.3.js",
+					"fonts/mui.ttf",
+					"img/icon/def_no_data.png",
+					"js/com.data.js",
+					"js/mui.min.js",
+					"js/com.js",
+					"css/mui.css"
+				],
+				"refer": [],
+				"priority": 0
+			},
+			"app/news/newslist.html": {
+				"resources": [
+					"js/com.mui.js",
+					"js/mui.pullToRefresh.js",
+					"js/DMobileFrame.js",
+					"js/mui.pullToRefresh.material.js",
+					"css/xmui.pullToRefresh.material.css",
+					"fonts/mui.ttf",
+					"js/com.data.js",
+					"js/xmui-globalEvent.js",
+					"js/mui.min.js",
+					"js/com.js",
+					"js/swiper.min.js",
+					"css/mui.css",
+					"js/doT.min.js",
+					"img/icon/def_no_data.png"
+				],
+				"refer": [
+					"app/news/newsinfo.html"
+				],
+				"priority": 0
+			},
+			"app/wallet/bankcard_edit.html": {
+				"resources": [
+					"js/jquery.min_1.8.3.js",
+					"js/com.data.js",
+					"js/xmui-globalEvent.js",
+					"js/mui.min.js",
+					"fonts/mui.ttf",
+					"js/com.js",
+					"css/gloab.css",
+					"css/mui.css"
+				],
+				"refer": [],
+				"priority": 0
+			},
+			"app/mecenter/update_phone.html": {
+				"resources": [
+					"img/icon/icon_phone.png",
+					"img/icon/icon_code_img.png",
+					"css/xmui.pullToRefresh.material.css",
+					"img/icon/icon_refresh_fff.png",
+					"img/icon/icon_code_sms.png",
+					"js/com.data.js",
+					"js/xmui-globalEvent.js",
+					"js/mui.min.js",
+					"fonts/mui.ttf",
+					"js/com.js",
+					"css/gloab.css",
+					"js/jquery.min_1.8.3.js",
+					"css/mui.css"
+				],
+				"refer": [],
+				"priority": 0
+			},
+			"app/mecenter/update_pwd.html": {
+				"resources": [
+					"img/icon/icon_pwd.png"
+				],
+				"refer": [],
+				"priority": 0
+			},
+			"app/about.html": {
+				"resources": [
+					"img/wallet/logo108.png",
+					"js/jquery.min_1.8.3.js",
+					"js/com.data.js",
+					"js/mui.min.js",
+					"fonts/mui.ttf",
+					"js/com.js",
+					"css/gloab.css",
+					"css/mui.css",
+					"js/doT.min.js"
+				],
+				"refer": [],
+				"priority": 0
+			},
+			"app/tools/uploadHeadImg.html": {
+				"resources": [
+					"css/cropper.css",
+					"js/cropper.js",
+					"js/jquery.min_1.8.3.js",
+					"js/com.data.js",
+					"js/xmui-globalEvent.js",
+					"js/mui.min.js",
+					"js/com.js",
+					"css/mui.css"
+				],
+				"refer": [],
+				"priority": 0
+			},
+			"app/wallet/drawals.html": {
+				"resources": [
+					"js/com.mui.js",
+					"js/DMobileFrame.js",
+					"js/xmui-globalEvent.js",
+					"js/mui.pullToRefresh.material.js",
+					"fonts/mui.ttf",
+					"css/gloab.css",
+					"css/mui.css",
+					"js/com.data.app_pro.js",
+					"js/mui.min.js",
+					"js/com.data.js",
+					"img/wallet/more.png",
+					"js/com.js",
+					"js/jquery.min_1.8.3.js",
+					"js/mui.picker.js",
+					"js/mui.poppicker.js",
+					"css/mui.picker.css",
+					"css/mui.picker.min.css",
+					"css/mui.poppicker.css"
+				],
+				"refer": [],
+				"priority": 0
+			},
+			"map_test.html": {
+				"resources": [
+					"js/mui.min.js"
+				],
+				"refer": [],
+				"priority": 0
+			},
+			"app/mecenter/QRCode.html": {
+				"resources": [
+					"js/jquery.min_1.8.3.js",
+					"js/com.data.js",
+					"js/xmui-globalEvent.js",
+					"js/mui.min.js",
+					"js/com.js",
+					"css/mui.css",
+					"css/gloab.css"
+				],
+				"refer": [],
+				"priority": 0
+			},
+			"app/mecenter/paymoney.html": {
+				"resources": [
+					"js/com.mui.js",
+					"js/mui.pullToRefresh.js",
+					"img/icon/icon_position.png",
+					"js/mui.pullToRefresh.material.js",
+					"img/icon/icon_star.png",
+					"css/xmui.pullToRefresh.material.css",
+					"img/icon/icon_more.png",
+					"fonts/mui.ttf",
+					"js/DMobileFrame.js",
+					"js/xmui-globalEvent.js",
+					"css/gloab.css",
+					"js/swiper.min.js",
+					"css/mui.css",
+					"js/doT.min.js",
+					"js/com.data.js",
+					"js/mui.min.js",
+					"js/com.js",
+					"img/home/icon_me_bean.png",
+					"js/jquery.min_1.8.3.js",
+					"img/home/icon_me_money.png",
+					"img/icon/icon_default_forDB.png",
+					"img/icon/icon_def.png",
+					"img/icon/icon_star_def.png",
+					"img/icon/def_no_data.png"
+				],
+				"refer": [
+					"app/mecenter/choicecardoil.html",
+					"app/mecenter/choiceticket.html",
+					"app/mecenter/paysuccess.html",
+					"app/wallet/money_show.html"
+				],
+				"priority": 0
+			},
+			"app/mecenter/choicecardoil.html": {
+				"resources": [
+					"img/icon/def_no_data.png"
+				],
+				"refer": [],
+				"priority": 0
+			},
+			"app/mecenter/paysuccess.html": {
+				"resources": [
+					"img/wallet/success.png",
+					"js/com.mui.js",
+					"js/mui.pullToRefresh.js",
+					"js/DMobileFrame.js",
+					"js/xmui-globalEvent.js",
+					"js/mui.pullToRefresh.material.js",
+					"js/swiper.min.js",
+					"css/mui.css",
+					"js/doT.min.js",
+					"js/com.data.js",
+					"js/mui.min.js",
+					"js/com.js",
+					"css/xmui.pullToRefresh.material.css",
+					"css/swiper.min.css",
+					"js/jquery.min_1.8.3.js",
+					"img/icon/def_no_data.png"
+				],
+				"refer": [
+					"app/wallet/bill_more.html"
+				],
+				"priority": 0
+			},
+			"app/mecenter/choiceticket.html": {
+				"resources": [
+					"js/mui.pullToRefresh.js",
+					"js/com.mui.js",
+					"js/DMobileFrame.js",
+					"js/xmui-globalEvent.js",
+					"js/mui.pullToRefresh.material.js",
+					"js/swiper.min.js",
+					"css/mui.css",
+					"js/doT.min.js",
+					"img/card/cardticket_bg.png",
+					"js/mui.min.js",
+					"js/com.data.js",
+					"css/xmui.pullToRefresh.material.css",
+					"js/com.js",
+					"img/icon/def_no_data.png"
+				],
+				"refer": [],
+				"priority": 0
+			},
+			"app/mecenter/realprizeInfo.html": {
+				"resources": [
+					"js/com.mui.js",
+					"js/mui.pullToRefresh.js",
+					"js/DMobileFrame.js",
+					"js/xmui-globalEvent.js",
+					"js/mui.pullToRefresh.material.js",
+					"fonts/mui.ttf",
+					"css/gloab.css",
+					"js/swiper.min.js",
+					"css/mui.css",
+					"js/doT.min.js",
+					"img/icon/icon_default_forDB.png",
+					"js/com.data.js",
+					"img/icon/icon_position.png",
+					"js/mui.min.js",
+					"img/icon/icon_star.png",
+					"js/com.js",
+					"css/xmui.pullToRefresh.material.css",
+					"js/jquery.min_1.8.3.js",
+					"img/icon/def_no_data.png",
+					"img/icon/icon_def.png"
+				],
+				"refer": [],
+				"priority": 0
+			},
+			"app/news/activityinfo.html": {
+				"resources": [
+					"js/com.mui.js",
+					"js/mui.pullToRefresh.js",
+					"js/DMobileFrame.js",
+					"js/com.data.js",
+					"js/xmui-globalEvent.js",
+					"js/mui.min.js",
+					"js/mui.pullToRefresh.material.js",
+					"js/com.js",
+					"css/xmui.pullToRefresh.material.css",
+					"js/swiper.min.js",
+					"css/mui.css",
+					"js/doT.min.js"
+				],
+				"refer": [],
+				"priority": 0
+			},
+			"app/news/newsinfo.html": {
+				"resources": [
+					"js/com.mui.js",
+					"js/mui.pullToRefresh.js",
+					"js/DMobileFrame.js",
+					"js/com.data.js",
+					"js/xmui-globalEvent.js",
+					"js/mui.min.js",
+					"js/mui.pullToRefresh.material.js",
+					"js/com.js",
+					"css/xmui.pullToRefresh.material.css",
+					"js/swiper.min.js",
+					"css/mui.css",
+					"js/doT.min.js"
+				],
+				"refer": [],
+				"priority": 0
+			},
+			"app/mecenter/suggest.html": {
+				"resources": [
+					"img/wallet/logo108.png",
+					"css/mui.css",
+					"js/com.data.js",
+					"js/mui.min.js",
+					"js/com.js",
+					"js/jquery.min_1.8.3.js",
+					"js/doT.min.js",
+					"fonts/mui.ttf"
+				],
+				"refer": [],
+				"priority": 0
+			},
+			"app/usermain/index.html": {
+				"resources": [
+					"css/swiper.min.css",
+					"js/swiper.min.js",
+					"css/mui.css",
+					"img/icon/shangseqiu.png",
+					"img/icon/daletou.png",
+					"img/icon/fucai3d.png",
+					"img/icon/qilecai.png",
+					"img/icon/jingcai.png",
+					"img/icon/shuoming.png",
+					"img/icon/zixun.png",
+					"img/icon/more.png",
+					"img/icon/pailie5.png",
+					"css/xmui.pullToRefresh.material.css",
+					"css/gloab.css",
+					"img/start.png",
+					"js/mui.min.js",
+					"js/com.js",
+					"img/text.png",
+					"js/com.mui.js",
+					"js/mui.pullToRefresh.js",
+					"js/DMobileFrame.js",
+					"js/mui.pullToRefresh.material.js",
+					"js/xmui-globalEvent.js",
+					"fonts/mui.ttf",
+					"js/doT.min.js",
+					"js/com.data.js"
+				],
+				"refer": [
+					"app/order/choose_caipiao.html",
+					"app/usermain/lottery_results.html",
+					"app/usermain/readme.html",
+					"app/oauth.html",
+					"app/usermain/lottery_results_infolist.html",
+					"app/usermain/news_list.html"
+				],
+				"priority": 0
+			},
+			"app/home_user.html": {
+				"resources": [
+					"fonts/mui.ttf",
+					"css/mui.css",
+					"app/usermain/index.html",
+					"css/gloab.css",
+					"js/mui.min.js",
+					"css/font-awesome-4.7.0/css/font-awesome.min.css",
+					"css/font-awesome-4.7.0/fonts/fontawesome-webfont.woff2",
+					"js/jquery.min_1.8.3.js",
+					"js/com.data.js",
+					"js/xmui-globalEvent.js",
+					"js/com.js",
+					"app/userlotterysite/station_list.html",
+					"css/font-awesome-4.7.0/fonts/fontawesome-webfont.woff",
+					"app/mainpage/index.html",
+					"app/mainpage/funds.html",
+					"app/mainpage/open.html",
+					"app/mainpage/mypage.html",
+					"app/fundspage/fundslist_public.html"
+				],
+				"refer": [
+					"app/usermain/index3.html",
+					"app/usermain/index2.html",
+					"app/usermain/webmaster_me.html",
+					"app/usermain/shopping_center_me.html",
+					"app/usermain/test.html",
+					"app/quotepage/qihuohangqing.html"
+				],
+				"priority": 0
+			},
+			"app/usermain/index2.html": {
+				"resources": [
+					"css/mui.css",
+					"css/swiper.min.css",
+					"css/xmui.pullToRefresh.material.css"
+				],
+				"refer": [],
+				"priority": 0
+			},
+			"app/usermain/index3.html": {
+				"resources": [
+					"css/mui.css",
+					"css/swiper.min.css"
+				],
+				"refer": [
+					"app/home_station.html"
+				],
+				"priority": 0
+			},
+			"app/home_station.html": {
+				"resources": [
+					"app/usermain/index4.html",
+					"css/mui.css",
+					"app/usermain/order_list.html",
+					"css/gloab.css",
+					"js/com.data.js",
+					"js/xmui-globalEvent.js",
+					"js/mui.min.js",
+					"fonts/mui.ttf",
+					"js/com.js",
+					"css/font-awesome-4.7.0/css/font-awesome.min.css",
+					"css/font-awesome-4.7.0/fonts/fontawesome-webfont.woff2",
+					"js/jquery.min_1.8.3.js"
+				],
+				"refer": [
+					"app/usermain/index5.html",
+					"app/usermain/webmaster_tools_me.html"
+				],
+				"priority": 0
+			},
+			"app/usermain/index4.html": {
+				"resources": [
+					"css/mui.css"
+				],
+				"refer": [],
+				"priority": 0
+			},
+			"app/usermain/index5.html": {
+				"resources": [
+					"css/mui.css"
+				],
+				"refer": [
+					"app/home_user.html"
+				],
+				"priority": 0
+			},
+			"app/usermain/webmaster_me.html": {
+				"resources": [
+					"css/mui.css"
+				],
+				"refer": [],
+				"priority": 0
+			},
+			"app/usermain/order_list.html": {
+				"resources": [
+					"js/com.mui.js",
+					"js/mui.pullToRefresh.js",
+					"js/mui.pullToRefresh.material.js",
+					"css/mui.css",
+					"css/xmui.pullToRefresh.material.css",
+					"css/swiper.min.css",
+					"img/icon/def_no_data.png",
+					"js/swiper.min.js",
+					"js/doT.min.js",
+					"js/xmui-globalEvent.js",
+					"css/gloab.css",
+					"js/mui.min.js",
+					"js/com.data.js",
+					"js/com.js"
+				],
+				"refer": [
+					"app/usermain/order_info.html",
+					"app/login.html"
+				],
+				"priority": 0
+			},
+			"app/usermain/shopping_center_me.html": {
+				"resources": [
+					"img/betting_record.png",
+					"img/promotion.png",
+					"img/update_pswd.png",
+					"img/complaints.png",
+					"img/phone.png",
+					"img/about.png",
+					"css/mui.css",
+					"img/change.png",
+					"css/swiper.min.css",
+					"css/xmui.pullToRefresh.material.css",
+					"js/com.mui.js",
+					"js/mui.pullToRefresh.js",
+					"js/DMobileFrame.js",
+					"js/mui.pullToRefresh.material.js",
+					"img/lottery_type/shaungseqiu.png",
+					"js/xmui-globalEvent.js",
+					"fonts/mui.ttf",
+					"css/gloab.css",
+					"js/swiper.min.js",
+					"js/doT.min.js",
+					"js/com.data.js",
+					"js/mui.min.js",
+					"js/com.js",
+					"js/immersed.js"
+				],
+				"refer": [
+					"app/home_station.html",
+					"app/usermain/betting_record.html",
+					"app/login.html",
+					"app/usermain/promotion.html",
+					"app/oauth.html",
+					"app/usermain/update_phone.html",
+					"app/usermain/update_pswd.html",
+					"app/usermain/add_phone.html",
+					"app/usermain/add_phone2.html"
+				],
+				"priority": 0
+			},
+			"app/usermain/betting_record.html": {
+				"resources": [
+					"js/com.mui.js",
+					"js/mui.pullToRefresh.js",
+					"js/DMobileFrame.js",
+					"js/mui.pullToRefresh.material.js",
+					"css/mui.css",
+					"css/xmui.pullToRefresh.material.css",
+					"css/swiper.min.css",
+					"css/gloab.css",
+					"js/com.data.js",
+					"js/xmui-globalEvent.js",
+					"js/mui.min.js",
+					"js/com.js",
+					"js/swiper.min.js",
+					"js/doT.min.js",
+					"fonts/mui.ttf",
+					"img/icon/def_no_data.png"
+				],
+				"refer": [
+					"app/usermain/betting_info.html",
+					"app/login.html",
+					"app/oauth.html"
+				],
+				"priority": 0
+			},
+			"app/usermain/order_info.html": {
+				"resources": [
+					"img/lottery_type/shaungseqiu.png",
+					"css/mui.css",
+					"css/xmui.pullToRefresh.material.css",
+					"css/swiper.min.css",
+					"js/com.mui.js",
+					"js/mui.pullToRefresh.js",
+					"js/xmui-globalEvent.js",
+					"js/mui.pullToRefresh.material.js",
+					"fonts/mui.ttf",
+					"css/gloab.css",
+					"js/swiper.min.js",
+					"js/doT.min.js",
+					"js/mui.min.js",
+					"js/com.data.js",
+					"js/com.js",
+					"img/icon/def_no_data.png"
+				],
+				"refer": [],
+				"priority": 0
+			},
+			"app/usermain/webmaster_tools_me.html": {
+				"resources": [
+					"img/lottery_type/shaungseqiu.png",
+					"img/position.png",
+					"img/business_card.png",
+					"img/distribution_application.png",
+					"css/mui.css",
+					"css/xmui.pullToRefresh.material.css",
+					"css/swiper.min.css",
+					"js/com.mui.js",
+					"js/mui.pullToRefresh.js",
+					"js/DMobileFrame.js",
+					"js/xmui-globalEvent.js",
+					"js/mui.pullToRefresh.material.js",
+					"css/gloab.css",
+					"js/swiper.min.js",
+					"img/change.png",
+					"js/doT.min.js",
+					"js/com.data.js",
+					"js/mui.min.js",
+					"js/com.js"
+				],
+				"refer": [
+					"app/home_user.html",
+					"app/usermain/business-card.html"
+				],
+				"priority": 0
+			},
+			"app/usermain/betting_info.html": {
+				"resources": [
+					"css/xmui.pullToRefresh.material.css",
+					"css/swiper.min.css",
+					"css/mui.css",
+					"js/com.mui.js",
+					"js/mui.pullToRefresh.js",
+					"js/DMobileFrame.js",
+					"js/com.data.js",
+					"js/xmui-globalEvent.js",
+					"js/mui.min.js",
+					"js/mui.pullToRefresh.material.js",
+					"js/com.js",
+					"js/swiper.min.js",
+					"js/doT.min.js",
+					"img/phone_tel.png",
+					"img/zhifubao.png",
+					"img/weixin.png",
+					"img/icon/def_no_data.png"
+				],
+				"refer": [
+					"app/usermain/complaints.html"
+				],
+				"priority": 0
+			},
+			"app/userlotterysite/station_list.html": {
+				"resources": [
+					"js/com.mui.js",
+					"js/mui.pullToRefresh.js",
+					"img/position.png",
+					"js/mui.pullToRefresh.material.js",
+					"css/xmui.pullToRefresh.material.css",
+					"img/buy.png",
+					"css/mui.css",
+					"img/vip.png",
+					"css/gloab.css",
+					"css/swiper.min.css",
+					"img/icon/def_no_data.png",
+					"js/com.data.js",
+					"js/xmui-globalEvent.js",
+					"js/mui.min.js",
+					"js/com.js",
+					"js/swiper.min.js",
+					"js/doT.min.js"
+				],
+				"refer": [
+					"app/userlotterysite/station_info.html"
+				],
+				"priority": 0
+			},
+			"app/login.html": {
+				"resources": [
+					"img/password.png",
+					"img/login.png",
+					"img/telnumber.png",
+					"css/mui.css",
+					"css/xmui.pullToRefresh.material.css",
+					"js/DMobileFrame.js",
+					"css/swiper.min.css",
+					"app/login.html",
+					"js/com.mui.js",
+					"js/mui.pullToRefresh.js",
+					"js/xmui-globalEvent.js",
+					"js/mui.pullToRefresh.material.js",
+					"js/swiper.min.js",
+					"js/doT.min.js",
+					"js/com.data.js",
+					"js/mui.min.js",
+					"js/com.js",
+					"images/logo.png",
+					"images/icon/icon_phone.png",
+					"images/icon/icon_pwd2.png",
+					"images/icon/icon-code.png",
+					"images/icon/icon_checked18.png",
+					"images/icon/icon_unchecked.png",
+					"js/vue.js",
+					"js/jquery.min_1.8.3.js",
+					"js/md5.js",
+					"fonts/mui.ttf",
+					"css/gloab.css"
+				],
+				"refer": [
+					"app/tools/kefu.html",
+					"app/register.html",
+					"app/home_user.html",
+					"app/userinfo/forgetpwd.html"
+				],
+				"priority": 0
+			},
+			"app/order/choose_caipiao.html": {
+				"resources": [
+					"img/phone_tel.png",
+					"img/zhifubao.png",
+					"img/weixin.png",
+					"css/mui.css",
+					"css/xmui.pullToRefresh.material.css",
+					"js/xmui-globalEvent.js",
+					"js/com.data.js",
+					"js/mui.min.js",
+					"fonts/mui.ttf",
+					"js/com.js",
+					"css/gloab.css",
+					"css/font-awesome-4.7.0/css/font-awesome.min.css",
+					"css/font-awesome-4.7.0/fonts/fontawesome-webfont.woff2"
+				],
+				"refer": [
+					"app/userlotterysite/choose_station.html",
+					"app/login.html",
+					"app/oauth.html",
+					"app/usermain/add_phone.html"
+				],
+				"priority": 0
+			},
+			"app/userlotterysite/choose_station.html": {
+				"resources": [
+					"img/lottery_type/shaungseqiu.png",
+					"js/com.mui.js",
+					"js/mui.pullToRefresh.js",
+					"js/mui.pullToRefresh.material.js",
+					"css/xmui.pullToRefresh.material.css",
+					"img/unchecked_station.png",
+					"css/mui.css",
+					"img/vip.png",
+					"css/swiper.min.css",
+					"img/icon/def_no_data.png",
+					"css/gloab.css",
+					"js/xmui-globalEvent.js",
+					"fonts/mui.ttf",
+					"js/swiper.min.js",
+					"js/doT.min.js",
+					"js/mui.min.js",
+					"js/com.data.js",
+					"js/com.js"
+				],
+				"refer": [
+					"app/login.html",
+					"app/userlotterysite/station_info.html"
+				],
+				"priority": 0
+			},
+			"app/userlotterysite/station_info.html": {
+				"resources": [
+					"css/mui.css",
+					"img/approve.png",
+					"img/test.jpg",
+					"js/com.mui.js",
+					"js/mui.pullToRefresh.js",
+					"js/com.data.js",
+					"js/xmui-globalEvent.js",
+					"js/mui.min.js",
+					"js/mui.pullToRefresh.material.js",
+					"js/com.js",
+					"js/swiper.min.js",
+					"js/doT.min.js",
+					"css/gloab.css",
+					"img/vip.png",
+					"img/position.png",
+					"css/xmui.pullToRefresh.material.css",
+					"css/swiper.min.css"
+				],
+				"refer": [
+					"app/usermain/certification_details.html"
+				],
+				"priority": 0
+			},
+			"app/usermain/test.html": {
+				"resources": [
+					"css/mui.css",
+					"css/swiper.min.css",
+					"css/xmui.pullToRefresh.material.css"
+				],
+				"refer": [],
+				"priority": 0
+			},
+			"app/usermain/business-card.html": {
+				"resources": [
+					"fonts/mui.ttf",
+					"css/xmui.pullToRefresh.material.css",
+					"css/swiper.min.css",
+					"css/gloab.css",
+					"img/share.png",
+					"css/mui.css",
+					"img/erweima_test.png"
+				],
+				"refer": [
+					"app/usermain/share.html"
+				],
+				"priority": 0
+			},
+			"app/usermain/share.html": {
+				"resources": [
+					"img/weibo.png",
+					"img/qq.png",
+					"img/qq_kongjian.png",
+					"img/weixin_share.png",
+					"css/mui.min.css",
+					"img/pengyouquan.png",
+					"css/mui.css",
+					"js/com.mui.js",
+					"js/mui.pullToRefresh.js",
+					"js/DMobileFrame.js",
+					"js/xmui-globalEvent.js",
+					"js/mui.pullToRefresh.material.js",
+					"css/gloab.css",
+					"js/swiper.min.js",
+					"js/doT.min.js",
+					"js/com.data.js",
+					"js/mui.min.js",
+					"js/com.js",
+					"css/swiper.min.css",
+					"css/xmui.pullToRefresh.material.css"
+				],
+				"refer": [],
+				"priority": 0
+			},
+			"app/usermain/lottery_results.html": {
+				"resources": [
+					"img/lottery_type/shaungseqiu.png",
+					"js/com.mui.js",
+					"js/mui.pullToRefresh.js",
+					"js/DMobileFrame.js",
+					"js/mui.pullToRefresh.material.js",
+					"css/xmui.pullToRefresh.material.css",
+					"css/swiper.min.css",
+					"css/mui.css",
+					"js/doT.min.js",
+					"js/xmui-globalEvent.js",
+					"fonts/mui.ttf",
+					"css/gloab.css",
+					"js/swiper.min.js",
+					"js/com.data.js",
+					"js/mui.min.js",
+					"js/com.js",
+					"img/icon/def_no_data.png"
+				],
+				"refer": [
+					"app/usermain/lottery_results_infolist.html"
+				],
+				"priority": 0
+			},
+			"app/usermain/promotion.html": {
+				"resources": [
+					"css/mui.css",
+					"js/com.mui.js",
+					"js/mui.pullToRefresh.js",
+					"js/DMobileFrame.js",
+					"js/xmui-globalEvent.js",
+					"js/mui.pullToRefresh.material.js",
+					"fonts/mui.ttf",
+					"css/gloab.css",
+					"js/swiper.min.js",
+					"js/doT.min.js",
+					"js/com.data.js",
+					"js/mui.min.js",
+					"css/swiper.min.css",
+					"css/xmui.pullToRefresh.material.css",
+					"js/com.js"
+				],
+				"refer": [],
+				"priority": 0
+			},
+			"app/oauth.html": {
+				"resources": [
+					"js/common.js",
+					"css/common.css",
+					"js/immersed.js",
+					"js/com.mui.js",
+					"js/mui.pullToRefresh.js",
+					"js/DMobileFrame.js",
+					"js/xmui-globalEvent.js",
+					"js/mui.pullToRefresh.material.js",
+					"js/swiper.min.js",
+					"js/doT.min.js",
+					"js/mui.min.js",
+					"js/com.data.js",
+					"js/com.js"
+				],
+				"refer": [
+					"app/home_user.html"
+				],
+				"priority": 0
+			},
+			"app/usermain/update_phone.html": {
+				"resources": [
+					"js/com.mui.js",
+					"js/mui.pullToRefresh.js",
+					"js/DMobileFrame.js",
+					"js/xmui-globalEvent.js",
+					"js/mui.pullToRefresh.material.js",
+					"fonts/mui.ttf",
+					"css/gloab.css",
+					"js/swiper.min.js",
+					"css/mui.css",
+					"js/doT.min.js",
+					"js/com.data.js",
+					"js/mui.min.js",
+					"css/swiper.min.css",
+					"css/xmui.pullToRefresh.material.css",
+					"js/com.js"
+				],
+				"refer": [],
+				"priority": 0
+			},
+			"app/usermain/readme.html": {
+				"resources": [
+					"js/com.mui.js",
+					"js/mui.pullToRefresh.js",
+					"js/DMobileFrame.js",
+					"js/xmui-globalEvent.js",
+					"js/mui.pullToRefresh.material.js",
+					"fonts/mui.ttf",
+					"css/gloab.css",
+					"js/swiper.min.js",
+					"css/mui.css",
+					"js/doT.min.js",
+					"js/com.data.js",
+					"js/mui.min.js",
+					"css/swiper.min.css",
+					"css/xmui.pullToRefresh.material.css",
+					"js/com.js",
+					"img/icon/def_no_data.png"
+				],
+				"refer": [],
+				"priority": 0
+			},
+			"app/usermain/add_phone.html": {
+				"resources": [
+					"img/icon/icon_phone.png",
+					"img/icon/icon_code_img.png",
+					"img/login.png",
+					"img/icon/icon_pwd.png",
+					"img/icon/icon_code_sms.png",
+					"css/mui.css",
+					"img/icon/icon_refresh.png",
+					"img/icon/icon_refresh_fff.png",
+					"js/jquery.min_1.8.3.js",
+					"css/xmui.pullToRefresh.material.css",
+					"css/swiper.min.css",
+					"js/com.mui.js",
+					"js/mui.pullToRefresh.js",
+					"js/DMobileFrame.js",
+					"js/xmui-globalEvent.js",
+					"js/mui.pullToRefresh.material.js",
+					"js/swiper.min.js",
+					"js/doT.min.js",
+					"js/com.data.js",
+					"js/mui.min.js",
+					"js/com.js"
+				],
+				"refer": [
+					"app/home_user.html"
+				],
+				"priority": 0
+			},
+			"app/usermain/update_pswd.html": {
+				"resources": [
+					"css/mui.css"
+				],
+				"refer": [],
+				"priority": 0
+			},
+			"app/usermain/certification_details.html": {
+				"resources": [
+					"js/com.mui.js",
+					"js/mui.pullToRefresh.js",
+					"js/DMobileFrame.js",
+					"js/com.data.js",
+					"js/xmui-globalEvent.js",
+					"js/mui.min.js",
+					"js/mui.pullToRefresh.material.js",
+					"js/com.js",
+					"js/swiper.min.js",
+					"css/mui.css",
+					"js/doT.min.js"
+				],
+				"refer": [],
+				"priority": 0
+			},
+			"app/usermain/complaints.html": {
+				"resources": [
+					"img/add_img.png",
+					"css/mui.css"
+				],
+				"refer": [],
+				"priority": 0
+			},
+			"app/usermain/lottery_results_infolist.html": {
+				"resources": [
+					"css/mui.css",
+					"css/xmui.pullToRefresh.material.css",
+					"css/swiper.min.css",
+					"css/gloab.css"
+				],
+				"refer": [],
+				"priority": 0
+			},
+			"app/usermain/add_phone2.html": {
+				"resources": [
+					"css/mui.css"
+				],
+				"refer": [],
+				"priority": 0
+			},
+			"app/usermain/news_list.html": {
+				"resources": [
+					"css/xmui.pullToRefresh.material.css",
+					"css/swiper.min.css",
+					"css/mui.css",
+					"img/icon/def_no_data.png",
+					"js/com.mui.js",
+					"js/mui.pullToRefresh.js",
+					"js/DMobileFrame.js",
+					"js/com.data.js",
+					"js/xmui-globalEvent.js",
+					"js/mui.min.js",
+					"js/mui.pullToRefresh.material.js",
+					"js/com.js",
+					"js/swiper.min.js",
+					"js/doT.min.js",
+					"img/icon/icon_more_red.png"
+				],
+				"refer": [
+					"app/usermain/news_info.html"
+				],
+				"priority": 0
+			},
+			"app/usermain/news_info.html": {
+				"resources": [
+					"css/xmui.pullToRefresh.material.css",
+					"css/swiper.min.css",
+					"css/mui.css"
+				],
+				"refer": [],
+				"priority": 0
+			},
+			"app/mainpage/index.html": {
+				"resources": [
+					"js/com.mui.js",
+					"js/mui.pullToRefresh.js",
+					"js/DMobileFrame.js",
+					"img/icon/jingcai.png",
+					"img/icon/fucai3d.png",
+					"img/icon/qilecai.png",
+					"js/mui.pullToRefresh.material.js",
+					"img/icon/daletou.png",
+					"css/gloab.css",
+					"js/swiper.min.js",
+					"img/icon/zixun.png",
+					"css/mui.css",
+					"js/doT.min.js",
+					"img/text.png",
+					"img/icon/shangseqiu.png",
+					"img/icon/shuoming.png",
+					"css/swiper.min.css",
+					"css/xmui.pullToRefresh.material.css",
+					"img/icon/more.png",
+					"img/icon/pailie5.png",
+					"js/xmui-globalEvent.js",
+					"js/com.data.js",
+					"js/mui.min.js",
+					"js/com.js",
+					"images/icon/1.png",
+					"images/icon/4.png",
+					"images/icon/3.png",
+					"images/icon/2.png",
+					"images/icon/note.png",
+					"images/temporary/headimg1.png",
+					"images/temporary/headimg2.png",
+					"images/silde_08.png",
+					"images/temporary/handbkg.png",
+					"images/temporary/indeximg.png",
+					"images/handbkg.png",
+					"images/icon/icon_kefu.png",
+					"js/md5.js",
+					"js/jquery.min_1.8.3.js",
+					"images/icon/icon_1.png",
+					"images/icon/icon_7.png",
+					"images/icon/icon_6.png",
+					"images/icon/icon_2.png",
+					"images/icon/icon_8.png",
+					"images/icon/icon_5.png",
+					"images/icon/icon_4.png",
+					"images/icon/icon_3.png",
+					"images/icon/icon_9.png",
+					"js/vue.js",
+					"js/fundsfunction.js",
+					"images/icon/icon_close.png"
+				],
+				"refer": [
+					"app/oauth.html",
+					"app/login.html",
+					"app/register.html",
+					"app/fundspage/fundslist_public.html",
+					"app/tools/kefu.html",
+					"app/mycircle/circle_index.html",
+					"app/fundspage/funds_more.html",
+					"app/quotepage/about.html",
+					"app/quotepage/hotnews.html",
+					"app/quotepage/caijingrili.html",
+					"app/quotepage/qihuohangqing.html",
+					"app/quotepage/wangzhebei.html",
+					"app/quotepage/focus11.html",
+					"app/mainpage/warn.html",
+					"app/quotepage/focus.html"
+				],
+				"priority": 0
+			},
+			"app/mainpage/funds.html": {
+				"resources": [
+					"js/mui.min.js",
+					"css/gloab.css",
+					"js/jquery.min_1.8.3.js",
+					"css/mui.css",
+					"js/com.mui.js",
+					"js/mui.pullToRefresh.js",
+					"js/xmui-globalEvent.js",
+					"js/mui.pullToRefresh.material.js",
+					"js/swiper.min.js",
+					"js/doT.min.js",
+					"js/com.data.js",
+					"css/xmui.pullToRefresh.material.css",
+					"css/swiper.min.css",
+					"js/com.js",
+					"img/position.png",
+					"img/vip.png",
+					"images/icon/1.png",
+					"js/vue.js",
+					"js/md5.js",
+					"js/fundsfunction.js"
+				],
+				"refer": [
+					"app/fundspage/fundslist.html",
+					"app/fundspage/fundslist_public.html",
+					"app/fundspage/funds_more.html",
+					"app/login.html",
+					"app/fundspage/fundslist_self.html"
+				],
+				"priority": 0
+			},
+			"app/fundspage/fundslist.html": {
+				"resources": [
+					"js/com.mui.js",
+					"js/mui.pullToRefresh.js",
+					"js/DMobileFrame.js",
+					"js/xmui-globalEvent.js",
+					"js/mui.pullToRefresh.material.js",
+					"css/gloab.css",
+					"js/swiper.min.js",
+					"css/mui.css",
+					"js/doT.min.js",
+					"js/com.data.js",
+					"js/mui.min.js",
+					"css/xmui.pullToRefresh.material.css",
+					"css/swiper.min.css",
+					"js/com.js",
+					"css/index.css"
+				],
+				"refer": [],
+				"priority": 0
+			},
+			"app/fundspage/fundslist_public.html": {
+				"resources": [
+					"js/com.mui.js",
+					"js/mui.pullToRefresh.js",
+					"js/DMobileFrame.js",
+					"js/xmui-globalEvent.js",
+					"js/mui.pullToRefresh.material.js",
+					"css/gloab.css",
+					"js/swiper.min.js",
+					"css/mui.css",
+					"js/doT.min.js",
+					"js/com.data.js",
+					"js/mui.min.js",
+					"css/xmui.pullToRefresh.material.css",
+					"css/swiper.min.css",
+					"js/com.js",
+					"js/vue.js",
+					"js/jquery.min_1.8.3.js",
+					"js/fundsfunction.js",
+					"js/md5.js",
+					"fonts/mui.ttf"
+				],
+				"refer": [
+					"app/fundspage/funds_more.html",
+					"app/login.html"
+				],
+				"priority": 0
+			},
+			"app/fundspage/funds_more.html": {
+				"resources": [
+					"js/com.mui.js",
+					"js/mui.pullToRefresh.js",
+					"js/com.data.js",
+					"js/xmui-globalEvent.js",
+					"js/mui.min.js",
+					"js/mui.pullToRefresh.material.js",
+					"js/com.js",
+					"css/mui.css",
+					"css/swiper.min.css",
+					"css/xmui.pullToRefresh.material.css",
+					"css/gloab.css",
+					"images/icon/right.png",
+					"app/quote/Highcharts-6.0.2/code/highcharts.js",
+					"images/temporary/headimg.png",
+					"images/icon/heart.png",
+					"images/icon/heart2.png",
+					"images/icon/heart3.png",
+					"fonts/mui.ttf",
+					"js/fundsfunction.js",
+					"js/vue.js",
+					"js/jquery.min_1.8.3.js",
+					"js/md5.js",
+					"js/highcharts.js"
+				],
+				"refer": [
+					"app/tools/addbank_success.html",
+					"app/fundspage/funds_buy.html",
+					"app/fundspage/funds_dingtou.html",
+					"app/fundspage/fundsbuy_success.html",
+					"app/login.html"
+				],
+				"priority": 0
+			},
+			"app/mainpage/mypage.html": {
+				"resources": [
+					"js/com.mui.js",
+					"js/mui.pullToRefresh.js",
+					"js/com.data.js",
+					"js/xmui-globalEvent.js",
+					"js/mui.min.js",
+					"js/mui.pullToRefresh.material.js",
+					"js/com.js",
+					"js/swiper.min.js",
+					"css/mui.css",
+					"images/temporary/mybkg3.jpg",
+					"images/icon/right.png",
+					"images/icon/right_weith.png",
+					"images/icon/userheard.png",
+					"images/temporary/mybkg3.png",
+					"images/icon/icon_card.png",
+					"images/icon/icon_info.png",
+					"images/icon/icon_funds.png",
+					"images/icon/icon_pwd.png",
+					"images/icon/icon_order.png",
+					"images/icon/icon_danger.png",
+					"images/icon/icon_option.png",
+					"images/icon/icon_service.png",
+					"images/icon/icon_advance.png",
+					"css/gloab.css",
+					"css/swiper.min.css",
+					"css/xmui.pullToRefresh.material.css",
+					"images/icon/icon_ding.png",
+					"js/vue.js",
+					"js/jquery.min_1.8.3.js",
+					"js/md5.js",
+					"images/icon/userheader2.png",
+					"js/immersed.js",
+					"js/h.min.js"
+				],
+				"refer": [
+					"app/userinfo/mycard.html",
+					"app/userinfo/myinfo.html",
+					"app/userinfo/myorder.html",
+					"app/userinfo/mypwd.html",
+					"app/tools/reg_question.html",
+					"app/userinfo/myfunds.html",
+					"app/tools/uploadHeadImg.html",
+					"app/tools/kefu.html",
+					"app/userinfo/myding.html",
+					"app/mycircle/circle_index.html",
+					"app/login.html",
+					"app/tools/reg_moreinfo.html",
+					"app/tools/reg_questresult.html",
+					"app/mainpage/jijinlist.html",
+					"app/home_user.html"
+				],
+				"priority": 0
+			},
+			"app/register.html": {
+				"resources": [
+					"js/mui.pullToRefresh.js",
+					"js/com.mui.js",
+					"js/DMobileFrame.js",
+					"js/xmui-globalEvent.js",
+					"js/mui.pullToRefresh.material.js",
+					"img/telnumber.png",
+					"js/swiper.min.js",
+					"css/mui.css",
+					"js/doT.min.js",
+					"img/password.png",
+					"js/mui.min.js",
+					"js/com.data.js",
+					"img/login.png",
+					"js/com.js",
+					"images/icon/icon_phone.png",
+					"images/icon/icon-code.png",
+					"images/icon/icon_pwd2.png",
+					"images/icon/icon_checked.png",
+					"css/gloab.css",
+					"css/xmui.pullToRefresh.material.css",
+					"css/swiper.min.css",
+					"images/icon/icon_unchecked.png",
+					"images/icon/icon_checked18.png",
+					"js/vue.js",
+					"js/jquery.min_1.8.3.js",
+					"js/md5.js",
+					"fonts/mui.ttf"
+				],
+				"refer": [
+					"app/login.html",
+					"app/tools/reg_success.html",
+					"app/tools/reg_xieyi.html"
+				],
+				"priority": 0
+			},
+			"app/tools/reg_success.html": {
+				"resources": [
+					"js/com.mui.js",
+					"js/mui.pullToRefresh.js",
+					"js/com.data.js",
+					"js/xmui-globalEvent.js",
+					"js/mui.min.js",
+					"js/mui.pullToRefresh.material.js",
+					"js/com.js",
+					"css/mui.css",
+					"images/icon/icon_true.png",
+					"css/swiper.min.css",
+					"css/xmui.pullToRefresh.material.css",
+					"css/gloab.css",
+					"fonts/mui.ttf"
+				],
+				"refer": [
+					"app/fundspage/funds_more.html",
+					"app/home_user.html",
+					"app/tools/reg_moreinfo.html"
+				],
+				"priority": 0
+			},
+			"app/tools/reg_moreinfo.html": {
+				"resources": [
+					"js/com.mui.js",
+					"js/mui.pullToRefresh.js",
+					"js/com.data.js",
+					"js/xmui-globalEvent.js",
+					"js/mui.min.js",
+					"js/mui.pullToRefresh.material.js",
+					"js/com.js",
+					"css/mui.css",
+					"js/mui.picker.js",
+					"css/mui.poppicker.css",
+					"css/mui.picker.css",
+					"js/mui.poppicker.js",
+					"js/mui.dtpicker.js",
+					"css/mui.dtpicker.css",
+					"js/vue.js",
+					"js/jquery.min_1.8.3.js",
+					"js/md5.js",
+					"css/swiper.min.css",
+					"js/fundsfunction.js",
+					"css/xmui.pullToRefresh.material.css"
+				],
+				"refer": [
+					"app/tools/reg_question.html",
+					"app/login.html"
+				],
+				"priority": 0
+			},
+			"app/tools/reg_question.html": {
+				"resources": [
+					"css/mui.css",
+					"js/com.mui.js",
+					"js/mui.pullToRefresh.js",
+					"js/mui.picker.js",
+					"js/com.data.js",
+					"js/mui.poppicker.js",
+					"js/mui.pullToRefresh.material.js",
+					"js/mui.dtpicker.js",
+					"js/xmui-globalEvent.js",
+					"js/mui.min.js",
+					"js/com.js",
+					"images/cp.png",
+					"css/swiper.min.css",
+					"js/vue.js",
+					"js/jquery.min_1.8.3.js",
+					"js/md5.js",
+					"css/xmui.pullToRefresh.material.css",
+					"fonts/mui.ttf",
+					"css/gloab.css"
+				],
+				"refer": [
+					"app/tools/reg_questresult.html",
+					"app/login.html"
+				],
+				"priority": 0
+			},
+			"app/tools/reg_questresult.html": {
+				"resources": [
+					"js/com.mui.js",
+					"js/mui.pullToRefresh.js",
+					"js/com.data.js",
+					"js/xmui-globalEvent.js",
+					"js/mui.min.js",
+					"js/mui.pullToRefresh.material.js",
+					"js/com.js",
+					"css/mui.css",
+					"images/questionIcon.png",
+					"css/swiper.min.css",
+					"js/vue.js",
+					"js/jquery.min_1.8.3.js",
+					"js/md5.js",
+					"images/icon/i_01.png",
+					"images/icon/i_02.png",
+					"images/icon/i_03.png"
+				],
+				"refer": [
+					"app/tools/reg_question.html",
+					"app/tools/bank_card_add.html",
+					"app/home_user.html"
+				],
+				"priority": 0
+			},
+			"app/tools/bank_card_add.html": {
+				"resources": [
+					"js/mui.pullToRefresh.js",
+					"js/com.mui.js",
+					"js/mui.picker.js",
+					"js/xmui-globalEvent.js",
+					"js/mui.pullToRefresh.material.js",
+					"css/mui.css",
+					"css/mui.picker.css",
+					"js/mui.dtpicker.js",
+					"js/mui.min.js",
+					"js/com.data.js",
+					"js/mui.poppicker.js",
+					"css/mui.dtpicker.css",
+					"js/com.js",
+					"css/mui.poppicker.css",
+					"js/vue.js",
+					"js/jquery.min_1.8.3.js",
+					"js/md5.js",
+					"js/data.city.js",
+					"css/xmui.pullToRefresh.material.css",
+					"css/swiper.min.css",
+					"fonts/mui.ttf",
+					"css/gloab.css"
+				],
+				"refer": [
+					"app/tools/choice_bankcard.html",
+					"app/tools/reg_question.html",
+					"app/tools/addbank_success.html",
+					"app/login.html"
+				],
+				"priority": 0
+			},
+			"app/tools/choice_bankcard.html": {
+				"resources": [
+					"js/com.mui.js",
+					"js/mui.picker.js",
+					"js/com.data.js",
+					"js/mui.poppicker.js",
+					"js/mui.pullToRefresh.material.js",
+					"css/mui.css",
+					"js/mui.dtpicker.js",
+					"js/mui.pullToRefresh.js",
+					"js/xmui-globalEvent.js",
+					"js/mui.min.js",
+					"js/com.js",
+					"images/bank_icon/icon_bank_1.png",
+					"images/icon/icon_jiao.png",
+					"images/bank_icon/icon_bank_4.png",
+					"images/bank_icon/icon_bank_3.png",
+					"images/bank_icon/icon_bank_2.png",
+					"images/bank_icon/icon_bank_11.png",
+					"images/bank_icon/icon_bank_10.png",
+					"images/bank_icon/icon_bank_8.png",
+					"images/bank_icon/icon_bank_7.png",
+					"images/bank_icon/icon_bank_12.png",
+					"images/bank_icon/icon_bank_9.png",
+					"images/bank_icon/icon_bank_5.png",
+					"images/bank_icon/icon_bank_6.png",
+					"css/mui.poppicker.css",
+					"css/mui.picker.css",
+					"css/mui.dtpicker.css",
+					"css/xmui.pullToRefresh.material.css",
+					"css/swiper.min.css"
+				],
+				"refer": [
+					"app/tools/bank_card_add.html"
+				],
+				"priority": 0
+			},
+			"app/tools/addbank_success.html": {
+				"resources": [
+					"css/mui.css",
+					"js/com.mui.js",
+					"js/mui.pullToRefresh.js",
+					"js/com.data.js",
+					"js/xmui-globalEvent.js",
+					"js/mui.min.js",
+					"js/mui.pullToRefresh.material.js",
+					"js/com.js",
+					"images/icon/icon_true.png",
+					"css/swiper.min.css",
+					"css/xmui.pullToRefresh.material.css"
+				],
+				"refer": [
+					"app/home_user.html"
+				],
+				"priority": 0
+			},
+			"app/userinfo/mycard.html": {
+				"resources": [
+					"js/com.mui.js",
+					"js/mui.pullToRefresh.js",
+					"js/com.data.js",
+					"js/xmui-globalEvent.js",
+					"js/mui.min.js",
+					"js/mui.pullToRefresh.material.js",
+					"js/com.js",
+					"js/swiper.min.js",
+					"css/mui.css",
+					"images/bank_icon/icon_bank_1.png",
+					"images/bank_icon/icon_bank_2.png",
+					"images/bank_icon/icon_bank_3.png",
+					"css/swiper.min.css",
+					"css/xmui.pullToRefresh.material.css",
+					"css/gloab.css",
+					"js/vue.js",
+					"js/jquery.min_1.8.3.js",
+					"js/md5.js",
+					"js/fundsfunction.js",
+					"images/bank_icon/icon_bank_4.png",
+					"images/bank_icon/icon_bank_12.png",
+					"fonts/mui.ttf",
+					"images/icon/icon_changecard.png",
+					"images/icon/icon_close.png",
+					"images/icon/icon_stop.png"
+				],
+				"refer": [
+					"app/tools/bank_card_add.html",
+					"app/login.html",
+					"app/tools/addbank_success.html",
+					"app/tools/bank_card_change.html"
+				],
+				"priority": 0
+			},
+			"app/userinfo/myinfo.html": {
+				"resources": [
+					"js/com.mui.js",
+					"js/mui.pullToRefresh.js",
+					"js/com.data.js",
+					"js/xmui-globalEvent.js",
+					"js/mui.min.js",
+					"js/mui.pullToRefresh.material.js",
+					"js/com.js",
+					"js/swiper.min.js",
+					"css/mui.css",
+					"css/swiper.min.css",
+					"css/xmui.pullToRefresh.material.css",
+					"css/gloab.css",
+					"js/vue.js",
+					"js/jquery.min_1.8.3.js",
+					"js/md5.js",
+					"js/fundsfunction.js",
+					"fonts/mui.ttf"
+				],
+				"refer": [
+					"app/tools/reg_moreinfo.html",
+					"app/login.html"
+				],
+				"priority": 0
+			},
+			"app/userinfo/myorder.html": {
+				"resources": [
+					"js/com.mui.js",
+					"js/mui.pullToRefresh.js",
+					"images/bank_icon/icon_bank_1.png",
+					"js/xmui-globalEvent.js",
+					"js/mui.pullToRefresh.material.js",
+					"css/gloab.css",
+					"js/swiper.min.js",
+					"css/mui.css",
+					"js/com.data.js",
+					"js/mui.min.js",
+					"images/bank_icon/icon_bank_3.png",
+					"css/xmui.pullToRefresh.material.css",
+					"css/swiper.min.css",
+					"js/com.js",
+					"images/bank_icon/icon_bank_2.png",
+					"fonts/mui.ttf"
+				],
+				"refer": [],
+				"priority": 0
+			},
+			"app/userinfo/mypwd.html": {
+				"resources": [
+					"js/com.mui.js",
+					"js/mui.pullToRefresh.js",
+					"js/com.data.js",
+					"js/xmui-globalEvent.js",
+					"js/mui.min.js",
+					"js/mui.pullToRefresh.material.js",
+					"js/com.js",
+					"css/swiper.min.css",
+					"css/xmui.pullToRefresh.material.css",
+					"css/gloab.css",
+					"js/swiper.min.js",
+					"css/mui.css",
+					"images/icon/icon_pwd2.png",
+					"images/icon/icon_handpwd.png",
+					"images/icon/icon_moneypwd.png"
+				],
+				"refer": [
+					"app/userinfo/changepwd_success.html",
+					"app/userinfo/handpwd.html",
+					"app/userinfo/mynewpwd.html"
+				],
+				"priority": 0
+			},
+			"app/userinfo/changepwd_success.html": {
+				"resources": [
+					"images/icon/icon_true.png",
+					"js/com.mui.js",
+					"js/mui.pullToRefresh.js",
+					"js/com.data.js",
+					"js/xmui-globalEvent.js",
+					"js/mui.min.js",
+					"js/mui.pullToRefresh.material.js",
+					"js/com.js",
+					"css/mui.css",
+					"css/swiper.min.css",
+					"css/xmui.pullToRefresh.material.css"
+				],
+				"refer": [
+					"app/tools/reg_moreinfo.html",
+					"app/home_user.html"
+				],
+				"priority": 0
+			},
+			"app/userinfo/handpwd.html": {
+				"resources": [
+					"js/com.mui.js",
+					"js/mui.pullToRefresh.js",
+					"js/com.data.js",
+					"js/xmui-globalEvent.js",
+					"js/mui.min.js",
+					"js/mui.pullToRefresh.material.js",
+					"js/com.js",
+					"js/swiper.min.js",
+					"js/mui.locker.js",
+					"css/mui.css"
+				],
+				"refer": [],
+				"priority": 0
+			},
+			"app/userinfo/myfunds.html": {
+				"resources": [
+					"js/com.mui.js",
+					"js/mui.pullToRefresh.js",
+					"js/com.data.js",
+					"js/xmui-globalEvent.js",
+					"js/mui.min.js",
+					"js/mui.pullToRefresh.material.js",
+					"js/com.js",
+					"js/swiper.min.js",
+					"css/mui.css",
+					"css/swiper.min.css",
+					"css/xmui.pullToRefresh.material.css",
+					"css/gloab.css",
+					"js/vue.js",
+					"js/jquery.min_1.8.3.js",
+					"js/fundsfunction.js",
+					"js/md5.js",
+					"fonts/mui.ttf",
+					"images/icon/right.png"
+				],
+				"refer": [
+					"app/register.html",
+					"app/userinfo/moneyreturn.html",
+					"app/userinfo/fundsinfo.html",
+					"app/fundspage/fundslist_public.html",
+					"app/login.html"
+				],
+				"priority": 0
+			},
+			"app/userinfo/moneyreturn.html": {
+				"resources": [
+					"js/com.mui.js",
+					"js/mui.pullToRefresh.js",
+					"js/com.data.js",
+					"js/xmui-globalEvent.js",
+					"js/mui.min.js",
+					"js/mui.pullToRefresh.material.js",
+					"js/com.js",
+					"js/swiper.min.js",
+					"css/mui.css",
+					"css/swiper.min.css",
+					"js/vue.js",
+					"js/jquery.min_1.8.3.js",
+					"js/fundsfunction.js",
+					"js/md5.js",
+					"css/xmui.pullToRefresh.material.css",
+					"css/gloab.css"
+				],
+				"refer": [
+					"app/userinfo/changepwd_success.html",
+					"app/userinfo/mycard.html",
+					"app/fundspage/choice_bank.html",
+					"app/login.html"
+				],
+				"priority": 0
+			},
+			"app/fundspage/funds_buy.html": {
+				"resources": [
+					"js/com.mui.js",
+					"js/mui.pullToRefresh.js",
+					"js/com.data.js",
+					"js/xmui-globalEvent.js",
+					"js/mui.min.js",
+					"js/mui.pullToRefresh.material.js",
+					"js/com.js",
+					"js/swiper.min.js",
+					"css/mui.css",
+					"js/mui.picker.js",
+					"js/mui.poppicker.js",
+					"css/mui.poppicker.css",
+					"css/mui.picker.css",
+					"css/xmui.pullToRefresh.material.css",
+					"css/swiper.min.css",
+					"images/icon/right.png",
+					"js/vue.js",
+					"js/jquery.min_1.8.3.js",
+					"js/md5.js",
+					"js/fundsfunction.js",
+					"fonts/mui.ttf",
+					"css/gloab.css"
+				],
+				"refer": [
+					"app/fundspage/funds_more.html",
+					"app/fundspage/fundsbuy_success.html",
+					"app/userinfo/mycard.html",
+					"app/fundspage/choice_bank.html",
+					"app/tools/reg_question.html"
+				],
+				"priority": 0
+			},
+			"app/fundspage/fundsbuy_success.html": {
+				"resources": [
+					"images/icon/icon_true.png",
+					"js/com.mui.js",
+					"js/mui.pullToRefresh.js",
+					"js/com.data.js",
+					"js/xmui-globalEvent.js",
+					"js/mui.min.js",
+					"js/mui.pullToRefresh.material.js",
+					"js/com.js",
+					"css/mui.css",
+					"css/swiper.min.css",
+					"js/vue.js",
+					"css/xmui.pullToRefresh.material.css"
+				],
+				"refer": [
+					"app/home_user.html"
+				],
+				"priority": 0
+			},
+			"app/fundspage/choice_bank.html": {
+				"resources": [
+					"js/com.mui.js",
+					"js/mui.pullToRefresh.js",
+					"js/com.data.js",
+					"js/xmui-globalEvent.js",
+					"js/mui.min.js",
+					"js/mui.pullToRefresh.material.js",
+					"js/com.js",
+					"js/swiper.min.js",
+					"css/mui.css",
+					"images/bank_icon/icon_bank_1.png",
+					"images/bank_icon/icon_bank_3.png",
+					"images/bank_icon/icon_bank_2.png",
+					"js/vue.js",
+					"js/jquery.min_1.8.3.js",
+					"js/md5.js",
+					"js/fundsfunction.js",
+					"images/bank_icon/icon_bank_12.png",
+					"css/swiper.min.css",
+					"css/xmui.pullToRefresh.material.css",
+					"images/bank_icon/icon_bank_4.png"
+				],
+				"refer": [
+					"app/login.html"
+				],
+				"priority": 0
+			},
+			"app/userinfo/mynewpwd.html": {
+				"resources": [
+					"js/com.mui.js",
+					"js/mui.pullToRefresh.js",
+					"js/com.data.js",
+					"js/xmui-globalEvent.js",
+					"js/mui.min.js",
+					"js/mui.pullToRefresh.material.js",
+					"js/com.js",
+					"js/swiper.min.js",
+					"css/mui.css",
+					"js/vue.js",
+					"js/jquery.min_1.8.3.js",
+					"js/md5.js",
+					"js/fundsfunction.js",
+					"css/xmui.pullToRefresh.material.css",
+					"css/swiper.min.css"
+				],
+				"refer": [
+					"app/userinfo/changepwd_success.html",
+					"app/login.html"
+				],
+				"priority": 0
+			},
+			"app/userinfo/fundsinfo.html": {
+				"resources": [
+					"js/com.mui.js",
+					"js/mui.pullToRefresh.js",
+					"js/com.data.js",
+					"js/xmui-globalEvent.js",
+					"js/mui.pullToRefresh.material.js",
+					"css/mui.css",
+					"js/mui.min.js",
+					"js/com.js",
+					"css/swiper.min.css",
+					"css/xmui.pullToRefresh.material.css",
+					"js/vue.js",
+					"js/md5.min.js",
+					"js/jquery.min_1.8.3.js",
+					"js/fundsfunction.js",
+					"js/md5.js",
+					"fonts/mui.ttf",
+					"css/gloab.css",
+					"images/icon/right.png"
+				],
+				"refer": [
+					"app/userinfo/myfunds.html",
+					"app/userinfo/myRecord.html",
+					"app/userinfo/myding.html",
+					"app/fundspage/funds_buy.html",
+					"app/fundspage/funds_more.html",
+					"app/userinfo/moneyreturn.html",
+					"app/fundspage/fundsbuy_success.html",
+					"app/login.html"
+				],
+				"priority": 0
+			},
+			"app/tools/reg_xieyi.html": {
+				"resources": [
+					"css/mui.css",
+					"js/com.mui.js",
+					"js/mui.pullToRefresh.js",
+					"js/com.data.js",
+					"js/xmui-globalEvent.js",
+					"js/mui.min.js",
+					"js/mui.pullToRefresh.material.js",
+					"js/com.js",
+					"css/swiper.min.css",
+					"css/xmui.pullToRefresh.material.css"
+				],
+				"refer": [],
+				"priority": 0
+			},
+			"app/tools/kefu.html": {
+				"resources": [
+					"js/com.mui.js",
+					"js/mui.pullToRefresh.js",
+					"js/com.data.js",
+					"js/mui.min.js",
+					"js/mui.pullToRefresh.material.js",
+					"js/com.js",
+					"css/mui.css",
+					"js/xmui-globalEvent.js",
+					"css/swiper.min.css",
+					"css/xmui.pullToRefresh.material.css"
+				],
+				"refer": [],
+				"priority": 0
+			},
+			"app/fundspage/funds_dingtou.html": {
+				"resources": [
+					"js/mui.pullToRefresh.js",
+					"js/com.mui.js",
+					"js/mui.picker.js",
+					"js/xmui-globalEvent.js",
+					"js/mui.pullToRefresh.material.js",
+					"js/swiper.min.js",
+					"css/mui.css",
+					"css/mui.picker.css",
+					"js/mui.min.js",
+					"js/com.data.js",
+					"js/mui.poppicker.js",
+					"js/com.js",
+					"css/mui.poppicker.css",
+					"css/xmui.pullToRefresh.material.css",
+					"css/swiper.min.css",
+					"images/icon/right.png",
+					"js/vue.js",
+					"js/jquery.min_1.8.3.js",
+					"js/fundsfunction.js",
+					"js/md5.js"
+				],
+				"refer": [
+					"app/fundspage/fundsbuy_success.html",
+					"app/fundspage/choice_bank.html",
+					"app/tools/reg_question.html"
+				],
+				"priority": 0
+			},
+			"app/userinfo/myding.html": {
+				"resources": [
+					"js/com.mui.js",
+					"js/mui.pullToRefresh.js",
+					"js/com.data.js",
+					"js/xmui-globalEvent.js",
+					"js/mui.min.js",
+					"js/mui.pullToRefresh.material.js",
+					"js/com.js",
+					"css/swiper.min.css",
+					"css/xmui.pullToRefresh.material.css",
+					"js/swiper.min.js",
+					"css/mui.css",
+					"js/vue.js",
+					"js/jquery.min_1.8.3.js",
+					"js/md5.js",
+					"js/fundsfunction.js",
+					"fonts/mui.ttf",
+					"css/gloab.css"
+				],
+				"refer": [
+					"app/userinfo/dinginfo.html",
+					"app/login.html"
+				],
+				"priority": 0
+			},
+			"app/userinfo/dinginfo.html": {
+				"resources": [
+					"js/com.mui.js",
+					"js/mui.pullToRefresh.js",
+					"js/com.data.js",
+					"js/xmui-globalEvent.js",
+					"js/mui.pullToRefresh.material.js",
+					"js/com.js",
+					"css/mui.css",
+					"js/vue.js",
+					"js/jquery.min_1.8.3.js",
+					"js/fundsfunction.js",
+					"js/md5.js",
+					"js/mui.min.js",
+					"css/swiper.min.css",
+					"css/xmui.pullToRefresh.material.css",
+					"fonts/mui.ttf",
+					"css/gloab.css"
+				],
+				"refer": [
+					"app/fundspage/funds_more.html",
+					"app/userinfo/dingchange.html",
+					"app/fundspage/fundsbuy_success.html"
+				],
+				"priority": 0
+			},
+			"app/mycircle/circle_index.html": {
+				"resources": [
+					"js/com.mui.js",
+					"js/mui.pullToRefresh.js",
+					"js/com.data.js",
+					"js/xmui-globalEvent.js",
+					"js/mui.min.js",
+					"js/mui.pullToRefresh.material.js",
+					"js/com.js",
+					"js/swiper.min.js",
+					"css/mui.css",
+					"images/icon/icon_down.png",
+					"css/swiper.min.css",
+					"css/xmui.pullToRefresh.material.css",
+					"images/icon/icon_write.png",
+					"images/icon/userheard.png"
+				],
+				"refer": [
+					"app/mycircle/circle_maininfo.html",
+					"app/mycircle/circle_maininfo2.html",
+					"app/mycircle/circle_send.html"
+				],
+				"priority": 0
+			},
+			"app/mycircle/circle_maininfo.html": {
+				"resources": [
+					"js/com.mui.js",
+					"js/mui.pullToRefresh.js",
+					"js/com.data.js",
+					"js/xmui-globalEvent.js",
+					"js/mui.min.js",
+					"js/mui.pullToRefresh.material.js",
+					"js/com.js",
+					"js/swiper.min.js",
+					"css/mui.css",
+					"js/mui.picker.js",
+					"css/mui.picker.css",
+					"js/mui.poppicker.js",
+					"css/mui.poppicker.css",
+					"css/swiper.min.css",
+					"css/xmui.pullToRefresh.material.css",
+					"images/questionIcon.png",
+					"images/icon/icon-message.png",
+					"images/nomessageimg.png",
+					"fonts/mui.ttf",
+					"css/gloab.css",
+					"images/icon/userheard.png"
+				],
+				"refer": [],
+				"priority": 0
+			},
+			"app/mycircle/circle_maininfo2.html": {
+				"resources": [
+					"js/com.mui.js",
+					"js/mui.pullToRefresh.js",
+					"js/mui.picker.js",
+					"js/com.data.js",
+					"js/xmui-globalEvent.js",
+					"js/mui.min.js",
+					"js/mui.poppicker.js",
+					"js/mui.pullToRefresh.material.js",
+					"js/com.js",
+					"js/swiper.min.js",
+					"css/mui.css",
+					"css/mui.picker.css",
+					"css/xmui.pullToRefresh.material.css",
+					"css/swiper.min.css",
+					"css/mui.poppicker.css",
+					"images/icon/icon-message.png"
+				],
+				"refer": [],
+				"priority": 0
+			},
+			"app/mycircle/circle_send.html": {
+				"resources": [
+					"js/com.mui.js",
+					"js/mui.pullToRefresh.js",
+					"js/mui.picker.js",
+					"js/xmui-globalEvent.js",
+					"js/mui.pullToRefresh.material.js",
+					"js/swiper.min.js",
+					"css/mui.css",
+					"css/mui.picker.css",
+					"js/mui.min.js",
+					"js/com.data.js",
+					"js/mui.poppicker.js",
+					"css/xmui.pullToRefresh.material.css",
+					"css/swiper.min.css",
+					"js/com.js",
+					"css/mui.poppicker.css",
+					"images/icon/icon_voice.png",
+					"images/icon/icon_picture.png",
+					"images/icon/icon_video.png",
+					"js/jquery.min_1.8.3.js",
+					"images/bank_icon/icon_bank_10.png",
+					"js/vue.js"
+				],
+				"refer": [
+					"app/tools/imageview.html"
+				],
+				"priority": 0
+			},
+			"app/tools/imageview.html": {
+				"resources": [
+					"js/com.mui.js",
+					"js/mui.pullToRefresh.js",
+					"js/mui.picker.js",
+					"js/com.data.js",
+					"js/xmui-globalEvent.js",
+					"js/mui.min.js",
+					"js/mui.poppicker.js",
+					"js/mui.pullToRefresh.material.js",
+					"js/com.js",
+					"js/swiper.min.js",
+					"js/jquery.min_1.8.3.js",
+					"css/mui.css",
+					"js/vue.js",
+					"css/mui.picker.css",
+					"css/xmui.pullToRefresh.material.css",
+					"css/swiper.min.css",
+					"css/mui.poppicker.css"
+				],
+				"refer": [],
+				"priority": 0
+			},
+			"app/userinfo/myRecord.html": {
+				"resources": [
+					"js/com.mui.js",
+					"js/mui.pullToRefresh.js",
+					"js/md5.min.js",
+					"js/vue.js",
+					"js/com.data.js",
+					"js/xmui-globalEvent.js",
+					"js/mui.min.js",
+					"js/mui.pullToRefresh.material.js",
+					"js/com.js",
+					"js/swiper.min.js",
+					"js/jquery.min_1.8.3.js",
+					"css/mui.css",
+					"js/fundsfunction.js",
+					"js/md5.js",
+					"css/xmui.pullToRefresh.material.css",
+					"css/swiper.min.css"
+				],
+				"refer": [],
+				"priority": 0
+			},
+			"app/userinfo/dingchange.html": {
+				"resources": [
+					"js/mui.pullToRefresh.js",
+					"js/com.mui.js",
+					"js/mui.picker.js",
+					"js/xmui-globalEvent.js",
+					"js/mui.pullToRefresh.material.js",
+					"js/swiper.min.js",
+					"css/mui.css",
+					"css/mui.picker.css",
+					"js/fundsfunction.js",
+					"js/vue.js",
+					"js/com.data.js",
+					"js/mui.poppicker.js",
+					"js/jquery.min_1.8.3.js",
+					"css/mui.poppicker.css",
+					"js/md5.js",
+					"js/mui.min.js",
+					"js/com.js"
+				],
+				"refer": [
+					"app/login.html"
+				],
+				"priority": 0
+			},
+			"app/mainpage/jijinlist.html": {
+				"resources": [
+					"js/mui.pullToRefresh.js",
+					"js/vue.js",
+					"js/com.data.js",
+					"js/mui.min.js",
+					"js/com.js",
+					"css/swiper.min.css",
+					"css/xmui.pullToRefresh.material.css",
+					"js/swiper.min.js",
+					"js/jquery.min_1.8.3.js",
+					"css/mui.css",
+					"js/md5.js",
+					"js/com.mui.js",
+					"images/icon/icon_funds.png",
+					"images/icon/icon_info.png",
+					"js/xmui-globalEvent.js",
+					"js/mui.pullToRefresh.material.js",
+					"images/icon/icon_ding.png",
+					"images/icon/icon_order.png",
+					"images/icon/icon_danger.png"
+				],
+				"refer": [
+					"app/userinfo/mypwd.html",
+					"app/userinfo/myding.html",
+					"app/userinfo/myfunds.html",
+					"app/userinfo/myorder.html",
+					"app/userinfo/mycard.html",
+					"app/userinfo/myinfo.html",
+					"app/tools/reg_questresult.html",
+					"app/login.html"
+				],
+				"priority": 0
+			},
+			"app/quotepage/about.html": {
+				"resources": [
+					"js/com.mui.js",
+					"js/mui.pullToRefresh.js",
+					"js/mui.pullToRefresh.material.js",
+					"images/icon/icon_danger.png",
+					"js/swiper.min.js",
+					"images/icon/right.png",
+					"images/icon/icon_ding.png",
+					"images/icon/icon_order.png",
+					"css/mui.css",
+					"js/vue.js",
+					"js/com.data.js",
+					"js/mui.min.js",
+					"images/icon/icon_info.png",
+					"images/icon/icon_funds.png",
+					"css/xmui.pullToRefresh.material.css",
+					"css/swiper.min.css",
+					"js/com.js",
+					"images/icon/icon_card.png",
+					"js/jquery.min_1.8.3.js",
+					"js/md5.js"
+				],
+				"refer": [
+					"app/login.html"
+				],
+				"priority": 0
+			},
+			"app/quotepage/hotnews.html": {
+				"resources": [
+					"js/mui.min.js",
+					"css/mui.css",
+					"css/swiper.min.css",
+					"css/xmui.pullToRefresh.material.css"
+				],
+				"refer": [],
+				"priority": 0
+			},
+			"app/quotepage/caijingrili.html": {
+				"resources": [
+					"js/mui.min.js",
+					"css/swiper.min.css",
+					"css/xmui.pullToRefresh.material.css",
+					"css/mui.css"
+				],
+				"refer": [],
+				"priority": 0
+			},
+			"app/userinfo/forgetpwd.html": {
+				"resources": [
+					"css/mui.css",
+					"js/fundsfunction.js",
+					"js/mui.pullToRefresh.js",
+					"js/com.mui.js",
+					"js/xmui-globalEvent.js",
+					"js/mui.pullToRefresh.material.js",
+					"js/swiper.min.js",
+					"js/vue.js",
+					"js/mui.min.js",
+					"js/com.data.js",
+					"css/xmui.pullToRefresh.material.css",
+					"css/swiper.min.css",
+					"js/com.js",
+					"js/jquery.min_1.8.3.js",
+					"js/md5.js"
+				],
+				"refer": [
+					"app/login.html",
+					"app/userinfo/changepwd_success.html"
+				],
+				"priority": 0
+			},
+			"app/tools/bank_card_change.html": {
+				"resources": [
+					"js/data.city.js",
+					"js/com.mui.js",
+					"js/mui.pullToRefresh.js",
+					"js/mui.picker.js",
+					"js/xmui-globalEvent.js",
+					"js/mui.pullToRefresh.material.js",
+					"css/mui.css",
+					"css/mui.picker.css",
+					"js/mui.dtpicker.js",
+					"js/vue.js",
+					"js/mui.min.js",
+					"js/com.data.js",
+					"js/mui.poppicker.js",
+					"css/mui.dtpicker.css",
+					"css/xmui.pullToRefresh.material.css",
+					"css/swiper.min.css",
+					"js/com.js",
+					"js/jquery.min_1.8.3.js",
+					"css/mui.poppicker.css",
+					"js/md5.js"
+				],
+				"refer": [
+					"app/tools/choice_bankcard.html",
+					"app/login.html"
+				],
+				"priority": 0
+			},
+			"app/fundspage/fundslist_self.html": {
+				"resources": [],
+				"refer": [
+					"app/fundspage/funds_more.html",
+					"app/fundspage/funds_self_more.html",
+					"app/login.html"
+				],
+				"priority": 0
+			},
+			"app/fundspage/funds_self_more.html": {
+				"resources": [],
+				"refer": [
+					"app/fundspage/funds_dingtou.html",
+					"app/login.html",
+					"app/fundspage/fundsbuy_success.html"
+				],
+				"priority": 0
+			}
+		},
+		"idle": {
+			"resources": [
+				"css/input-model.css",
+				"js/com.qiniu.js",
+				"js/mui.zoom.js",
+				"app/mecenter/list_auction_detail.html",
+				"app/mecenter/order_detail.html",
+				"js/mui.previewimage.js",
+				"js/mui.js",
+				"js/plupload.full.min.js",
+				"app/mecenter/edit_address.html",
+				"temp.html",
+				"img/home/icon_qi_red.png",
+				"js/mui.lazyload.js",
+				"app/mecenter/list_auction.html",
+				"js/localResizeIMG.js",
+				"img/media_index.png",
+				"js/qiniu.min.js",
+				"js/crypto-js.js",
+				"js/lazyload.js",
+				"css/uploadimg-model.css",
+				"js/mui.lazyload.img.js",
+				"js/jquery.qrcode.min.js",
+				"img/home/icon_you_red.png",
+				"img/icon/icon_save.png",
+				"app/mecenter/list_order.html",
+				"css/mui.previewimage.css"
+			]
+		}
+	},
+	"fullscreen": false
+}

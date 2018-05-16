@@ -1,0 +1,34 @@
+/**********�ϴ�ͼƬʱ�����Ĵ�����ʽ��������קͼƬ���������ȡ��.***********/
+
+/*********����***********/
+/**����localResizeIMG.js�ļ�
+   Ȼ�� localResizeIMG.alert() ��������ô���
+***/
+.img-modal{
+    background-color: rgba(0,0,0,0.7);
+    height: 100%;
+    width: 100%;
+    position: fixed;
+    left: 0px;
+    top: 0px;
+    z-index: 1000;
+    -webkit-backface-visibility: hidden;
+    -webkit-transform-style: preserve-3d;
+    display: none;
+}
+.img-choose{
+    width: 200px;
+    height: 200px;
+    border:1px solid #FFA304;
+    margin: 0 auto;
+    margin-top: 150px;
+    background-color: #fff;
+    position: relative;
+}
+.img-choose img{
+    display: block;
+    width: 100%;
+    position: absolute;
+    left: 0px;
+    top: 0px;
+}

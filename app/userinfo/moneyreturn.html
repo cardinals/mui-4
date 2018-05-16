@@ -1,0 +1,282 @@
+
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <title>首页</title>
+    <meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+    <link href="../../css/mui.css" rel="stylesheet" />
+    <link href="../../css/gloab.css" rel="stylesheet" />
+    <link href="../../css/xmui.pullToRefresh.material.css" rel="stylesheet" />
+    <link href="../../css/swiper.min.css" rel="stylesheet">
+    <style>
+        .swiper-slide{
+            width: 100px;
+        }
+        input[type=radio][name=type-choice]{
+            display: none;
+            opacity: 0;
+        }
+
+        input[type=radio][name=type-choice]+label {
+            font-size: 14px;
+            display: inline-block;
+            width: 100%;
+            text-align: center;
+            line-height: 34px;
+        }
+
+        input[type=radio][name=type-choice]:checked+label {
+            border-bottom: 1px solid #FE7E00;
+            color: #FE7E00;
+        }
+        .bg-title{
+            background-color:#c70321;
+        }
+        .my-swiper{
+            background-color: white;
+            height: 35px;
+        }
+        .cell-ji{
+            text-align: center;
+            background-color: #ffffff;
+        }
+        .cell-ou{
+            text-align: center;
+            background-color: #F9F9F9;
+
+        }
+        
+        .mui-input-group .mui-input-row:after{
+				height: 0px;
+		}
+		input[type='text'],input[type='password']{
+			font-size: 14px;
+		}
+		
+		.can-next{
+			background-color: #FB5C60;
+		}
+		.not-next{
+			background-color: #DDDDDD;
+		}
+    </style>
+</head>
+<body>
+<header class="mui-bar mui-bar-nav bg-title">
+    <a class="mui-action-back mui-icon mui-icon-left-nav mui-pull-left color-white"></a>
+    <h1 class="mui-title color-white titlecolor">基金赎回</h1>
+</header>
+
+<div class="mui-content mui-scroll-wrapper" >
+    <div class="mui-scroll" id="" style="padding-bottom: 50px;">
+    	
+    	<div id="vue-body">
+    	
+	    	<div class="wd100 bg-bai pt10 pb10 mb5">
+	    		<div class="wd90 dis_table">
+	    			<div class="dis_table_row">
+	    				<div class="dis_table_cell textleft" style="font-size: 14px;color:#000000;padding-bottom: 5px;">基金名称</div>
+	    				<div class="dis_table_cell textright" style="font-size: 14px;color:#000000;padding-bottom: 5px;" v-text="fundinfo.fund_name+' '+fundinfo.fund_code"></div>
+	    			</div>
+	    			<!--<div class="dis_table_row">
+	    				<div class="dis_table_cell textleft" style="font-size: 14px;color:#000000;padding-bottom: 5px;">基金份额(份)</div>
+	    				<div class="dis_table_cell textright" style="font-size: 14px;color:#000000;padding-bottom: 5px;">10.00</div>
+	    			</div>-->
+	    			<div class="dis_table_row">
+	    				<div class="dis_table_cell textleft" style="font-size: 14px;color:#000000;">可用份额(份)</div>
+	    				<div class="dis_table_cell textright" style="font-size: 14px;color:#000000;" v-text="fundinfo.enable_shares"></div>
+	    			</div>
+	    		</div>
+	    	</div>
+	    	
+			<form class="mui-input-group">
+				<div class="wd100" style="border-bottom: 1px solid #DDDDDD;">
+					<div class="dis_table wd90">
+				    	<div class="dis_table_cell wd20 textleft">
+				    		选择银行卡
+				    	</div>
+				        <div class="dis_table_cell" style="">
+							<div class="mui-input-row textleft">
+				        		<!--<input type="text" class="mui-input-clear" placeholder="请选择银行卡">-->
+				        			<span id="" style="font-size: 14px;display: inline-block;margin-left: 15px;padding-top: 9px;" v-text="userChoice.bankShow"></span>
+							</div>
+				        </div>
+			    	</div>
+				</div>
+			    <div class="wd100" style="border-bottom: 1px solid #DDDDDD;">
+					<div class="dis_table wd100">
+						<div class="dis_table_cell" style="width: 5%;">
+				    	</div>
+				    	<div class="dis_table_cell  textleft" style="width: 18%;">
+				    		输入份额
+				    	</div>
+				        <div class="dis_table_cell" style="">
+				        	<input type="text" v-model="userChoice.fene" class="mui-input-clear" placeholder="请输入份额">
+				        </div>
+				        <div class="dis_table_cell wd30" style="border-left: 1px solid #DDDDDD;;">
+				        	<input @click="returnAll()" class="mui-btn" type="button" name="send_code" id="send_code" value="全部赎回" style="display: block;width: 100%;height: 100%;background-color: white;color: #999;"/>
+				        </div>
+			    	</div>
+				</div>
+			    <div class="wd100" style="border-bottom: 1px solid #DDDDDD;">
+					<div class="dis_table wd90">
+				    	<div class="dis_table_cell wd20 textleft">
+				    		交易密码
+				    	</div>
+				        <div class="dis_table_cell" style="">
+				        	<div class="mui-input-row">
+				        		<input v-model="userChoice.pwd" type="password" class="mui-input-password" placeholder="请输入交易密码">
+				        	</div>
+				        </div>
+			    	</div>
+				</div>
+			</form>
+			
+			<div class="wd90" style="margin-top: 30px;">
+				<button type="button" :class="nextSwitch?'can-next':'not-next'" id="next_step" style="width: 100%;height: 40px;color: white;border: 0px;">确认</button>
+			</div>
+    	
+    	</div>
+    	
+    </div>
+</div>
+
+
+<script src="../../js/h.min.js"></script>
+		<script src="../../js/mui.min.js"></script>
+		<script src="../../js/immersed.js"></script>
+<script src="../../js/com.js"></script>
+<script src="../../js/xmui-globalEvent.js"></script>
+<script src="../../js/mui.pullToRefresh.js"></script>
+<script src="../../js/mui.pullToRefresh.material.js"></script>
+<script src="../../js/com.js"></script>
+<script src="../../js/swiper.min.js"></script>
+<script src="../../js/com.data.js"></script>
+<script src="../../js/com.mui.js"></script>
+
+<script src="../../js/vue.js"></script>
+<script src="../../js/jquery.min_1.8.3.js"></script>
+<script src="../../js/md5.js"></script>
+<script src="../../js/fundsfunction.js"></script>
+	
+
+<script>
+    mui.ready(function () {
+        mui(".mui-scroll-wrapper").scroll({
+            bounce: true,//是否启用回弹
+            indicators: true,//是否显示滚动条
+            deceleration:  0.0005 //flick 减速系数，系数越大，滚动速度越慢，滚动距离越小，默认值0.0006
+        });
+    });
+    
+    
+    var vue_body = new Vue({
+        el:"#vue-body",
+        data:{
+			fundinfo:{},
+			userChoice:{
+				bankShow:"请选择银行卡",
+				banNo:"",
+				bankNum:"",
+                bankName:"",
+				fene:"",
+				pwd:"",
+                trade_acco:""
+			},
+			nextSwitch:false
+        },
+        methods:{
+            returnAll:function(){
+            	this.userChoice.fene = this.fundinfo.enable_shares
+            },
+            checkNext:function(){
+            	if(this.userChoice.banNo!=""&&this.userChoice.fene!=""&&this.userChoice.pwd!=""){
+            		this.nextSwitch = true;
+            	}else{
+            		this.nextSwitch = false;
+            	}
+            }
+        },
+        watch:{
+            'userChoice.banNo':function(nval,oval){
+				this.checkNext();
+            },
+            'userChoice.fene':function(nval,oval){
+				this.checkNext();
+            },
+            'userChoice.pwd':function(nval,oval){
+				this.checkNext();
+            },
+        },
+        mounted:function(){
+
+        }
+
+    });
+    
+    mui.plusReady(function(){
+    	
+		vue_body.fundinfo = com.plus.getCurrWebview().self.fundinfo;
+		
+//      	console.log(JSON.stringify(vue_body.fundinfo))
+//        alert(JSON.stringify(vue_body.fundinfo.trade_acco));
+//        alert(JSON.stringify(vue_body.fundinfo.bank_no));
+
+        vue_body.userChoice.banNo = vue_body.fundinfo.bank_no;
+        vue_body.userChoice.bankNum = vue_body.fundinfo.bank_no;
+        vue_body.userChoice.bankName = getBankName(vue_body.fundinfo.bank_no);
+        vue_body.userChoice.bankShow = getBankName(vue_body.fundinfo.bank_no)+"("+vue_body.fundinfo.bank_account.substring(vue_body.fundinfo.bank_account.length-4)+")";
+        vue_body.userChoice.trade_acco = vue_body.fundinfo.trade_acco;
+
+
+        mui('body').on('tap', '#next_step', function (){
+			  console.log(JSON.stringify(vue_body.fundinfo));
+//            alert(vue_body.fundinfo.share_type);
+              if(vue_body.nextSwitch){
+                  com.data.funds.doMoneyReturn({
+                      fund_code:vue_body.fundinfo.fund_code,
+                      share_type:vue_body.fundinfo.share_type,
+                      trade_acco:vue_body.fundinfo.trade_acco,
+                      shares:vue_body.userChoice.fene,
+                      bank_no:vue_body.fundinfo.bank_no,
+                      password:vue_body.userChoice.pwd,
+				  },(data)=>{
+                      mui.ge.fireEvent("returnFundSuccess", {}, function (args){
+                          mui.back();
+                      });
+                  });
+//                  mui.ge.fireEvent("returnFundSuccess", {}, function (args) {
+//                      mui.back();
+//                  });
+			  }
+        });
+        
+        
+        mui('body').on('tap', '#bankcard_choice', function (){
+          com.plus.openWindowX('../fundspage/choice_bank.html', {
+          	listenType:"moneyReturn"
+          });
+        });
+        
+        
+
+        mui.ge.addListener("choiceCardReturn", function(args){
+            var card_no = args.detail.card_no;
+            var card_name = args.detail.card_name;
+            var card_num = args.detail.card_num;
+            var trade_acco = args.detail.trade_acco;
+            vue_body.userChoice.banNo = card_no;
+            vue_body.userChoice.bankNum = card_name;
+            vue_body.userChoice.bankName = card_num;
+            vue_body.userChoice.bankShow = card_name+"("+card_num+")";
+            vue_body.userChoice.trade_acco = trade_acco;
+            mui.ge.callback(args, {})
+        });
+        
+    })
+</script>
+</body>
+
+</html>

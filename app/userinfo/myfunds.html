@@ -1,0 +1,408 @@
+
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <title>首页</title>
+    <meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+    <link href="../../css/mui.css" rel="stylesheet" />
+    <link href="../../css/gloab.css" rel="stylesheet" />
+    <link href="../../css/xmui.pullToRefresh.material.css" rel="stylesheet" />
+    <link href="../../css/swiper.min.css" rel="stylesheet">
+    <style>
+        .bg-title{
+            background-color:#c70321;
+        }
+                #sliderIndicator .mui-control-item.mui-active {
+            border-bottom: 2px solid #F75D60 !important;
+        }
+        .btm-input{
+			display: inline-block;
+			width: 100%;
+			height: 50px;
+
+		}
+		.mui-pull-bottom-tips {
+			display: none !important;
+		}
+    </style>
+
+</head>
+<body>
+<header class="mui-bar mui-bar-nav bg-title">
+    <a class="mui-action-back mui-icon mui-icon-left-nav mui-pull-left color-white"></a>
+    <h1 class="mui-title color-white titlecolor">我的基金</h1>
+    <!--<a class="mui-icon mui-icon-right-nav mui-pull-right color-white" style="font-size: 14px;line-height: 25px;">交易查询</a>-->
+    
+</header>
+
+<div class="mui-content" >
+	<div class="bg-bai textcenter" style="padding-top: 30px;padding-bottom: 30px;border-bottom: 1px solid #ddd;">
+		<div style="color: #999;font-weight:bold;font-size: 16px;">基金总市值(元)</div>
+		<div id="sum—money"  style="font-size: 46px;color: #F75D60;height: 69px;" v-text="summoney">0</div>
+
+	</div>
+	
+	<div class="mui-slider mui-fullscreen" style="margin-top: 154px;">
+        <div id="sliderIndicator"
+             class="bg-bai mui-slider-indicator mui-segmented-control mui-segmented-control-inverted">
+            <a class="mui-control-item mui-active" href="#bill_now">
+                当前持有
+            </a>
+            <a class="mui-control-item" href="#bill_1">
+                待持有
+            </a>
+            <a class="mui-control-item" href="#bill_2">
+               待赎回
+            </a>
+            <a class="mui-control-item" id="my-record-btn">
+               交易记录
+            </a>
+            <!--<a class="mui-control-item" href="#bill_3">
+               申请确认
+            </a>-->
+        </div>
+        <div class="mui-slider-group">
+            <div id="bill_now" class="mui-slider-item mui-control-content mui-active">
+                <div class="mui-scroll-wrapper">
+                    <div class="mui-scroll" id="nowtrade" style="padding-bottom: 50px;">
+						<div id="vue-body1">
+							<template v-if="(fundslist==null||fundslist.length==0)&&isLoad==1">
+								<div style="text-align: center;font-size: 16px;margin-top: 30px;">
+									- - 暂未查到相关信息 - -
+								</div>
+							</template>
+							<!--单个带持有div start-->
+							<div  v-for="(item,index) in fundslist" >
+
+								<div class="wd100 bg-bai funds-list" :index="index" style="margin-top: 3px;margin-bottom: 5px;">
+									<div class="wd90 " style="padding: 8px 0px;">
+										<span class=" " style="font-size: 14px;color: #000000;" v-text="fundslist[index].fund_name"></span>
+										<span class=" " style="display: inline-block;margin-left: 5px;color: #999999;" v-text="fundslist[index].fund_code"></span>
+										<template v-if="fundslist[index].scheduled_protocol_id!=null&&fundslist[index].scheduled_protocol_id!=''">
+											<span v-if="fundslist[index].fund_status==0" class="" style="float: right;font-size: 14px;vertical-align: middle;display: inline-block;color: #F75D60;">定投<img src="../../images/icon/right.png" style="width: 20px;height: 20px;vertical-align:middle;" /></span>
+										</template>
+									</div>
+									<!--<hr style="-webkit-transform:scaleY(.5); height: 0px;"/>-->
+									<div style="-webkit-transform:scaleY(.5);border-bottom: 1px solid #DDDDDD;"></div>
+									<div class="wd90 pt10 pb10">
+										<div class="dis_table wd100">
+											<div class="dis_table_row">
+												<div class="dis_table_cell textleft" style="color: #999999;">参考市值</div>
+												<div class="dis_table_cell" style="color: #999999;">可用份额</div>
+												<div class="dis_table_cell textright" style="color: #999999;padding-bottom: 8px;">持有份额</div>
+											</div>
+											<div class="dis_table_row">
+												<div class="dis_table_cell textleft" style="color:#FB5C5F;font-size: 14px;" v-text="fundslist[index].total_income"></div>
+												<div class="dis_table_cell" style="color: #000000;font-size: 14px;" v-text="fundslist[index].enable_shares"></div>
+												<div class="dis_table_cell textright" style="color:#000000;font-size: 14px;" v-text="fundslist[index].current_share"></div>
+											</div>
+										</div>
+									</div>
+								</div>
+
+							</div>
+
+							<!--单个带持有div end-->
+						</div>
+                    </div>
+                </div>
+            </div>
+
+            <div id="bill_1" class="mui-slider-item mui-control-content">
+                <div class="mui-scroll-wrapper">
+                    <div class="mui-scroll" id="waittrade" style="padding-bottom: 50px;">
+
+						<div id="vue-body2">
+							<template v-if="(fundslist==null||fundslist.length==0)&&isLoad==1">
+								<div style="text-align: center;font-size: 16px;margin-top: 30px;">
+									- - 暂未查到相关信息 - -
+								</div>
+							</template>
+							<!--单个div start-->
+							<div v-for="(item,index) in fundslist" class="wd100 bg-bai pt10 pb10 mb5" style="margin-top: 3px;">
+								<div class="dis_table wd90">
+									<div class="dis_table_row">
+										<div class="dis_table_cell textleft wd80" style="font-size: 14px;color:#000000;padding-bottom: 5px;" v-text="fundslist[index].fund_name+'('+fundslist[index].fund_code+')'"></div>
+										<div class="dis_table_cell textright" style="color: #999999;" v-text="fundslist[index].balance+'元'"></div>
+									</div>
+									<div class="dis_table_row">
+										<div class="dis_table_cell textleft" style="color: #999999;" ><span style="line-height: 30px" v-text="getDateFromat(fundslist[index].apply_date)"></span><span style="display: inline-block;background: #FC5B61;color:white;font-size: 10px;padding: 0px 3px;margin-left: 5px;position: relative;top: -2px;" v-text="getBusinName(fundslist[index].fund_busin_code)"></span></div>
+										<div class="dis_table_cell textright" style="color: #E86464;" v-text="getConfirmName(fundslist[index].taconfirm_flag)"></div>
+									</div>
+								</div>
+							</div>
+							<!--单个div end-->
+
+						</div>
+
+                    </div>
+                </div>
+            </div>
+
+            <div id="bill_2" class="mui-slider-item mui-control-content">
+                <div class="mui-scroll-wrapper">
+                    <div class="mui-scroll" id="waitreturn" style="padding-bottom: 50px;">
+
+						<div id="vue-body3">
+							<template v-if="(fundslist==null||fundslist.length==0)&&isLoad==1">
+								<div style="text-align: center;font-size:16px;margin-top: 30px;">
+									- - 暂未查到相关信息 - -
+								</div>
+							</template>
+							<!--单个div start-->
+							<div v-for="(item,index) in fundslist" class="wd100 bg-bai pt10 pb10 mb5" style="margin-top: 3px;">
+								<div class="dis_table wd90">
+									<div class="dis_table_row">
+										<div class="dis_table_cell textleft wd80" style="font-size: 14px;color:#000000;padding-bottom: 5px;" v-text="fundslist[index].fund_name+'('+fundslist[index].fund_code+')'"></div>
+										<div class="dis_table_cell textright" style="color: #999999;" v-text="fundslist[index].balance+''"></div>
+									</div>
+									<div class="dis_table_row">
+										<div class="dis_table_cell textleft" style="color: #999999;"><span style="line-height: 30px" v-text="getDateFromat(fundslist[index].apply_date)"></span><span style="display: inline-block;background: #FC5B61;color:white;font-size: 10px;padding: 0px 3px;margin-left: 5px;position: relative;top: -2px;" v-text="getBusinName(fundslist[index].fund_busin_code)"></span></div>
+										<div class="dis_table_cell textright" style="color: #999999;" v-text="getConfirmName(fundslist[index].taconfirm_flag)"></div>
+									</div>
+								</div>
+							</div>
+							<!--单个div end-->
+
+						</div>
+
+                    </div>
+                </div>
+            </div>
+            <!--<div id="bill_3" class="mui-slider-item mui-control-content">-->
+                <!--<div class="mui-scroll-wrapper" style="">-->
+                    <!--<div class="mui-scroll" id="applytrade" style="padding-bottom: 50px;">-->
+
+						<!--<div id="vue-body4">-->
+
+							<!--&lt;!&ndash;单个div&ndash;&gt;-->
+							<!--<div class="wd100 bg-bai pt10 pb10 mb5 funds-list" style="margin-top: 3px;">-->
+								<!--<div class="dis_table wd90">-->
+									<!--<div class="dis_table_row">-->
+										<!--<div class="dis_table_cell textleft wd80" style="font-size: 14px;color:#000000;padding-bottom: 5px;" v-text="fundslist[index].fund_name"></div>-->
+										<!--<div class="dis_table_cell textright" style="color: #999999;">-10.00份</div>-->
+									<!--</div>-->
+									<!--<div class="dis_table_row">-->
+										<!--<div class="dis_table_cell textleft" style="color: #999999;">2017-09-07 16:21:29 <span style="display: inline-block;background: #FC5B61;color:white;font-size: 10px;padding: 0px 3px;margin-left: 5px;">申购</span></div>-->
+										<!--<div class="dis_table_cell textright" style="color: #999999;">待确认</div>-->
+									<!--</div>-->
+								<!--</div>-->
+							<!--</div>-->
+							<!--&lt;!&ndash;单个div end&ndash;&gt;-->
+
+						<!--</div>-->
+
+
+
+                    <!--</div>-->
+                <!--</div>-->
+            <!--</div>-->
+        </div>
+    </div>
+	<!--底部按钮 start-->
+	<div class="bg-bai wd100 fixed bottom0 z997" style="border-top: 1px solid #EEEEEE;">
+		<div class="dis_table wd100">
+			<!--<div class="dis_table_cell">
+				<input class="btm-input"  type="button" name="tou" id="tou" value="我的定投" style="background-color:white ;color:#FB5B5E ;font-size: 16px;border: 0px;border-right: 1px solid #EEEEEE;"/>
+			</div>-->
+			<div class="dis_table_cell">
+				<input class="btm-input"  type="button" name="order" id="order" value="查看更多产品" style="background-color: white;color: #FB5B5E;font-size: 16px;border: 0px;"/>
+			</div>
+		</div>
+	</div>
+	<!--底部按钮 end-->
+</div>
+
+
+<script src="../../js/h.min.js"></script>
+		<script src="../../js/mui.min.js"></script>
+		<script src="../../js/immersed.js"></script>
+<script src="../../js/com.js"></script>
+<script src="../../js/xmui-globalEvent.js"></script>
+<script src="../../js/mui.pullToRefresh.js"></script>
+<script src="../../js/mui.pullToRefresh.material.js"></script>
+<script src="../../js/com.js"></script>
+<script src="../../js/swiper.min.js"></script>
+<script src="../../js/com.data.js"></script>
+<script src="../../js/com.mui.js"></script>
+
+<script src="../../js/vue.js"></script>
+<script src="../../js/jquery.min_1.8.3.js"></script>
+<script src="../../js/md5.js"></script>
+<script src="../../js/fundsfunction.js"></script>
+
+<script>
+    mui.ready(function (){
+        mui(".mui-scroll-wrapper").scroll({
+            bounce: true,//是否启用回弹
+            indicators: true,//是否显示滚动条
+            deceleration:  0.0005 //flick 减速系数，系数越大，滚动速度越慢，滚动距离越小，默认值0.0006
+        });
+    });
+
+    mui.plusReady(function(){
+        var flag = [0,0,0,0];
+        var scroll = new Array();
+
+    	var vue_sum = new Vue({
+    		el:"#sum—money",
+    		data:{
+    			summoney:""
+    		},
+    		methods:{
+                getConfirmName:function (confirm_flag) {
+					return getConfirmName(confirm_flag);
+                },
+			},
+    		mounted:function () {
+//    			var this_ = this;
+//    			com.data.funds.getMyFundsSum({},function(data){
+////  				alert(JSON.stringify(JSON.stringify(data.result_map.total_income)));
+////					alert(data.result_map.total_income);
+//					this_.summoney = data.result_map.total_income;
+//    			});
+    		}
+
+    	});
+        var vue_body1= new Vue({
+            el:"#vue-body1",
+            data:{
+                fundslist:[],
+				isLoad:0,
+            },
+            methods:{
+
+            },
+            mounted: function(){}
+        });
+
+        var vue_body2= new  Vue({
+            el:"#vue-body2",
+            data:{
+                fundslist:[],
+                isLoad:0,
+            },
+            methods:{
+				getDateFromat:function(date){
+                    return getDateFromat(date);
+				},
+                getConfirmName:function (confirm_flag) {
+                    return getConfirmName(confirm_flag);
+                },
+                getBusinName:function (data) {
+					return getBusinName(data);
+                },
+            },
+            mounted: function() {
+
+			}
+        });
+
+        var vue_body3= new  Vue({
+            el:"#vue-body3",
+            data:{
+                fundslist:[],
+                isLoad:0,
+            },
+            methods:{
+                getDateFromat:function(date){
+                    return getDateFromat(date);
+                },
+                getConfirmName:function (confirm_flag) {
+                    return getConfirmName(confirm_flag);
+                },
+				getBusinName:function (data){
+                    return getBusinName(data);
+                },
+
+            },
+            mounted: function(){
+
+			}
+        });
+
+
+
+        scroll[0] = new com.mui.muiScroll(
+            document.querySelector("#nowtrade")
+            , function (index, size, do_success, do_error) {
+                com.data.funds.fundMyNow({},function(data){
+                    vue_body1.fundslist = data.result_list;
+                    vue_body1.isLoad = 1;
+
+                    com.data.funds.getMyFundsSum({},function(data){
+                        vue_sum.summoney = data.result_map.total_income;
+                    });
+
+                })
+                do_success(0);
+            }
+        )
+        scroll[0].refresh();
+        scroll[1] = new com.mui.muiScroll(
+            document.querySelector("#waittrade")
+            , function (index, size, do_success, do_error) {
+                com.data.funds.fundMyHolding({},function(data){
+
+                    vue_body2.fundslist = data.result_list;
+                    vue_body2.isLoad = 1;
+                })
+                do_success(0);
+            }
+        )
+        scroll[2] = new com.mui.muiScroll(
+            document.querySelector("#waitreturn")
+            , function (index, size, do_success, do_error){
+                com.data.funds.fundMyRedeem({},function(data){
+                    vue_body3.fundslist = data.result_list;
+                    vue_body3.isLoad = 1;
+                })
+                do_success(0);
+            }
+        )
+//        scroll[3] = new com.mui.muiScroll(
+//            document.querySelector("#applytrade")
+//            , function (index, size, do_success, do_error){
+//                com.data.funds.fundMyApply({},function(data){
+//                    vue_body4.fundslist = data.result_list;
+//                    var length = JSON.stringify(data.result_list).length;
+////                  console.log(JSON.stringify(data.result_list).substring(0,length/2))
+////                  console.log(JSON.stringify(data.result_list).substring(length/2,length))
+//					alert(JSON.stringify(data.result_list))
+//                })
+//                do_success(0);
+//            }
+//        )
+        document.querySelector('.mui-slider').addEventListener('slide', function (event) {
+            num=event.detail.slideNumber;
+            if(flag[num]==0){
+                scroll[num].refresh();
+            }
+        });
+		mui('body').on('tap', '.money-return', function(){
+	        com.plus.openWindowX('moneyreturn.html',{
+	        });
+	    });
+	    mui('body').on('tap', '.funds-list', function(){
+	        var index = this.getAttribute("index");
+	        var fundinfo = vue_body1.fundslist[index];
+	        com.plus.openWindowX('fundsinfo.html',{
+	            fundinfo:vue_body1.fundslist[index]
+			});
+	    });
+	    mui('body').on('tap', '#order', function(){
+	        com.plus.openWindowX('../fundspage/fundslist_public.html',{
+	        	index: true
+	        });
+	    });
+	    
+	    mui('body').on('tap', "#my-record-btn",function(){
+	    	com.plus.openWindowX('./myRecord.html',{});
+	    })
+    })
+</script>
+</body>
+
+</html>

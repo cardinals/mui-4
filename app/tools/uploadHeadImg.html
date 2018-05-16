@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>图片裁剪</title>
+    <meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+    <link href="../../css/mui.css" rel="stylesheet" />
+    <link href="../../css/gloab.css" rel="stylesheet" />
+    <link href="../../css/cropper.css" rel="stylesheet">
+    <style>
+        img {
+            max-width: 100%; /* This rule is very important, please do not ignore this! */
+        }
+        /*
+            图片居中
+        */
+        .middle-demo-3{
+            display: table-cell;
+            vertical-align: middle;
+        }
+        .mui-bar{
+        	background-color: #c70321;
+        }
+    </style>
+</head>
+<body>
+<header class="mui-bar mui-bar-nav bg-red">
+    <a class="mui-action-back mui-icon mui-icon-left-nav mui-pull-left color-white"></a>
+    <h1 class="mui-title color-white">裁剪头像</h1>
+    <button class="mui-btn mui-btn-link mui-pull-right" id="tap_ok" style="color: #fff">确定</button >
+</header>
+<div class="mui-content mui-fullscreen middle-demo-3">
+    <img src="" id="main_img" >
+</div>
+<script src="../../js/h.min.js"></script>
+		<script src="../../js/mui.min.js"></script>
+		<script src="../../js/immersed.js"></script>
+<script src="../../js/jquery.min_1.8.3.js"></script>
+<script src="../../js/cropper.js"></script>
+<script src="../../js/xmui-globalEvent.js"></script>
+<script src="../../js/com.js"></script>
+<script src="../../js/com.data.js"></script>
+<script>
+    var clipImageOptions={};
+    mui.ready(function(){
+        mui.init();
+    });
+    var currwebview=null;
+    //开始压缩
+    var local_image_url = '_downloads/ziphead.jpg'; // 缓存本地图片url
+    mui.plusReady(function(){
+        currwebview=com.plus.getCurrWebview();
+        //获取加载的图片
+        var path_=currwebview.self.path;
+        $("#main_img").attr("src",path_);
+        $('#main_img').cropper({
+            aspectRatio: 1/1,
+            crop: function(e) {
+                clipImageOptions.top= e.y;
+                clipImageOptions.left= e.x;
+                clipImageOptions.width= e.width;
+                clipImageOptions.height= e.height;
+            }
+        });
+
+        document.querySelector("#tap_ok").addEventListener("tap",function(){
+            if(clipImageOptions.top<0
+                    ||clipImageOptions.left<0
+                    ||clipImageOptions.width<0
+                    ||clipImageOptions.height<0){
+                mui.toast('截屏框超出区域');
+                return;
+            }
+            //对图片进行裁剪
+            plus.zip.compressImage(
+                    {
+                        src: path_, //也就是本地路径
+                        dst:local_image_url,
+                        overwrite: true,
+                        clip: clipImageOptions
+                    },
+                    function(e) {
+                        resizeImage(e.target); //压缩图片
+                    }
+            );
+        });
+    });
+
+    //再对图片进行压缩为270*270，再上传到服务器
+    function resizeImage(src) {
+        plus.zip.compressImage(
+                {
+                    src: src,
+                    dst: local_image_url,
+                    overwrite: true,
+                    width: '270px', //这里指定了宽度，同样
+                    format: 'jpg',
+                    quality: 100  //图片质量不再修改，以免失真
+                },
+                function(e) {
+                    com.plus.qiniu.upload(e.target,0,function(url_,key,bucket){
+                        mui.ge.fireEvent("uploadHeadImgOver", {
+                            url: url_
+                        }, function(args) {
+                            mui.back();
+                        },currwebview.getPreid());
+                    },function(){
+                        $("#tap_ok").removeAttr("disabled");
+                    });
+                },
+                function(err) {
+                    $("#tap_ok").removeAttr("disabled");
+                    mui.alert("未知错误");
+                    mui.back();
+                }
+        );
+    }
+
+</script>
+</body>
+
+</html>

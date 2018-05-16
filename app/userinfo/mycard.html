@@ -1,0 +1,228 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="UTF-8">
+		<title>首页</title>
+		<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+		<link href="../../css/mui.css" rel="stylesheet" />
+		<link href="../../css/gloab.css" rel="stylesheet" />
+		<link href="../../css/xmui.pullToRefresh.material.css" rel="stylesheet" />
+		<link href="../../css/swiper.min.css" rel="stylesheet">
+		<style>
+			.swiper-slide {
+				width: 100px;
+			}
+			
+			input[type=radio][name=type-choice] {
+				display: none;
+				opacity: 0;
+			}
+			
+			input[type=radio][name=type-choice]+label {
+				font-size: 14px;
+				display: inline-block;
+				width: 100%;
+				text-align: center;
+				line-height: 34px;
+			}
+			
+			input[type=radio][name=type-choice]:checked+label {
+				border-bottom: 1px solid #FE7E00;
+				color: #FE7E00;
+			}
+			
+			.bg-title {
+				background-color: #c70321;
+			}
+			
+			.my-swiper {
+				background-color: white;
+				height: 35px;
+			}
+			
+			.cell-ji {
+				text-align: center;
+				background-color: #ffffff;
+			}
+			
+			.cell-ou {
+				text-align: center;
+				background-color: #F9F9F9;
+			}
+			
+		
+			.add-bank-card {
+				transition: background-color .2s!important
+			}
+			
+			.add-bank-card:active {
+				background-color: #EEEEEE!important;
+			}
+			
+			.mui-pull-bottom-tips {
+				display: none !important;
+			}
+		</style>
+
+	</head>
+
+	<body>
+		<header class="mui-bar mui-bar-nav bg-title">
+			<a class="mui-action-back mui-icon mui-icon-left-nav mui-pull-left color-white"></a>
+			<h1 class="mui-title color-white titlecolor">银行卡管理</h1>
+			<!--<a class="mui-icon mui-icon-right-nav mui-pull-right color-white add-bank-card" style="font-size: 28px;">+</a>-->
+		</header>
+
+		<div class="mui-content mui-scroll-wrapper">
+			<div class="mui-scroll" id="station-list-mycard" style="padding-bottom: 50px;">
+				<div>
+					<!--单个银行卡 div start-->
+					<div v-for="(item2,index2) in cardList" class="bg-bai wd100 mb5">
+						<div class="dis_table wd90">
+							<div class="dis_table_cell" style="width: 15%;text-align: left;">
+								<img :src="getBankImg(cardList[index2].bank_no)" alt="" width="35" height="35" />
+							</div>
+							<div class="dis_table_cell" style="text-align: left;padding-top: 15px;padding-bottom: 15px;">
+								<div style="font-size: 16px;" v-text="getBankName(cardList[index2].bank_no)"></div>
+								<div style="color: #666;" v-text="'尾号'+cutBankNo(cardList[index2].bank_account)+' '+cardList[index2].bank_account_name"></div>
+							</div>
+							<div class="dis_table_cell textright" style="width: 30%">
+								<img class="img_change" :bank_name="getBankName(cardList[index2].bank_no)" :trade_acco="cardList[index2].trade_acco" :bank_no="cardList[index2].bank_no"  style="position: relative;width: 25px;height: 25px;left: -10px;" src="../../images/icon/icon_changecard.png">
+
+								<div style="" class="inline-block">
+									<!--<input type="button" @click="delBankCard(,)" name="btn_delete" value="删除" style="border: 1px solid #FE7E01;color: #FE7E01;border-radius: 20px;font-size: 12px;"/>-->
+									<template v-if="cardList.length>1">
+										<img class="img_delete" :bank_name="getBankName(cardList[index2].bank_no)" :trade_acco="cardList[index2].trade_acco" :bank_no="cardList[index2].bank_no" src="../../images/icon/icon_stop.png" style="width: 25px;height: 25px;position: relative;" />
+									</template>
+								</div>
+							</div>
+						</div>
+					</div>
+					<!--单个银行卡 div end-->
+
+					<div class="bg-bai add-bank-card" style="text-align: center;padding-top: 15px;padding-bottom: 15px;font-size: 16px;margin-top: 20px;">
+						+银行卡
+					</div>
+					<div style="padding: 20px">
+						<div>
+							1、在途和已持有基金的银行卡不能删卡、换卡操作。
+						</div>
+						<div>
+							2、新增银行卡在T+2日后可以进行删卡、换卡操作。
+						</div>
+					</div>
+
+				</div>
+
+			</div>
+		</div>
+		<script src="../../js/h.min.js"></script>
+		<script src="../../js/mui.min.js"></script>
+		<script src="../../js/immersed.js"></script>
+		<script src="../../js/com.js"></script>
+		<script src="../../js/xmui-globalEvent.js"></script>
+		<script src="../../js/mui.pullToRefresh.js"></script>
+		<script src="../../js/mui.pullToRefresh.material.js"></script>
+		<script src="../../js/com.js"></script>
+		<script src="../../js/swiper.min.js"></script>
+		<script src="../../js/com.data.js"></script>
+		<script src="../../js/com.mui.js"></script>
+		<script src="../../js/vue.js"></script>
+		<script src="../../js/jquery.min_1.8.3.js"></script>
+		<script src="../../js/md5.js"></script>
+		<script src="../../js/fundsfunction.js"></script>
+		<script>
+			mui.ready(function() {
+				mui(".mui-scroll-wrapper").scroll({
+					bounce: true, //是否启用回弹
+					indicators: true, //是否显示滚动条
+					deceleration: 0.0005 //flick 减速系数，系数越大，滚动速度越慢，滚动距离越小，默认值0.0006
+				});
+			});
+			mui.plusReady(function(){
+				var vue_body = new Vue({
+					el: "#station-list-mycard",
+					data: {
+						cardList: []
+					},
+					methods: {
+						getBankImg: function(cardNo) {
+							return getBankImg(cardNo)
+						},
+						getBankName: function(cardNo) {
+							return getBankName(cardNo);
+						},
+						cutBankNo: function(bankNo) {
+							return bankNo.substring(bankNo.length - 4);
+						},
+						delBankCard: function(bankname, bankno) {
+		//				    alert(bankname);
+						}
+					},
+					mounted: function() {
+
+					}
+				});
+				var scroll = new com.mui.muiScroll(
+					document.querySelector("#station-list-mycard"),
+					function(index, size, do_success, do_error) {
+						com.data.user.showMyCard({}, function(data){
+							vue_body.cardList = data.result_list;
+							do_success(0);
+						})
+					}
+				)
+				scroll.refresh();
+                mui('body').on('tap', '.img_change', function(){
+                    var bank_no = this.getAttribute("bank_no");
+                    var bank_name = this.getAttribute("bank_name");
+                    var trade_acco = this.getAttribute("trade_acco");
+
+                    com.plus.openWindowX('../tools/bank_card_change.html',{
+                        bank_no:bank_no,
+                        bank_name:bank_name,
+                        trade_acco:trade_acco,
+                    });
+                });
+
+
+
+				mui('body').on('tap', '.add-bank-card', function(){
+					com.plus.openWindowX('../tools/bank_card_add.html',{
+					    isalone:true,
+						hasCardNum:vue_body.cardList.length
+					});
+				});
+				mui('body').on('tap', '.img_delete', function() {
+					mui.confirm("", '确认删除吗？', null, e => {
+						if(e.index == 1) {
+							let bankname = this.getAttribute('bank_name');
+							let bankno = this.getAttribute('bank_no');
+							let trade_acco = this.getAttribute('trade_acco')
+							com.data.user.delMyCard({
+                                bank_name: encodeURIComponent(encodeURIComponent(bankname)),
+                                trade_acco: trade_acco,
+								bank_no: bankno
+							}, data => {
+								scroll.refresh();
+							})
+						}
+					}, 'div');
+				});
+                mui.ge.addListener("openbanksuccess", function(args){
+                    com.plus.openWindowX('../tools/addbank_success.html',{
+                        isalone:true
+                    });
+                    mui.ge.callback(args, {})
+                });
+                mui.ge.addListener("addbanksuccess", function(args){
+                    scroll.refresh();
+                    mui.ge.callback(args,{})
+                });
+
+			})
+		</script>
+	</body>
+
+</html>

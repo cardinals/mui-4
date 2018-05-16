@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>关于我们</title>
+    <meta name="viewport"
+          content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no"/>
+    <link href="../css/mui.css" rel="stylesheet"/>
+    <link href="../css/gloab.css" rel="stylesheet"/>
+    <link href="../css/xmui.pullToRefresh.material.css">
+</head>
+<style type="text/css">
+	.mui-bar{
+            background-color:#c70321;
+        }
+</style>
+<body class="bg-bai">
+<header class="mui-bar mui-bar-nav bg-red">
+    <a class="mui-action-back mui-icon mui-icon-left-nav mui-pull-left color-white"></a>
+    <h1 class="mui-title color-white">关于我们</h1>
+</header>
+<div class="mui-content bg-bai">
+    <div class="marginAuto textcenter " style="width: 108px;margin-top: 25px">
+        <img src="../img/wallet/logo108.png" class="block" height="108" width="108"/>
+        <div id="version"></div>
+    </div>
+    <div class="splitborder mt15"></div>
+    <!--<div class="wd90">
+        <div class="titlecolor mt10 mb5 ft16">山西车易加新能源科技有限公司</div>
+        <div class="contextcolor ft12">
+            异辛烷、焦油、重烃、丙烷、丁烯、液化天然气、混合液化石油天然气、燃料油、丁烷、丙烯、石脑油；煤制品、焦炭、钢材、建筑材料、金属制品、五金产品、矿山机械设备及零配件、专用机械设备及零配件；润滑油、塑料制品批零；计算机信息系统集成服务
+        </div>
+    </div>-->
+    <div class="wd94 pb10 pt10 brd10 mt15 borderall border-color-red">
+        <div class="wd90 dis_table">
+            <div class="dis_table_row"  style="height: 25px;">
+                <div class="dis_table_cell vertical-top textleft titlecolor" style="width: 70px;">
+                    公司名称：
+                </div>
+                <div class="color-red dis_table_cell vertical-top textleft">山西车易加新能源科技有限公司</div>
+            </div>
+            <div class="dis_table_row"  style="height: 25px;">
+                <div class="dis_table_cell vertical-top textleft titlecolor" style="width: 70px;">
+                    联系电话：
+                </div>
+                <div class="color-red dis_table_cell vertical-top textleft">0357-5600678,0357-5601678</div>
+            </div>
+            <div class="dis_table_row"  style="height: 25px;">
+                <div class="dis_table_cell vertical-top textleft titlecolor">
+                    Email：
+                </div>
+                <div class="color-red dis_table_cell vertical-top textleft">3319196679@qq.com</div>
+            </div>
+            <div class="dis_table_row"  style="height: 25px;">
+                <div class="dis_table_cell vertical-top textleft titlecolor">
+                    联系地址：
+                </div>
+                <div class="color-red dis_table_cell vertical-top textleft">山西省霍州市开元街开元盛典A2楼1003号（阳光华府东楼）</div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script id="temp_data" type="text/x-dot-template">
+
+
+    <span class="inline-block marginAuto ft16 mt5 mb15" style="">车易加 {{= it}}</span>
+
+
+
+</script>
+<script src="../js/h.min.js"></script>
+<script src="../js/mui.min.js"></script>
+<script src="../js/immersed.js"></script>
+<script src="../js/jquery.min_1.8.3.js"></script>
+<script src="../js/com.js"></script>
+<script src="../js/doT.min.js"></script>
+<script src="../js/com.data.js"></script>
+<script>
+
+    mui.ready(function () {
+
+
+    });
+    mui.plusReady(function () {
+        var ov_ = plus.runtime.version;
+        document.querySelector("#version").innerHTML = com.doT.get("temp_data", ov_);
+    })
+
+
+
+</script>
+</body>
+</html>

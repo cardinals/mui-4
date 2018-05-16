@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="UTF-8">
+		<title>首页</title>
+		<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+		<link rel="stylesheet" href="../css/font-awesome-4.7.0/css/font-awesome.min.css">
+		<link href="../../css/mui.css" rel="stylesheet" />
+		<link href="../../css/gloab.css" rel="stylesheet" />
+		<link href="../../css/xmui.pullToRefresh.material.css" rel="stylesheet" />
+		<link href="../../css/swiper.min.css" rel="stylesheet">
+		<style>
+			.mui-icon {
+				background-size: contain;
+				background-position: center;
+				background-repeat: no-repeat;
+			}
+			
+			.bg-title {
+				background-color: #c70321;
+			}
+		</style>
+
+	</head>
+
+	<body>
+		<header class="mui-bar mui-bar-nav bg-title">
+			<a class="mui-action-back mui-icon mui-icon-left-nav mui-pull-left color-white"></a>
+			<h1 class="mui-title color-white titlecolor">期货开户</h1>
+		</header>
+		<div class="mui-content">
+			<form class="mui-input-group">
+				<div class="wd100" style="border-bottom: 1px solid #EEEEEE;">
+					<div class="dis_table wd90">
+						<div class="dis_table_cell  wd20 textleft ft12">
+							营业部
+						</div>
+						<div class="dis_table_cell" style="text-align: left;">
+							<div class="mui-input-row">
+								<span style="font-size: 14px;display: inline-block;margin-left: 15px;padding-top: 9px;" id="marketChannel"></span>
+							</div>
+						</div>
+					</div>
+					<div class="dis_table wd90">
+						<div class="dis_table_cell  wd20 textleft ft12">
+							渠道号
+						</div>
+						<div class="dis_table_cell" style="text-align: left;">
+							<div class="mui-input-row">
+								<span style="font-size: 14px;display: inline-block;margin-left: 15px;padding-top: 9px;" id="businessDepartmentName"></span>
+							</div>
+						</div>
+					</div>
+				</div>
+			</form>
+		</div>
+		<script src="../../js/h.min.js"></script>
+		<script src="../../js/mui.min.js"></script>
+		<script src="../../js/immersed.js"></script>
+		<script src="../../js/com.js"></script>
+		<script src="../../js/xmui-globalEvent.js"></script>
+		<script src="../../js/mui.pullToRefresh.js"></script>
+		<script src="../../js/mui.pullToRefresh.material.js"></script>
+		<script src="../../js/com.js"></script>
+		<script src="../../js/swiper.min.js"></script>
+		<script src="../../js/com.data.js"></script>
+		<script src="../../js/com.mui.js"></script>
+
+		<script src="../../js/vue.js"></script>
+		<script src="../../js/jquery.min_1.8.3.js"></script>
+		<script src="../../js/md5.js"></script>
+		<script src="../../js/fundsfunction.js"></script>
+
+		<script>
+			mui.plusReady(function() {
+
+				var phone = com.plus.getCurrWebview().self.phone;
+				console.log(phone)
+				$.ajax({
+					url: "http://guishu.dzqh.com.cn:18089/futuresAccountController.do?getAccountByPhoe",
+					type: "get",
+					dataType: "JSON",
+					async: false,
+					data: {
+						'phone': phone
+					},
+					success: function(data) {
+						var result = JSON.parse(data.jsonStr)
+						console.log(JSON.stringify(result))
+						document.querySelector("#marketChannel").innerText = result.obj.marketChannel
+						document.querySelector("#businessDepartmentName").innerText = result.obj.businessDepartmentName
+					}
+				});
+
+			});
+		</script>
+	</body>
+
+</html>

@@ -1,0 +1,336 @@
+
+<!DOCTYPE html>
+<html>
+
+<head>
+	<meta charset="UTF-8">
+	<title>首页</title>
+	<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+	<link href="../../css/mui.css" rel="stylesheet" />
+	<link href="../../css/gloab.css" rel="stylesheet" />
+	<link href="../../css/xmui.pullToRefresh.material.css" rel="stylesheet" />
+	<link href="../../css/swiper.min.css" rel="stylesheet">
+<style>
+        .swiper-slide{
+            width: 100px;
+        }
+        input[type=radio][name=type-choice]{
+            display: none;
+            opacity: 0;
+        }
+
+        input[type=radio][name=type-choice]+label{
+            font-size: 14px;
+            display: inline-block;
+            width: 100%;
+            text-align: center;
+            line-height: 34px;
+        }
+        input[type=radio][name=type-choice]:checked+label{
+            border-bottom: 1px solid #FE7E00;
+            color: #FE7E00;
+        }
+        .bg-title{
+            background-color:#c70321;
+        }
+        .my-swiper{
+            background-color: white;
+            height: 35px;
+        }
+        .cell-ji{
+            text-align: center;
+            background-color: #ffffff;
+        }
+        .cell-ou{
+            text-align: center;
+            background-color: #F9F9F9;
+
+        }
+        .bg-title{
+            background-color:#FB5C5F;
+        }
+    	.funds_list{transition: background-color .2s!important}
+		.funds_list:active{
+			background-color: #FFE6E7!important; 
+		}
+		
+		.mui-search .mui-placeholder .mui-icon{
+			color: white;
+		}
+		div.mui-search .mui-input-clear{
+        	background-color: white;
+        }
+		.mui-active::before{
+			top: 20px;
+			color: #999999;
+		}
+		.mui-search .mui-placeholder{
+            background-color: white;
+            color: #999999;
+        }
+		.mui-icon-search::before{
+			color: #999999;
+		}
+		.mui-pull-bottom-tips{
+			display: none !important;
+		}
+    </style>
+
+</head>
+<body>
+    <header class="mui-bar mui-bar-nav bg-title">
+        <a class="mui-action-back mui-icon mui-icon-left-nav mui-pull-left color-white"></a>
+        <h1 class="mui-title color-white titlecolor">私募基金</h1>
+    </header>
+	<div id="vue-heard" style="margin-top: 44px">
+
+		<div style="background-color: #FFFFFF;position: relative;z-index: 999;padding-top: 5px;padding-bottom: 5px;">
+			<div class="dis_table wd90 bg-bai" style="height: 20px;">
+				<div class="dis_table_cell wd90" >
+					<input type="text" style="margin: 0px;padding: 0px;border: 0px;" v-model="searchCode" placeholder="请输入基金代码"/>
+				</div>
+				<div class="dis_table_cell textright">
+					<img @click="seacrch" src="../../images/icon/icon_search.png" style="width: 20px;height: 20px;">
+				</div>
+			</div>
+			<!--<input type="button" value="s" />-->
+		</div>
+
+	</div>
+
+
+<div class="mui-content mui-scroll-wrapper">
+
+
+
+        <!--swiper滑动tab end-->
+		<div class="mui-scroll" id="station-list" style="padding-bottom: 100px;margin-top: 55px">
+			<div id="vue-list">
+				<template v-if="(fundlist==null||fundlist.length==0)&&isLoad==1">
+					<div style="text-align: center;font-size: 16px;margin-top: 30px;">
+						- - 暂未查到相关信息 - -
+					</div>
+				</template>
+		        <!--单个div start-->
+		        <div v-for="(item,index) in fundlist"  class="bg-bai  mb5" >
+		        	<div class="funds_list" :code="fundlist[index].fund_code":name="fundlist[index].fund_name">
+
+		        	<div  style="border-bottom: 1px solid #EEEEEE;padding: 10px 0px 5px 0px">
+		                <div class="wd90">
+		                    <span style="font-size: 14px;color: #000000;" v-text="fundlist[index].fund_name"></span> <span style="color: #BBBBBB;" v-text="fundlist[index].fund_code"></span>
+		                </div>
+		            </div>
+		            <div class="dis_table wd90">
+		            	<template v-if="fundlist[index].ofund_type==2">
+		            		<div class="dis_table_cell pt10 pb15" style="color: #FB686B;">
+								<template v-if="userinfoflag==0">
+									<span class="" style="font-size: 20px;color: #FB686B;">--</span><br/>
+								</template>
+								<template v-if="userinfoflag==1">
+									<span class="" style="font-size: 20px;color: #FB686B;" v-text="toFix2(fundlist[index].fund_curr_ratio)"></span><br/>
+								</template>
+			                    <span style="color: #AAAAAA;font-weight: normal;">七日年化收益</span>
+			                </div>
+			                <div class="dis_table_cell">
+								<template v-if="userinfoflag==0">
+									<span class="" style="font-size: 20px;color: #FB686B;">--</span><br/>
+								</template>
+								<template v-if="userinfoflag==1">
+									<span style="font-size: 18px;color: #FB686B;" v-text="toFix2(fundlist[index].per_myriad_income)"></span><br/>
+								</template>
+			                    <span style="color: #AAAAAA;font-weight: normal;">万份收益</span>
+			                </div>
+		            	</template>
+		                <template v-else>
+		            		<div class="dis_table_cell pt10 pb15" style="color: #FB686B;">
+								<template v-if="userinfoflag==0">
+									<span class="" style="font-size: 20px;color: #FB686B;">--</span><br/>
+								</template>
+
+								<template v-if="userinfoflag==1">
+									<span class="" style="font-size: 18px;color: #FB686B;" v-text="fundlist[index].nav"></span><br/>
+								</template>
+
+			                    <span style="color: #AAAAAA;font-weight: normal;">单位净值</span>
+			                </div>
+			                <div class="dis_table_cell">
+								<template v-if="userinfoflag==0">
+									<span class="" style="font-size: 20px;color: #FB686B;">--</span><br/>
+								</template>
+								<template v-if="userinfoflag==1">
+									<span style="font-size: 18px;color: #FB686B;" v-text="fundlist[index].nav"></span><br/>
+								</template>
+			                    <span style="color: #AAAAAA;font-weight: normal;">累计净值</span>
+			                </div>
+		            	</template>
+		                <div class="dis_table_cell">
+		                    <span style="font-size: 16px;" v-text="getFundState(fundlist[index].fund_status)"></span><br/>
+		                    <span style="color: #AAAAAA;font-weight: normal;">基金状态</span>
+		                </div>
+		            </div>
+		        	</div>
+		            
+		        </div>
+		        <!--单个div end-->
+			</div>
+		</div>
+
+
+
+
+</div>
+
+
+<script src="../../js/h.min.js"></script>
+		<script src="../../js/mui.min.js"></script>
+		<script src="../../js/immersed.js"></script>
+<script src="../../js/com.js"></script>
+<script src="../../js/xmui-globalEvent.js"></script>
+<script src="../../js/mui.pullToRefresh.js"></script>
+<script src="../../js/mui.pullToRefresh.material.js"></script>
+<script src="../../js/com.js"></script>
+<script src="../../js/swiper.min.js"></script>
+<script src="../../js/com.data.js"></script>
+<script src="../../js/com.mui.js"></script>
+
+
+<script src="../../js/vue.js"></script>
+<script src="../../js/jquery.min_1.8.3.js"></script>
+<script src="../../js/md5.js"></script>
+<script src="../../js/fundsfunction.js"></script>
+
+
+<script>
+    var vue_list = null;
+    var scroll;
+    mui.ready(function () {
+
+        mui(".mui-scroll-wrapper").scroll({
+            bounce: true,//是否启用回弹
+            indicators: true,//是否显示滚动条
+            deceleration:  0.0005 //flick 减速系数，系数越大，滚动速度越慢，滚动距离越小，默认值0.0006
+        });
+    });
+    var vue_heard = new Vue({
+        el:"#vue-heard",
+        data:{
+            choiceType:"",
+			searchCode:"",
+        },
+        methods:{
+			seacrch:function(){
+				scroll.refresh();
+			}
+        },
+        watch:{
+            choiceType:function (nv,ov) {
+                var pdata ={};
+                pdata["private_flag"]=0;
+                if(nv!=""){
+                    pdata["ofund_type"]=nv;
+				}
+                com.data.funds.getFundsList(pdata,function (data){
+                    vue_list.fundlist=data.result_list;
+                })
+            },
+            searchCode:function(nv,ov){
+//          	alert(nv);
+            }
+        },
+        mounted:function(){
+
+        }
+
+    });
+    mui.plusReady(function(){
+
+
+
+
+    	vue_list = new Vue({
+    		el:"#vue-list",
+    		data:{
+    			fundlist:[],
+				userinfoflag:"0",
+                isLoad:0,
+    		},
+    		methods:{
+    			scrollreload:function(){
+
+    			},
+				getFundState:function (fund_status){
+                    return getFundStatusByCode(fund_status);
+                },
+               toFix2:function (doublenum){
+               	    return toFix2(doublenum);
+               }
+    		},
+    		mounted:function(){
+
+    		}
+
+    	});
+
+
+    	scroll = new com.mui.muiScroll(
+			document.querySelector("#station-list"),
+			function(index, size, do_success, do_error){
+                var pdata ={};
+                pdata["private_flag"] = 1;
+                pdata["fund_category"] = 1;
+                pdata["current_page"] = index;
+                pdata["num_per_page"] = size;
+//              alert(vue_heard.searchCode);
+                if(vue_heard.searchCode!=null&&vue_heard.searchCode!=""){
+                    pdata["fund_code"] = vue_heard.searchCode;
+				}
+
+                com.data.funds.getList4SelfFund(pdata,function (data,msg,token,finish_info_flag){
+//                  console.log(JSON.stringify(finish_info_flag));
+//					alert(JSON.stringify(finish_info_flag));
+                    vue_list.userinfoflag = finish_info_flag;
+                    if(index==1){
+                        vue_list.fundlist=data.result_list;
+                        vue_list.isLoad=1;
+                        do_success(1);
+                    }else{
+                        if(data.result_list!=null&&data.result_list.length!=0){
+                            vue_list.fundlist.push.apply(vue_list.fundlist,data.result_list);
+                            do_success(1);
+                        }else{
+                            do_success(0);
+                        }
+                    }
+
+                })
+
+
+			}
+		)
+		scroll.refresh();
+
+
+        mui('body').on('tap', '.funds_list', function(){
+            var code = this.getAttribute("code");
+            var name = this.getAttribute("name");
+
+              com.plus.openWindowX('funds_self_more.html',{
+              	code:code,name:name
+              });
+        });
+        
+       	$(".mui-icon-search::before").click(function(){
+        	alert(111);
+
+       	})
+//      mui('body').on('tap', '.mui-icon-search', function(){
+//      	alert(111);
+////      	var str = $("#searchbox").val();
+////      	alert(str);
+////          scroll.refresh();
+//      });
+
+    })
+</script>
+</body>
+</html>

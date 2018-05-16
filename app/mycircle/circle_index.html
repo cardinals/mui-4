@@ -1,0 +1,358 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="UTF-8">
+		<title>首页</title>
+		<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+		<link href="../../css/mui.css" rel="stylesheet" />
+		<link href="../../css/gloab.css" rel="stylesheet" />
+		<link href="../../css/xmui.pullToRefresh.material.css" rel="stylesheet" />
+		<link href="../../css/swiper.min.css" rel="stylesheet">
+		<style>
+			.bg-title {
+				background-color: #c70321;
+			}
+			
+			#sliderIndicator .mui-control-item.mui-active {
+				border-bottom: 2px solid #FE7E00 !important;
+			}
+			
+			.btm-input {
+				display: inline-block;
+				width: 100%;
+				height: 50px;
+			}
+			/*轮播图*/
+			
+			.carousel {
+				width: 100vw;
+				height: 50vw;
+			}
+			/*分类*/
+			
+			.category {
+				margin-top: 10px;
+				width: 40px;
+				height: 40px;
+			}
+			/*课程*/
+			
+			.course {
+				margin-top: 10px;
+				margin-bottom: 10px;
+				width: 100%;
+				height: 20vw;
+			}
+			
+			.option {
+				font-size: 14px;
+				background-color: #FFFFFF;
+				border-bottom: 1px solid #EEEEEE;
+				padding: 5px 10px;
+			}
+		</style>
+
+	</head>
+
+	<body>
+		<header class="mui-bar mui-bar-nav bg-title">
+			<a class="mui-action-back mui-icon mui-icon-left-nav mui-pull-left color-white"></a>
+			<h1 class="mui-title color-white titlecolor">圈子</h1>
+			<a class="mui-icon mui-icon-right-nav mui-pull-right color-white textright wd35" style="font-size: 14px;line-height: 25px;">
+				<img src="../../images/icon/icon_write.png" alt="" style="width: 25px;height: 25px;" />
+				<div class="option mt5 textcenter send-post" style="display: none;">发帖</div>
+				<div class="option textcenter my-post" style="display: none;">我的帖子</div>
+			</a>
+		</header>
+
+		<div class="mui-scroll-wrapper mui-content bg-gray">
+			<div class="mui-scroll">
+
+				<!-- 轮播图 -->
+				<div class="mui-slider">
+					<div class="mui-slider-group mui-slider-loop">
+						<!--支持循环，需要重复图片节点-->
+						<div class="mui-slider-item mui-slider-item-duplicate">
+							<a href="#"><img class="carousel" src="http://p05vxiv8z.bkt.clouddn.com/Fp17PkgC6BJZA7JonCnRQ69G3Cob" /></a>
+						</div>
+						<div class="mui-slider-item ">
+							<a href="#"><img class="carousel" src="http://img06.tooopen.com/images/20160818/tooopen_sy_175833047715.jpg" /></a>
+						</div>
+						<div class="mui-slider-item">
+							<a href="#"><img class="carousel" src="http://img06.tooopen.com/images/20160818/tooopen_sy_175866434296.jpg" /></a>
+						</div>
+						<div class="mui-slider-item">
+							<a href="#"><img class="carousel" src="http://p05vxiv8z.bkt.clouddn.com/Fp17PkgC6BJZA7JonCnRQ69G3Cob" /></a>
+						</div>
+						<!--支持循环，需要重复图片节点-->
+						<div class="mui-slider-item mui-slider-item-duplicate">
+							<a href="#"><img class="carousel" src="http://img06.tooopen.com/images/20160818/tooopen_sy_175833047715.jpg" /></a>
+						</div>
+					</div>
+				</div>
+
+				<!-- 条目 -->
+				<!--swiper滑动tab-->
+				<div class="swiper-container swiper-container-horizontal mt10 bg-bai" id="category-swiper">
+					<div class="swiper-wrapper">
+						<div class="swiper-slide">
+							<div class="textcenter">
+								<img src="../../images/icon/icon_4.png" class="category" />
+								<div class="ft16"><strong>行情分析</strong></div>
+							</div>
+						</div>
+						<div class="swiper-slide">
+							<div class="el-col-xl-4 el-col-sm-4 textcenter">
+								<img src="../../images/icon/icon_4.png" class="category" />
+								<div class="ft16"><strong>投教讲解</strong></div>
+							</div>
+						</div>
+						<div class="swiper-slide">
+							<div class="el-col-xl-4 el-col-sm-4 textcenter">
+								<img src="../../images/icon/icon_4.png" class="category" />
+								<div class="ft16"><strong>早盘回顾</strong></div>
+							</div>
+						</div>
+						<div class="swiper-slide">
+							<div class="el-col-xl-4 el-col-sm-4 textcenter">
+								<img src="../../images/icon/icon_4.png" class="category" />
+								<div class="ft16"><strong>晚盘预测</strong></div>
+							</div>
+						</div>
+						<div class="swiper-slide">
+							<div class="el-col-xl-4 el-col-sm-4 textcenter">
+								<img src="../../images/icon/icon_4.png" class="category" />
+								<div class="ft16"><strong>晚盘预测2</strong></div>
+							</div>
+						</div>
+					</div>
+				</div>
+
+				<!--热门课程-->
+				<div class="bg-bai mt10 wd100">
+					<div class="pt10 pb5" style="border-bottom: 1px solid #EEEEEE;">
+						<div class="mui-row pl10 pr10">
+							<div class="mui-col-sm-10 mui-col-xs-10">
+								<strong class="ft16">热门课程</strong>
+							</div>
+							<div class="mui-col-sm-2 mui-col-xs-2" style="line-height: 25px;">
+								查看更多
+							</div>
+						</div>
+					</div>
+					<!-- 课程轮播 -->
+					<div class="swiper-container swiper-container-horizontal" id="course-swiper">
+						<div class="swiper-wrapper">
+							<div class="swiper-slide">
+								<div class="textcenter">
+									<img src="http://p05vxiv8z.bkt.clouddn.com/Fp17PkgC6BJZA7JonCnRQ69G3Cob" class="course" />
+								</div>
+							</div>
+							<div class="swiper-slide">
+								<div class="textcenter">
+									<img src="http://p05vxiv8z.bkt.clouddn.com/Fp17PkgC6BJZA7JonCnRQ69G3Cob" class="course" />
+								</div>
+							</div>
+							<div class="swiper-slide">
+								<div class="textcenter">
+									<img src="http://p05vxiv8z.bkt.clouddn.com/Fp17PkgC6BJZA7JonCnRQ69G3Cob" class="course" />
+								</div>
+							</div>
+							<div class="swiper-slide">
+								<div class="textcenter">
+									<img src="http://p05vxiv8z.bkt.clouddn.com/Fp17PkgC6BJZA7JonCnRQ69G3Cob" class="course" />
+								</div>
+							</div>
+							<div class="swiper-slide">
+								<div class="textcenter">
+									<img src="http://p05vxiv8z.bkt.clouddn.com/Fp17PkgC6BJZA7JonCnRQ69G3Cob" class="course" />
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+
+				<!-- 最新课程 -->
+				<div class="bg-bai mt10 wd100 pl10 pr10">
+					<div class="pt10 pb5" style="border-bottom: 1px solid #EEEEEE;">
+						<div class="mui-row ">
+							<div class="mui-col-sm-10 mui-col-xs-10">
+								<strong class="ft16">最新课程</strong>
+							</div>
+							<div class="mui-col-sm-2 mui-col-xs-2" style="line-height: 25px;">
+								查看更多
+							</div>
+						</div>
+					</div>
+					<!-- 内容 -->
+
+					<!--最新-->
+					<!--单个div start-->
+					<div class="wd100 bg-bai pt10">
+						<div class="dis_table wd100">
+							<div class="dis_table_cell  textleft" style="width: 65px;">
+								<div style="width: 50px;height: 50px;display: inline-block;border: 0px solid #999;overflow: hidden;border-radius: 60px;background-color: white;">
+									<img src="../../images/icon/userheard.png" width="50" height="50">
+								</div>
+							</div>
+							<div class="dis_table_cell textleft">
+								<span style="font-size: 14px;color: #000000;line-height: 30px;">飞狐4568</span><br />
+								<span style="color: #999999">3小时前</span>
+							</div>
+							<div class="dis_table_cell wd10 textleft">
+								<img src="../../images/icon/icon_down.png" style="width: 20px;height: 20px;" alt="" />
+							</div>
+						</div>
+						<div class="wd100 ft14" id="content1" style="margin-top: 5px;">
+							本月基本盈利20%咋样
+						</div>
+					</div>
+					<!--单个div end-->
+
+					<!--单个div start-->
+					<div class="wd100 bg-bai pt10 pb10 mt10">
+						<div class="dis_table wd100">
+							<div class="dis_table_cell textleft" style="width: 65px;">
+								<div style="width: 50px;height: 50px;display: inline-block;border: 0px solid #999;overflow: hidden;border-radius: 60px;background-color: white;">
+									<img src="../../images/icon/userheard.png" width="50" height="50">
+								</div>
+							</div>
+							<div class="dis_table_cell textleft">
+								<span style="font-size: 14px;color: #000000;line-height: 30px;">飞狐4568</span><br />
+								<span style="color: #999999">9小时前</span>
+							</div>
+							<div class="dis_table_cell wd10 textright">
+								<img src="../../images/icon/icon_down.png" style="width: 20px;height: 20px;" alt="" />
+							</div>
+						</div>
+						<div class="wd100 ft14" id="content2" style=";margin-top: 5px;">
+							百度（纳斯达克：BIDU），全球最大的中文搜索引擎、最大的中文网站。1999年底,身在美国硅谷的李彦宏看到了中国互联网及中文搜索引擎服务的巨大发展潜力，抱着技术改变世界的梦想，他毅然辞掉硅谷的高薪工作，携搜索引擎专利技术，于 2000年...
+						</div>
+						<div class="wd100 dis_table">
+							<div class="dis_table_row">
+								<div class="dis_table_cell wd33" style="padding-top: 5px;padding-right: 1%;">
+									<img src="https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1510576444219&di=9bac5874013928de05ffe2b8596d5f69&imgtype=0&src=http%3A%2F%2Fwww.360caifu.com%2Fupload%2Fcms%2Fnewsinfo%2Fimage%2F20170801%2F20170801165347_668.png" alt="" style="width: 100%;height: 28vw;" />
+								</div>
+								<div class="dis_table_cell wd33" style="padding-top: 5px;padding-right: 1%;padding-left: 1%;">
+									<img src="https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1510576444219&di=9bac5874013928de05ffe2b8596d5f69&imgtype=0&src=http%3A%2F%2Fwww.360caifu.com%2Fupload%2Fcms%2Fnewsinfo%2Fimage%2F20170801%2F20170801165347_668.png" alt="" style="width: 100%;height: 28vw;" />
+								</div>
+								<div class="dis_table_cell wd33" style="padding-top: 5px;padding-left: 1%;">
+									<img src="https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1510576444219&di=9bac5874013928de05ffe2b8596d5f69&imgtype=0&src=http%3A%2F%2Fwww.360caifu.com%2Fupload%2Fcms%2Fnewsinfo%2Fimage%2F20170801%2F20170801165347_668.png" alt="" style="width: 100%;height: 28vw;" />
+								</div>
+							</div>
+							<div class="dis_table_row">
+								<div class="dis_table_cell wd33" style="padding-top: 5px;padding-right: 1%;">
+									<img src="https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1510576444219&di=9bac5874013928de05ffe2b8596d5f69&imgtype=0&src=http%3A%2F%2Fwww.360caifu.com%2Fupload%2Fcms%2Fnewsinfo%2Fimage%2F20170801%2F20170801165347_668.png" alt="" style="width: 100%;height: 28vw;" />
+								</div>
+								<div class="dis_table_cell wd33" style="padding-top: 5px;padding-right: 1%;padding-left: 1%;">
+									<img src="https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1510576444219&di=9bac5874013928de05ffe2b8596d5f69&imgtype=0&src=http%3A%2F%2Fwww.360caifu.com%2Fupload%2Fcms%2Fnewsinfo%2Fimage%2F20170801%2F20170801165347_668.png" alt="" style="width: 100%;height: 28vw;" />
+								</div>
+								<div class="dis_table_cell wd33" style="padding-top: 5px;padding-left: 1%;">
+									<img src="https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1510576444219&di=9bac5874013928de05ffe2b8596d5f69&imgtype=0&src=http%3A%2F%2Fwww.360caifu.com%2Fupload%2Fcms%2Fnewsinfo%2Fimage%2F20170801%2F20170801165347_668.png" alt="" style="width: 100%;height: 28vw;" />
+								</div>
+							</div>
+						</div>
+					</div>
+					<!--单个div end-->
+
+					<!--单个div start-->
+					<div class="wd100 bg-bai pt10 pb10 mt10">
+						<div class="dis_table wd100">
+							<div class="dis_table_cell textleft" style="width: 65px;">
+								<div style="width: 50px;height: 50px;display: inline-block;border: 0px solid #999;overflow: hidden;border-radius: 60px;background-color: white;">
+									<img src="../../images/icon/userheard.png" width="50" height="50">
+								</div>
+							</div>
+							<div class="dis_table_cell textleft">
+								<span style="font-size: 14px;color: #000000;line-height: 30px;">飞狐4568</span><br/>
+								<span style="color: #999999">6小时前</span>
+							</div>
+							<div class="dis_table_cell wd10 textright">
+								<img src="../../images/icon/icon_down.png" style="width: 20px;height: 20px;" alt="" />
+							</div>
+						</div>
+						<div class="wd100 ft14" style="margin-top: 5px;">
+							本月基本盈利20%咋样
+						</div>
+					</div>
+					<!--单个div end-->
+				</div>
+
+				<!-- 关注 -->
+				<!-- 最新课程 -->
+				<div class="bg-bai mt10 wd100">
+					<div class="pt10 pb5" style="border-bottom: 1px solid #EEEEEE;">
+						<div class="mui-row pl10 pr10">
+							<div class="mui-col-sm-10 mui-col-xs-10">
+								<strong class="ft16">我的关注</strong>
+							</div>
+							<div class="mui-col-sm-2 mui-col-xs-2" style="line-height: 25px;">
+								<img src="../../images/icon/right.png" style="width: 20px;height: 20px;float: right;" alt="">
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+
+		<script type="text/javascript" src="../../js/jquery.min_1.8.3.js"></script>
+		<script src="../../js/h.min.js"></script>
+		<script src="../../js/mui.min.js"></script>
+		<script src="../../js/immersed.js"></script>
+		<script src="../../js/com.js"></script>
+		<script src="../../js/xmui-globalEvent.js"></script>
+		<script src="../../js/mui.pullToRefresh.js"></script>
+		<script src="../../js/mui.pullToRefresh.material.js"></script>
+		<script src="../../js/com.js"></script>
+		<script src="../../js/swiper.min.js"></script>
+		<script src="../../js/com.data.js"></script>
+		<script src="../../js/com.mui.js"></script>
+
+		<script>
+			mui.ready(function() {
+				//获得slider插件对象
+				// 类别swiper
+				var swiper = new Swiper('#category-swiper', {
+					slidesPerView: 4.5,
+					spaceBetween: 0
+				});
+				//课程swiper
+				var swiper = new Swiper('#course-swiper', {
+					slidesPerView: 3,
+					spaceBetween: 10
+				});
+				//轮播图
+				var gallery = mui('.mui-slider');
+				gallery.slider({
+					interval: 2000 //自动轮播周期，若为0则不自动播放，默认为0；
+				});
+				mui(".mui-scroll-wrapper").scroll({
+					scrollY: true, //是否竖向滚动
+					scrollX: false, //是否横向滚动
+					bounce: true, //是否启用回弹
+					indicators: true, //是否显示滚动条
+					deceleration: 0.0005 //flick 减速系数，系数越大，滚动速度越慢，滚动距离越小，默认值0.0006
+				});
+			});
+			mui.plusReady(function() {
+				mui('body').on('tap', '#content1', function() {
+					com.plus.openWindowX('circle_maininfo.html', {});
+				});
+				mui('body').on('tap', '#content2', function() {
+					com.plus.openWindowX('circle_maininfo2.html', {});
+				});
+				mui('body').on('tap', '.mui-pull-right', function() {
+					$(".option").toggle()
+				});
+				mui('body').on('tap', '.send-post', function() {
+					com.plus.openWindowX('circle_send.html', {});
+				});
+				mui('body').on('tap', '.my-post', function() {
+					com.plus.openWindowX('circle_me.html', {});
+				});
+			})
+		</script>
+	</body>
+
+</html>

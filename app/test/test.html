@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<a href="test2.html" target="_blank">test1</a>
+</body>
+<script src="mui.js"></script>
+<script>
+    mui.back = function(){
+        var btn = ["确定","取消"];
+        mui.confirm('确认关闭当前窗口？','Hello MUI',btn,function(e){
+            if(e.index==0){
+                mui.currentWebview.close();
+            }
+        });
+    }
+</script>
+</html>

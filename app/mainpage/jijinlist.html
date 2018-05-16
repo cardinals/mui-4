@@ -1,0 +1,303 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="UTF-8">
+		<title>首页</title>
+		<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+		<link href="../../css/mui.css" rel="stylesheet" />
+		<link href="../../css/gloab.css" rel="stylesheet" />
+		<link href="../../css/xmui.pullToRefresh.material.css" rel="stylesheet" />
+		<link href="../../css/swiper.min.css" rel="stylesheet">
+		<style>
+			.bg-title {
+				background-color: #c70321;
+			}
+			
+			.my_list {
+				transition: background-color .2s!important
+			}
+			
+			.my_list:active {
+				background-color: #EEEEEE!important;
+			}
+			
+			.mui-pull-bottom-tips {
+				display: none !important;
+			}
+		</style>
+
+	</head>
+
+	<body>
+		<header class="mui-bar mui-bar-nav bg-title">
+			<a class="mui-action-back mui-icon mui-icon-left-nav mui-pull-left color-white"></a>
+			<h1 class="mui-title color-white titlecolor">基金账户</h1>
+		</header>
+
+		<div class="mui-content mui-scroll-wrapper">
+			<div class="mui-scroll" id="station-list" style="padding-bottom: 50px;">
+				<div id="vue-body">
+
+					<!--我的银行卡-->
+					<div id="my_card" class="wd100 bg-bai my_list" style="border-bottom: 1px solid #EEEEEE;margin-top: 0.2px;">
+						<div class="dis_table wd90" style="">
+							<div class="dis_table_cell wd80 pt10 pb10 textleft"><img src="../../images/icon/icon_card.png" style="position: relative;top:-3px;" alt="" width="28" height="28"> <span class="ft14 inline-block " style="color:#000000;line-height: 30px;margin-left: 3px;">
+					我的银行卡</span></div>
+							<div class="dis_table_cell textright"><img src="../../images/icon/right.png" width="15" height="20"></div>
+						</div>
+					</div>
+					<!--我的资料-->
+					<div class="wd100 bg-bai my_info my_list" style="border-bottom: 1px solid #EEEEEE;margin-top: 0.2px;">
+						<div class="dis_table wd90" style="">
+							<div class="dis_table_cell wd80 pt10 pb10 textleft"><img src="../../images/icon/icon_info.png" style="position: relative;top:-3px;" alt="" width="28" height="28"> <span class="ft14 inline-block " style="color:#000000;line-height: 30px;margin-left: 3px;">
+					我的资料</span></div>
+							<div class="dis_table_cell textright"><img src="../../images/icon/right.png" width="15" height="20"></div>
+						</div>
+					</div>
+					<!--我的基金-->
+					<div class="wd100 bg-bai my_list" id="my_funds" style="border-bottom: 1px solid #EEEEEE;margin-top: 0.2px;">
+						<div class="dis_table wd90" style="">
+							<div class="dis_table_cell wd80 pt10 pb10 textleft"><img src="../../images/icon/icon_funds.png" style="position: relative;top:-0px;left: 5px;" alt="" width="20" height="20"> <span class="ft14 inline-block " style="color:#000000;line-height: 30px;margin-left: 13px;">
+					我的基金</span></div>
+							<div class="dis_table_cell textright"><img src="../../images/icon/right.png" width="15" height="20"></div>
+						</div>
+					</div>
+
+					<!--我的定投-->
+					<div class="wd100 bg-bai my_list" id="my_ding" style="border-bottom: 1px solid #EEEEEE;margin-top: 0.2px;">
+						<div class="dis_table wd90" style="">
+							<div class="dis_table_cell wd80 pt10 pb10 textleft"><img src="../../images/icon/icon_ding.png" style="position: relative;top:-0px;left: 5px;" alt="" width="20" height="20"> <span class="ft14 inline-block " style="color:#000000;line-height: 30px;margin-left: 13px;">
+					我的定投</span></div>
+							<div class="dis_table_cell textright"><img src="../../images/icon/right.png" width="15" height="20"></div>
+						</div>
+					</div>
+					<!--我的预约-->
+					<div class="wd100 bg-bai my_list" id="my_order" style="border-bottom: 1px solid #EEEEEE;margin-top: 0.2px;">
+						<div class="dis_table wd90" style="">
+							<div class="dis_table_cell wd80 pt10 pb10 textleft"><img src="../../images/icon/icon_order.png" style="position: relative;top:-0px;left: 7px;" alt="" width="20" height="20"> <span class="ft14 inline-block " style="color:#000000;line-height: 30px;margin-left: 13px;">
+					我的预约</span></div>
+							<div class="dis_table_cell textright"><img src="../../images/icon/right.png" width="15" height="20"></div>
+						</div>
+					</div>
+
+					<!--风险测评-->
+					<div class="wd100 bg-bai my_list" id="my_question" style="border-bottom: 1px solid #EEEEEE;margin-top: 10px;">
+						<div class="dis_table wd90" style="">
+							<div class="dis_table_cell wd80 pt10 pb10 textleft"><img src="../../images/icon/icon_danger.png" style="position: relative;top:-0px;left: 7px;" alt="" width="23" height="23"> <span class="ft14 inline-block " style="color:#000000;line-height: 30px;margin-left: 13px;">
+					风险测评</span></div>
+							<div class="dis_table_cell textright"><img src="../../images/icon/right.png" width="15" height="20"></div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+
+		<!--拨打客服弹出窗-->
+		<div id="payWechartWindow" class="mui-popover mui-popover-action mui-popover-bottom">
+			<ul class="mui-table-view">
+				<li class="mui-table-view-cell">
+					<span style="color: #000;">
+							联系客服：请拨打客服电话（400-885-9999）
+								</span>
+				</li>
+				<li class="mui-table-view-cell">
+					<a href="#" class="choice" style="color: #008000;">立刻拨号</a>
+				</li>
+			</ul>
+		</div>
+		<!--拨打客服弹出窗-->
+
+		<script src="../../js/h.min.js"></script>
+		<script src="../../js/mui.min.js"></script>
+		<script src="../../js/immersed.js"></script>
+		<script src="../../js/com.js"></script>
+		<script src="../../js/xmui-globalEvent.js"></script>
+		<script src="../../js/mui.pullToRefresh.js"></script>
+		<script src="../../js/mui.pullToRefresh.material.js"></script>
+		<script src="../../js/com.js"></script>
+		<script src="../../js/swiper.min.js"></script>
+		<script src="../../js/com.data.js"></script>
+		<script src="../../js/com.mui.js"></script>
+		<script src="../../js/vue.js"></script>
+		<script src="../../js/jquery.min_1.8.3.js"></script>
+		<script src="../../js/md5.js"></script>
+
+		<script>
+			mui.ready(function() {
+				mui(".mui-scroll-wrapper").scroll({
+					bounce: true, //是否启用回弹
+					indicators: true, //是否显示滚动条
+					deceleration: 0.0005 //flick 减速系数，系数越大，滚动速度越慢，滚动距离越小，默认值0.0006
+				});
+			});
+			var vue_body = new Vue({
+				el: "#vue-body",
+				data: {
+					userInfo: {}
+				},
+				methods: {
+
+				},
+				mounted: function() {
+					//            com.data.user.showMyInfo({},function (data) {
+					//                vue_body.userInfo = data.result_map;
+					//            })
+				}
+			});
+			mui.plusReady(function() {
+
+				var scroll = new com.mui.muiScroll(
+					document.querySelector("#station-list"),
+					function(index, size, do_success, do_error) {
+						com.data.user.showMyInfo({}, function(data) {
+							vue_body.userInfo = data.result_map;
+						})
+						do_success(0);
+					}
+				)
+				scroll.refresh();
+
+				mui.ge.addListener("reloadMyinfo", function(args) {
+					vue_body.userInfo = com.data.userInfo.get();
+					mui.ge.callback(args, {})
+				});
+
+				mui('body').on('tap', '#my_card', function() {
+					com.plus.openWindowX('../userinfo/mycard.html', {});
+				});
+
+				mui('body').on('tap', '.my_info', function() {
+					//            com.data.user.showMyInfo({},function (data){
+					//                vue_body.userInfo = data.result_map;
+					//                do_success(0);
+					//            })
+					var userinfo = com.data.userInfo.get();
+					//            alert(JSON.stringify(userinfo));
+					console.log(JSON.stringify(userinfo))
+					if(userinfo.address == null) {
+						com.plus.openWindowX('../tools/reg_moreinfo.html', {
+							isAlone: true
+						});
+					} else {
+						com.plus.openWindowX('../userinfo/myinfo.html', {});
+					}
+
+				});
+				mui('body').on('tap', '#my_order', function() {
+					com.plus.openWindowX('../userinfo/myorder.html', {});
+				});
+				mui('body').on('tap', '#my_pwd', function() {
+					com.plus.openWindowX('../userinfo/mypwd.html', {});
+				});
+				mui('body').on('tap', '#my_question', function() {
+					com.data.user.showMyInfo({}, function(data) {
+						var userinfo = data.result_map;
+						console.log(JSON.stringify(userinfo));
+						console.log(userinfo.invest_risk_tolerance)
+						if(userinfo.invest_risk_tolerance == null) {
+							com.plus.openWindowX('../tools/reg_question.html', {
+								isalone: true
+							});
+						} else {
+							com.plus.openWindowX('../tools/reg_questresult.html', {
+								isPeek: true,
+								isalone: true,
+								lv: userinfo.invest_risk_tolerance
+							});
+						}
+//						do_success(0);
+					})
+				});
+				mui('body').on('tap', '#my_funds', function() {
+					com.plus.openWindowX('../userinfo/myfunds.html', {});
+				});
+
+				mui('body').on('tap', '#my_suggest', function() {
+					com.plus.openWindowX('../tools/kefu.html', {});
+				});
+
+				mui('body').on('tap', '#my_kefu', function() {
+					mui('#payWechartWindow').popover('toggle');
+				});
+				mui('body').on('tap', '#my_ding', function() {
+					com.plus.openWindowX('../userinfo/myding.html', {})
+				});
+				mui('body').on('tap', '#my_friend', function() {
+					com.plus.openWindowX('../mycircle/circle_index.html', {})
+				});
+				mui('body').on('tap', '.choice', function() {
+					plus.device.dial(4008859999, true);
+				});
+				mui('body').on('tap', '#loginout', function() {
+					com.data.user.loginout({}, function(data) {
+						com.data.loginToken.clear();
+						//                plus.runtime.quit();
+						plus.runtime.restart();
+					})
+				});
+				//		//     	上传头像
+				//		mui("body").on("tap", "#show_headimg", function() {
+				//
+				//			var openUploadHeadimg = function(file) {
+				//				plus.io.resolveLocalFileSystemURL(file, function(entry) {
+				//					com.plus.openWindowX("../../app/tools/uploadHeadImg.html", {
+				//						path: entry.toLocalURL()
+				//					});
+				//				});
+				//			}
+				//
+				//			//选择图片
+				//			//这里会弹出选择操作，是否删除
+				//			var btnArray = [{
+				//				title: "拍照"
+				//			}, {
+				//				title: "从相册选择"
+				//			}];
+				//			plus.nativeUI.actionSheet({
+				//				title: "修改头像",
+				//				cancel: "取消",
+				//				buttons: btnArray
+				//			}, function(e) {
+				//				switch(e.index) {
+				//					case 1:
+				//						var cmr = plus.camera.getCamera();
+				//						cmr.captureImage(function(p) {
+				//							openUploadHeadimg(p);
+				//						}, function(error) {
+				//							console.log("error:" + JSON.stringify(error));
+				//						}, {
+				//							index: 2
+				//						});
+				//						break;
+				//					case 2:
+				//						plus.gallery.pick(
+				//							function(file) {
+				//								//直接网络上传，成功之后本地显示出来，并且绑定 提交数据、
+				//								openUploadHeadimg(file);
+				//							},
+				//							function(e){
+				//								mui.toast("相册访问失败");
+				//							}, {
+				//								filter: "image"
+				//							}
+				//						);
+				//						break;
+				//				}
+				//			});
+				//		});
+
+				mui.ge.addListener("uploadHeadImgOver", function(args) {
+					mui.ge.callback(args, {});
+					var url_ = args.detail.url;
+					console.log("上传图片获取成功：" + url_);
+					//          com.data.user.updateUserHead({head_img: url_}, function (data, msg) {
+					//              scroll.refresh();
+					//              mui.toast(msg);
+					//          })
+				});
+			})
+		</script>
+	</body>
+
+</html>

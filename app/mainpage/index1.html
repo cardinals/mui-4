@@ -1,0 +1,708 @@
+<!DOCTYPE html>
+<html lang="en">
+
+	<head>
+		<meta charset="UTF-8">
+		<title>首页</title>
+		<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+		<link href="../../css/mui.css" rel="stylesheet" />
+		<link href="../../css/gloab.css" rel="stylesheet" />
+		<link href="../../css/swiper.min.css" rel="stylesheet">
+		<!--<link href="../../css/xmui.pullToRefresh.material.css" rel="stylesheet" />-->
+		<style type="text/css">
+			.bg-title {
+				background-color: #c70321;
+			}
+			
+			.single-row {
+				overflow: hidden;
+				text-overflow: ellipsis;
+				white-space: nowrap;
+			}
+			
+			.scale-1px {
+				position: relative;
+				margin-bottom: 20px;
+				border: none;
+			}
+			
+			.scale-1px::after {
+				content: '';
+				position: absolute;
+				top: 0;
+				left: 0;
+				border: 1px solid #000;
+				-webkit-box-sizing: border-box;
+				box-sizing: border-box;
+				width: 200%;
+				height: 200%;
+				-webkit-transform: scale(0.5);
+				transform: scale(0.5);
+				-webkit-transform-origin: left top;
+				transform-origin: left top;
+			}
+			
+			.advance-list {
+				transition: background-color .2s!important
+			}
+			
+			.advance-list:active {
+				background-color: #FFE6E7!important;
+			}
+		</style>
+
+	</head>
+
+	<body>
+		<header class="mui-bar mui-bar-nav bg-title" id="vue-header" style="display: none;">
+			<h1 class="mui-title color-white titlecolor">东证赢家</h1>
+		</header>
+		<div class="mui-content mui-scroll-wrapper" id="pullrefresh" style="padding-top: 0;overflow:scroll;">
+			<div class="mui-scroll" id="index-div" style="">
+				<!--头部信息-->
+				<div class="wd100" style="padding: 0px 0px; position: relative;z-index: 999;">
+					<div style="position:absolute;right:10px; top: 25px;">
+						<div id="kefu" style="display: inline-block;text-align: center;">
+							<img src="../../images/icon/icon_kefu.png" alt="" width="30" height="30" /><br />
+							<span class="" style="color: white;font-size: 10px;position: relative;top: -5px;">客服</span>
+						</div>
+					</div>
+					<!--<div class="dis_table wd80" style="margin-top: 60px;margin-bottom: 5px;margin-left:10%;">-->
+					<!--<div class="dis_table_cell textcenter" style="padding-right: 10px;">-->
+					<!--<input type="button" id="btn-reg" value="注册" style="color: #FB5C5F;border: 1px solid #FB5C5F;background-color: rgba(0,0,0,0);font-size: 12px;line-height: 10px;width: 75%;border-radius: 15px;height: 25px;font-weight: bold;">-->
+					<!--</div>-->
+					<!--<div class="dis_table_cell textcenter" style="padding-left: 10px;">-->
+					<!--<input class="scale-1px" type="button" id="btn-login" value="登录" style="color: #FB5C5F;border: 1px solid #FB5C5F;background-color:  rgba(0,0,0,0);font-size: 12px;line-height: 10px;width: 75%;height: 25px;border-radius: 15px;font-weight: bold;">-->
+					<!--</div>-->
+					<!--</div>-->
+				</div>
+				<!--头部信息 end-->
+
+				<!--<div id="focusVue" style="height: 215px; overflow: hidden;">
+					<a href="javascript:void(0);" @click="goFocusLink()">
+					<img src="../../images/handbkg.png" style="width: 100%;" alt="" />
+					</a>
+				</div>-->
+				<!-- 轮播广告 -->
+				<div class="swiper-container box-shadow" id="adImgs" style="margin:0px;">
+					<div class="swiper-wrapper" id="headerimg-list">
+						<div class="swiper-slide relative">
+							<a href="" class="focuslink"><img src="../../images/slide/f_001.png" class="bg-gray" style="width: 100%;" /></a>
+						</div>
+						<!--<div class="swiper-slide relative">
+								<a href="https://www.dggaoshou.com/mobile" class="focuslink"><img src="../../images/slide/f_002.png" class="bg-gray" style="width: 100%;" /></a>
+							</div>-->
+					</div>
+					<!-- Add Pagination -->
+					<div class="swiper-pagination"></div>
+				</div>
+				<!-- 轮播广告end -->
+
+				<div id="vue-content">
+					<!--选项列表-->
+					<div class="pt15 pb15 bg-bai mt5" style="margin-bottom: -8px">
+						<div class="wd100 dis_table" style="margin-bottom: 5px;">
+							<div class="dis_table_cell " id="qihuokaihu">
+								<img src="../../images/icon/icon_4.png" height="50" width="50" />
+								<div style="padding-top: 5px;">
+									<span class="titlecolor" style="font-family: '黑体';color: #000000;">期货开户</span>
+								</div>
+							</div>
+							<div class="dis_table_cell " id="qihuohangqing">
+								<img src="../../images/icon/icon_7.png" height="50" width="50" />
+								<div style="padding-top: 5px;">
+									<span class="titlecolor" style="color: #000000;">期货行情</span>
+								</div>
+							</div>
+							<div class="dis_table_cell " id="caijingcalander">
+								<img src="../../images/icon/icon_6.png" height="50" width="50" />
+								<div style="padding-top: 5px;">
+									<span class="titlecolor" style="color: #000000;">财经日历</span>
+								</div>
+							</div>
+
+							<div class="dis_table_cell " id="hotnews">
+								<img src="../../images/icon/icon_8.png" height="50" width="50" />
+								<div style="padding-top: 5px;">
+									<span class="titlecolor" style="color: #000000;">热点新闻</span>
+								</div>
+							</div>
+
+<!--                            <div class="dis_table_cell " id="mycricle">-->
+<!--                                <img src="../../images/icon/icon_10.png" height="50" width="50" />-->
+<!--                                <div style="padding-top: 5px;">-->
+<!--                                    <span class="titlecolor" style="color: #000000;">实盘秀</span>-->
+<!--                                </div>-->
+<!--                            </div>-->
+						</div>
+						<!--<div style="border-bottom: 1px solid #EEEEEE;transform: scaleY(.5);"></div>-->
+						<div class="wd100 dis_table mt15">
+							<div class="dis_table_cell" id="jijinkaihu">
+								<img src="../../images/icon/icon_3.png" height="50" width="50" />
+								<div style="padding-top: 5px;">
+									<span class="titlecolor" style="color: #000000;">基金开户</span>
+								</div>
+							</div>
+
+							<div class="dis_table_cell" id="gongmujijin">
+								<img src="../../images/icon/icon_2.png" height="50" width="50" />
+								<div style="padding-top: 5px;">
+									<span class="titlecolor" style="color: #000000;">公募基金</span>
+								</div>
+							</div>
+<!--                            <div class="dis_table_cell" id="gaoduanlicai">-->
+<!--                                <img src="../../images/icon/icon_9.png" height="50" width="50" />-->
+<!--                                <div style="padding-top: 5px;">-->
+<!--                                    <span class="titlecolor" style="color: #000000;">高端理财</span>-->
+<!--                                </div>-->
+<!--                            </div>-->
+<!--                            <div class="dis_table_cell" id="ziguan">-->
+<!--                                <img src="../../images/icon/icon_1.png" height="50" width="50" />-->
+<!--                                <div style="padding-top: 5px;">-->
+<!--                                    <span class="titlecolor" style="color: #000000;">东方红资管</span>-->
+<!--                                </div>-->
+<!--                            </div>-->
+							<div class="dis_table_cell" id="wangzhebei">
+								<img src="../../images/icon/icon_11.png" height="50" width="50" />
+								<div style="padding-top: 5px;">
+									<span class="titlecolor" style="color: #000000;">东方杯</span>
+								</div>
+							</div>
+                            <div class="dis_table_cell " id="mycricle">
+                                <img src="../../images/icon/icon_10.png" height="50" width="50" />
+                                <div style="padding-top: 5px;">
+                                    <span class="titlecolor" style="color: #000000;">在线咨询</span>
+                                </div>
+                            </div>
+						</div>
+
+					</div>
+					<!--选项列表 end-->
+					<hr style="border: 1px solid #E0E0E0;-webkit-transform: scaleY(0.5);padding: 0px;margin: 0px" />
+					<!--消息通知-->
+					<div class="wd100 bg-bai" style="padding: 7px 0px;">
+						<div class="wd90 text_clamp1">
+							<img src="../../images/icon/note.png" height="20" width="20"> <span>东证赢家财富版上线</span>
+						</div>
+					</div>
+					<!--消息通知 end-->
+
+					<!-- 轮播广告 -->
+					<div class="swiper-container box-shadow" id="adImgs2" style="height: 37vw;margin: 5px 0px;">
+						<div class="swiper-wrapper" id="headerimg-list2">
+							<div class="swiper-slide relative">
+								<img src="../../images/temporary/indeximg.png" class="bg-gray" style="width: 100%;height:100%" />
+							</div>
+							<!--<div class="swiper-slide relative">
+								<img src="../../images/temporary/handbkg.png" class="bg-gray" style="width: 100%;height:100%" />
+							</div>-->
+							<!--<div class="swiper-slide relative">-->
+							<!--<img src="../../images/silde_08.png" class="bg-gray" style="width: 100%;height:100%" />-->
+							<!--</div>-->
+						</div>
+						<!-- Add Pagination -->
+						<div class="swiper-pagination"></div>
+					</div>
+					<!-- 轮播广告end -->
+					<!--推荐产品-->
+					<div>
+
+						<div class="" style="font-size: 16px;padding: 10px 0px 10px 10px;background-color: white;border-bottom: 1px solid #EEEEEE;color: black;margin-top: 5px;">
+							精选产品
+						</div>
+
+						<!--单个内容div-->
+						<div v-for="(item,index) in upFunds" class=" bg-bai advance-list " style="border-bottom: 1px solid #EEEEEE;padding:15px 0px;">
+							<div id="jingxuan" @click="showFundMore(upFunds[index].fund_code,upFunds[index].fund_name)">
+
+								<div class="dis_table wd90" style="text-align: left">
+
+									<div v-if="upFunds[index].ofund_type==2" class="dis_table_cell" style="width: 35%;border-right: 1px solid #eee;text-align: left;padding-right: 10px;">
+										<div style="color: #FB5C5F;font-size: 20px;margin-bottom:5px;text-align: center" v-text="Math.round(upFunds[index].fund_curr_ratio*100)/100"></div>
+										<div style="color: black;text-align: center">近7日年化</div>
+									</div>
+									<div v-if="upFunds[index].ofund_type!=2" class="dis_table_cell" style="width: 35%;border-right: 1px solid #eee;text-align: left;padding-right: 10px;">
+										<div style="color: #FB5C5F;font-size: 20px;margin-bottom:5px;text-align: center" v-text="upFunds[index].nav_total"></div>
+										<div style="color: black;text-align: center">累计净值</div>
+									</div>
+
+									<div class="dis_table_cell" style="text-align: left;padding-left: 20px">
+										<div style="color: #000000;;font-size: 14px;padding-bottom: 5px;" v-text="upFunds[index].fund_name"></div>
+										<div style=";padding-bottom: 5px;" v-text="fundtype(upFunds[index].ofund_type)"></div>
+										<div>
+											<!--<span class="inline-block" style="border-radius: 10px;background-color: #FFE6E7;padding: 0px 5px;font-weight: bold;color: #FD777A;">-->
+											<!--费率:-->
+											<!--<span style="background-color: #FFE6E7;text-decoration: line-through;color: #FD777A;">-->
+											<!--1.50%-->
+											<!--</span> 0.15%-->
+											<!--</span>-->
+											<span v-for="(item2,index2) in upFunds[index].TradeLimits">
+										<span v-if="index2=='022'||index2=='020'" class="inline-block" style="border-radius: 10px;background-color: #FFE6E7;padding: 0px 5px;font-weight: bold;color: #FD777A;" v-text="upFunds[index].TradeLimits[index2].min_value+'元起投'">
+										</span>
+											</span>
+											<span class="inline-block" style="border-radius: 10px;background-color: #FFE6E7;padding: 0px 5px;font-weight: bold;color: #FD777A;" v-text="riskLevel(upFunds[index].ofund_risklevel)">
+									</span>
+										</div>
+									</div>
+								</div>
+
+							</div>
+
+						</div>
+						<!--单个内容div end-->
+
+					</div>
+					<!--推荐产品end-->
+
+				</div>
+
+				<!--热点资讯-->
+				<div id="newsDiv">
+					<div style="font-size: 16px;padding: 10px 0px 10px 10px;background-color: white;border-bottom: 1px solid #EEEEEE;color: black;margin-top: 5px;">
+						热点资讯
+						<!--<span @click="lookmore()" id="more" style="padding-top:2px;font-size: 14px;color: #0053A5;float: right;">
+							查看更多
+							<img src="../../images/icon/right.png" style="width: 20px;height: 20px;margin-right: 10px;" alt="">
+						</span>-->
+					</div>
+					<div v-for="(item,index) in newsList.slice(0, 5)">
+						<a id="rdxiangqing" href="javascript:void(0);" @click="goNewsDetail(newsList[index].id,newsList[index].title)">
+							<!--<div >-->
+							<!--<img :src="newsList[index].image_uri">-->
+							<!--</div>-->
+							<!--<div>-->
+							<!--<h4 v-text="newsList[index].title"></h4>-->
+							<!--<ul>-->
+							<!--<li v-text="newsList[index].author.display_name"></li>-->
+							<!--<li v-text="newsList[index].display_time"></li>-->
+							<!--</ul>-->
+							<!--</div>-->
+							<!--单个内容div-->
+							<div class=" bg-bai" style="border-bottom: 1px solid #EEEEEE;padding:10px 0px;">
+								<div class="dis_table wd90">
+									<div class="dis_table_cell textleft" style="width: 100px">
+										<img :src="newsList[index].image_uri" style="height: 60px;width: 90px">
+									</div>
+									<div class="dis_table_cell textleft" style="vertical-align: top;">
+										<div style="height: 50px" v-text="newsList[index].title"></div>
+										<div style="">
+											<span style="color: #999999" v-text="newsList[index].author.display_name"></span>
+											<div style="display: inline-block;padding-left: 5px;padding-right: 5px;color: #999999">|</div>
+											<span style="color: #999999" v-text="formartDisplayDate(newsList[index].display_time)"></span>
+										</div>
+									</div>
+								</div>
+							</div>
+							<!--单个内容div end-->
+						</a>
+
+					</div>
+					<div @click="lookmore()" id="more" style="padding: 10px 0px 10px 10px;background-color: white;border-bottom: 1px solid #EEEEEE;font-size: 14px;color: #0053A5                         ;">
+						查看更多
+						<img src="../../images/icon/right.png" style="width: 20px;height: 20px;float: right;margin-right: 10px;" alt="">
+					</div>
+				</div>
+				<!--今日要闻end-->
+
+				<!--拨打客服弹出窗-->
+				<div id="payWechartWindow" class="mui-popover mui-popover-action mui-popover-bottom" style="border: 1px solid #000">
+					<ul class="mui-table-view">
+						<li class="mui-table-view-cell">
+							<span style="color: #000;">
+							联系客服：请拨打客服电话（400-885-9999）
+								</span>
+						</li>
+						<li class="mui-table-view-cell">
+							<a href="#" class="choice">立刻拨号</a>
+						</li>
+					</ul>
+					<ul class="mui-table-view">
+						<li class="mui-table-view-cell">
+							<a href="#picture"><b>取消</b></a>
+						</li>
+					</ul>
+				</div>
+				<!--拨打客服弹出窗-->
+			</div>
+			<div class="pull-bottom-tips"></div>
+		</div>
+		<div id="loginDiv" style="position: fixed;bottom: 0px;opacity: .8;z-index: 1000;">
+			<template v-if="loginFlag==false">
+
+				<div class="dis_table wd100" style="height: 60px;background-color: #555;z-index: 1000;">
+					<div class="dis_table_cell wd70" style="color: white;text-align: left;font-size: 16px;padding-left: 10px;">千万投资者的放心之选</div>
+					<div class="dis_table_cell" style="">
+						<button id="btn-login" style="width: 60px;height: 30px;border: 0px;color: white;background-color: #FB6B6E;opacity: 1">登录</button>
+					</div>
+					<div class="dis_table_cell">
+						<img @click="closeDiv" style="width: 25px;height: 25px" src="../../images/icon/icon_close.png" />
+					</div>
+				</div>
+
+			</template>
+		</div>
+		<script src="../../js/h.min.js"></script>
+		<script src="../../js/mui.min.js"></script>
+		<script src="../../js/immersed.js"></script>
+		<script src="../../js/xmui-globalEvent.js"></script>
+		<!--<script src="../../js/mui.pullToRefresh.js"></script>
+		<script src="../../js/mui.pullToRefresh.material.js"></script>-->
+		<!-- 滚动条 -->
+		<script src="../../js/swiper.min.js"></script>
+		<!-- 图片缓存-->
+		<script src="../../js/DMobileFrame.js"></script>
+		<script src="../../js/jquery.min_1.8.3.js"></script>
+		<script src="../../js/md5.js"></script>
+		<script src="../../js/com.js"></script>
+		<script src="../../js/com.data.js"></script>
+		<script src="../../js/com.data.huaerjie.js"></script>
+		<!--<script src="../../js/com.mui.js"></script>-->
+		<script src="../../js/vue.js"></script>
+		<script src="../../js/fundsfunction.js"></script>
+		<!--<script src="../../hqup.js"></script>-->
+		<script>
+			var mescroll;
+			var indexVue;
+			var newsVue;
+			var loginvue;
+			mui.ready(function() {
+                mui(".mui-scroll-wrapper").scroll({
+                    bounce: false, //是否启用回弹
+                    indicators: false, //是否显示滚动条
+                    deceleration: 0.003//flick 减速系数，系数越大，滚动速度越慢，滚动距离越小，默认值0.0006
+                });
+				
+			});
+			mui.plusReady(function() {
+//		        var deceleration = mui.os.ios ? 0.003 : 0.0009;
+//		        mui(".mui-scroll-wrapper").scroll({
+//		            bounce: true, //是否启用回弹
+//		            indicators: true //是否显示滚动条
+//		            deceleration: deceleration //flick 减速系数，系数越大，滚动速度越慢，滚动距离越小，默认值0.0006
+//		        });		
+				var newsWebURL = "";
+				com.data.huaerjie.getNewsWebURL({
+					sys_code: 'news_web_url'
+				}, function(data) {
+
+					var sysCfg = data.result_list;
+					if(sysCfg != null && sysCfg.length != 0) {
+						newsWebURL = sysCfg[0].sysValue;
+						newsWebURL = "https://newsjijin.dzqh.com.cn/";
+					}
+
+					//					console.log('123'+JSON.stringify(data));
+					//console.log(newsWebURL);
+					//newsWebURL = data.items;
+				});
+
+				mui('body').on('tap', '#btn-login', function() {
+					com.plus.openWindowX('../login.html', {});
+				});
+				mui('body').on('tap', '#btn-reg', function() {
+					com.plus.openWindowX('../register.html', {});
+				});
+
+				//财经日历
+				mui('body').on('tap', '#caijingcalander', function() {
+					//					com.plus.openWindowX(newsWebURL + 'page/livenews/live_news.html', {});
+					com.plus.openWindowX('../quotepage/caijingrili.html', {});
+				});
+				//热点新闻
+				mui('body').on('tap', '#hotnews', function() {
+					//					com.plus.openWindowX(newsWebURL + 'page/article/articles.html', {});
+					com.plus.openWindowX('../quotepage/hotnews.html', {});
+				});
+				mui('body').on('tap', '#kefu', function() {
+					//                    mui('#payWechartWindow').popover('toggle');
+					//                  getFundChoices2();
+					com.plus.openWindowX('../tools/kefu.html', {});
+				});
+				mui('body').on('tap', '#mycricle', function() {
+					//com.plus.openWindowX('../mycircle/circle_index.html', {});
+<!--                    mui.alert("即将上线")-->
+                               com.plus.openWindowX('../tools/kefu.html', {});
+				});
+
+				// 期货开户
+				mui('body').on('tap', '#qihuokaihu', function() {
+					//					com.data.user.showMyInfo({}, function(data) {
+					//						var userInfo = data.result_map;
+					//						com.plus.openWindowX('../quotepage/qihuokaihu.html', {
+					//							phone: userInfo.mobile_tel
+					//						});
+					//					})
+					
+                
+                   com.data.user.showMyInfo({}, function(data) {
+                        var userInfo = data.result_map;
+                            com.plus.openWindowX('warn.html', {
+                                phone: userInfo.mobile_tel
+                            });
+                        })
+                   
+                               //开户sdk
+
+				});
+
+				// 期货行情
+				mui('body').on('tap', '#qihuohangqing', function() {
+					//com.plus.openWindowX('../quotepage/qihuohangqing.html', {});
+<!--                    interac();-->
+                               
+                               plus.bridge.exec( 'pbmobile', 'openPbmobilePage', [] );
+				});
+
+				// 王者杯
+				mui('body').on('tap', '#wangzhebei', function() {
+					com.plus.openWindowX('../quotepage/wangzhebei.html', {});
+				});
+
+				// 基金开户
+				mui('body').on('tap', '#jijinkaihu', function() {
+					com.plus.openWindowX('../register.html', {});
+				});
+
+				// 公募基金
+				mui('body').on('tap', '#gongmujijin', function() {
+					com.plus.openWindowX('../fundspage/fundslist_public.html', {
+						index: true
+					});
+				});
+
+				//高端理财
+				mui('body').on('tap', '#gaoduanlicai', function() {
+					mui.alert("即将上线")
+				});
+
+				// 东方红资管
+				mui('body').on('tap', '#ziguan', function() {
+					mui.alert("即将上线")
+				});
+
+				mui('body').on('tap', '.choice', function() {
+					plus.device.dial(4008859999, true);
+				});
+
+				//焦点图切换
+				mui('body').on('tap', '.focuslink', function() {
+					var weburl = this.getAttribute('href');
+					//alert(go);
+					if(weburl != "" && weburl != null) {
+						mui.openWindow({
+							url: "../quotepage/focus.html",
+							extras: {
+								weburl: weburl
+							}
+						});
+					}
+				});
+				
+				//热点新闻
+				newsVue = new Vue({
+					el: '#newsDiv',
+					data: {
+						newsList: [],
+						loginFlag: false
+					},
+					methods: {
+						goNewsDetail: function(article_id, title) {
+							title = encodeURIComponent(encodeURIComponent(title));
+							var url = 'https://newsjijin.dzqh.com.cn/page/article/article_detail.html?article_id=' + article_id + '&title=' + title;
+							//var url="https://newsjijin.dzqh.com.cn/page/article/article_detail.html";
+							//									com.plus.openWindowX(url, {});
+							mui.openWindow({
+								url: url,
+								id: 'hotnewscontent',
+								styles: {
+									top: '0', //新页面顶部位置
+									statusbar: {
+										immersed: true,
+										background: '#FB5C5F'
+									}
+								},
+								extras: {
+
+								}
+							});
+						},
+						formartDisplayDate: function(time) {
+							return com.util.formatDate(parseInt(time + "000"), "yyyy-MM-dd HH:mm:ss", 1)
+						},
+						lookmore: function() {
+							//									com.plus.openWindowX(newsWebURL + 'page/article/articles.html', {});
+							//								alert(newsWebURL)
+							mui.openWindow({
+								url: newsWebURL + 'page/article/articles.html',
+								id: 'gengduo',
+								styles: {
+									top: '0', //新页面顶部位置
+									statusbar: {
+										immersed: true,
+										background: '#FB5C5F'
+									}
+								},
+								extras: {
+
+								}
+
+							});
+						}
+					},
+					mounted: function() {
+						var this_ = this;
+						com.data.huaerjie.getMostReadNews({}, function(data) {
+							console.log(JSON.stringify(data.items));
+							//						    alert(JSON.stringify(data.items));
+							this_.newsList = data.items;
+						});
+					}
+				});
+
+				indexVue = new Vue({
+					el: '#vue-content',
+					data: {
+						upFunds: {},
+						loginFlag: false
+					},
+					methods: {
+						riskLevel: function(fundRiskLevel) {
+							return getFundRiskLevelName(fundRiskLevel);
+						},
+						fundtype: function(fundtype) {
+							return getFundTypeNameByType(fundtype);
+						},
+						showFundMore: function(code, name) {
+							//                          com.plus.openWindowX('../fundspage/fundslist_public.html',{});
+							setTimeout(function() {
+								com.plus.openWindowX('../fundspage/funds_more.html', {
+									code: code,
+									name: name
+								});
+							}, 200)
+						}
+					},
+					mounted: function() {
+						var this_ = this;
+						com.data.funds.getUpFunds({}, function(data) {
+
+							this_.upFunds = data.result_list;
+						});
+						// 获取头部轮播图
+						new Swiper('#adImgs', {
+							pagination: '.swiper-pagination',
+							paginationClickable: true
+						});
+						new Swiper('#adImgs2', {
+							pagination: '.swiper-pagination',
+							paginationClickable: true
+						});
+					}
+				});
+
+				loginvue = new Vue({
+					el: '#loginDiv',
+					data: {
+						loginFlag: false
+					},
+					methods: {
+						closeDiv: function() {
+							this.loginFlag = true;
+						}
+					},
+					mounted: function() {
+						var this_ = this;
+						this_.loginFlag = com.data.loginToken.get() != null;
+						mui.ge.addListener("reloadIndex", function(args) {
+							this_.loginFlag = com.data.loginToken.get() == null ? false : true;
+							mui.ge.callback(args, {})
+						});
+
+					}
+				});
+//				点击事件处理
+//				//查看更多
+				mui('body').on('tap', '#more', function (event) {
+					this.click();
+				});
+				//精选产品
+				mui('body').on('tap', '#jingxuan', function (event) {
+					this.click();
+				});
+				//热点资讯点击
+				mui('body').on('tap', '#rdxiangqing', function (event) {
+					this.click();
+				});
+
+				//						var scroll = new com.mui.muiScroll(
+				//							document.querySelector("#index-div"),
+				//							function(index, size, do_success, do_error) {
+				//								
+				//								com.data.funds.getUpFunds({}, function(data) {
+				//									console.log(JSON.stringify(data.items))
+				//									indexVue.upFunds = data.result_list;
+				//								});
+				//								com.data.huaerjie.getMostReadNews({}, function(data) {
+				//									console.log(JSON.stringify(data.items));
+				//									newsVue.newsList = data.items;
+				//								});
+				//								loginvue.loginFlag = com.data.loginToken.get() == null ? false : true
+				//								do_success(0);
+				//							}
+				//						)
+				//						scroll.refresh();
+//										获取滚动条高度，显示头部
+						var scroll = mui('.mui-scroll-wrapper').scroll();
+						document.querySelector('.mui-scroll-wrapper').addEventListener('scroll', function(e) {
+							console.log(scroll.y)
+						    if(scroll.y < -120) {
+								$('.mui-bar-nav').show();
+							} else if(scroll.y >-10) {
+								$('.mui-bar-nav').hide();
+							}
+						})
+				//		获取滚动条高度，显示头部 安卓
+//						window.onscroll = function(){
+//							console.log(document.body.scrollTop)
+
+//							 if(document.body.scrollTop > 100) {
+//								$('.mui-bar-nav').show();
+//							} else if(document.body.scrollTop == 0) {
+//								$('.mui-bar-nav').hide();
+//							}
+//						}
+				mui.init({
+					pullRefresh: {
+						container: ".mui-scroll-wrapper", //下拉刷新容器标识，querySelector能定位的css选择器均可，比如：id、.class等
+						down: {
+//							height: 50, //可选,默认50.触发下拉刷新拖动距离,
+//							auto: true, //可选,默认false.首次加载自动下拉刷新一次
+							contentdown: "下拉可以刷新", //可选，在下拉可刷新状态时，下拉刷新控件上显示的标题内容
+//							contentover: "释放立即刷新", //可选，在释放可刷新状态时，下拉刷新控件上显示的标题内容
+							contentrefresh: "正在刷新...", //可选，正在刷新状态时，下拉刷新控件上显示的标题内容
+							callback: pulldownRefresh
+						}
+					}
+				});
+
+				function pulldownRefresh() {
+					com.data.funds.getUpFunds({}, function(data) {
+						//console.log(JSON.stringify(data.items))
+						indexVue.upFunds = data.result_list;
+					});
+					com.data.huaerjie.getMostReadNews({}, function(data) {
+						//alert(JSON.stringify(data.items));
+						newsVue.newsList = data.items;
+					});
+					loginvue.loginFlag = com.data.loginToken.get() == null ? false : true;
+					setTimeout(function() {
+						mui('.mui-scroll-wrapper').pullRefresh().endPulldownToRefresh();
+					}, 1000); 
+
+				}
+			});
+			
+		</script>
+	</body>
+
+</html>

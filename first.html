@@ -1,0 +1,179 @@
+<!DOCTYPE html>
+<html>
+<body>
+<!-- 主要处理逻辑 -->
+<!--<img class="wd100 fixed h100" src="img/mian.png"/>-->
+<script src="js/h.min.js"></script>
+<script src="js/mui.min.js"></script>
+<script src="js/immersed.js"></script>
+<script src="js/xmui-globalEvent.js"></script>
+<script src="js/doT.min.js"></script>
+<script src="js/com.js"></script>
+<script src="js/com.data.js"></script>
+<script src="js/com.data.app_pro.js"></script>
+<script>
+	
+    mui.plusReady(function(){
+		
+        plus.navigator.setStatusBarBackground("#FB5C5F");
+        //仅支持竖屏显示
+        plus.screen.lockOrientation("portrait-primary");
+        //清空codeToken 的缓存
+        com.data.codeToken.clear();
+        //进入主页
+        mui.ge.addListener("loadMain", function(args){
+            loadMain();
+            mui.ge.callback(args, {});
+        });
+		
+//        mui.ge.addListener("initData", function(args) {
+//            initData(function() {
+//                mui.ge.callback(args, {});
+//            });
+//        });
+
+        //判断是否是最新的版本
+        //首先检查版本更新,如果是不更新，那么就继续
+		//      com.plus.openWindowX("app/home_user.html");
+				//读取本地存储，检查是否为首次启动
+				var showGuide = plus.storage.getItem("lauchFlag");
+				//仅支持竖屏显示
+				plus.screen.lockOrientation("portrait-primary");
+				if(showGuide) {
+					//有值，说明已经显示过了，无需显示；
+					//关闭splash页面；
+//					plus.navigator.closeSplashscreen();
+//					plus.navigator.setFullscreen(false);
+					//预加载
+					com.plus.openWindowX("app/home_user.html");
+				} else {
+					//显示启动导航
+					mui.openWindow({
+						id: 'guide',
+						url: 'guide.html',
+						styles: {
+							popGesture: "none"
+						},
+						show: {
+							aniShow: 'none'
+						},
+						waiting: {
+							autoShow: false
+						}
+					});
+					
+				}
+        plus.webview.currentWebview().hide();
+//      update_app.todo();
+		
+    });
+	
+    var loadMain = function (fun_over) {
+        var webObjs = plus.webview.all();
+        var launch_id = plus.webview.getLaunchWebview().id;
+        for (var i = 0; i < webObjs.length; i++) {
+            if (webObjs[i].id == launch_id) {
+                continue;
+            }
+            plus.webview.close(webObjs[i]);
+        }
+       
+			com.plus.openWindowX("app/home_user.html", null, '进入主页', function () {
+	            plus.webview.currentWebview().hide();
+	            if (fun_over) {
+	                fun_over(1);
+	            }
+        })    
+	}
+    //更新APP
+    var update_app = {
+        todo: function (do_success_) {
+            var that_ = this;
+            //检查更新
+            //获取到当前的版本
+            var ov_ = plus.runtime.version;
+//            var pro_v = com.data.app_pro.getV();
+            var type_str = "android";
+            if (mui.os.ios) {
+                type_str = "ios";
+            }
+            com.data.common.version({
+                code: type_str,
+                version: ov_
+//                pro_version: pro_v
+            }, function (data){
+                //如果区县版本需要更新的话
+//                com.data.app_pro.update(data.app_pro);
+                //如果app需要更新的话
+                if (data.app){
+                    var nv, title_, note_, url_,is_pian;
+                    is_pian = data.result;
+                    nv = data.app.versionName;
+                    url_ = data.app.url;
+                    title_ = "最新版本（" + nv + "）";
+                    note_ = data.app.appDesc;
+//                  if (nv != null){
+                        if (is_pian == 1){
+                            mui.alert(
+                                note_, title_,
+                                function(data_){
+                                    plus.runtime.openURL(url_, that_.error);
+                                });
+                            return;
+                        }else if(is_pian == 0){
+//                          com.plus.openWindowX("app/home_user.html", {"isMain": true});
+						mui.openWindow({  
+			                url: "Advertisement.html"
+			            });
+                        }else if(is_pian == 2){
+                            com.plus.openWindowX("app/usermain/lottery_results.html", {"isMain": true});
+                            com.plus.openWindowX("app/home_user.html", {"isMain": true});
+						mui.openWindow({  
+			                url: "Advertisement.html"
+			            });  
+                        }
+//                  } else {
+//                      if (do_success_) {
+//                          do_success_();
+//                      }
+//                  }
+                } else {
+                    if (do_success_) {
+                        do_success_();
+                    }
+                }
+            }, function (msg_){
+                mui.confirm('网络请求失败！', '', ['刷新', '关闭应用'], function (e) {
+                    if (e.index == 1) {
+                        com.plus.closeApp();
+                    } else {
+                        update_app.todo();
+                    }
+                });
+            });
+        },
+        error: function (msg) {
+            mui.alert('更新失败[' + msg + ']', function () {
+                com.plus.closeApp();
+            });
+        }
+    }
+
+    //			CCom.get({
+    //				url:"",
+    //				data:{},
+    //				success:function(data){
+    //
+    //				}
+    //
+    //			});
+</script>
+</body>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="initial-scale=1.0, maximum-scale=1.0, user-scalable=no"/>
+    <title>启动首页</title>
+    <link rel="stylesheet" href="css/mui.min.css">
+    <link rel="stylesheet" href="css/gloab.css">
+</head>
+</html>

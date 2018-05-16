@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="UTF-8">
+		<title>首页</title>
+		<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+		<link href="../../css/mui.css" rel="stylesheet" />
+		<link href="../../css/gloab.css" rel="stylesheet" />
+		<link href="../../css/xmui.pullToRefresh.material.css" rel="stylesheet" />
+		<link href="../../css/swiper.min.css" rel="stylesheet">
+		<link href="../../css/mui.picker.css" rel="stylesheet">
+		<link href="../../css/mui.poppicker.css" rel="stylesheet">
+		<style>
+			.bg-title {
+				background-color: #c70321;
+			}
+			
+			.my-swiper {
+				background-color: white;
+				height: 35px;
+			}
+			
+			
+			
+			.post-img {
+				width: 30vw;
+				height: 30vw;
+			}
+		</style>
+
+	</head>
+
+	<body>
+		<header class="mui-bar mui-bar-nav bg-title">
+			<a class="mui-action-back mui-icon mui-icon-left-nav mui-pull-left color-white"></a>
+			<h1 class="mui-title color-white titlecolor">我的帖子</h1>
+		</header>
+
+		<div class="mui-content mui-scroll-wrapper">
+			<div class="mui-scroll">
+				<div id="my-post">
+					<div class="post-item mb10" v-for="index in 5">
+						<!-- 文章作者信息 -->
+						<div class="pl10 wd100 bg-bai" style="height: 60px;">
+							<div class="wd80 float-left">
+								<div style="float:left;margin:5px;width: 50px;height: 50px;display: inline-block;border: 0px solid #999;overflow: hidden;border-radius: 60px;background-color: white;">
+									<img src="../../images/icon/userheard.png" width="50" height="50">
+								</div>
+								<div style="float: left;" class="ml5">
+									<div style="font-size: 16px;line-height: 25px;margin-top: 10px;">
+										飞狐4587
+									</div>
+									<div style="color: #E0E0E0;">
+										3小时前
+									</div>
+								</div>
+							</div>
+							<div class="wd20 float-left textcenter ft14" style="line-height: 50px;">
+								待审
+							</div>
+						</div>
+						<!-- 文章内容信息 -->
+						<div class="pl10 wd100 bg-bai float-left pr10">
+							<p class="ft16 mt5">
+								进入期货市场有段时间了，前辈老师都说要建立自己的系统规则，理解起来真不易！从实践 上看，自己本身就是系统参与的主要因素，没有时间和损失金钱的挣扎过渡过程， 是不会领悟也不能进阶思维的。
+							</p>
+						</div>
+						<!-- 文章图片 -->
+						<div class="pl10 wd100 bg-bai pb10 pr10">
+							<img class="post-img" src="https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1510576444219&di=9bac5874013928de05ffe2b8596d5f69&imgtype=0&src=http%3A%2F%2Fwww.360caifu.com%2Fupload%2Fcms%2Fnewsinfo%2Fimage%2F20170801%2F20170801165347_668.png" alt="" />
+							<img class="post-img" src="https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1510576444219&di=9bac5874013928de05ffe2b8596d5f69&imgtype=0&src=http%3A%2F%2Fwww.360caifu.com%2Fupload%2Fcms%2Fnewsinfo%2Fimage%2F20170801%2F20170801165347_668.png" alt="" />
+							<img class="post-img" src="https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1510576444219&di=9bac5874013928de05ffe2b8596d5f69&imgtype=0&src=http%3A%2F%2Fwww.360caifu.com%2Fupload%2Fcms%2Fnewsinfo%2Fimage%2F20170801%2F20170801165347_668.png" alt="" />
+							<img class="post-img" src="https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1510576444219&di=9bac5874013928de05ffe2b8596d5f69&imgtype=0&src=http%3A%2F%2Fwww.360caifu.com%2Fupload%2Fcms%2Fnewsinfo%2Fimage%2F20170801%2F20170801165347_668.png" alt="" />
+						</div>
+						<!-- 文章音视频 -->
+						<div class="pl10 pr10 bg-bai"></div>
+						<!-- 修改按钮 -->
+						<div class="pl10 pr10 bg-bai textcenter" style="border-top: 0.5px solid #EEEEEE;">
+							<div class="mui-row">
+								<div class="mui-col-sm-4 mui-col-xs-4" style="padding: 10px 0;border-right: 0.5px solid #EEEEEE;font-size: 16px;">
+									修改图文
+								</div>
+								<div class="mui-col-sm-4 mui-col-xs-4" style="padding: 10px 0;border-right: 0.5px solid #EEEEEE;font-size: 16px">
+									修改视音频
+								</div>
+								<div class="mui-col-sm-4 mui-col-xs-4" style="font-size: 16px;padding: 10px 0;">
+									删除
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+
+		<script src="../../js/h.min.js"></script>
+		<script src="../../js/mui.min.js"></script>
+		<script src="../../js/immersed.js"></script>
+		<script src="../../js/com.js"></script>
+		<script src="../../js/xmui-globalEvent.js"></script>
+		<script src="../../js/mui.pullToRefresh.js"></script>
+		<script src="../../js/mui.pullToRefresh.material.js"></script>
+		<script src="../../js/com.js"></script>
+		<script src="../../js/swiper.min.js"></script>
+		<script src="../../js/com.data.js"></script>
+		<script src="../../js/com.mui.js"></script>
+		<script src="../../js/mui.picker.js"></script>
+		<script src="../../js/mui.poppicker.js"></script>
+		<script src="../../js/jquery.min_1.8.3.js"></script>
+		<script src="../../js/vue.js"></script>
+
+		<script>
+			mui.ready(function() {
+				mui(".mui-scroll-wrapper").scroll({
+					scrollY: true, //是否竖向滚动
+					scrollX: false, //是否横向滚动
+					bounce: true, //是否启用回弹
+					indicators: true, //是否显示滚动条
+					deceleration: 0.0005 //flick 减速系数，系数越大，滚动速度越慢，滚动距离越小，默认值0.0006
+				});
+			});
+			var vue_body = new Vue({
+				el: "#my-post",
+				data: {
+
+				},
+				methods: {
+
+				},
+				mounted: function() {
+
+				}
+			});
+			mui.plusReady(function() {
+
+			});
+		</script>
+	</body>
+
+</html>

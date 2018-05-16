@@ -1,0 +1,198 @@
+
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <title>首页</title>
+    <meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+    <link href="../../css/mui.css" rel="stylesheet" />
+    <link href="../../css/gloab.css" rel="stylesheet" />
+    <link href="../../css/xmui.pullToRefresh.material.css" rel="stylesheet" />
+    <link href="../../css/swiper.min.css" rel="stylesheet">
+    <style>
+        .swiper-slide{
+            width: 100px;
+        }
+        input[type=radio][name=type-choice]{
+            display: none;
+            opacity: 0;
+        }
+
+        input[type=radio][name=type-choice]+label {
+            font-size: 14px;
+            display: inline-block;
+            width: 100%;
+            text-align: center;
+            line-height: 34px;
+        }
+
+        input[type=radio][name=type-choice]:checked+label {
+            border-bottom: 1px solid #FE7E00;
+            color: #FE7E00;
+        }
+        .bg-title{
+            background-color:#c70321;
+        }
+        .my-swiper{
+            background-color: white;
+            height: 35px;
+        }
+        .cell-ji{
+            text-align: center;
+            background-color: #ffffff;
+        }
+        .cell-ou{
+            text-align: center;
+            background-color: #F9F9F9;
+
+        }
+        .bg-title{
+            background-color:#FB5C5F;
+        }
+    </style>
+
+</head>
+<body>
+<header class="mui-bar mui-bar-nav bg-title">
+    <a class="mui-action-back mui-icon mui-icon-left-nav mui-pull-left color-white"></a>
+    <h1 class="mui-title color-white titlecolor">请选择银行卡</h1>
+    
+</header>
+
+<div class="mui-content mui-scroll-wrapper" >
+    <div class="mui-scroll" id="station-list" style="padding-bottom: 50px;">
+
+		<div id="vue-body">
+
+			<!--单个银行卡 div start-->
+			<div  v-for="(item,index) in cardList" class="bg-bai wd100 mb5 ">
+				<div class="dis_table wd90 choice-card" @click="choicecard(cardList[index].bank_no,getBankName(cardList[index].bank_no),cutBankNo(cardList[index].bank_account),cardList[index].trade_acco)" >
+					<!--card-no="{{cardList[index].bank_no}}" card-name="{{getBankName(cardList[index].bank_no)}}" card-num="{{cutBankNo(cardList[index].bank_account)}}"-->
+					<div class="dis_table_cell" style="width: 15%;text-align: left;">
+						<img :src="getBankImg(cardList[index].bank_no)" alt="" width="40" height="40"/>
+					</div>
+					<div class="dis_table_cell" style="text-align: left;padding-top: 15px;padding-bottom: 15px;">
+						<div style="font-size: 16px;" v-text="getBankName(cardList[index].bank_no)"></div>
+						<div style="color: #666;" v-text="'尾号'+cutBankNo(cardList[index].bank_account)"></div>
+					</div>
+				</div>
+			</div>
+			<!--单个银行卡 div end-->
+
+
+		</div>
+
+
+    </div>
+</div>
+
+<script src="../../js/h.min.js"></script>
+<script src="../../js/mui.min.js"></script>
+<script src="../../js/immersed.js"></script>
+<script src="../../js/com.js"></script>
+<script src="../../js/xmui-globalEvent.js"></script>
+<script src="../../js/mui.pullToRefresh.js"></script>
+<script src="../../js/mui.pullToRefresh.material.js"></script>
+<script src="../../js/com.js"></script>
+<script src="../../js/swiper.min.js"></script>
+<script src="../../js/com.data.js"></script>
+<script src="../../js/com.mui.js"></script>
+
+
+<script src="../../js/vue.js"></script>
+<script src="../../js/jquery.min_1.8.3.js"></script>
+<script src="../../js/md5.js"></script>
+<script src="../../js/fundsfunction.js"></script>
+
+<script>
+    mui.ready(function () {
+        mui(".mui-scroll-wrapper").scroll({
+            bounce: true,//是否启用回弹
+            indicators: true,//是否显示滚动条
+            deceleration:  0.0005 //flick 减速系数，系数越大，滚动速度越慢，滚动距离越小，默认值0.0006
+        });
+    });
+
+    var listenType = null;
+
+    var vue_body = new Vue({
+        el:"#vue-body",
+        data:{
+            cardList:{}
+        },
+        methods:{
+            getBankImg:function(cardNo){
+                return getBankImg(cardNo)
+            },
+            getBankName:function(cardNo){
+                return getBankName(cardNo);
+            },
+            cutBankNo:function(bankNo){
+                return bankNo.substring(bankNo.length-4);
+            },
+            choicecard:function(cardNo,cardName,cardNum,trade_acco){
+//          	alert(cardNo);
+//          	alert(cardName);
+//          	alert(cardNum);
+//				console.log(JSON.stringify(vue_body.cardList));
+				if(listenType==null){
+					mui.ge.fireEvent("choiceCardBuy",{
+		                card_no:cardNo,
+						card_name:cardName,
+						card_num:cardNum
+					}, function (args){
+		                mui.back();
+		            });	
+				}else if(listenType=='moneyReturn'){
+					mui.ge.fireEvent("choiceCardReturn",{
+		                card_no:cardNo,
+						card_name:cardName,
+						card_num:cardNum,
+                        trade_acco:trade_acco,
+					}, function (args){
+		                mui.back();
+		            });
+				}else if(listenType=='order'){
+                    mui.ge.fireEvent("choiceCardOrder", {
+                        card_no:cardNo,
+                        card_name:cardName,
+                        card_num:cardNum
+                    }, function (args){
+                        mui.back();
+                    });
+				}
+	            
+            }
+        },
+        mounted:function () {
+
+        }
+    });
+
+    mui.plusReady(function(){
+        listenType = com.plus.getCurrWebview().self.listenType;
+		
+        com.data.user.showMyCard({},function (data){
+            vue_body.cardList = data.result_list;
+        })
+
+//		mui('body').on('tap', '.choice-card', function (){
+//          var card_no = this.getAttribute("card-no");
+//          var card_name = this.getAttribute("card-name");
+//          var card_num = this.getAttribute("card-num");
+//			//执行监听时间
+//          mui.ge.fireEvent("choiceCardBuy", {
+//              card_no:card_no,
+//				card_name:card_name,
+//				card_num:card_num
+//			}, function (args) {
+//              mui.back();
+//          });
+//
+//      });
+
+    })
+</script>
+</body>
+</html>

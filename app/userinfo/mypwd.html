@@ -1,0 +1,135 @@
+
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <title>首页</title>
+    <meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+    <link href="../../css/mui.css" rel="stylesheet" />
+    <link href="../../css/gloab.css" rel="stylesheet" />
+    <link href="../../css/xmui.pullToRefresh.material.css" rel="stylesheet" />
+    <link href="../../css/swiper.min.css" rel="stylesheet">
+    <style>
+        .swiper-slide{
+            width: 100px;
+        }
+        input[type=radio][name=type-choice]{
+            display: none;
+            opacity: 0;
+        }
+
+        input[type=radio][name=type-choice]+label {
+            font-size: 14px;
+            display: inline-block;
+            width: 100%;
+            text-align: center;
+            line-height: 34px;
+        }
+
+        input[type=radio][name=type-choice]:checked+label {
+            border-bottom: 1px solid #FE7E00;
+            color: #FE7E00;
+        }
+        .bg-title{
+            background-color:#c70321;
+        }
+        .my-swiper{
+            background-color: white;
+            height: 35px;
+        }
+        .cell-ji{
+            text-align: center;
+            background-color: #ffffff;
+        }
+        .cell-ou{
+            text-align: center;
+            background-color: #F9F9F9;
+
+        }
+       
+        .mui-input-group .mui-input-row:after{
+				height: 0px;
+			}
+    </style>
+
+</head>
+<body>
+<header class="mui-bar mui-bar-nav bg-title">
+    <a class="mui-action-back mui-icon mui-icon-left-nav mui-pull-left color-white"></a>
+    <h1 class="mui-title color-white titlecolor">修改密码</h1>
+</header>
+
+<div class="mui-content mui-scroll-wrapper" >
+    <div class="mui-scroll" id="" style="padding-bottom: 50px;">
+    	
+
+		<div id="chang_pwd"  class="wd100 bg-bai pwdlist"  style="border-bottom: 1px solid #EEEEEE;margin-top: 0.2px;">
+			<div class="dis_table wd90" style="">
+				<div class="dis_table_cell wd80 pt10 pb10 textleft"><img src="../../images/icon/icon_pwd2.png" style="position: relative;top:-3px;" alt="" width="28" height="28"> <span class="ft14 inline-block " style="color:#000000;line-height: 30px;margin-left: 3px;">修改登录密码</span></div>
+				<div class="dis_table_cell textright"><img src="../../images/icon/right.png" width="15" height="20"></div>
+			</div>
+		</div>
+		
+		<div id="chang_moneypwd"  class="wd100 bg-bai pwdlist"  style="border-bottom: 1px solid #EEEEEE;margin-top: 0.2px;">
+			<div class="dis_table wd90" style="">
+				<div class="dis_table_cell wd80 pt10 pb10 textleft"><img src="../../images/icon/icon_moneypwd.png" style="position: relative;top:-3px;" alt="" width="28" height="28"> <span class="ft14 inline-block " style="color:#000000;line-height: 30px;margin-left: 3px;">修改基金交易密码</span></div>
+				<div class="dis_table_cell textright"><img src="../../images/icon/right.png" width="15" height="20"></div>
+			</div>
+		</div>
+		
+<!--        <div id="chang_handpwd" class="wd100 bg-bai pwdlist"  style="border-bottom: 1px solid #EEEEEE;margin-top: 0.2px;">-->
+<!--            <div class="dis_table wd90" style="">-->
+<!--                <div class="dis_table_cell wd80 pt10 pb10 textleft"><img src="../../images/icon/icon_pwd2.png" style="position: relative;top:-3px;" alt="" width="28" height="28"> <span class="ft14 inline-block " style="color:#000000;line-height: 30px;margin-left: 3px;">修改手势密码，功能未完成</span></div>-->
+<!--                <div class="dis_table_cell textright"><img src="../../images/icon/right.png" width="15" height="20"></div>-->
+<!--            </div>-->
+<!--        </div>-->
+
+		
+    </div>
+</div>
+
+
+<script src="../../js/h.min.js"></script>
+		<script src="../../js/mui.min.js"></script>
+		<script src="../../js/immersed.js"></script>
+<script src="../../js/com.js"></script>
+<script src="../../js/xmui-globalEvent.js"></script>
+<script src="../../js/mui.pullToRefresh.js"></script>
+<script src="../../js/mui.pullToRefresh.material.js"></script>
+<script src="../../js/com.js"></script>
+<script src="../../js/swiper.min.js"></script>
+<script src="../../js/com.data.js"></script>
+<script src="../../js/com.mui.js"></script>
+
+<script>
+    mui.ready(function () {
+        mui(".mui-scroll-wrapper").scroll({
+            bounce: true,//是否启用回弹
+            indicators: true,//是否显示滚动条
+            deceleration:  0.0005 //flick 减速系数，系数越大，滚动速度越慢，滚动距离越小，默认值0.0006
+        });
+        
+    });
+    mui.plusReady(function(){
+
+        mui('body').on('tap', '#chang_pwd', function(){
+              com.plus.openWindowX('mynewpwd.html', {
+              	changeType:0
+              });
+        });
+        
+        mui('body').on('tap', '#chang_moneypwd', function(){
+              com.plus.openWindowX('mynewpwd.html', {changeType:1});
+        });
+        
+        mui('body').on('tap', '#chang_handpwd',function(){
+              com.plus.openWindowX('handpwd.html',{
+
+              });
+        });
+    })
+</script>
+</body>
+
+</html>

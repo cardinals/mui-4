@@ -1,0 +1,361 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="UTF-8">
+		<title>首页</title>
+		<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+		<link href="../../css/mui.css" rel="stylesheet" />
+		<link href="../../css/gloab.css" rel="stylesheet" />
+		<link href="../../css/xmui.pullToRefresh.material.css" rel="stylesheet" />
+		<link href="../../css/swiper.min.css" rel="stylesheet">
+		<style>
+			.bg-title {
+				background-color: #c70321;
+			}
+			
+			.my_list {
+				transition: background-color .2s!important
+			}
+			
+			.my_list:active {
+				background-color: #EEEEEE!important;
+			}
+			
+			.mui-pull-bottom-tips {
+				display: none !important;
+			}
+		</style>
+		
+	</head>
+
+	<body>
+		<header class="mui-bar mui-bar-nav bg-title">
+			<!--<a class="mui-action-back mui-icon mui-icon-left-nav mui-pull-left color-white"></a>-->
+			<h1 class="mui-title color-white titlecolor">我的</h1>
+		</header>
+
+		<div class="mui-content mui-scroll-wrapper">
+			<div class="mui-scroll" id="station-list" style="padding-bottom: 50px;">
+				<div id="vue-body">
+
+					<!--头部图片+信息-->
+					<!--<div class="wd100">
+                <div class="dis_table wd90">
+                    <div class="dis_table_cell wd10"></div>
+                    <div class="dis_table_cell pt20 " style="padding-bottom: 30px;">
+                        <div style="width: 84px;height: 84px;display: inline-block;border: 2px solid #C9745A;overflow: hidden;border-radius: 60px;background-color: white;">
+                            <img id="show_headimg" src="../../images/icon/userheard.png" width="80" height="80">
+                        </div>
+                        <br />
+                        <div class="mt10 color-white ft16" style="font-weight: bold;">
+                            张三丰  180****5669
+                        </div>
+                    </div>
+                    <div class="dis_table_cell wd10 my_info" ><img src="../../images/icon/right_weith.png" width="20" height="30"></div>
+                </div>
+            </div>-->
+					<!--<div style="position: relative;top: -174px;z-index: -9;margin-bottom: -174px;">
+                <img src="../../images/temporary/mybkg3.png" style="width: 100%;height: 167px;" alt="">
+            </div>-->
+					<!--头部图片+信息 end-->
+
+					<!--简陋版我的头部信息 start-->
+					<div class="wd100 bg-bai " style="border-bottom: 1px solid #EEEEEE;margin-top: 0.2px;padding: 10px 0px;">
+						<div class="dis_table wd90" style="">
+							<div class="dis_table_cell  pt10 pb10 textleft" style="width: 80px;">
+								<div style="display: inline-block;overflow: hidden;border-radius: 60px;background-color: white;">
+									<img id="show_headimg" src="../../images/icon/userheader2.png" width="70">
+								</div>
+							</div>
+							<div class="dis_table_cell  pt10 pb10 textleft  my_info">
+								<span class="ft14 inline-block " style="color:#000000;line-height: 30px;margin-left: 3px;" v-if="loginFlag!=false" v-text="formatTel(userInfo.mobile_tel)"></span>
+								<span class="ft14 inline-block " style="color:#000000;line-height: 30px;margin-left: 3px;" v-else>登录/注册</span>
+							</div>
+							<div class="dis_table_cell textright  my_info"><img src="../../images/icon/right.png" width="15" height="20"></div>
+						</div>
+					</div>
+
+<!--                    <div id="qihuolist" class="wd100 bg-bai my_list" style="border-bottom: 1px solid #EEEEEE;margin-top: 0.2px;">-->
+<!--                        <div class="dis_table wd90" style="">-->
+<!--                            <div class="dis_table_cell wd80 pt10 pb10 textleft"><img src="../../images/icon/icon_card.png" style="position: relative;top:-3px;" alt="" width="28" height="28"> <span class="ft14 inline-block " style="color:#000000;line-height: 30px;margin-left: 3px;">-->
+<!--                        期货账户</span></div>-->
+<!--                            <div class="dis_table_cell textright"><img src="../../images/icon/right.png" width="15" height="20"></div>-->
+<!--                        </div>-->
+<!--                    </div>-->
+					<div id="jijinlist" class="wd100 bg-bai my_list" style="border-bottom: 1px solid #EEEEEE;margin-top: 0.2px;">
+						<div class="dis_table wd90" style="">
+							<div class="dis_table_cell wd80 pt10 pb10 textleft"><img src="../../images/icon/icon_card.png" style="position: relative;top:-3px;" alt="" width="28" height="28"> <span class="ft14 inline-block " style="color:#000000;line-height: 30px;margin-left: 3px;">
+						基金账户</span></div>
+							<div class="dis_table_cell textright"><img src="../../images/icon/right.png" width="15" height="20"></div>
+						</div>
+					</div>
+					<!--修改密码-->
+					<div class="wd100 bg-bai my_list" id="my_pwd" style="border-bottom: 1px solid #EEEEEE;margin-top: 0.2px;">
+						<div class="dis_table wd90" style="">
+							<div class="dis_table_cell wd80 pt10 pb10 textleft"><img src="../../images/icon/icon_pwd.png" style="position: relative;top:-0px;left: 3px;" alt="" width="20" height="20">
+								<span class="ft14 inline-block " style="color:#000000;line-height: 30px;margin-left: 11px;">
+					修改密码</span></div>
+							<div class="dis_table_cell textright"><img src="../../images/icon/right.png" width="15" height="20"></div>
+						</div>
+					</div>
+
+					<div class="wd100 bg-bai my_list" id="my_kefu" style="border-bottom: 1px solid #EEEEEE;margin-top: 10px;">
+						<div class="dis_table wd90" style="">
+							<div class="dis_table_cell wd80 pt10 pb10 textleft"><img src="../../images/icon/icon_service.png" style="position: relative;top:-0px;left:4px;" alt="" width="20" height="20"> <span class="ft14 inline-block " style="color:#000000;line-height: 30px;margin-left: 11px;">
+					拨打客服电话</span></div>
+							<div class="dis_table_cell textright"><img src="../../images/icon/right.png" width="15" height="20"></div>
+						</div>
+					</div>
+					<div class="wd100 bg-bai my_list" id="my_suggest" style="border-bottom: 1px solid #EEEEEE;margin-top: 0.2px;">
+						<div class="dis_table wd90" style="">
+							<div class="dis_table_cell wd80 pt10 pb10 textleft"><img src="../../images/icon/icon_advance.png" style="position: relative;top:-0px;left: 3px;" alt="" width="20" height="20"> <span class="ft14 inline-block " style="color:#000000;line-height: 30px;margin-left: 11px;">
+					意见与反馈</span></div>
+							<div class="dis_table_cell textright"><img src="../../images/icon/right.png" width="15" height="20"></div>
+						</div>
+					</div>
+					<!--我的信息选项 end-->
+					<div class="bg-bai wd100 mt10" v-if="loginFlag!=false">
+						<input type="button" name="loginout" id="loginout" value="安全退出" style="display: inline-block; border: 0px;width: 100%;height: 40px;color: #000000;" />
+					</div>
+
+				</div>
+
+			</div>
+		</div>
+
+		<!--拨打客服弹出窗-->
+		<div id="payWechartWindow" class="mui-popover mui-popover-action mui-popover-bottom">
+			<ul class="mui-table-view">
+				<li class="mui-table-view-cell">
+					<span style="color: #000;">
+							联系客服：请拨打客服电话（400-885-9999）
+								</span>
+				</li>
+				<li class="mui-table-view-cell">
+					<a href="#" class="choice" style="color: #008000;">立刻拨号</a>
+				</li>
+			</ul>
+		</div>
+		<!--拨打客服弹出窗-->
+		<script src="../../js/h.min.js"></script>
+		<script src="../../js/mui.min.js"></script>
+		<script src="../../js/immersed.js"></script>
+		<script src="../../js/com.js"></script>
+		<script src="../../js/xmui-globalEvent.js"></script>
+		<script src="../../js/mui.pullToRefresh.js"></script>
+		<script src="../../js/mui.pullToRefresh.material.js"></script>
+		<script src="../../js/com.js"></script>
+		<script src="../../js/swiper.min.js"></script>
+		<script src="../../js/com.data.js"></script>
+		<script src="../../js/com.mui.js"></script>
+		<script src="../../js/vue.js"></script>
+		<script src="../../js/jquery.min_1.8.3.js"></script>
+		<script src="../../js/md5.js"></script>
+
+		<script>
+			mui.ready(function() {
+				mui(".mui-scroll-wrapper").scroll({
+					bounce: true, //是否启用回弹
+					indicators: true, //是否显示滚动条
+					deceleration: 0.0005 //flick 减速系数，系数越大，滚动速度越慢，滚动距离越小，默认值0.0006
+				});
+			});
+			var vue_body = new Vue({
+				el: "#vue-body",
+				data: {
+					userInfo: {},
+					loginFlag:false
+				},
+				methods: {
+					formatTel: function(tel) {
+						if(!tel){
+							return ""
+						}
+						return tel.substr(0, 3) + '****' + tel.substr(7)
+					}
+				},
+				mounted: function() {
+					//            com.data.user.showMyInfo({},function (data) {
+					//                vue_body.userInfo = data.result_map;
+					//            })
+				}
+			});
+			
+			mui.plusReady(function() {
+//绽曙 "我的"刷新
+				var scroll = new com.mui.muiScroll(
+					document.querySelector("#station-list"),
+					function(index, size, do_success, do_error) {
+                       if(com.data.loginToken.get() != null){
+                       com.data.user.showMyInfo({}, function(data) {
+                            vue_body.userInfo = data.result_map;
+                            })
+                       }
+						
+						vue_body.loginFlag = com.data.loginToken.get() == null ? false : true
+						do_success(0);
+					}
+				)
+				scroll.refresh();
+              window.addEventListener('newsId',function(event){
+                scroll.refresh();
+            });
+				mui.ge.addListener("reloadMyinfo", function(args) {
+					vue_body.userInfo = com.data.userInfo.get();
+					mui.ge.callback(args, {})
+				});
+
+				mui('body').on('tap', '#my_card', function() {
+					com.plus.openWindowX('../userinfo/mycard.html', {});
+				});
+
+				mui('body').on('tap', '.my_info', function() {
+					//            com.data.user.showMyInfo({},function (data){
+					//                vue_body.userInfo = data.result_map;
+					//                do_success(0);
+					//            })
+					var userinfo = com.data.userInfo.get();
+					//            alert(JSON.stringify(userinfo));
+					console.log(JSON.stringify(userinfo))
+					if(vue_body.loginFlag==false){
+						com.plus.openWindowX('../login.html', {});
+					}else if(userinfo.address == null) {
+						com.plus.openWindowX('../tools/reg_moreinfo.html', {
+							isAlone: true
+						});
+					} else {
+						com.plus.openWindowX('../userinfo/myinfo.html', {});
+					}
+				});
+				mui('body').on('tap', '#my_order', function() {
+					com.plus.openWindowX('../userinfo/myorder.html', {});
+				});
+				mui('body').on('tap', '#my_pwd', function() {
+					if(com.data.loginToken.get()!=null){
+						com.plus.openWindowX('../userinfo/mypwd.html', {});
+					}else{
+						com.data.user.showMyInfo({}, function(data) {
+						})
+					}
+					
+				});
+				mui('body').on('tap', '#my_question', function() {
+					var userinfo = com.data.userInfo.get();
+					//          	console.log(JSON.stringify(userinfo.invest_risk_tolerance));
+					//          alert(JSON.stringify(userinfo.invest_risk_tolerance));
+					if(userinfo.invest_risk_tolerance == null) {
+						com.plus.openWindowX('../tools/reg_question.html', {
+							isalone: true
+						});
+					} else {
+						com.plus.openWindowX('../tools/reg_questresult.html', {
+							isPeek: true,
+							isalone: true,
+							lv: userinfo.invest_risk_tolerance
+						});
+					}
+
+				});
+				mui('body').on('tap', '#my_funds', function() {
+					com.plus.openWindowX('../userinfo/myfunds.html', {});
+				});
+
+				mui('body').on('tap', '#my_suggest', function() {
+					com.plus.openWindowX('../tools/kefu.html', {});
+				});
+
+				mui('body').on('tap', '#my_kefu', function() {
+					mui('#payWechartWindow').popover('toggle');
+				});
+				mui('body').on('tap', '#my_ding', function() {
+					com.plus.openWindowX('../userinfo/myding.html', {})
+				});
+				mui('body').on('tap', '#my_friend', function() {
+					com.plus.openWindowX('../mycircle/circle_index.html', {})
+				});
+				mui('body').on('tap', '.choice', function() {
+					plus.device.dial(4008859999, true);
+				});
+				mui('body').on('tap', '#loginout', function() {
+					com.data.user.loginout({}, function(data) {
+						com.data.loginToken.clear();
+//						com.plus.openWindowX('../home_user.html', {
+//							"isMain": true
+//						})
+						vue_body.userInfo.mobile_tel = ""
+                               mui.toast("退出成功");
+                               scroll.refresh();
+					})
+				});
+
+				mui('body').on('tap', '#jijinlist', function() {
+					com.plus.openWindowX('jijinlist.html', {})
+				});
+
+				//		//     	上传头像
+				//		mui("body").on("tap", "#show_headimg", function() {
+				//
+				//			var openUploadHeadimg = function(file) {
+				//				plus.io.resolveLocalFileSystemURL(file, function(entry) {
+				//					com.plus.openWindowX("../../app/tools/uploadHeadImg.html", {
+				//						path: entry.toLocalURL()
+				//					});
+				//				});
+				//			}
+				//
+				//			//选择图片
+				//			//这里会弹出选择操作，是否删除
+				//			var btnArray = [{
+				//				title: "拍照"
+				//			}, {
+				//				title: "从相册选择"
+				//			}];
+				//			plus.nativeUI.actionSheet({
+				//				title: "修改头像",
+				//				cancel: "取消",
+				//				buttons: btnArray
+				//			}, function(e) {
+				//				switch(e.index) {
+				//					case 1:
+				//						var cmr = plus.camera.getCamera();
+				//						cmr.captureImage(function(p) {
+				//							openUploadHeadimg(p);
+				//						}, function(error) {
+				//							console.log("error:" + JSON.stringify(error));
+				//						}, {
+				//							index: 2
+				//						});
+				//						break;
+				//					case 2:
+				//						plus.gallery.pick(
+				//							function(file) {
+				//								//直接网络上传，成功之后本地显示出来，并且绑定 提交数据、
+				//								openUploadHeadimg(file);
+				//							},
+				//							function(e){
+				//								mui.toast("相册访问失败");
+				//							}, {
+				//								filter: "image"
+				//							}
+				//						);
+				//						break;
+				//				}
+				//			});
+				//		});
+
+				mui.ge.addListener("uploadHeadImgOver", function(args) {
+					mui.ge.callback(args, {});
+					var url_ = args.detail.url;
+					console.log("上传图片获取成功：" + url_);
+					//          com.data.user.updateUserHead({head_img: url_}, function (data, msg) {
+					//              scroll.refresh();
+					//              mui.toast(msg);
+					//          })
+				});
+			})
+			
+		</script>
+	</body>
+
+</html>

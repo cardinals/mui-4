@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+	<meta charset="UTF-8">
+	<title>首页</title>
+	<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+	<link href="../../css/mui.css" rel="stylesheet" />
+	<link href="../../css/gloab.css" rel="stylesheet" />
+	<link href="../../css/xmui.pullToRefresh.material.css" rel="stylesheet" />
+	<link href="../../css/swiper.min.css" rel="stylesheet">
+	<style>
+		.titlecolor{
+			color: white;
+		}
+		.mui-bar{
+			background-color: #c70321;
+		}
+		.mui-input-group .mui-input-row:after{
+			height: 0px;
+		}
+	</style>
+
+</head>
+<body>
+    <header class="mui-bar mui-bar-nav bg-title">
+        <a class="mui-action-back mui-icon mui-icon-left-nav mui-pull-left color-white"></a>
+        <h1 class="mui-title color-white titlecolor">风险测评</h1>
+    </header>
+
+<div class="mui-content mui-scroll-wrapper bg-bai">
+	<div class="mui-scroll" id="station-list" style="padding-bottom: 0px;">
+		<div id="vue-body">
+			<div class="textcenter" style="margin-top: 80px;">
+				<img :src="'../../images/icon/i_0'+lv+'.png'" style="width: 150px;" alt="" />
+				<div>
+					<div style="font-size: 14px;color: #bbb;font-weight: bold;margin-top: 50px;">您的风险承受等级</div>
+					<div class="ft18" style="font-weight: bold;margin-top: 20px;margin-bottom: 40px;" v-text="lvtext"></div>
+					<template v-if="isPeek==false">
+						<template v-if="isalone==false">
+							<div style="font-size: 14px;color: #bbb;font-weight: bold;">为了您更好的进行交易，请绑定银行卡</div>
+						</template>
+					</template>
+				</div>
+			</div>
+			<div class="wd90" style="margin-top: 30px;">
+				<template v-if="isPeek==false">
+					<template v-if="isalone==false">
+						<button type="button" class="" id="next_step" style="width: 100%;height: 40px;background-color: #FB5C60;color: white;border: 0px;">下一步</button>
+					</template>
+					<template v-if="isalone==true">
+						<button type="button" class="" id="question_complete" style="width: 100%;height: 40px;background-color: #FB5C60;color: white;border: 0px;">完成</button>
+					</template>
+				</template>
+				<template v-if="isPeek==true">
+					<button type="button" class="" id="re_question" style="width: 100%;height: 40px;background-color: #FB5C60;color: white;border: 0px;">重新测评</button>
+				</template>
+			</div>
+			<div class="wd90" style="text-align: right;padding-top: 20px;padding-bottom: 10px;">
+				<template v-if="isPeek==false">
+					<template v-if="isalone==false">
+						<span id="jump" style="font-size: 14px;color: #999999 ;">跳过此步骤</span>
+					</template>
+				</template>
+			</div>
+		</div>
+	</div>
+</div>
+
+
+<script src="../../js/h.min.js"></script>
+<script src="../../js/mui.min.js"></script>
+<script src="../../js/immersed.js"></script>
+<script src="../../js/com.js"></script>
+<script src="../../js/xmui-globalEvent.js"></script>
+<script src="../../js/mui.pullToRefresh.js"></script>
+<script src="../../js/mui.pullToRefresh.material.js"></script>
+<script src="../../js/com.js"></script>
+<script src="../../js/com.data.js"></script>
+<script src="../../js/com.mui.js"></script>
+<script src="../../js/vue.js"></script>
+<script src="../../js/jquery.min_1.8.3.js"></script>
+<script src="../../js/md5.js"></script>
+
+
+
+<script>
+    mui.ready(function () {
+        mui(".mui-scroll-wrapper").scroll({
+            bounce: true,//是否启用回弹
+            indicators: true,//是否显示滚动条
+            deceleration:  0.0005 //flick 减速系数，系数越大，滚动速度越慢，滚动距离越小，默认值0.0006
+        });
+    });
+
+
+
+    mui.plusReady(function(){
+    	var vue_bouy = new Vue({
+    		el:"#vue-body",
+    		data:{
+    			lv:"",
+    			lvtext:"",
+                isPeek:false,
+				isalone:false,
+    		},
+    		methods:{
+    			
+    		}
+    	});
+    	vue_bouy.lv =  com.plus.getCurrWebview().self.lv;
+    	vue_bouy.lvtext = getInvestorRiskToleranceName(com.plus.getCurrWebview().self.lv);
+    	vue_bouy.isPeek = com.plus.getCurrWebview().self.isPeek==null?false:com.plus.getCurrWebview().self.isPeek;
+        vue_bouy.isalone = com.plus.getCurrWebview().self.isalone==null?false:com.plus.getCurrWebview().self.isalone;
+
+//        alert(vue_bouy.isPeek);
+//        alert(vue_bouy.isalone);
+
+        mui('body').on('tap', '#next_step', function (){
+              com.plus.openWindowX('../tools/bank_card_add.html',{
+                  isReg:1
+              });
+        });
+        mui('body').on('tap', '#question_complete', function (){
+            mui.back();
+        });
+        mui('body').on('tap', '#re_question', function (){
+            com.plus.openWindowX('../tools/reg_question.html',{
+                isalone:vue_bouy.isalone
+            },"评测",function () {
+				com.plus.getCurrWebview().self.close();
+            });
+        });
+
+        mui('body').on('tap', '#jump', function (){
+            mui.back();
+        });
+    })
+    
+    function getInvestorRiskToleranceName(invest_risk_tolerance) {
+		var investorRiskToleranceName = "";
+	
+		if (invest_risk_tolerance == null || invest_risk_tolerance == "") {
+			investorRiskToleranceName = "";
+		}
+		switch (invest_risk_tolerance){
+			case "1":
+				investorRiskToleranceName = "保守型";
+				break;
+			case "2":
+				investorRiskToleranceName = "稳健型";
+				break;
+			case "3":
+				investorRiskToleranceName = "温和型";
+				break;
+			case "4":
+				investorRiskToleranceName = "积极型";
+				break;
+			case "5":
+				investorRiskToleranceName = "激进型";
+				break;
+			default:
+				investorRiskToleranceName = "";
+		}
+	return investorRiskToleranceName;
+}
+
+</script>
+</body>
+
+</html>

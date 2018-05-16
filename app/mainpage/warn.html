@@ -1,0 +1,103 @@
+<!doctype html>
+<html>
+
+	<head>
+		<meta charset="UTF-8">
+		<title>首页</title>
+		<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+		<link href="../../css/mui.css" rel="stylesheet" />
+		<link href="../../css/gloab.css" rel="stylesheet" />
+		<link href="../../css/xmui.pullToRefresh.material.css" rel="stylesheet" />
+		<link href="../../css/swiper.min.css" rel="stylesheet">
+		<style>
+			.bg-title {
+				background-color: #c70321;
+			}
+		</style>
+	</head>
+
+	<body>
+		<header class="mui-bar mui-bar-nav bg-title">
+			<a class="mui-action-back mui-icon mui-icon-left-nav mui-pull-left color-white"></a>
+			<h1 class="mui-title color-white titlecolor">特别提醒</h1>
+		</header>
+		<div class="mui-content mui-scroll-wrapper" style="background: #FFF;">
+			<div class="mui-scroll" style="padding:20px;padding-bottom: 50px;">
+				<div class="ml10 mr10">
+					<h4>尊敬的客户：</h4>
+					<p class="ft16">
+						在您办理期货业务之前，请您知悉以下信息：
+					</p>
+					<p class="ft16">
+						&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;任何机构或个人向您介绍的期货知识、市场特征等内容，不构成您与我司签订合同的依据，您应根据自身的经历、知识、投资偏好及风险承受能力，判断是否符合投资者适当性要求，决定是否向我司申请办理期货业务；向您提供的市场研究、分析报告或建议等增值服务，不构成您参与期货交易的依据，您应独立判断并承担交易结果。
+					</p>
+					<p class="ft16">
+						&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;非我公司授权的我司员工，不得为客户办理账户开立、注销、转移、资料变更、密码重置或资金存取、划转、查询等事宜。为我司提供期货介绍服务的机构或个人，不为客户提供融资服务；也不得为客户之间的融资提供中介、担保或其他便利。若您同意，将视同您已知晓并理解上述信息，并承诺自身的风险承担能力符合适当性要求，相关机构或人员在业务推介过程中不存在不适当的销售行为。
+					</p>
+				</div>
+
+			</div>
+		</div>
+
+		<div class="wd100 textcenter" style="bottom: 0;position: fixed; z-index: 1000;">
+			<div class="wd50 h40px float-left bg-gray ft16" id="disagree">不同意</div>
+			<div class="wd50 h40px float-left bg-title ft16 color-white" id="agree">同意</div>
+		</div>
+	</body>
+	<!--拨打客服弹出窗-->
+
+	<script src="../../js/h.min.js"></script>
+		<script src="../../js/mui.min.js"></script>
+		<script src="../../js/immersed.js"></script>
+	<script src="../../js/com.js"></script>
+	<script src="../../js/xmui-globalEvent.js"></script>
+	<script src="../../js/mui.pullToRefresh.js"></script>
+	<script src="../../js/mui.pullToRefresh.material.js"></script>
+	<script src="../../js/com.js"></script>
+	<script src="../../js/swiper.min.js"></script>
+	<script src="../../js/com.data.js"></script>
+	<script src="../../js/com.mui.js"></script>
+	<script src="../../js/vue.js"></script>
+	<script src="../../js/jquery.min_1.8.3.js"></script>
+	<script src="../../js/md5.js"></script>
+	<script>
+		mui.ready(function() {
+			mui(".mui-scroll-wrapper").scroll({
+				bounce: true, //是否启用回弹
+				indicators: true, //是否显示滚动条
+				deceleration: 0.0005 //flick 减速系数，系数越大，滚动速度越慢，滚动距离越小，默认值0.0006
+			});
+		});
+		mui.plusReady(function() {
+			var phone = com.plus.getCurrWebview().self.phone;
+			mui('body').on('tap', '#disagree', function() {
+				mui.back()
+			});
+			mui('body').on('tap', '#agree', function() {
+                           com.data.user.showMyInfo({}, function(data) {
+                                var userInfo = data.result_map;
+                                var mobile_tel = userInfo.mobile_tel;
+                                $.ajax({
+                                        url: "http://guishu.dzqh.com.cn:18089/futuresAccountController.do?getAccountByPhoe",
+                                        type: "get",
+                                        dataType: "JSON",
+                                        async: false,
+                                        data: {
+                                        'phone': mobile_tel
+                                        },
+                                        success: function(data) {
+                                                           
+                                        var result = JSON.parse(data.jsonStr);
+                                                           
+                                        var channel = "@"+ result.obj.marketChannel +"$"+result.obj.businessDepartmentName;
+                                            plus.bridge.exec( 'openaccount', 'openAccountPage', [mobile_tel,channel] );
+                                             mui.back();
+                                                           
+                                            }
+                                        });
+                                    })
+			});
+		})
+	</script>
+
+</html>

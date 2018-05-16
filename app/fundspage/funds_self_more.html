@@ -1,0 +1,773 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+	<meta charset="UTF-8">
+	<title>首页</title>
+	<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+	<link href="../../css/mui.css" rel="stylesheet" />
+	<link href="../../css/gloab.css" rel="stylesheet" />
+	<link href="../../css/xmui.pullToRefresh.material.css" rel="stylesheet" />
+	<link href="../../css/swiper.min.css" rel="stylesheet">
+	<style>
+		.titlecolor{
+			color: white;
+			font-size: 16px;
+			text-align: center;
+		}
+
+		.title-centent{
+			height: 60px;
+		}
+		.mui-bar{
+			background-color: #c70321;
+		}
+		.title-desc{
+			color: #757575;
+			font-size: 12px;
+		}
+		.red-font{
+			color: #FB5B5E;
+		}
+		.chart {
+			min-width: 320px;
+			max-width: 800px;
+			height: 220px;
+			margin: 0 auto;
+		}
+
+		input[type=radio][name=time-long]{
+			display: none;
+			opacity: 0;
+		}
+
+		input[type=radio][name=time-long]+label {
+			
+			font-size: 14px;
+			display: inline-block;
+			width:80%;
+			text-align: center;
+			background-color: #dddddd;
+			color: #666;
+			padding: 5px 0px;
+			border-radius: 3px;
+		}
+
+		input[type=radio][name=time-long]:checked+label {
+			color: white;
+			background-color: #FB5B5E;
+		}
+		.btm-input{
+			display: inline-block;
+			width: 100%;
+			height: 50px;
+
+		}
+		.btm-fouce{
+			background: url("../../images/icon/heart3.png") no-repeat 25px center;
+			display: inline-block;
+			width: 100%;
+			height: 50px;
+			
+		}
+
+		.advance-list {
+			transition: background-color .2s!important;
+			background-color: #FB5B5E;
+		}
+		.ban-list{
+			background-color: #DDDDDD;
+		}
+		.advance-list:active {
+			background-color: #FFE6E7!important;
+		}
+	</style>
+
+</head>
+<body>
+    <header class="mui-bar mui-bar-nav bg-title" style="height: 60px;">
+        <a class="mui-action-back mui-icon mui-icon-left-nav mui-pull-left color-white" style="margin-top: 7px;"></a>
+        <h1 class="color-white titlecolor title-centent" style="margin-top: 13px;"><span class="color-white titlecolor title-centent" id="fund-name">东证赢家稳筹建混合</span><br><span class="color-white titlecolor title-centent" id="fund-code">5119006</span></h1>
+    </header>
+
+<div class="mui-content mui-scroll-wrapper" style="padding-top: 60px;">
+	<div class="mui-scroll" id="station-list">
+		<div id="vue-body">
+
+
+			<!--头部div显示 start-->
+			<div class="wd100 bg-bai">
+				<div class="dis_table wd90">
+					<div class="dis_table_row">
+						<div class="dis_table_cell textleft title-desc pt10 pb5">
+							基金编号：<span style="font-weight: bold" v-text="fundinfo.fund_code"></span>
+						</div>
+						<div class="dis_table_cell textleft pt10 pb5">
+							类型：<span style="font-weight: bold" v-text="getFundTypeNameByType(fundinfo.ofund_type)"></span>
+						</div>
+					</div>
+					<div class="dis_table_row">
+						<div class="dis_table_cell textleft title-desc pt10 pb5">
+							风险等级：<span style="font-weight: bold" v-text="getFundRiskLevelName(fundinfo.ofund_risklevel)"></span>
+						</div>
+
+						<div class="dis_table_cell textleft pt10 pb5">
+							<template v-if="userinfoflag==0">
+								净值日期：<span style="font-weight: bold" >--</span>
+							</template>
+							<template v-if="userinfoflag==1">
+								净值日期：<span style="font-weight: bold" v-text="fundinfo.hq_date"></span>
+							</template>
+						</div>
+					</div>
+					<div class="dis_table_row">
+						<template v-if="fundinfo.ofund_type==2">
+							<div class="dis_table_cell textleft title-desc pt10 pb5">
+								<template v-if="userinfoflag==0">
+									万份收益：<span class="" style="color: #1DD337;" >--</span>
+								</template>
+								<template v-if="userinfoflag==1">
+									万份收益：<span class="" style="color: #1DD337;" v-text="toFix2(fundinfo.per_myriad_income)"></span>
+								</template>
+							</div>
+							<div class="dis_table_cell textleft pt10 pb5">
+								<template v-if="userinfoflag==0">
+									七日年化：<span class="" style="color: #1DD337;">--</span>
+								</template>
+								<template v-if="userinfoflag==1">
+									七日年化：<span class="" style="color: #1DD337;"v-text="toFix2(fundinfo.fund_curr_ratio)"></span>
+								</template>
+
+							</div>
+						</template>
+						<template v-else>
+							<div class="dis_table_cell textleft title-desc pt10 pb5">
+								<template v-if="userinfoflag==0">
+									单位净值：<span class="" style="color: #1DD337;">--</span>
+								</template>
+								<template v-if="userinfoflag==1">
+									单位净值：<span class="" style="color: #1DD337;" v-text="fundinfo.nav"></span>
+								</template>
+							</div>
+							<div class="dis_table_cell textleft pt10 pb5">
+								<template v-if="userinfoflag==0">
+									累计净值：<span class="" style="color: #1DD337;">--</span>
+								</template>
+								<template v-if="userinfoflag==1">
+									累计净值：<span class="" style="color: #1DD337;"v-text="fundinfo.nav_total"></span>
+								</template>
+							</div>
+						</template>
+
+					</div>
+					<div class="dis_table_row">
+						<div class="dis_table_cell textleft title-desc pt5 pb10">
+							起购金额：<span style="font-weight: bold" v-text="fundinfo.min_value"></span>
+						</div>
+						<div class="dis_table_cell textleft title-desc pt5 pb10">
+							基金状态：<span style="font-weight: bold" v-text="getFundStatusByCode(fundinfo.fund_status)"></span>
+						</div>
+					</div>
+
+				</div>
+			</div>
+			<!--头部div显示 end-->
+			<div class="wd100 bg-bai pt5 pb5 mt5">
+				<div class="wd90 dis_table">
+					<div class="dis_table_cell textleft" style="width: 90%"><span class="title-desc" v-text="fundinfo.ofund_type==2?'万份收益:':'累计净值:'"></span> <span class="red-font">{{yval}}</span>&nbsp;&nbsp;&nbsp;<span class="title-desc">日期：</span> <span style="font-weight: bold" v-text="xval"></span></div>
+					<!--<div class="dis_table_cell textright"><img src="../../images/icon/right.png" height="25" width="20"/></div>-->
+				</div>
+			</div>
+
+			<!--图表显示 start-->
+			<div id="container"></div>
+			<!--图表显示 end-->
+			<!--三个按钮-->
+			<div class="bg-bai wd100 pb20">
+				<div class="dis_table wd90">
+					<div class="dis_table_cell">
+						<input v-model="linkMonth" type="radio" name="time-long" id="one-month" value="30">
+						<label for="one-month">一个月</label>
+					</div>
+					<div class="dis_table_cell">
+						<input v-model="linkMonth" type="radio" name="time-long" id="three-month" value="90">
+						<label for="three-month">三个月</label>
+					</div>
+					<div class="dis_table_cell">
+						<input v-model="linkMonth" type="radio" name="time-long" id="one-year" value="365">
+						<label for="one-year">一年</label>
+					</div>
+				</div>
+			</div>
+			<!--三个按钮end-->
+			<!--基金经理 start-->
+			<!--<div class="bg-bai wd100 pb10">
+				<div class="textcenter ft14 pt5 pb5" style="background-color: #EEEEEE;border-top: 1px solid #E0E0E0;border-bottom: 1px solid #E0E0E0;">基金经理</div>
+				<div class="wd90 dis_table">
+					<div class="dis_table_cell" style="width: 90px;text-align: left;">
+						<img src="../../images/temporary/headimg.png" width="80" height="100" alt="">
+					</div>
+					<div class="dis_table_cell textleft">
+						<span style="color: #000000;" class=" inline-block pt10 pb5">基金经理：雷鸣</span><br />
+						<span class="pt5 pb5 inline-block">任职日期：2017-5-4</span><br />
+						<span class="inline-block ">国籍：中国。学历：中国科技大学啊实打实大苏打这是描述中国科技大学啊实打实大苏打这是描述中国科技大学啊实打实大苏打这是描述中国科技大学</span>
+					</div>
+				</div>
+			</div>-->
+			<!--基金经理 end-->
+			<!--交易规则 start-->
+			<div class="bg-bai wd100">
+				<div class="textcenter ft14 pt5 pb5" style="background-color: #EEEEEE;border-top: 1px solid #E0E0E0;border-bottom: 1px solid #E0E0E0;">交易规则</div>
+				<div class="wd100 dis_table">
+					<div class="dis_table_row">
+						<div class="dis_table_cell wd20 " style="border-bottom: 1px solid #EEEEEE;border-right: 1px solid #EEEEEE;">
+							申购规则
+						</div>
+						<div class="dis_table_cell textleft pt10 pl10 pb10" v-cloak style="width: 75%;border-bottom: 1px solid #EEEEEE;">
+							1.首次最低：{{buyRules.min_value}}元。<br>
+							2.追加最低：{{buyRules.second_min}}元。<br>
+							3.最高：{{buyRules.max_value}}元。<br>
+						</div>
+						<div class="dis_table_cell textleft pt10 pl10" style="border-bottom: 1px solid #EEEEEE;">
+
+						</div>
+					</div>
+					<!--<div class="dis_table_row">-->
+						<!--<div class="dis_table_cell " style="border-bottom: 1px solid #EEEEEE;border-right: 1px solid #EEEEEE;">-->
+							<!--赎回说明-->
+						<!--</div>-->
+						<!--<div class="dis_table_cell textleft pt10 pl10 pb10" style="width: 75%;border-bottom: 1px solid #EEEEEE;">-->
+							<!--1.交易日15：00前赎回，下1个交易日资金到达现金宝账户-->
+							<!--2.交易日15：00后，周末及节假日赎回，下两个交易日资金到达现金宝账户-->
+						<!--</div>-->
+						<!--<div class="dis_table_cell textleft pt10 pl10" style="border-bottom: 1px solid #EEEEEE;">-->
+
+						<!--</div>-->
+					<!--</div>-->
+				</div>
+			</div>
+			<div style="margin-bottom: 50px;">
+
+				<!--交易规则 end-->
+				<template v-for="(item,index) in rateList">
+					<!--赎回费率 start-->
+					<div class="bg-bai wd100" >
+						<div class="textcenter ft14 pt5 pb5" style="background-color: #EEEEEE;border-top: 1px solid #E0E0E0;border-bottom: 1px solid #E0E0E0;">{{rateList[index].text}}</div>
+						<div class="wd100 dis_table">
+
+							<div v-for="(item2,index2) in rateList[index].more" class="dis_table_row">
+								<div class="dis_table_cell" style="width: 5%;border-bottom: 1px solid #EEEEEE"></div>
+								<div class="dis_table_cell wd80 textleft pt10 pb10" style="border-bottom: 1px solid #EEEEEE">
+									{{rateList[index].more[index2].qudecr}}
+								</div>
+								<div class="dis_table_cell" style="border-bottom: 1px solid #EEEEEE">
+									{{toFix3(rateList[index].more[index2].rate)}}
+								</div>
+							</div>
+
+						</div>
+					</div>
+					<!--赎回费率 end-->
+
+				</template>
+
+			</div>
+
+
+
+
+		</div>
+
+
+	</div>
+
+</div>
+
+		<!--底部按钮 start-->
+		<div id="vue-foot" class="bg-bai fixed bottom0 z997">
+			<div class="dis_table wd100">
+				<div @click="method1" :class="fundinfo.forbid_flag_982==1?'ban-list':'advance-list'" id="tou" class="dis_table_cell  wd50 " style="height: 50px;color: white;font-size: 16px;font-weight: bold;border-right: 1px solid white;">
+					预约
+				</div>
+			</div>
+		</div>
+		<!--底部按钮 end-->
+
+
+
+
+<script src="../../js/h.min.js"></script>
+		<script src="../../js/mui.min.js"></script>
+		<script src="../../js/immersed.js"></script>
+<script src="../../js/com.js"></script>
+<script src="../../js/xmui-globalEvent.js"></script>
+<script src="../../js/mui.pullToRefresh.js"></script>
+<script src="../../js/mui.pullToRefresh.material.js"></script>
+<script src="../../js/com.js"></script>
+<script src="../../js/com.data.js"></script>
+<script src="../../js/com.mui.js"></script>
+
+	<script src="../../js/jquery.min_1.8.3.js"></script>
+	<script src="../../js/highcharts.js"></script>
+
+<!--<script src="../quote/Highcharts-6.0.2/code/highcharts.js"></script>-->
+
+	<script src="../../js/vue.js"></script>
+	<script src="../../js/md5.js"></script>
+	<script src="../../js/fundsfunction.js"></script>
+
+<script>
+	var code,name;
+    var vue_body = {};
+    var vue_foot={};
+    mui.ready(function(){
+        mui(".mui-scroll-wrapper").scroll({
+            bounce: true,//是否启用回弹
+            indicators: true,//是否显示滚动条
+            deceleration:  0.0005 //flick 减速系数，系数越大，滚动速度越慢，滚动距离越小，默认值0.0006
+        });
+    });
+    mui.plusReady(function(){
+        code = com.plus.getCurrWebview().self.code;
+        name = com.plus.getCurrWebview().self.name;
+//		alert(name);
+        //添加监听
+
+
+
+
+        mui.ge.addListener("openOrderSuccess", function(args){
+            com.plus.openWindowX('fundsbuy_success.html',{
+                type:1
+            });
+            mui.ge.callback(args, {})
+        });
+
+
+
+
+        mui.ge.addListener("orderFunctionSuccess", function(args){
+            com.plus.openWindowX('fundsbuy_success.html',{
+                type:2
+            });
+            mui.ge.callback(args, {})
+        });
+
+
+
+
+
+        document.getElementById("fund-name").innerHTML  = name;
+        document.getElementById("fund-code").innerHTML  = code;
+
+//		alert(code+"+"+name);
+		vue_body = new Vue({
+            el:"#vue-body",
+            data:{
+				fundinfo:{},
+    			linkMonth:30,
+    			yval:0,
+    			xval:0,
+                buyRules:{},
+				rateList:{},
+				rateSection:[],
+				userinfoflag:0,
+            },
+            methods:{
+                getFundTypeNameByType:function(ofund_type){
+                    return getFundTypeNameByType(ofund_type);
+				},
+                getFundRiskLevelName:function(ofund_risklevel){
+                    return getFundRiskLevelName(ofund_risklevel);
+				},
+                getFundStatusByCode:function (state) {
+                    return getFundStatusByCode(state);
+                },
+                toFix2:function (doublenum){
+                    return toFix2(doublenum);
+                }
+                ,
+                toFix3:function (doublenum){
+                    var a = parseFloat(doublenum)
+                    return a.toFixed(3)
+                }
+            },
+            watch:{
+                linkMonth:function (nv,ov)  {
+//					alert(nv);
+                    reqChartInfo(nv);
+                }
+            },
+            mounted:function(){
+				  com.data.funds.getFundMoreInfo({
+					fund_code:code
+				  },function(data,msg,token,userinfoflag){
+					  vue_body.fundinfo = data.result_map;
+//					  alert(JSON.stringify(userinfoflag));
+					  vue_foot.fundinfo = data.result_map;
+
+                      vue_body.userinfoflag = userinfoflag;
+                      vue_foot.userinfoflag = userinfoflag;
+
+
+                      reqChartInfo(30);
+					  com.data.funds.getBuyRules({
+                          fund_code:vue_body.fundinfo.fund_code,
+                          share_type:vue_body.fundinfo.share_type,
+                          fund_status:vue_body.fundinfo.fund_status,
+					  },function (data2) {
+                          vue_body.buyRules = data2.result_map["022"]
+						  com.data.funds.getBuyRate({
+                              fund_code:vue_body.fundinfo.fund_code,
+                              share_type:vue_body.fundinfo.share_type,
+                              fund_status:vue_body.fundinfo.fund_status,
+						  },function (data3){
+//                              console.log("3------------->"+JSON.stringify(data3))
+//                              alert(JSON.stringify(data3));
+								getRateFun(data3);
+							  
+                          })
+                      });
+
+				  })
+
+
+                
+            }
+		});
+
+        vue_foot = new Vue({
+            el:"#vue-foot",
+            data:{
+                fundinfo:{},
+                userinfoflag:0,
+            },
+            methods:{
+				method1:function () {
+                    setTimeout(function () {
+						if(vue_foot.userinfoflag==0){
+							alert("您的个人信息尚未填写完成，清先完善信息后再试。");
+						}else{
+//                            alert(vue_foot.fundinfo.fund_code);
+//                            alert(vue_foot.fundinfo.fund_name);
+                            com.data.funds.doSelfFundsOrder({
+                                fund_code:vue_foot.fundinfo.fund_code,
+                                fund_name:encodeURIComponent(encodeURIComponent(vue_foot.fundinfo.fund_name)),
+							},function (data,msg,token,userinfoflag) {
+//								alert(JSON.stringify(data));
+                                com.plus.openWindowX('fundsbuy_success.html',{
+									type:5
+                                });
+                            });
+						}
+
+
+                    },200);
+                },
+				method2:function (){
+                    setTimeout(function (){
+                        if(vue_foot.fundinfo.forbid_flag_022!=1){
+
+                            //申购
+                            com.data.funds.checkUserStatue({},function (data) {
+//						    alert(vue_body.fundinfo.ofund_risklevel);
+                                com.data.funds.checkUserLevel({
+                                    ofund_risklevel:vue_body.fundinfo.ofund_risklevel
+                                },function (data0) {
+                                    var userInfo = com.data.userInfo.get();
+                                    if(userInfo.invest_risk_tolerance==null||(userInfo.invest_risk_tolerance==1&&vue_body.fundinfo.ofund_risklevel>1)){
+                                        mui.toast("当前风险等级不支持购买此基金。请尝试重新测评")
+                                    }else{
+                                        com.plus.openWindowX('funds_buy.html',{
+                                            levelresult:data0.result_map.is_risk,
+                                            fundinfo:vue_body.fundinfo,
+                                            rateSection:vue_body.rateSection,
+                                        });
+                                    }
+
+                                })
+                            })
+
+						}
+
+                    },200);
+                }
+            },
+            watch:{
+
+            },
+            mounted:function(){
+
+            }
+        });
+//        mui('body').on('tap', '#tou', function (){
+//
+//        });
+//        mui('body').on('tap', '#order', function (){
+//
+//
+//        });
+
+        
+    })
+
+
+    $('#container').bind('mousemove touchmove touchstart', function (e){
+        var chart,
+            point,
+            i,
+            event;
+
+        for (i = 0; i < Highcharts.charts.length; i = i + 1) {
+            chart = Highcharts.charts[i];
+            event = chart.pointer.normalize(e.originalEvent); // Find coordinates within the chart
+            point = chart.series[0].searchPoint(event, true); // Get the hovered point
+
+            if (point) {
+                point.highlight(e);
+            }
+        }
+    });
+    /**
+     * Override the reset function, we don't need to hide the tooltips and crosshairs.
+     */
+    Highcharts.Pointer.prototype.reset = function () {
+        return undefined;
+    };
+
+    /**
+     * Highlight a point by showing tooltip, setting hover state and draw crosshair
+     */
+    Highcharts.Point.prototype.highlight = function (event) {
+        this.onMouseOver(); // Show the hover marker
+        this.series.chart.tooltip.refresh(this); // Show the tooltip
+        this.series.chart.xAxis[0].drawCrosshair(event, this); // Show the crosshair
+    };
+
+
+
+
+//    var dataset = {name:'aaa',type:"area",unit:"m",data:[2.421,2.431,2.451,2.453,2.455,2.439,2.459]};
+//    var xdata = [Date.UTC(2013,5,11),Date.UTC(2013,5,12),Date.UTC(2013,5,13),Date.UTC(2013,5,14),Date.UTC(2013,5,15),Date.UTC(2013,5,16),Date.UTC(2013,5,17)];
+//    dataset.data = Highcharts.map(dataset.data, function (val, j) {
+//        return [xdata[j],val];
+//    });
+
+    var dayshow =1;
+   function stringToDate(fDate){
+//       return Date.UTC(parseInt(fDate.substring(0,4)),parseInt(fDate.substring(4,6))-1,parseInt(fDate.substring(6,8)));
+//		alert(parseInt(fDate.substring(0,4)))
+	   var year = parseInt(fDate.substring(0,4));
+       var month = parseInt(fDate.substring(4,6))-1;
+       var day = parseInt(fDate.substring(6,8));
+       return Date.UTC(year,month,day);
+  }
+  
+  function reqChartInfo(daynum){
+      var ofund_type = vue_body.fundinfo.ofund_type;
+      var fund_code = vue_body.fundinfo.fund_code;
+      var nowdate = new Date();
+      var begindate = new Date();
+      begindate.setDate(nowdate.getDate()-daynum)
+
+      com.data.funds.getFundLink({
+          fund_code:fund_code,
+          ofund_type:ofund_type,
+          nav_begin_date:com.util.formatDate(begindate,"yyyyMMdd",1),
+          nav_end_date:com.util.formatDate(nowdate,"yyyyMMdd",1),
+      },function (data) {
+//					    alert(JSON.stringify(data));
+          var fundlist = data.result_list;
+          var xdatas = [];
+          var ydatas = [];
+//		  alert(fundlist.length);
+
+          for(var index in fundlist){
+              var fundone = fundlist[index];
+              xdatas[index] = stringToDate(fundone.x_value);
+              ydatas[index] = parseFloat(fundone.y_value);
+
+          }
+          drawChart(xdatas,ydatas);
+      })
+  }
+
+  function drawChart(xdatas,ydatas) {
+      $('#container').empty();
+      var dataset = {name:'aaa',type:"area",unit:"m",data:ydatas};
+      var xdata = xdatas
+      dataset.data = Highcharts.map(dataset.data, function (val, j){
+          return [xdata[j],val];
+      });
+      $('<div class="chart">')
+          .appendTo('#container')
+          .highcharts({
+              chart: {
+                  type: "area",
+              },
+
+              plotOptions: {
+                  series: {
+                      marker: {
+                          enabled: false
+                      }
+                  },
+                  area: {
+                      lineWidth:1,
+                      point:{
+                          events:{
+                              mouseOver:function (event){
+
+									vue_body.yval =this.y; 
+									vue_body.xval =com.util.formatDate(this.x,"yyyy-MM-dd",1);
+                              }
+                          }
+                      }
+                  }
+              },
+              title: {
+                  text: "",
+                  align: 'left',
+                  margin: 0,
+                  x: 0
+              },
+              credits: {
+                  enabled: false
+              },
+              legend: {
+                  enabled: false
+              },
+              xAxis: {
+                  gridLineColor: '#dddddd',//纵向网格线颜色
+                  gridLineDashStyle:'Dot',
+                  crosshair: true,
+                  tickPixelInterval : 120,
+                  //或者150px画一个x刻度，如果跟上面那个一起设置了，则以最大的间隔为准
+                  type: 'datetime',
+                  dateTimeLabelFormats: {
+                      second: '%Y-%m-%d',
+                      minute: '%Y-%m-%d',
+                      hour: '%Y-%m-%d',
+                      day: '%Y-%m-%d',
+                      week: '%Y-%m-%d',
+                      month: '%Y-%m-%d',
+                      year: '%Y-%m-%d'
+                  }
+              },
+              yAxis: {
+                  gridLineColor: '#dddddd',//纵向网格线颜色
+                  gridLineDashStyle:'Dot',
+                  crosshair: true,
+//                                    min:'2.421',
+                  title: {
+                      text: null
+                  }
+              },
+              tooltip: {
+                  backgroundColor:"rgba(251,91,94,0.85)",
+                  formatter: function(){
+                      var content = "<span style=\"color:#ffffff\">"+this.point.y+"</span>";
+                      return content;
+                  }
+              },
+              series: [{
+                  data: dataset.data,
+                  color: "#FB5B5E",
+                  fillOpacity: 0.3,
+
+              }]
+          });
+  }
+
+
+  var getRateFun = function (data) {
+      var obj = data.result_map;
+      var resultList = [];
+      if(obj!=null){
+
+          $.each(obj,function(key,list){
+
+              if(key=="022"){
+
+                  if(list!=null){
+                      var rateInfo = {text:"申购费率",more:[]};
+
+                      var n=1;
+
+                      $.each(list,function(key,map1){
+                          var quinfo = {qudecr:'',rate:''};
+						  var ratioSection ={min:0,max:0,ratio:0};
+                          //没有设置区间
+                          if(map1.min_balance=="0.00" && map1.max_balance=="0.00"){
+                              quinfo.qudecr = "费用比例"
+							  quinfo.rate = map1.ratio;
+                              ratioSection.ratio = map1.ratio;
+//                              rateInfo.more.push(n+".费用比例"+map1.ratio)
+                          }else{
+                              quinfo.qudecr = map1.min_balance+"元~"+map1.max_balance+"元";
+                              quinfo.rate = map1.ratio;
+                              ratioSection.min = map1.min_balance;
+                              ratioSection.max = map1.max_balance;
+                              ratioSection.ratio = map1.ratio;
+
+//                              rateInfo.more.push(n+"."+map1.min_balance+"元~"+map1.max_balance+"元：费率（"+map1.ratio+"）")
+                          }
+                          n++;
+                          rateInfo.more.push(quinfo);
+                          vue_body.rateSection.push(ratioSection);
+                      });
+                      resultList.push(rateInfo)
+                  }
+
+              }else if(key=="024"){
+                  if(list!=null){
+                      var rateInfo = {text:"赎回费率",more:[]};
+                      var n=1;
+                      $.each(list,function(key,map1){
+                          var quinfo = {qudecr:'',rate:''};
+                          //区间编号
+                          if(map1.min_balance=="0.00" && map1.max_balance=="0.00"){
+                              quinfo.qudecr = "费用比例"
+                              quinfo.rate = map1.ratio;
+                          }else{
+                              quinfo.qudecr = map1.min_balance+"元~"+map1.max_balance+"元";
+                              quinfo.rate = map1.ratio;
+                          }
+                          n++;
+                          rateInfo.more.push(quinfo);
+                      });
+                      resultList.push(rateInfo)
+                  }
+              }else if(key=="020"){
+                  if(list!=null){
+
+                      var rateInfo = {text:"认购费率",more:[]};
+                      var n=1;
+
+                      $.each(list,function(key,map1){
+                          var quinfo = {qudecr:'',rate:''};
+                          //区间编号
+                          if(map1.min_balance=="0.00" && map1.max_balance=="0.00"){
+                              quinfo.qudecr = "费用比例"
+                              quinfo.rate = map1.ratio;
+//                              rateInfo.more.push(n+".费用比例 "+map1.ratio)
+                          }else{
+                              quinfo.qudecr = map1.min_balance+"元~"+map1.max_balance+"元";
+                              quinfo.rate = map1.ratio;
+//                              rateInfo.more.push(n+"."+map1.min_balance+"元~"+map1.max_balance+"元：费率（"+map1.ratio+"）")
+                          }
+                          n++;
+                          rateInfo.more.push(quinfo);
+                      });
+                      resultList.push(rateInfo)
+                  }
+              }
+          });
+      }
+      vue_body.rateList = resultList;
+  }
+
+</script>
+</body>
+
+</html>

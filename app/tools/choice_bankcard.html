@@ -1,0 +1,435 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+	<meta charset="UTF-8">
+	<title>首页</title>
+	<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+	<link href="../../css/mui.css" rel="stylesheet" />
+	<link href="../../css/gloab.css" rel="stylesheet" />
+	<link href="../../css/xmui.pullToRefresh.material.css" rel="stylesheet" />
+	<link href="../../css/swiper.min.css" rel="stylesheet">
+	<link href="../../css/mui.picker.css" rel="stylesheet">
+	<link href="../../css/mui.poppicker.css" rel="stylesheet">
+	<link href="../../css/mui.dtpicker.css" rel="stylesheet">
+	<style>
+		.titlecolor{
+			color: white;
+		}
+		.mui-bar{
+			background-color: #c70321;
+		}
+		.mui-input-group .mui-input-row:after{
+			height: 0px;
+		}
+	</style>
+
+</head>
+<body>
+    <header class="mui-bar mui-bar-nav bg-title">
+        <a class="mui-action-back mui-icon mui-icon-left-nav mui-pull-left color-white"></a>
+        <h1 class="mui-title color-white titlecolor">选择银行</h1>
+    </header>
+
+<div class="mui-content mui-scroll-wrapper" id="vue_body">
+	<div class="mui-scroll" id="station-list" style="padding-bottom: 10px;">
+		<!--银行选项卡 start-->
+		<div class="wd90 bg-bai mt15 tab_bank" style="border-radius: 5px;" bankId="002" bankName="工商银行" v-if="isShow(002)">
+			<div class="wd90 pt5">
+				<div>
+					<div style="display:inline-block;vertical-align:middle;padding-top: 5px;font-size: 16px;font-weight: bold;">
+						<img src="../../images/bank_icon/icon_bank_1.png" alt="" width="30" height="30"/>
+						工商银行
+					</div>
+				</div>
+				<div style="margin: 15px 0px 10px 0px;">
+					<span style="font-weight: bold;">交易额度：</span><br />
+					<span style="color: #888;">单笔、日累计50万</span>
+				</div>
+				<div style="padding: 5px 0px 10px 0px;">
+					<span style="font-weight: bold;">开通方式：</span><br />
+					<span style="color: #888;">验证在银行的取款密码，需先开通银联在</span>
+				</div>
+			</div>
+			<div class="textright" style="position: relative;left: 3px;top: -155px;margin-bottom: -70px;">
+				<img src="../../images/icon/icon_jiao.png" alt="" width="70" height="70"/>
+			</div>
+			<div id="" style="height: 0px;color: rgba(0,0,0,0);">1</div>
+		</div>
+		<!--银行选项卡 end-->
+		
+		
+		
+				<!--银行选项卡 start-->
+		<div class="wd90 bg-bai mt15 tab_bank" style="border-radius: 5px;" bankId="003" bankName="中国农业银行"  v-if="isShow(003)">
+			<div class="wd90 pt5">
+				<div>
+					<div style="display:inline-block;vertical-align:middle;padding-top: 5px;font-size: 16px;font-weight: bold;">
+						<img src="../../images/bank_icon/icon_bank_2.png" alt="" width="30" height="30"/>
+						中国农业银行
+					</div>
+				</div>
+				<div style="margin: 15px 0px 10px 0px;">
+					<span style="font-weight: bold;">交易额度：</span><br />
+					<span style="color: #888;">单笔、日累计50万</span>
+				</div>
+				<div style="padding: 5px 0px 10px 0px;">
+					<span style="font-weight: bold;">开通方式：</span><br />
+					<span style="color: #888;">验证在银行的取款密码，需先开通银联在</span>
+				</div>
+			</div>
+			<div class="textright" style="position: relative;left: 3px;top: -155px;margin-bottom: -70px;">
+				<img src="../../images/icon/icon_jiao.png" alt="" width="70" height="70"/>
+			</div>
+			<div id="" style="height: 0px;color: rgba(0,0,0,0);">1</div>
+		</div>
+		<!--银行选项卡 end-->
+		
+		
+				<!--银行选项卡 start-->
+		<div class="wd90 bg-bai mt15 tab_bank" style="border-radius: 5px;" bankId="004" bankName="中国银行"  v-if="isShow(004)">
+			<div class="wd90 pt5">
+				<div>
+					<div style="display:inline-block;vertical-align:middle;padding-top: 5px;font-size: 16px;font-weight: bold;">
+						<img src="../../images/bank_icon/icon_bank_3.png" alt="" width="30" height="30"/>
+						中国银行
+					</div>
+				</div>
+				<div style="margin: 15px 0px 10px 0px;">
+					<span style="font-weight: bold;">交易额度：</span><br />
+					<span style="color: #888;">单笔、日累计50万</span>
+				</div>
+				<div style="padding: 5px 0px 10px 0px;">
+					<span style="font-weight: bold;">开通方式：</span><br />
+					<span style="color: #888;">验证在银行的取款密码，需先开通银联在</span>
+				</div>
+			</div>
+			<div class="textright" style="position: relative;left: 3px;top: -155px;margin-bottom: -70px;">
+				<img src="../../images/icon/icon_jiao.png" alt="" width="70" height="70"/>
+			</div>
+			<div id="" style="height: 0px;color: rgba(0,0,0,0);">1</div>
+		</div>
+		<!--银行选项卡 end-->
+		
+		
+		
+				<!--银行选项卡 start-->
+		<div class="wd90 bg-bai mt15 tab_bank" style="border-radius: 5px;" bankId="005" bankName="中国建设银行"  v-if="isShow(005)">
+			<div class="wd90 pt5">
+				<div>
+					<div style="display:inline-block;vertical-align:middle;padding-top: 5px;font-size: 16px;font-weight: bold;">
+						<img src="../../images/bank_icon/icon_bank_4.png" alt="" width="30" height="30"/>
+						中国建设银行
+					</div>
+				</div>
+				<div style="margin: 15px 0px 10px 0px;">
+					<span style="font-weight: bold;">交易额度：</span><br />
+					<span style="color: #888;">单笔、日累计50万</span>
+				</div>
+				<div style="padding: 5px 0px 10px 0px;">
+					<span style="font-weight: bold;">开通方式：</span><br />
+					<span style="color: #888;">验证在银行的取款密码，需先开通银联在</span>
+				</div>
+			</div>
+			<div class="textright" style="position: relative;left: 3px;top: -155px;margin-bottom: -70px;">
+				<img src="../../images/icon/icon_jiao.png" alt="" width="70" height="70"/>
+			</div>
+			<div id="" style="height: 0px;color: rgba(0,0,0,0);">1</div>
+		</div>
+		<!--银行选项卡 end-->
+		
+		
+		
+				<!--银行选项卡 start-->
+		<div class="wd90 bg-bai mt15 tab_bank" style="border-radius: 5px;" bankId="006" bankName="中国交通银行"  v-if="isShow(006)">
+			<div class="wd90 pt5">
+				<div>
+					<div style="display:inline-block;vertical-align:middle;padding-top: 5px;font-size: 16px;font-weight: bold;">
+						<img src="../../images/bank_icon/icon_bank_5.png" alt="" width="30" height="30"/>
+						中国交通银行
+					</div>
+				</div>
+				<div style="margin: 15px 0px 10px 0px;">
+					<span style="font-weight: bold;">交易额度：</span><br />
+					<span style="color: #888;">单笔、日累计50万</span>
+				</div>
+				<div style="padding: 5px 0px 10px 0px;">
+					<span style="font-weight: bold;">开通方式：</span><br />
+					<span style="color: #888;">验证在银行的取款密码，需先开通银联在</span>
+				</div>
+			</div>
+			<div class="textright" style="position: relative;left: 3px;top: -155px;margin-bottom: -70px;">
+				<img src="../../images/icon/icon_jiao.png" alt="" width="70" height="70"/>
+			</div>
+			<div id="" style="height: 0px;color: rgba(0,0,0,0);">1</div>
+		</div>
+		<!--银行选项卡 end-->
+		
+		
+		
+				<!--银行选项卡 start-->
+		<div class="wd90 bg-bai mt15 tab_bank" style="border-radius: 5px;" bankId="015" bankName="中信银行"  v-if="isShow(015)">
+			<div class="wd90 pt5">
+				<div>
+					<div style="display:inline-block;vertical-align:middle;padding-top: 5px;font-size: 16px;font-weight: bold;">
+						<img src="../../images/bank_icon/icon_bank_6.png" alt="" width="30" height="30"/>
+						中信银行
+					</div>
+				</div>
+				<div style="margin: 15px 0px 10px 0px;">
+					<span style="font-weight: bold;">交易额度：</span><br />
+					<span style="color: #888;">单笔、日累计50万</span>
+				</div>
+				<div style="padding: 5px 0px 10px 0px;">
+					<span style="font-weight: bold;">开通方式：</span><br />
+					<span style="color: #888;">验证在银行的取款密码，需先开通银联在</span>
+				</div>
+			</div>
+			<div class="textright" style="position: relative;left: 3px;top: -155px;margin-bottom: -70px;">
+				<img src="../../images/icon/icon_jiao.png" alt="" width="70" height="70"/>
+			</div>
+			<div id="" style="height: 0px;color: rgba(0,0,0,0);">1</div>
+		</div>
+		<!--银行选项卡 end-->
+		
+		
+				<!--银行选项卡 start-->
+		<div class="wd90 bg-bai mt15 tab_bank" style="border-radius: 5px;" bankId="014" bankName="中国民生银行"  v-if="isShow(014)">
+			<div class="wd90 pt5">
+				<div>
+					<div style="display:inline-block;vertical-align:middle;padding-top: 5px;font-size: 16px;font-weight: bold;">
+						<img src="../../images/bank_icon/icon_bank_7.png" alt="" width="30" height="30"/>
+						中国民生银行
+					</div>
+				</div>
+				<div style="margin: 15px 0px 10px 0px;">
+					<span style="font-weight: bold;">交易额度：</span><br />
+					<span style="color: #888;">单笔、日累计50万</span>
+				</div>
+				<div style="padding: 5px 0px 10px 0px;">
+					<span style="font-weight: bold;">开通方式：</span><br />
+					<span style="color: #888;">验证在银行的取款密码，需先开通银联在</span>
+				</div>
+			</div>
+			<div class="textright" style="position: relative;left: 3px;top: -155px;margin-bottom: -70px;">
+				<img src="../../images/icon/icon_jiao.png" alt="" width="70" height="70"/>
+			</div>
+			<div id="" style="height: 0px;color: rgba(0,0,0,0);">1</div>
+		</div>
+		<!--银行选项卡 end-->
+		
+		
+				<!--银行选项卡 start-->
+		<div class="wd90 bg-bai mt15 tab_bank" style="border-radius: 5px;" bankId="011" bankName="兴业银行"  v-if="isShow(011)">
+			<div class="wd90 pt5">
+				<div>
+					<div style="display:inline-block;vertical-align:middle;padding-top: 5px;font-size: 16px;font-weight: bold;">
+						<img src="../../images/bank_icon/icon_bank_8.png" alt="" width="30" height="30"/>
+						兴业银行
+					</div>
+				</div>
+				<div style="margin: 15px 0px 10px 0px;">
+					<span style="font-weight: bold;">交易额度：</span><br />
+					<span style="color: #888;">单笔、日累计50万</span>
+				</div>
+				<div style="padding: 5px 0px 10px 0px;">
+					<span style="font-weight: bold;">开通方式：</span><br />
+					<span style="color: #888;">验证在银行的取款密码，需先开通银联在</span>
+				</div>
+			</div>
+			<div class="textright" style="position: relative;left: 3px;top: -155px;margin-bottom: -70px;">
+				<img src="../../images/icon/icon_jiao.png" alt="" width="70" height="70"/>
+			</div>
+			<div id="" style="height: 0px;color: rgba(0,0,0,0);">1</div>
+		</div>
+		<!--银行选项卡 end-->
+		
+		
+		
+				<!--银行选项卡 start-->
+		<div class="wd90 bg-bai mt15 tab_bank" style="border-radius: 5px;" bankId="016" bankName="广东发展银行"  v-if="isShow(016)">
+			<div class="wd90 pt5">
+				<div>
+					<div style="display:inline-block;vertical-align:middle;padding-top: 5px;font-size: 16px;font-weight: bold;">
+						<img src="../../images/bank_icon/icon_bank_9.png" alt="" width="30" height="30"/>
+						广东发展银行
+					</div>
+				</div>
+				<div style="margin: 15px 0px 10px 0px;">
+					<span style="font-weight: bold;">交易额度：</span><br />
+					<span style="color: #888;">单笔、日累计50万</span>
+				</div>
+				<div style="padding: 5px 0px 10px 0px;">
+					<span style="font-weight: bold;">开通方式：</span><br />
+					<span style="color: #888;">验证在银行的取款密码，需先开通银联在</span>
+				</div>
+			</div>
+			<div class="textright" style="position: relative;left: 3px;top: -155px;margin-bottom: -70px;">
+				<img src="../../images/icon/icon_jiao.png" alt="" width="70" height="70"/>
+			</div>
+			<div id="" style="height: 0px;color: rgba(0,0,0,0);">1</div>
+		</div>
+		<!--银行选项卡 end-->
+		
+		
+		
+				<!--银行选项卡 start-->
+		<div class="wd90 bg-bai mt15 tab_bank" style="border-radius: 5px;" bankId="920" bankName="中国平安银行"  v-if="isShow(920)">
+			<div class="wd90 pt5">
+				<div>
+					<div style="display:inline-block;vertical-align:middle;padding-top: 5px;font-size: 16px;font-weight: bold;">
+						<img src="../../images/bank_icon/icon_bank_10.png" alt="" width="30" height="30"/>
+						中国平安银行
+					</div>
+				</div>
+				<div style="margin: 15px 0px 10px 0px;">
+					<span style="font-weight: bold;">交易额度：</span><br />
+					<span style="color: #888;">单笔、日累计50万</span>
+				</div>
+				<div style="padding: 5px 0px 10px 0px;">
+					<span style="font-weight: bold;">开通方式：</span><br />
+					<span style="color: #888;">验证在银行的取款密码，需先开通银联在</span>
+				</div>
+			</div>
+			<div class="textright" style="position: relative;left: 3px;top: -155px;margin-bottom: -70px;">
+				<img src="../../images/icon/icon_jiao.png" alt="" width="70" height="70"/>
+			</div>
+			<div id="" style="height: 0px;color: rgba(0,0,0,0);">1</div>
+		</div>
+		<!--银行选项卡 end-->
+		
+		
+		
+				<!--银行选项卡 start-->
+		<div class="wd90 bg-bai mt15 tab_bank" style="border-radius: 5px;" bankId="934" bankName="中国邮政储蓄银行"  v-if="isShow(934)">
+			<div class="wd90 pt5">
+				<div>
+					<div style="display:inline-block;vertical-align:middle;padding-top: 5px;font-size: 16px;font-weight: bold;">
+						<img src="../../images/bank_icon/icon_bank_11.png" alt="" width="30" height="30"/>
+						中国邮政储蓄银行
+					</div>
+				</div>
+				<div style="margin: 15px 0px 10px 0px;">
+					<span style="font-weight: bold;">交易额度：</span><br />
+					<span style="color: #888;">单笔、日累计50万</span>
+				</div>
+				<div style="padding: 5px 0px 10px 0px;">
+					<span style="font-weight: bold;">开通方式：</span><br />
+					<span style="color: #888;">验证在银行的取款密码，需先开通银联在</span>
+				</div>
+			</div>
+			<div class="textright" style="position: relative;left: 3px;top: -155px;margin-bottom: -70px;">
+				<img src="../../images/icon/icon_jiao.png" alt="" width="70" height="70"/>
+			</div>
+			<div id="" style="height: 0px;color: rgba(0,0,0,0);">1</div>
+		</div>
+		<!--银行选项卡 end-->
+		
+		
+		
+				<!--银行选项卡 start-->
+		<div class="wd90 bg-bai mt15 tab_bank" style="border-radius: 5px;" bankId="009" bankName="中国光大银行"  v-if="isShow(009)">
+			<div class="wd90 pt5">
+				<div>
+					<div style="display:inline-block;vertical-align:middle;padding-top: 5px;font-size: 16px;font-weight: bold;">
+						<img src="../../images/bank_icon/icon_bank_12.png" alt="" width="30" height="30"/>
+						中国光大银行
+					</div>
+				</div>
+				<div style="margin: 15px 0px 10px 0px;">
+					<span style="font-weight: bold;">交易额度：</span><br />
+					<span style="color: #888;">单笔、日累计50万</span>
+				</div>
+				<div style="padding: 5px 0px 10px 0px;">
+					<span style="font-weight: bold;">开通方式：</span><br />
+					<span style="color: #888;">验证在银行的取款密码，需先开通银联在</span>
+				</div>
+			</div>
+			<div class="textright" style="position: relative;left: 3px;top: -155px;margin-bottom: -70px;">
+				<img src="../../images/icon/icon_jiao.png" alt="" width="70" height="70"/>
+			</div>
+			<div id="" style="height: 0px;color: rgba(0,0,0,0);">1</div>
+		</div>
+		<!--银行选项卡 end-->
+		
+		
+		
+		
+	</div>
+</div>
+
+
+<script src="../../js/h.min.js"></script>
+<script src="../../js/mui.min.js"></script>
+<script src="../../js/immersed.js"></script>
+<script src="../../js/com.js"></script>
+<script src="../../js/xmui-globalEvent.js"></script>
+<script src="../../js/mui.pullToRefresh.js"></script>
+<script src="../../js/mui.pullToRefresh.material.js"></script>
+<script src="../../js/com.js"></script>
+<script src="../../js/com.data.js"></script>
+<script src="../../js/com.mui.js"></script>
+
+<script src="../../js/mui.picker.js"></script>
+<script src="../../js/mui.poppicker.js"></script>
+<script src="../../js/mui.dtpicker.js"></script>
+<script src="../../js/data.city.js"></script>
+
+<script src="../../js/vue.js"></script>
+<script src="../../js/jquery.min_1.8.3.js"></script>
+<script src="../../js/md5.js"></script>
+<script>
+	var cardArr = []
+    mui.ready(function () {
+        mui(".mui-scroll-wrapper").scroll({
+            bounce: true,//是否启用回弹
+            indicators: true,//是否显示滚动条
+            deceleration:  0.0005 //flick 减速系数，系数越大，滚动速度越慢，滚动距离越小，默认值0.0006
+        });
+    });
+    
+    var vue_body = new Vue({
+    	el: "#vue_body",
+    	data: {
+    		cardNoArr: []
+    	},
+    	methods: {
+    		isShow: function(no){
+    			for(var i = 0; i < this.cardNoArr.length; i++){
+	    			if(this.cardNoArr[i] == no){
+	    				return false;
+	    			}
+	    		}
+	    		return true
+    		}
+    	}
+    })
+    
+    mui.plusReady(function(){
+    	com.data.user.checkHaveBankCard({},function(res){
+    		console.log(JSON.stringify(res))
+    		var cardList = res.result_list
+    		
+    		for(var i = 0; i < cardList.length; i++){
+    			cardArr.push(cardList[i].bank_no)
+    		}
+    		vue_body.cardNoArr = cardArr
+    	});
+        mui('body').on('tap', '.tab_bank', function (){
+        	var name = this.getAttribute("bankName");
+        	var id = this.getAttribute("bankId");
+
+            mui.ge.fireEvent("chocie_bank",{
+                bankName: name,
+                bankId: id
+            }, function(args){
+            	mui.back();
+            });
+        });
+        
+        
+    })
+</script>
+</body>
+
+</html>

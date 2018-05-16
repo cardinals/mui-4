@@ -1,0 +1,264 @@
+
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <title>首页</title>
+    <meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+    <link href="../../css/mui.css" rel="stylesheet" />
+    <link href="../../css/gloab.css" rel="stylesheet" />
+    <link href="../../css/xmui.pullToRefresh.material.css" rel="stylesheet" />
+    <link href="../../css/swiper.min.css" rel="stylesheet">
+    <style>
+        .swiper-slide{
+            width: 100px;
+        }
+        input[type=radio][name=type-choice]{
+            display: none;
+            opacity: 0;
+        }
+
+        input[type=radio][name=type-choice]+label {
+            font-size: 14px;
+            display: inline-block;
+            width: 100%;
+            text-align: center;
+            line-height: 34px;
+        }
+
+        input[type=radio][name=type-choice]:checked+label {
+            border-bottom: 1px solid #FE7E00;
+            color: #FE7E00;
+        }
+        .bg-title{
+            background-color:#c70321;
+        }
+        .my-swiper{
+            background-color: white;
+            height: 35px;
+        }
+        .cell-ji{
+            text-align: center;
+            background-color: #ffffff;
+        }
+        .cell-ou{
+            text-align: center;
+            background-color: #F9F9F9;
+
+        }
+        
+    </style>
+
+</head>
+<body>
+<header class="mui-bar mui-bar-nav bg-title">
+    <a class="mui-action-back mui-icon mui-icon-left-nav mui-pull-left color-white"></a>
+    <h1 class="mui-title color-white titlecolor">交易记录</h1>
+</header>
+
+<div class="mui-content mui-scroll-wrapper" >
+    <div class="mui-scroll" id="station-list-founds-record" style="padding-bottom: 50px;">
+
+        <div>
+
+            <template v-for="(item,index) in fundslist">
+                <!--单个预定 div start-->
+                <div class="bg-bai wd100" style="margin-top: 2px;">
+                    <div class="wd90 dis_table">
+                    	<div class="dis_table_row">
+                        	<div class="dis_table_cell pt15 textleft" style="font-size: 14px;color: #000000;" v-text="getBusinName(fundslist[index].fund_busin_code)"></div>
+                            <div v-if="fundslist[index].fund_busin_code=='020'||fundslist[index].fund_busin_code=='022'||fundslist[index].fund_busin_code=='039'" class="dis_table_cell textright" style="font-size: 14px;color: #000000;" v-text="fundslist[index].balance+'元'"></div>
+                            <div v-else-if="fundslist[index].fund_busin_code=='024'" class="dis_table_cell textright" style="font-size: 14px;color: #000000;" v-text="fundslist[index].shares+'份'"></div>
+                    	</div>
+						<div class="dis_table_row">
+	                        <div class="dis_table_cell textleft pb15" style="color: #999999;margin-top: 5px;" v-text="getFormartDate(fundslist[index].apply_date)+' '+getFormartTime(fundslist[index].apply_time)"></div>
+							<div class="dis_table_cell textright" v-text="getConfirmName(fundslist[index].taconfirm_flag)"></div>
+						</div>
+
+                    </div>
+                </div>
+                <!--单个预定 div end-->
+            </template>
+
+        </div>
+
+
+    	
+    </div>
+</div>
+
+
+<script src="../../js/h.min.js"></script>
+		<script src="../../js/mui.min.js"></script>
+		<script src="../../js/immersed.js"></script>
+<script src="../../js/com.js"></script>
+<script src="../../js/xmui-globalEvent.js"></script>
+<script src="../../js/mui.pullToRefresh.js"></script>
+<script src="../../js/mui.pullToRefresh.material.js"></script>
+<script src="../../js/com.js"></script>
+<script src="../../js/swiper.min.js"></script>
+<script src="../../js/com.data.js"></script>
+<script src="../../js/com.mui.js"></script>
+
+
+<script src="../../js/vue.js"></script>
+<script src="../../js/jquery.min_1.8.3.js"></script>
+<script src="../../js/md5.js"></script>
+<script src="../../js/fundsfunction.js"></script>
+
+
+<script>
+     var  code;
+     var scroll = {};
+    mui.ready(function (){
+        mui(".mui-scroll-wrapper").scroll({
+            bounce: true,//是否启用回弹
+            indicators: true,//是否显示滚动条
+            deceleration:  0.0005 //flick 减速系数，系数越大，滚动速度越慢，滚动距离越小，默认值0.0006
+        });
+    });
+//     {
+//         "after_discount_rate": "0.0000",
+//         "allot_no": "91712081000001",
+//         "apply_date": "20171208",
+//         "apply_time": "131200",
+//         "auto_buy": "",
+//         "auto_request_flag": "",
+//         "balance": "88.89",
+//         "bank_account": "6226621234567890",
+//         "bank_no": "009",
+//         "batch_no": "2017120800",
+//         "broker": "",
+//         "busin_ass_code": "",
+//         "busin_board_type": "",
+//         "capital_mode": "3",
+//         "client_id": "1468",
+//         "combined_error_info": "",
+//         "comerro_no": "1",
+//         "cust_type": "1",
+//         "cyber_bank_date": "20171208",
+//         "cyber_bank_error_id": "",
+//         "deduct_status": "1",
+//         "detail_fund_way": "01",
+//         "diffscale": "0",
+//         "discount_rate": "1.0000",
+//         "error_code": "",
+//         "error_info": "",
+//         "expiry_date": "",
+//         "explain": "",
+//         "exponent_code": "",
+//         "exponent_flag": "",
+//         "exponent_type": "",
+//         "exponent_value": "0.0000",
+//         "extends_day": "0",
+//         "first_exchdate": "",
+//         "fund_busin_code": "039",
+//         "fund_code": "C40002",
+//         "fund_exceed_flag": "",
+//         "fund_frozen_reason": "",
+//         "fund_risk_flag": "",
+//         "hope_date": "",
+//         "max_succ_times": "0",
+//         "max_trade_succ_quota": "0",
+//         "money_type": "0",
+//         "net_no": "0001",
+//         "ofund_type": "b",
+//         "ofund_user_type": "",
+//         "online_flag": "0",
+//         "oppo_agency": "",
+//         "oppo_fund_account": "",
+//         "oppo_netno": "",
+//         "oppo_trade_account": "",
+//         "order_date": "131200",
+//         "origin_businflag": "",
+//         "original_appno": "",
+//         "original_date": "",
+//         "portfolio_allot_no": "",
+//         "portfolio_code": "",
+//         "protocol_period_unit": "",
+//         "protocol_traffic_flag": "0",
+//         "receivable_account": "6226621234567890",
+//         "reserve_discount_rate": "0.0000",
+//         "rowcount": "10",
+//         "scheduled_protocol_id": "201711162332",
+//         "send_flags": "0",
+//         "share_type": "A",
+//         "shares": "0.00",
+//         "success_type": "0",
+//         "ta_acco": "C41000000059",
+//         "taconfirm_flag": "0",
+//         "target_fund_code": "",
+//         "target_fund_type": "",
+//         "target_invest_direct": "",
+//         "target_invest_region": "",
+//         "target_operation_direction": "",
+//         "target_share_type": "",
+//         "tenantid": "519",
+//         "total_count": "0",
+//         "trade_acco": "0290",
+//         "trade_source": "",
+//         "trust_way": "2"
+//     }
+
+     var vue_body= new  Vue({
+         el:"#station-list-founds-record",
+         data:{
+             fundslist:[]
+         },
+         methods:{
+			getBusinName:function(fund_busin_code){
+				return getBusinName(fund_busin_code);
+			},
+			getFormartDate:function(date){
+				return date.substring(0,4)+"-"+date.substring(4,6)+"-"+date.substring(6,8);
+			},
+			getFormartTime:function(time){
+				return time.substring(0,2)+":"+time.substring(2,4)+":"+time.substring(4,6);
+			},
+			getConfirmName:function(taconfirm_flag){
+				return getConfirmName(taconfirm_flag)
+			}
+
+         },
+         mounted: function(){
+
+         }
+     });
+
+    mui.plusReady(function(){
+
+
+        code = com.plus.getCurrWebview().self.fund_code;
+
+        scroll = new com.mui.muiScroll(
+            document.querySelector("#station-list-founds-record")
+            , function (index, size, do_success, do_error) {
+                com.data.funds.getFundRecord({
+                	current_page:index,
+                	num_per_page:10,
+                    fund_code:code,
+                },function (data){
+                	if(index==1){
+                		vue_body.fundslist = data.result_list;
+                	}else{
+
+                		if(data.result_list!=null){
+	                		vue_body.fundslist.push.apply(vue_body.fundslist,data.result_list);
+
+                		}
+
+                	}
+
+                    do_success(1);
+
+                })
+                
+            }
+        )
+        scroll.refresh();
+    })
+</script>
+</body>
+
+</html>

@@ -1,0 +1,182 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="UTF-8">
+		<title>首页</title>
+		<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+		<link href="../../css/mui.css" rel="stylesheet" />
+		<link href="../../css/gloab.css" rel="stylesheet" />
+		<link href="../../css/xmui.pullToRefresh.material.css" rel="stylesheet" />
+		<link href="../../css/swiper.min.css" rel="stylesheet">
+		<link href="../../css/mui.picker.css" rel="stylesheet">
+		<link href="../../css/mui.poppicker.css" rel="stylesheet">
+		<style>
+			.bg-title {
+				background-color: #c70321;
+			}
+			
+			.my-swiper {
+				background-color: white;
+				height: 35px;
+			}
+			
+			
+		</style>
+
+	</head>
+
+	<body>
+		<header class="mui-bar mui-bar-nav bg-title">
+			<a class="mui-action-back mui-icon mui-icon-left-nav mui-pull-left color-white"></a>
+			<h1 class="mui-title color-white titlecolor">圈子</h1>
+		</header>
+
+		<div class="mui-content mui-scroll-wrapper bg-bai" id="vue_body">
+			<div class="mui-scroll" id="station-list" style="padding-bottom: 50px;">
+				<!-- 选择主题 -->
+				<div class="wd100 mui-row pl10 pr10 pt10 pb10" style="border-bottom: 1px solid red;">
+					<div class="mui-col-sm-4 mui-col-xs-4 ft16">
+						选择主题：
+					</div>
+					<div class="mui-col-sm-8 mui-col-xs-8">
+						<label class="ft16">行情</label>
+						<img src="../../images/icon/right.png" style="width: 15px;height: 15px;float: right;margin-top: 5px;" alt="">
+					</div>
+				</div>
+				<div>
+					<textarea style="border: none;" name="sendmessage" rows="4" cols="" placeholder="写下您的看法吧..."></textarea>
+					<div class="wd90">
+
+						<span v-for="(item,index) in imgArry.length" style="display: inline-block;margin-top: 10px;">
+					<img @click="showimg(imgArry[index])" class="userimg" :src="imgArry[index]" style="width:60px;height:60px;border: 1px solid #EEEEEE;" alt="" />
+					<span @click="delimg(index)" style="background-color: red;color: white;display: inline-block;width: 15px;height: 15px;border-radius: 15px;text-align: center;line-height: 16px;position: relative;top: -20px;left: -20px;">X</span>
+						</span>
+
+					</div>
+					<div v-if="voice">
+						<audio preload="preload" :src="voice" style="width: 100%;" controls="controls">
+							您的浏览器不支持 audio 标签。
+						</audio>
+					</div>
+				</div>
+			</div>
+			<div style="background-color: #F6F6F6;border-top: 1px solid #AAAAAA;position: fixed;bottom: 0px;width: 100%;padding: 10px 0px;">
+				<div style="width: 90%;margin: 0px auto;">
+					<span id="upimg" style="display: inline-block;margin-right: 10px;"><img src="../../images/icon/icon_picture.png" style="width:30px;height: 30px;" alt="" /></span>
+					<span style="display: inline-block;margin-right: 10px;"><img src="../../images/icon/icon_video.png" style="width:35px;height: 35px;" alt="" /></span>
+					<span style="display: inline-block;margin-right: 10px;"><a href="#voice"><img src="../../images/icon/icon_voice.png" style="width:30px;height: 30;" alt="" /></a></span>
+				</div>
+			</div>
+
+			<div id="voice" class="box mui-popover mui-popover-action mui-popover-bottom" style="z-index:99999">
+				<!--<input type="text" name="" id="" value="" style="position:relative;"/>-->
+				<div class="bg-bai pt10">
+					<div class="wd96 dis_table">
+						<div class="dis_table_cell " style="width: 50%;">
+							<button type="button" id="upVoice" class="mui-btn mui-btn-success">开始</button>
+						</div>
+						<div class="dis_table_cell">
+							<button type="button" id="stopVoice" class="mui-btn mui-btn-danger">停止</button>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+
+		<script src="../../js/h.min.js"></script>
+		<script src="../../js/mui.min.js"></script>
+		<script src="../../js/immersed.js"></script>
+		<script src="../../js/com.js"></script>
+		<script src="../../js/xmui-globalEvent.js"></script>
+		<script src="../../js/mui.pullToRefresh.js"></script>
+		<script src="../../js/mui.pullToRefresh.material.js"></script>
+		<script src="../../js/com.js"></script>
+		<script src="../../js/swiper.min.js"></script>
+		<script src="../../js/com.data.js"></script>
+		<script src="../../js/com.mui.js"></script>
+		<script src="../../js/mui.picker.js"></script>
+		<script src="../../js/mui.poppicker.js"></script>
+		<script src="../../js/jquery.min_1.8.3.js"></script>
+		<script src="../../js/vue.js"></script>
+
+		<script>
+			mui.ready(function() {
+				mui(".mui-scroll-wrapper").scroll({
+					bounce: true, //是否启用回弹
+					indicators: true, //是否显示滚动条
+					deceleration: 0.0005 //flick 减速系数，系数越大，滚动速度越慢，滚动距离越小，默认值0.0006
+				});
+			});
+			var r = null
+			mui.plusReady(function() {
+				r = plus.audio.getRecorder();
+				var vue_body = new Vue({
+					el: "#vue_body",
+					data: {
+						imgArry: [],
+						voice: null //音频
+					},
+					methods: {
+						delimg: function(index) {
+							this.imgArry.splice(index, 1)
+						},
+						showimg: function(url) {
+							com.plus.openWindowX('../tools/imageview.html', {
+								imgurl: url
+							});
+						}
+					}
+				})
+
+				mui('body').on('tap', '#upimg', function() {
+
+					// 从相册中选择图片
+					//			alert('从相册中选择多张图片：');
+					plus.gallery.pick(function(e) {
+						for(var i in e.files) {
+							plus.io.resolveLocalFileSystemURL(e.files[i], function(entry) {
+								vue_body.imgArry.push(entry.toLocalURL())
+								console.log(entry.toLocalURL())
+							}, function(e) {});
+						}
+					}, function(e) {
+						//		    	alert('取消选择图片');
+					}, {
+						filter: 'image',
+						multiple: true,
+						system: false
+					});
+
+				});
+
+				// 上传音频
+				mui('body').on('tap', '#upVoice', function() {
+					if(r == null) {
+						alert("Device not ready!");
+						return;
+					}
+					r.record({
+						filename: "_doc/audio/"
+					}, function(p) {
+						alert("Audio record success!");
+						plus.io.resolveLocalFileSystemURL(p, function(entry) {
+							vue_body.voice = entry.toLocalURL()
+							console.log(p)
+							console.log(entry.toLocalURL())
+						}, function(e) {
+							outLine('读取录音文件错误：' + e.message);
+						});
+					}, function(e) {
+						alert("Audio record failed: " + e.message);
+					});
+				})
+				// 停止录音
+				mui('body').on('tap', '#stopVoice', function() {
+					r.stop()
+				})
+			})
+		</script>
+	</body>
+
+</html>

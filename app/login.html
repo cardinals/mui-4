@@ -1,0 +1,320 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="UTF-8">
+		<title>首页</title>
+		<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+		<link href="../css/mui.css" rel="stylesheet" />
+		<link href="../css/xmui.pullToRefresh.material.css" rel="stylesheet" />
+		<link href="../css/swiper.min.css" rel="stylesheet">
+		<link href="../css/gloab.css" rel="stylesheet">
+		<style>
+			.loginpic {
+				width: 15%;
+				padding-top: 20%;
+				padding-bottom: 10%;
+			}
+			
+			.mui-input-group .mui-input-row:after {
+				height: 0px;
+			}
+			
+			.mui-input-group:before {
+				background-color: white;
+			}
+			
+			
+			
+			.login-a {
+				color: #5b5b5b;
+				font-size: 14px;
+			}
+			
+			
+			.mui-bar{
+				background-color:#FFFFFF;
+			}
+			.titlecolor strong{
+				color: #000000;
+				font-size: 16px;
+			}
+			
+			input::-webkit-input-placeholder { 
+				color: #929292; 
+				font-size: 14px;
+			} 
+			input:-moz-placeholder{ 
+				color: #929292; 
+				font-size: 14px;
+			} 
+			input:-ms-input-placeholder { 
+				color: #929292; 
+				font-size: 14px;
+			} 
+			[v-cloak] {
+			  display: none;
+			}
+		</style>
+	</head>
+
+	<body>
+
+		<header class="mui-bar mui-bar-nav">
+			<a class="mui-action-back mui-icon mui-icon-left-nav mui-pull-left " style="color: #000000;"></a>
+			<h1 class="mui-title titlecolor"><strong>登录</strong></h1>
+		</header>
+
+		<div class="mui-content mui-scroll-wrapper" style="background: #ffffff;">
+			<div id="vue-body" v-cloak>
+
+				<div style="background: white;">
+					<!-- 选项卡-->
+					<!--FB5C60-->
+					<!--<div class="wd100 textcenter">
+						<div class="active-login-action wd50 h40px float-left ft14 login-tab" data-login="1">密码登录</div>
+						<div class="login-action wd50 h40px float-left ft14 login-tab" data-login="0">短信登录</div>
+					</div>-->
+
+					<!-- 密码登录 -->
+					<div v-if="isPswdLogin">
+					<form  class="mui-input-group" style="width: 90%;margin: 0px auto;margin-top: 60px;">
+						<div class="wd100" style="border-bottom: 1px solid #cbcbcb;">
+							<div class="dis_table wd90">
+								<div class="dis_table_cell  " style="width: 10%;font-size: 14px;color: #000000;">
+									账号
+								</div>
+								<div class="dis_table_cell" style="">
+									<div class="">
+										<input type="text" style="font-size: 14px;padding: 15px 10px;height: 50px;" v-model="phone" class="mui-input-clear" placeholder="请输入手机号">
+									</div>
+								</div>
+							</div>
+						</div>
+
+						<div class="wd100" style="border-bottom: 1px solid #cbcbcb;">
+							<div class="dis_table wd90">
+								<div class="dis_table_cell " style="width: 10%;font-size: 14px;color: #000000;">
+									密码
+								</div>
+								<div class="dis_table_cell" style="">
+									<div class="">
+										<input type="password" style="font-size: 14px;padding:15px 10px;height: 50px;" v-model="pwd" class="mui-input-password" placeholder="请输入密码">
+									</div>
+								</div>
+							</div>
+						</div>
+						
+					</form>
+					<div class="wd90" style="margin-top: 30px;">
+							<button v-if="phone && pwd" @click="login" type="button" class="" id="next_step" style="width: 100%;height: 40px;background-color: #FB5C60;color: white;border: 0px;">登录</button>
+							<button v-else type="button"  id="next_step" style="width: 100%;height: 40px;background-color: #eeeeee;color: #c9c9c9;border: 0px;">登录</button>
+						</div>
+					</div>
+					<!-- 短信登录 -->
+					<div v-if="!isPswdLogin">
+					<form class="mui-input-group" style="width: 90%;margin: 0px auto;margin-top: 60px;">
+						<div class="wd100" style="border-bottom: 1px solid #DDDDDD;">
+							<div class="dis_table">
+								
+								<div class="dis_table_cell" style="">
+									<div class="">
+										<input type="number" style="font-size: 14px;padding: 15px 5px;height: 50px;" v-model="phone" class="mui-input-clear" placeholder="请输出手机号">
+									</div>
+								</div>
+							</div>
+						</div>
+
+						<div class="wd100" style="border-bottom: 1px solid #EEEEEE;">
+							<div class="dis_table">
+								
+								<div class="dis_table_cell">
+									<div class="">
+										<input type="number" style="font-size: 14px;padding: 15px 5px;height: 50px;" class="mui-input-clear" v-model="code" placeholder="请输出验证码">
+									</div>
+								</div>
+								<div class="dis_table_cell wd30" style="position: relative;left: 25px">
+									<input class="mui-btn" type="button" 
+										value="发送验证码" v-model="send_btn" @click="reqCode" name="send_code" 
+										id="send_code" style="float: right;font-size: 14px;width: 100%;
+										height: 100%;background-color: white;color: #242424;
+										border: none;padding: 0 10px;border-left: 2px solid #e5e5e5;" />
+								</div>
+							</div>
+						</div>
+						
+					</form>
+					<div class="wd90" style="margin-top: 30px;">
+						
+						<button v-if="phone && code" @click="login" type="button"  id="next_step" style="width: 100%;height: 40px;background-color: #FB5C60;color: white;border: 0px;">登录</button>
+						<button v-else type="button"  id="next_step" style="width: 100%;height: 40px;background-color: #EEEEEE;color: #c9c9c9;border: 0px;">登录</button>
+					</div>
+</div>
+					
+					<div class="" style="text-align: center;padding-top: 20px;">
+						<span class="login-a" id="reg" style="float:left;margin-left: 5%;display: inline-block;;font-size: 14px;">手机快速注册</span>
+						<span v-if="isPswdLogin" class="login-a" id="forget-pwd" style="float:right;margin-right: 5%;display: inline-block;font-size: 14px;">忘记密码</span>
+					</div>
+				</div>
+				
+				<div class="footer" style="width: 100%;text-align: center;position: fixed;bottom: 30px;z-index: -99;color: #2e2e2e;font-size: 14px;">
+					<span id="login-tab" v-if="isPswdLogin">短信快捷登录</span>
+					<span id="login-tab" v-if="!isPswdLogin">密码登录</span>
+				</div>
+			</div>
+			
+		</div>
+		<script src="../js/h.min.js"></script>
+		<script src="../js/mui.min.js"></script>
+		<script src="../js/immersed.js"></script>
+		<script src="../js/xmui-globalEvent.js"></script>
+		<!--<script src="../js/mui.pullToRefresh.js"></script>
+		<script src="../js/mui.pullToRefresh.material.js"></script>-->
+		<!-- 滚动条 -->
+		<script src="../js/swiper.min.js"></script>
+		<!-- 图片缓存-->
+		<script src="../js/DMobileFrame.js"></script>
+		<script src="../js/com.js"></script>
+		<script src="../js/com.data.js"></script>
+		<script src="../js/com.mui.js"></script>
+		<script src="../js/vue.js"></script>
+		<script src="../js/jquery.min_1.8.3.js"></script>
+		<script src="../js/md5.js"></script>
+		<script>
+			var vue_body = new Vue({
+				el: "#vue-body",
+				data: {
+					phone: "",
+					pwd: "",
+					code: "",
+					send_btn: "发送验证码",
+					isPswdLogin: true,
+					wait_time: 30
+				},
+				methods: {
+					login: function() {
+						//						alert(123);
+						if(this.isPswdLogin) {
+							if(!this.phone) {
+								mui.toast("请填写手机号")
+								return
+							}
+							if(!this.pwd) {
+								mui.toast("请填写密码")
+								return
+							}
+
+							com.data.user.login({
+								mobile_tel: vue_body.phone,
+								login_password: vue_body.pwd
+							}, function(data) {
+								console.log(JSON.stringify(data.result_map.token));
+								//							登录成功 储存token
+								com.data.loginToken.update(data.result_map.token);
+								mui.toast("登录成功");
+								com.data.user.showMyInfo({}, function(data) {
+									com.data.userInfo.update(data.result_map);
+									//执行监听时间
+									mui.ge.fireEvent("reloadMyinfo", {}, function(args) {});
+									mui.ge.fireEvent("reloadIndex", {}, function(args) {});
+									//com.plus.openWindowX("mainpage/mypage.html");           
+                                 	var detailPage = plus.webview.getWebviewById('mainpage/mypage.html');
+                                 	//触发详情页面的newsId事件
+                                     mui.fire(detailPage,'newsId',{});
+									plus.webview.currentWebview().close();
+								})
+
+							});
+						} else {
+							if(!this.code) {
+								mui.toast("请填写验证码")
+								return
+							}
+							com.data.user.loginByCode({
+								mobile_tel: vue_body.phone,
+								verificationCode: vue_body.code
+							}, function(data, msg, token) {
+								//							登录成功 储存token
+								console.log(JSON.stringify(data))
+
+								com.data.loginToken.update(token);
+								var resultMap = data.result_map
+
+								com.data.user.showMyInfo({}, function(data) {
+									var myInfo = data.result_map
+									com.data.userInfo.update(data.result_map);
+									// 执行监听时间
+									mui.ge.fireEvent("reloadMyinfo", {}, function(args) {});
+									mui.ge.fireEvent("reloadIndex", {}, function(args) {});
+
+									if(resultMap.is_set_password == '1') {
+										com.plus.openWindowX("setPswd.html", {
+											phone: vue_body.phone
+										});
+									} else {
+										plus.webview.currentWebview().close();
+									}
+								})
+
+							});
+						}
+					},
+					//发送验证码
+					reqCode: function() {
+						var this_ = this;
+						if(this_.send_btn == "发送验证码") {
+							var phone = this_.phone;
+
+							var myreg = /^1[3|4|5|7|8|9][0-9]{9}$/;
+							if(!myreg.test(phone)) {
+								mui.toast('请输入有效的手机号码！');
+								return false;
+							}
+							//                              alert(phone);
+							//说明可以发送 请求发送验证码
+							com.data.user.getPhoneCodeUncheck({
+								mobile_tel: phone
+							}, function(data) {
+								//									alert(JSON.stringify(data));
+							})
+							//无论成不成功都等待30s
+							var time_count = this_.wait_time;
+							this_.send_btn = time_count + "s后重发";
+
+							var t1 = window.setInterval(function() {
+								console.log(time_count);
+								if(time_count <= 0) {
+									this_.send_btn = "发送验证码"
+									window.clearInterval(t1);
+									return;
+								}
+								time_count--;
+								this_.send_btn = time_count + "s后重发";
+							}, 1000);
+						}
+					}
+				}
+			});
+			mui.plusReady(function() {
+
+			})
+
+			mui("body").on('tap', '#login-tab', function() {
+//				$(".login-tab").removeClass("active-login-action").removeClass("login-action")
+//				$(this).addClass("active-login-action")
+				vue_body.isPswdLogin = !vue_body.isPswdLogin;
+			})
+			mui('body').on('tap', '#forget-pwd', function() {
+				//                alert(1);
+				com.plus.openWindowX('userinfo/forgetpwd.html', {});
+			});
+//			mui('body').on('tap', '#my_kefu', function() {
+//				com.plus.openWindowX('tools/kefu.html', {});
+//			});
+			mui('body').on('tap', '#reg', function() {
+				com.plus.openWindowX('register.html', {});
+			});
+		</script>
+	</body>
+
+</html>

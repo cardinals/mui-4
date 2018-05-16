@@ -1,0 +1,111 @@
+/*********原生input样式更改，例如radio和checkBOx***/
+input[type=checkbox]{
+    appearance: none;
+    -moz-appearance: none;
+    -webkit-appearance: none;
+    width: 14px;
+    height: 14px;
+    background-image: url("../img/icon/input/ico_checkbox.png");
+    background-size: 100% 100%;
+    background-repeat: no-repeat;
+    margin: 0px;
+}
+input[type=checkbox]:checked{
+    background-image: url("../img/icon/input/ico_checkbox_checked.png");
+}
+
+/*********原生input样式更改，例如radio和checkBOx***/
+input[type=radio]{
+    appearance: none;
+    -moz-appearance: none;
+    -webkit-appearance: none;
+    width: 14px;
+    height: 14px;
+    background-image: url("../img/icon/input/ico_radio.png");
+    background-size: 100% 100%;
+    background-repeat: no-repeat;
+    margin: 0px;
+}
+input[type=radio]:checked{
+    background-image: url("../img/icon/input/ico_radio_checked.png");
+}
+
+
+
+/*****公共input的设置css*****/
+/****例如***************/
+/** 带左边一个图标的input
+<div class="input-div h50px wd80" style="margin-top: 25px">
+    <div class="left-icon"><!-- input 的左边图标 -->
+        <img src="../../到了么/developing/daolema-user-phone/images/icon/input/ico_user@2x.png" class="h16px w10px">
+    </div> <!-- input 的左边图标 end-->
+    <input class="input1" placeholder="请设置昵称" type="text" /> <!--只出现一个图标，则使用input1-->
+</div>
+**/
+
+/** input两端都带有图标的样式
+<div class="input-div h50px wd80" style="margin-top: 12px">
+    <div class="left-icon">
+        <img src="../../到了么/developing/daolema-user-phone/images/icon/input/ico_passwd@2x.png" class="h16px w10px">
+    </div>
+    <input class="input1" placeholder="请设置密码" type="password" />
+    <div class="right-icon">
+        <img src="../../到了么/developing/daolema-user-phone/images/icon/input/ico_view@2x.png" class="h10px w16px">
+    </div>
+</div>
+**/
+
+.input-div{
+    -webkit-border-radius: 2px;
+    -moz-border-radius: 2px;
+    border-radius: 2px;
+    background-color:#F5F5F5;
+    -webkit-box-shadow:  -1px 0px 0px #E4E4E4, /*左边阴影*/
+    1px 0px 0px #E4E4E4, /*右边阴影*/
+    0px -1px 0px #E4E4E4, /*顶部阴影*/
+    0px 1px 0px #E4E4E4; /*底边阴影*/  ;
+    -moz-box-shadow:   -1px 0px 0px #E4E4E4, /*左边阴影*/
+    1px 0px 0px #E4E4E4, /*右边阴影*/
+    0px -1px 0px #E4E4E4, /*顶部阴影*/
+    0px 1px 0px #E4E4E4; /*底边阴影*/  ;
+    box-shadow:   -1px 0px 0px #E4E4E4, /*左边阴影*/
+    1px 0px 0px #E4E4E4, /*右边阴影*/
+    0px -1px 0px #E4E4E4, /*顶部阴影*/
+    0px 1px 0px #E4E4E4; /*底边阴影*/  ;
+}
+
+.input-div .left-icon{
+    width: 18%;
+    height: 100%;
+    text-align: center;
+    float: left;
+    vertical-align: middle;
+}
+.input-div input{
+    height: 100%;
+    float: left;
+    vertical-align: middle;
+    border:none;
+    background-color:#F5F5F5;
+}
+
+.input-div .input1{
+    width: 82%;
+}
+
+.input-div .input2{
+    width: 64%;
+}
+
+
+.input-div .right-icon{
+    width: 18%;
+    height: 100%;
+    float: left;
+    vertical-align: middle;
+    text-align: center;
+}
+
+.input-div .left-icon img,.input-div .right-icon img{
+    vertical-align: middle;
+}

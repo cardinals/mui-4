@@ -1,0 +1,323 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>账单明细</title>
+    <meta name="viewport"
+          content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no"/>
+    <link href="../../css/mui.css" rel="stylesheet"/>
+    <link href="../../css/xmui.pullToRefresh.material.css" rel="stylesheet"/>
+    <link href="../../css/swiper.min.css" rel="stylesheet">
+    <link href="../../css/gloab.css" rel="stylesheet"/>
+    <!-- 引入样式 -->
+    <link rel="stylesheet" href="https://unpkg.com/element-ui/lib/theme-chalk/index.css">
+
+    <style>
+        .swiper-slide{
+            width: 100px;
+        }
+        input[type=radio][name=type-choice]{
+            display: none;
+            opacity: 0;
+        }
+
+        input[type=radio][name=type-choice]+label {
+        	font-size: 14px;
+            display: inline-block;
+            width: 100%;
+            text-align: center;
+            line-height: 34px;
+        }
+
+        input[type=radio][name=type-choice]:checked+label {
+            border-bottom: 1px solid #FE7E00;
+            color: #FE7E00;
+        }
+        .bg-title{
+            background-color:#c70321;
+        }
+        .my-swiper{
+            background-color: white;
+            height: 35px;
+        }
+        .cell-ji{
+        	text-align: center;
+            background-color: #ffffff;
+        }
+        .cell-ou{
+        	text-align: center;
+            background-color: #F9F9F9;
+
+        }
+    </style>
+</head>
+<body>
+    <header class="mui-bar mui-bar-nav bg-title">
+        <a class="mui-action-back mui-icon mui-icon-left-nav mui-pull-left color-white"></a>
+        <h1 class="mui-title color-white titlecolor">公募基金</h1>
+    </header>
+    <div class="mui-content mui-scroll-wrapper">
+        <div class="mui-scroll" id="station-list">
+            <div class="swiper-container my-swiper" style="margin-bottom: 10px;">
+                <div class="swiper-wrapper">
+                	
+                    <div class="swiper-slide" style="width: 100px">
+                    	<input type="radio" id="funds_all" name="type-choice" value="-1" checked=""/>
+                    	<label for="funds_all">全部基金</label>
+                    </div>
+                    <div class="swiper-slide">
+                    	<input type="radio" id="funds_fouce" name="type-choice" value="0"/>
+                    	<label for="funds_all">我的关注</label>
+                    </div>
+                    <div class="swiper-slide">
+                    	<input type="radio" id="funds_1" name="type-choice" value="1"/>
+                    	<label for="funds_all">股票型</label>
+                    </div>
+                    <div class="swiper-slide">
+                    	<input type="radio" id="funds_2" name="type-choice" value="2"/>
+                    	<label for="funds_all">混合型</label>
+                    </div>
+                    <div class="swiper-slide">
+                    	<input type="radio" id="funds_3" name="type-choice" value="3"/>
+                    	<label for="funds_all">债券型</label>
+                    </div>
+                    <div class="swiper-slide">
+                    	<input type="radio" id="funds_4" name="type-choice" value="4"/>
+                    	<label for="funds_all">指数型</label>
+                    </div>
+                    <div class="swiper-slide">
+                    	<input type="radio" id="funds_5" name="type-choice" value="5"/>
+                    	<label for="funds_all">货币型</label>
+                    </div>
+                    <div class="swiper-slide">
+                    	<input type="radio" id="funds_6" name="type-choice" value="6"/>
+                    	<label for="funds_all">其他基金</label>
+                    </div>
+                </div>
+            </div>
+
+            <div id="all_bill">
+                <template>
+                    <el-table
+                    		highlight-current-row:true
+                            :data="tableData"
+                            height="600"
+                            style="width: 100%"
+                            :cell-class-name="changeCell"
+                            :header-cell-class-name="changeCell"
+                            @row-click="rowClick"
+                            >
+                        <el-table-column
+                                fixed
+                                prop="name"
+                                label="基金名称"
+                                width="100"
+                                >
+                        </el-table-column>
+                        <el-table-column
+                                prop="value"
+                                label="单位净值"
+                                width="100"
+                                sortable
+                                :formatter="valueFormatter">
+                            <template slot-scope="scope">
+                                {{ scope.row.value }}<br>{{ scope.row.time }}
+                            </template>
+                        </el-table-column>
+                        <el-table-column
+                                prop="day_up"
+                                label="日涨幅"
+                                width="80"
+                                sortable>
+                        </el-table-column>
+                        <el-table-column
+                                prop="month_up"
+                                label="月涨幅"
+                                width="80"
+                                sortable>
+                        </el-table-column>
+                        <el-table-column
+                                prop="season_up"
+                                label="季涨幅"
+                                width="80"
+                                sortable>
+                        </el-table-column>
+                        <el-table-column
+                                prop="year_up"
+                                label="年涨幅"
+                                width="80"
+                                sortable>
+                        </el-table-column>
+
+                    </el-table>
+                </template>
+            </div>
+        </div>
+    </div>
+
+
+
+<script src="../../js/h.min.js"></script>
+		<script src="../../js/mui.min.js"></script>
+		<script src="../../js/immersed.js"></script>
+<script src="../../js/xmui-globalEvent.js"></script>
+<script src="../../js/mui.pullToRefresh.js"></script>
+<script src="../../js/mui.pullToRefresh.material.js"></script>
+<!-- 滚动条 -->
+<script src="../../js/swiper.min.js"></script>
+<!-- 图片缓存-->
+<script src="../../js/DMobileFrame.js"></script>
+<script src="../../js/doT.min.js"></script>
+<script src="../../js/com.js"></script>
+<script src="../../js/com.data.js"></script>
+<script src="../../js/com.mui.js"></script>
+
+<!-- 引入组件库 -->
+<script src="https://unpkg.com/vue"></script>
+<script src="https://unpkg.com/element-ui/lib/index.js"></script>
+
+<script>
+
+    mui.ready(function (){
+        var vue = new Vue({
+            el:"#all_bill",
+            methods:{
+                handleClick:function(row){
+                    console.log(row);
+                },
+                changeCell:function (data){
+                    if(data.columnIndex%2==0){
+                        return "cell-ji";
+                    }else {
+                        return "cell-ou";
+                    }
+                },
+                valueFormatter:function (row, column) {
+//                  alert(JSON.stringify(row));
+					return row.value+"  <br>"+row.time;
+                },
+                rowClick:function (row, event, column){
+                    com.plus.openWindowX('../fundspage/fundslist.html',{
+                        type:type
+                    });
+                }
+
+            },
+            data: {
+                tableData: [{
+                    id:"1",
+                    name: '东证赢家增长股票000925',
+                    value:'1.251',
+                    day_up:'2.81%',
+                    month_up: '2.41%',
+                    season_up: '2.01%',
+                    year_up: '2.81%',
+                    time:'2017-10-31'
+                },{
+                    id:"2",
+                    name: '东证赢家延增长股票000925',
+                    value:'1.252',
+                    day_up:'2.82%',
+                    month_up: '2.42%',
+                    season_up: '2.92%',
+                    year_up: '2.82%',
+                    time:'2017-10-31'
+                },{
+                    id:"3",
+                    name: '东证赢家增长股票000925',
+                    value:'1.253',
+                    day_up:'2.83%',
+                    month_up: '2.43%',
+                    season_up: '2.83%',
+                    year_up: '2.83%',
+                    time:'2017-10-31'
+                },{
+                    id:"4",
+                    name: '东证赢家增长股票000925',
+                    value:'1.254',
+                    day_up:'2.84%',
+                    month_up: '2.44%',
+                    season_up: '2.74%',
+                    year_up: '2.84%',
+                    time:'2017-10-31'
+                },{
+                    id:"5",
+                    name: '东证赢家增长股票000925',
+                    value:'1.255',
+                    day_up:'2.85%',
+                    month_up: '2.45%',
+                    season_up: '2.65%',
+                    year_up: '2.85%',
+                    time:'2017-10-31'
+                },{
+                    id:"6",
+                    name: '东证赢家增长股票000925',
+                    value:'1.256',
+                    day_up:'2.86%',
+                    month_up: '2.46%',
+                    season_up: '2.56%',
+                    year_up: '2.86%',
+                    time:'2017-10-31'
+                },{
+                    id:"7",
+                    name: '东证赢家增长股票000925',
+                    value:'1.257',
+                    day_up:'2.87%',
+                    month_up: '2.47%',
+                    season_up: '2.47%',
+                    year_up: '2.87%',
+                    time:'2017-10-31'
+                },{
+                    id:"8",
+                    name: '东证赢家增长股票000925',
+                    value:'1.258',
+                    day_up:'2.88%',
+                    month_up: '2.48%',
+                    season_up: '2.38%',
+                    year_up: '2.88%',
+                    time:'2017-10-31'
+                },{
+                    id:"9",
+                    name: '东证赢家增长股票000925',
+                    value:'1.259',
+                    day_up:'2.89%',
+                    month_up: '2.49%',
+                    season_up: '2.29%',
+                    year_up: '2.89%',
+                    time:'2017-10-31'
+                },{
+                    id:"0",
+                    name: '东证赢家增长股票000925',
+                    value:'1.250',
+                    day_up:'2.80%',
+                    month_up: '2.40%',
+                    season_up: '2.10%',
+                    year_up: '2.80%',
+                    time:'2017-10-31'
+                }]
+            }
+        })
+    });
+
+
+
+</script>
+    <script>
+      var swiper = new Swiper('.swiper-container', {
+          pagination: '.swiper-pagination',
+          slidesPerView: 5,
+          paginationClickable: true,
+          spaceBetween: 0,
+          freeMode: true
+      });
+//    var swiper = new Swiper('.swiper-container', {
+//        pagination: '.swiper-pagination',
+//        slidesPerView: 'auto',
+//        centeredSlides: true,
+//        paginationClickable: true,
+//        spaceBetween: 30,
+//        freeMode: true
+//    });
+    </script>
+</body>
+</html>

@@ -1,0 +1,198 @@
+<!DOCTYPE html>
+<html lang="en">
+
+	<head>
+		<meta charset="UTF-8">
+		<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+		<link rel="stylesheet" href="../css/font-awesome-4.7.0/css/font-awesome.min.css">
+		<link href="../css/mui.css" rel="stylesheet" />
+		<link href="../css/gloab.css" rel="stylesheet" />
+		<title>主页面</title>
+		<style>
+			.mui-icon {
+				background-size: contain;
+				background-position: center;
+				background-repeat: no-repeat;
+			}
+			
+			.change-color {
+				color: #c70321;
+				transform: scale(0.9);
+			}
+			
+			.mui-bar-tab .mui-tab-item.mui-active {
+				color: #c70321;
+			}
+			
+			.mui-active>.mui-tab-label {
+				color: #c70321;
+			}
+			
+			.mui-bar {
+				box-shadow: 0 0 2px #DEDEDE;
+			}
+			
+			.home {
+				background-image: url(../img/home/home_def.png);
+			}
+			
+			.mui-active .home {
+				background-image: url(../img/home/home_check.png);
+			}
+			
+			.shop {
+				background-image: url(../img/home/shop_def.png);
+			}
+			
+			.mui-active .shop {
+				background-image: url(../img/home/shop_check.png);
+			}
+			
+			.me {
+				background-image: url(../img/home/me_def.png);
+			}
+			
+			.mui-active .me {
+				background-image: url(../img/home/me_check.png);
+			}
+			/**
+            设置make显示的颜色
+        */
+			
+			.mui-backdrop {
+				background-color: transparent !important;
+			}
+		</style>
+
+	</head>
+
+	<body>
+
+		<nav class="mui-bar mui-bar-tab">
+
+			<a id="defaultTab" class="mui-tab-item mui-active" href="mainpage/index.html" id='0' to_sub="0">
+				<span class="mui-icon home"><i class="icon-show fa fa-home change-color " style="transform: scale(0.8);"></i></span>
+				<span class="mui-tab-label titlecolor" style="line-height: 22px;">首页</span>
+			</a>
+			<a class="mui-tab-item" to_sub="1" href="quotepage/qihuohangqing.html" id='1'>
+				<span class="mui-icon shop"><i class="icon-show fa fa-area-chart" style="transform: scale(0.8);"></i></span>
+				<span class="mui-tab-label titlecolor" style="line-height: 22px;">期货</span>
+			</a>
+			<a class="mui-tab-item" to_sub="2" href="fundspage/fundslist_public.html" id='2'>
+				<span class="mui-icon shop"><i class="icon-show fa fa-line-chart" style="transform: scale(0.8);"></i></span>
+				<span class="mui-tab-label titlecolor" style="line-height: 22px;">基金</span>
+			</a>
+
+<!--            <a class="mui-tab-item" to_sub="3" href="mainpage/funds.html" id='3'>-->
+<!--                <span class="mui-icon shop"><i class="icon-show fa fa-diamond" style="transform: scale(0.8);"></i></span>-->
+<!--                <span class="mui-tab-label titlecolor" style="line-height: 22px;">高端理财</span>-->
+<!--            </a>-->
+
+			<a class="mui-tab-item" to_sub="4" href="mainpage/mypage.html" id='4'>
+				<span class="mui-icon me"><i class="icon-show fa fa-user-o " style="transform: scale(0.8);"></i></span>
+				<span class="mui-tab-label titlecolor" style="line-height: 22px;">我</span>
+			</a>
+
+		</nav>
+
+		<script src="../js/h.min.js"></script>
+		<script src="../js/mui.min.js"></script>
+		<script src="../js/immersed.js"></script>
+		<script src="../js/xmui-globalEvent.js"></script>
+		<script src="../js/com.js"></script>
+		<script src="../js/com.data.js"></script>
+		<script src="../js/jquery.min_1.8.3.js"></script>
+		<script src="../hqup.js"></script>
+		<script>
+			var subpages = [{
+					url: 'mainpage/index.html',
+					active: false,
+					new: false,
+					id: '0',
+					styles: {
+						statusbar:{
+							immersed:true
+						}
+					}
+				}
+				//      , {url: 'mainpage/open.html', active: false, new: false}
+				, {
+					url: 'quotepage/qihuohangqing.html',
+					active: false,
+					new: false,
+					id: '1'
+				}, {
+					url: 'fundspage/fundslist_public.html',
+					active: false,
+					new: false,
+					id: '2'
+				}, {
+					url: 'mainpage/funds.html',
+					active: false,
+					new: false,
+					id: '3'
+				}, {
+					url: 'mainpage/mypage.html',
+					active: false,
+					new: false,
+					id: '4'
+				}
+			];
+
+			var subpage_style = {
+				top: '0px',
+				bottom: '51px'
+			};
+
+			var currWeb = null;
+
+			mui.plusReady(function() {
+				com.plus.fullscreen.setNoFull();
+				currWeb = com.plus.getCurrWebview();
+
+				var sub = plus.webview.create(subpages[0].url, subpages[0].url, subpage_style);
+				currWeb.self.append(sub);
+				subpages[0].new = true;
+				plus.webview.show(subpages[0].url);
+				subpages[0].active = true;
+
+				mui('body').on('tap', '[to_sub]', function() {
+					$(".icon-show").removeClass("change-color");
+					$(this).children(".mui-icon").children().addClass("change-color");
+					var to_sub = this.getAttribute("to_sub");
+					
+                   //点击期货详情到时调起sdk 不打开tab指定路径
+                    if (subpages[to_sub].id == '1'){
+                               //interac();
+                                plus.bridge.exec( 'pbmobile', 'openPbmobilePage', [] );
+                               return;
+                        }
+					if(!subpages[to_sub].active) {
+						for(var i = 0; i < subpages.length; i++) {
+							if(subpages[i].active) {
+								plus.webview.hide(subpages[i].url);
+								subpages[i].active = false;
+								break;
+							}
+						}
+						if(!subpages[to_sub].new) {
+							var sub = plus.webview.create(subpages[to_sub].url, subpages[to_sub].url, subpage_style);
+							currWeb.self.append(sub);
+							subpages[to_sub].new = true;
+						}
+						plus.webview.show(subpages[to_sub].url);
+						subpages[to_sub].active = true;
+					}
+				})
+			})
+
+			//判断是否退出应用																																																																																																																																			
+			var old_back = mui.back;
+			mui.back = function() {
+				com.plus.hasCloseApp();
+			}
+		</script>
+
+	</body>
+
+</html>

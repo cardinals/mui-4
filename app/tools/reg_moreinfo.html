@@ -1,0 +1,461 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+	<meta charset="UTF-8">
+	<title>首页</title>
+	<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+	<link href="../../css/mui.css" rel="stylesheet" />
+	<link href="../../css/gloab.css" rel="stylesheet" />
+	<link href="../../css/xmui.pullToRefresh.material.css" rel="stylesheet" />
+	<link href="../../css/swiper.min.css" rel="stylesheet">
+	<link href="../../css/mui.picker.css" rel="stylesheet">
+	<link href="../../css/mui.poppicker.css" rel="stylesheet">
+	<link href="../../css/mui.dtpicker.css" rel="stylesheet">
+	<style>
+		.titlecolor{
+			color: white;
+		}
+		.mui-bar{
+			background-color: #c70321;
+		}
+		.mui-input-group .mui-input-row:after{
+			height: 0px;
+		}
+		input[type='text']{
+			font-size: 14px;
+		}
+		
+		.can-next{
+				background-color: #FB5C60;
+			}
+			.not-next{
+				background-color: #DDDDDD;
+			}
+	</style>
+
+</head>
+<body>
+    <header class="mui-bar mui-bar-nav bg-title">
+        <a class="mui-action-back mui-icon mui-icon-left-nav mui-pull-left color-white"></a>
+        <h1 class="mui-title color-white titlecolor">补充个人信息</h1>
+    </header>
+
+<div class="mui-content mui-scroll-wrapper bg-bai">
+	<div class="mui-scroll" id="vue-body-myinfo">
+		<div>
+			<form class="mui-input-group">
+				<div class="wd100" style="border-bottom: 1px solid #EEEEEE;">
+					<div class="dis_table wd90">
+				    	<div class="dis_table_cell  wd20 textleft">
+				    		真实姓名
+				    	</div>
+				        <div class="dis_table_cell" style="">
+							<div class="mui-input-row">
+				        		<input type="text" v-model="name" placeholder="请输入真实姓名">
+							</div>
+				        </div>
+			    	</div>
+				</div>
+			    
+			    <div class="wd100" style="border-bottom: 1px solid #EEEEEE;">
+					<div class="dis_table wd90">
+				    	<div class="dis_table_cell  wd20 textleft">
+				    		证件类型
+				    	</div>
+				        <div class="dis_table_cell" style="text-align: left;"  id="card_type">
+
+							<div class="mui-input-row">
+				        		<span style="font-size: 14px;display: inline-block;margin-left: 15px;padding-top: 9px;">{{cardType}}</span>
+							</div>
+				        </div>
+			    	</div>
+				</div>
+				
+				<div class="wd100" style="border-bottom: 1px solid #EEEEEE;">
+					<div class="dis_table wd90">
+				    	<div class="dis_table_cell  wd20 textleft">
+				    		证件号码
+				    	</div>
+				        <div class="dis_table_cell" style="">
+							<div class="mui-input-row">
+								<input type="text" v-model="cardNo" v-if="isHasCard" readonly="readonly" placeholder="请输入证件号码">
+				        		<input type="text" v-model="cardNo" v-else class="mui-input-clear" placeholder="请输入证件号码">
+							</div>
+				        </div>
+			    	</div>
+				</div>
+				
+				<div class="wd100" style="border-bottom: 1px solid #EEEEEE;">
+					<div class="dis_table wd90">
+				    	<div class="dis_table_cell  wd20 textleft">
+				    		证件有效期
+				    	</div>
+				        <div class="dis_table_cell" style="text-align: left;" id="card_time">
+							<div class="mui-input-row">
+				        		<span style="font-size: 14px;display: inline-block;margin-left: 15px;padding-top: 9px;">{{cardTime}}</span>
+							</div>
+				        </div>
+			    	</div>
+				</div>
+				
+				<div class="wd100" style="border-bottom: 1px solid #EEEEEE;">
+					<div class="dis_table wd90">
+				    	<div class="dis_table_cell  wd20 textleft">
+				    		性别
+				    	</div>
+						<div class="dis_table_cell" style="text-align: left;" id="choicegender">
+							<div class="mui-input-row">
+								<span style="font-size: 14px;display: inline-block;margin-left: 15px;padding-top: 9px;">{{gender}}</span>
+							</div>
+						</div>
+			    	</div>
+				</div>
+				
+				<div class="wd100" style="border-bottom: 1px solid #EEEEEE;">
+					<div class="dis_table wd90">
+				    	<div class="dis_table_cell  wd20 textleft">
+				    		出生日期
+				    	</div>
+				        <div class="dis_table_cell" style="text-align: left;" id="bron_time">
+							<div class="mui-input-row">
+				        		<span style="font-size: 14px;display: inline-block;margin-left: 15px;padding-top: 9px;">{{bornTime}}</span>
+							</div>
+				        </div>
+			    	</div>
+				</div>
+				
+				<div class="wd100" style="border-bottom: 1px solid #EEEEEE;">
+					<div class="dis_table wd90">
+				    	<div class="dis_table_cell  wd20 textleft">
+				    		职业
+				    	</div>
+						<div class="dis_table_cell" style="text-align: left;" id="profession">
+							<div class="mui-input-row">
+								<span style="font-size: 14px;display: inline-block;margin-left: 15px;padding-top: 9px;">{{profession}}</span>
+							</div>
+						</div>
+			    	</div>
+				</div>
+				
+				
+				<div class="wd100" style="border-bottom: 1px solid #EEEEEE;">
+					<div class="dis_table wd90">
+				    	<div class="dis_table_cell  wd20 textleft">
+				    		联系地址
+				    	</div>
+				        <div class="dis_table_cell" style="">
+							<div class="mui-input-row">
+				        		<input type="text" v-model="addr" placeholder="请输入联系地址">
+							</div>
+				        </div>
+			    	</div>
+				</div>
+				
+				<div class="wd100" style="border-bottom: 1px solid #EEEEEE;">
+					<div class="dis_table wd90">
+				    	<div class="dis_table_cell wd20 textleft">
+				    		推荐人
+				    	</div>
+				        <div class="dis_table_cell" style="">
+							<div class="mui-input-row">
+				        		<input type="text" v-model="referrer" class="mui-input-clear" placeholder="姓名或工号">
+							</div>
+				        </div>
+			    	</div>
+				</div>
+			</form>
+			<div v-if="addOrUpdate==0" class="wd90" style="margin-top: 30px;">
+				<template v-if="isalone==false">
+					<button type="button" @click="nextstep" :class="switchNext ? 'can-next' : 'not-next'" class="" id="next_step" style="width: 100%;height: 40px;;color: white;border: 0px;">下一步</button>
+				</template>
+				<template v-if="isalone==true">
+					<button type="button" @click="nextstep" :class="switchNext ? 'can-next' : 'not-next'" class="" id="next_step" style="width: 100%;height: 40px;;color: white;border: 0px;">提交</button>
+				</template>
+			</div>
+			<div v-if="addOrUpdate==1" class="wd90" style="margin-top: 30px;">
+				<button type="button" @click="upuserinfo" :class="switchNext ? 'can-next' : 'not-next'" class="" id="up" style="width: 100%;height: 40px;;color: white;border: 0px;">提交</button>
+			</div>
+		</div>
+	</div>
+</div>
+
+
+	<script src="../../js/h.min.js"></script>
+	<script src="../../js/mui.min.js"></script>
+	<script src="../../js/immersed.js"></script>
+	<script src="../../js/com.js"></script>
+	<script src="../../js/xmui-globalEvent.js"></script>
+	<script src="../../js/mui.pullToRefresh.js"></script>
+	<script src="../../js/mui.pullToRefresh.material.js"></script>
+	<script src="../../js/com.js"></script>
+	<script src="../../js/com.data.js"></script>
+	<script src="../../js/com.mui.js"></script>
+	<script src="../../js/mui.picker.js"></script>
+	<script src="../../js/mui.poppicker.js"></script>
+	<script src="../../js/mui.dtpicker.js"></script>
+	<script src="../../js/vue.js"></script>
+	<script src="../../js/jquery.min_1.8.3.js"></script>
+	<script src="../../js/md5.js"></script>
+	<script src="../../js/fundsfunction.js"></script>
+
+<script>
+    mui.ready(function () {
+        mui(".mui-scroll-wrapper").scroll({
+            bounce: true,//是否启用回弹
+            indicators: true,//是否显示滚动条
+            deceleration:  0.0005 //flick 减速系数，系数越大，滚动速度越慢，滚动距离越小，默认值0.0006
+        });
+    });
+    
+    var vue_body = new Vue({
+    	el:"#vue-body-myinfo",
+    	data:{
+    		addOrUpdate:0,
+    		switchNext:false,
+    		name:"",
+            cardType:"身份证",
+            cardTypeValue:0,
+    		cardNo:"",
+    		cardTime:"请选择证件有效日期",
+            gender:"请选择性别",
+            genderValue:-1,
+    		bornTime:"请选择出生日期",
+            profession:"请选择职业",
+            professionValue:-1,
+    		addr:"",
+    		referrer:"",
+			isalone:false,
+			isHasCard:false //是否有银行卡
+    	},
+    	methods:{
+    		checkNext:function(){
+    			if(this.name!=""&&this.cardNo!=""&&this.gender!=-1&&this.profession!=-1&&this.addr!=""&&this.cardTypeValue!=-1){
+    				if(this.cardTime!="请选择证件有效日期"&&this.bornTime!="请选择出生日期"){
+    					this.switchNext = true;
+    				}else{
+    					this.switchNext = false;
+    				}
+    			}else{
+    				this.switchNext = false;
+
+    			}
+    		},
+    		nextstep:function(){
+
+    			if(this.switchNext){
+    				var logintoken = com.data.loginToken.get();
+    				var referrer = this.referrer;
+    				if(referrer==""){
+                        referrer = "移动金融部";
+					}
+//					alert();
+					com.data.user.addUserInfo({
+						client_name:encodeURIComponent(encodeURIComponent(this.name)),
+						id_no:this.cardNo,
+						birthday:this.bornTime.replaceAll("-",""),
+						ofund_prof_code:this.professionValue,
+						address:encodeURIComponent(encodeURIComponent(this.addr)),
+						id_enddate:this.cardTime.replaceAll("-",""),
+						broker:encodeURIComponent(encodeURIComponent(referrer)),
+						id_kind_gb:this.cardTypeValue,
+						client_gender:this.genderValue
+    				},(data)=>{
+                        mui.toast("操作成功")
+                        //更新手机内存
+                        com.data.user.showMyInfo({},(data)=>{
+                            com.data.userInfo.update(data.result_map);
+                            //执行监听时间
+
+                            mui.ge.fireEvent("reloadMyinfo", {}, (args)=>{
+                                //注册路程直接转跳到下一步 不是 返回
+                                if(this.isalone==true){
+                                    mui.back();
+                                }else{
+                                    com.plus.openWindowX('../tools/reg_question.html',{
+
+                                    });
+                                }
+                            });
+                        })
+    				})
+
+    			}else{
+    				mui.toast("请先将信息填写完整");
+//                    //测试转跳
+//                    com.plus.openWindowX('../tools/reg_question.html',{});
+
+
+    			}
+	    	},
+	    	upuserinfo:function(){
+	    		if(this.switchNext){
+    				var logintoken = com.data.loginToken.get();
+    				var referrer = this.referrer;
+    				if(referrer==""){
+                        referrer = "移动金融部";
+					}
+//					alert();
+					com.data.user.upMyInfo({
+						client_name:encodeURIComponent(encodeURIComponent(this.name)),
+						id_no:this.cardNo,
+						birthday:this.bornTime.replaceAll("-",""),
+						ofund_prof_code:this.professionValue,
+						address:encodeURIComponent(encodeURIComponent(this.addr)),
+						id_enddate:this.cardTime.replaceAll("-",""),
+						broker:encodeURIComponent(encodeURIComponent(referrer)),
+						id_kind_gb:this.cardTypeValue,
+						client_gender:this.genderValue
+    				},function(data){
+						mui.toast("修改成功")
+						mui.ge.fireEvent("rescroll", {}, function (args){
+							mui.back();
+						});
+    				})
+    			}else{
+    				mui.toast("请先将信息填写完整");
+                    com.plus.openWindowX('../tools/reg_question.html',{
+                    });
+    			}
+	    	}
+    		
+    	},
+    	watch:{
+    		name:function(){
+    			this.checkNext()
+    		},
+    		cardNo:function(){
+    			this.checkNext()
+    		},
+    		gender:function(){
+    			this.checkNext()
+    		},
+    		profession:function(){
+    			this.checkNext()
+    		},
+    		addr:function(){
+    			this.checkNext()
+    		},
+    		referrer:function(){
+    			this.checkNext()
+    		},
+    		cardType:function(){
+    			this.checkNext()
+    		},
+    		cardTime:function(){
+    			this.checkNext()
+    		},
+    		bornTime:function(){
+    			this.checkNext()
+    		},
+    	},
+    	mounted: function(){
+			
+        }
+    })
+    
+    mui.plusReady(function(){
+    	var userInfo = com.plus.getCurrWebview().self.userInfo;
+		var isalone = com.plus.getCurrWebview().self.isAlone==null?false:com.plus.getCurrWebview().self.isAlone;
+        vue_body.isalone = isalone;
+
+    	if(userInfo==null){
+    		vue_body.addOrUpdate=0;
+    	}else{
+    		console.log(JSON.stringify(userInfo))
+    		vue_body.addOrUpdate=1;
+
+
+    		vue_body.name=userInfo.client_name,
+            vue_body.cardType="身份证";
+            vue_body.cardTypeValue=0;
+    		vue_body.cardNo=userInfo.id_no;
+    		vue_body.cardTime=getDateFromat(userInfo.id_enddate);
+            vue_body.gender=userInfo.client_gender==0?"男":"女";
+            vue_body.genderValue=userInfo.client_gender;
+    		vue_body.bornTime=getDateFromat(userInfo.birthday);
+            vue_body.profession=getZhiYe(userInfo.ofund_prof_code);
+            vue_body.professionValue=userInfo.ofund_prof_code;
+    		vue_body.addr=userInfo.address;
+    		vue_body.referrer=userInfo.broker;
+    		com.data.user.showMyCard({}, function(data){
+				vue_body.isHasCard = data.result_list != null && data.result_list.length>0;
+			})
+
+//			vue_body.name = userInfo.client_name;
+    	}
+    	
+    	
+        mui('body').on('tap', '#card_type', function (){
+//      	alert(1);
+           	var picker = new mui.PopPicker();
+			picker.setData([{value:0,text:'身份证'}]);
+			picker.show(function (selectItems) {
+                vue_body.cardType = selectItems[0].text;
+                vue_body.cardTypeValue = selectItems[0].value;
+			})
+        });
+
+        mui('body').on('tap', '#choicegender', function (){
+            var picker = new mui.PopPicker();
+            picker.setData([{value:0,text:'男'},{value:1,text:'女'}]);
+            picker.pickers[0].setSelectedValue(vue_body.genderValue);
+            picker.show(function (selectItems){
+                vue_body.gender = selectItems[0].text;
+                vue_body.genderValue = selectItems[0].value;
+            })
+        });
+
+        mui('body').on('tap', '#profession', function (){
+            var picker = new mui.PopPicker();
+            picker.setData([
+                {value:1,text:'政府部门'}
+                ,{value:2,text:'教科文'}
+                ,{value:3,text:'金融'}
+                ,{value:4,text:'商贸'}
+                ,{value:5,text:'房地产'}
+                ,{value:6,text:'制造业'}
+                ,{value:7,text:'自由职业'}
+                ,{value:9,text:'事业单位'}
+                ,{value:10,text:'国有企业'}
+                ,{value:11,text:'公务员'}
+                ,{value:12,text:'专业技术人员'}
+                ,{value:13,text:'办事人员'}
+                ,{value:14,text:'军人'}
+                ,{value:15,text:'商业和服'}
+                ,{value:16,text:'生产、运输设备操作人员'}
+                ,{value:18,text:'农、林、牧、渔、水利业生产人员'}
+                ,{value:8,text:'其它'}
+            ]);
+            picker.pickers[0].setSelectedValue(vue_body.professionValue);
+            picker.show(function (selectItems){
+                vue_body.profession = selectItems[0].text;
+                vue_body.professionValue = selectItems[0].value;
+            })
+        });
+
+        mui('body').on('tap', '#bron_time', function (){
+		    var dtPicker = new mui.DtPicker({type:"date",beginDate:new Date(1900,1),endDate:new Date()});
+		    dtPicker.setSelectedValue(vue_body.bornTime) 
+		    dtPicker.show(function (selectItems) {
+		    	vue_body.bornTime = selectItems.value;
+		    })
+        });
+        
+         mui('body').on('tap', '#card_time', function (){
+		    var dtPicker = new mui.DtPicker({type:"date",beginDate:new Date(),endDate:new Date(2099,11)});
+		    dtPicker.setSelectedValue(vue_body.cardTime)
+		    dtPicker.show(function (selectItems){
+		    	vue_body.cardTime = selectItems.value;
+		    })
+        });
+
+        mui.ge.addListener("reloadMyinfo", function(args) {
+            vue_body.userInfo=com.data.userInfo.get();
+            mui.ge.callback(args, {})
+        });
+    })
+</script>
+</body>
+
+</html>
