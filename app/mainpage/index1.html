@@ -212,7 +212,7 @@
 						</div>
 
 						<!--单个内容div-->
-						<div v-for="(item,index) in upFunds" class=" bg-bai advance-list " style="border-bottom: 1px solid #EEEEEE;padding:15px 0px;">
+						<div v-for="(item,index) in upFunds(0, 1)" class=" bg-bai advance-list " style="border-bottom: 1px solid #EEEEEE;padding:15px 0px;">
 							<div id="jingxuan" @click="showFundMore(upFunds[index].fund_code,upFunds[index].fund_name)">
 
 								<div class="dis_table wd90" style="text-align: left">
@@ -228,7 +228,7 @@
 
 									<div class="dis_table_cell" style="text-align: left;padding-left: 20px">
 										<div style="color: #000000;;font-size: 14px;padding-bottom: 5px;" v-text="upFunds[index].fund_name"></div>
-										<div style=";padding-bottom: 5px;" v-text="fundtype(upFunds[index].ofund_type)"></div>
+										<div style="padding-bottom: 5px;" v-text="fundtype(upFunds[index].ofund_type)"></div>
 										<div>
 											<!--<span class="inline-block" style="border-radius: 10px;background-color: #FFE6E7;padding: 0px 5px;font-weight: bold;color: #FD777A;">-->
 											<!--费率:-->
@@ -237,11 +237,14 @@
 											<!--</span> 0.15%-->
 											<!--</span>-->
 											<span v-for="(item2,index2) in upFunds[index].TradeLimits">
-										<span v-if="index2=='022'||index2=='020'" class="inline-block" style="border-radius: 10px;background-color: #FFE6E7;padding: 0px 5px;font-weight: bold;color: #FD777A;" v-text="upFunds[index].TradeLimits[index2].min_value+'元起投'">
-										</span>
+											<span v-if="index2=='022'||index2=='020'" class="inline-block" style="border-radius: 10px;background-color: #FFE6E7;padding: 0px 5px;font-weight: bold;color: #FD777A;" v-text="upFunds[index].TradeLimits[index2].min_value+'元起投'">
+										
 											</span>
+										</span>
+											
 											<span class="inline-block" style="border-radius: 10px;background-color: #FFE6E7;padding: 0px 5px;font-weight: bold;color: #FD777A;" v-text="riskLevel(upFunds[index].ofund_risklevel)">
-									</span>
+									
+											</span>
 										</div>
 									</div>
 								</div>
@@ -265,7 +268,7 @@
 							<img src="../../images/icon/right.png" style="width: 20px;height: 20px;margin-right: 10px;" alt="">
 						</span>-->
 					</div>
-					<div v-for="(item,index) in newsList.slice(0, 5)">
+					<div v-for="(item,index) in newsList.slice(0, 1)">
 						<a id="rdxiangqing" href="javascript:void(0);" @click="goNewsDetail(newsList[index].id,newsList[index].title)">
 							<!--<div >-->
 							<!--<img :src="newsList[index].image_uri">-->

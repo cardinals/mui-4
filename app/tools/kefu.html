@@ -15,7 +15,7 @@
 			}
 			
 			.mui-bar {
-				background-color: #c70321;
+				background-color: #D42528;
 			}
 			
 			.mui-input-group .mui-input-row:after {
@@ -31,17 +31,18 @@
 			<h1 class="mui-title color-white titlecolor">客服</h1>
 		</header>
 
-		<div class="mui-content mui-scroll-wrapper bg-bai">
+		<!--<div class="mui-content mui-scroll-wrapper bg-bai">
 			<div class="mui-scroll" id="station-list" style="padding-bottom: 0px;">
-				<iframe style="width: 100%;border: 0px;height: 100vh;" src="https://chat8.live800.com/live800/chatClient/chatbox.jsp?companyID=70649&configID=83625&jid=6826038593"></iframe>
+				<iframe style="width: 100%;border: 0px;height: 96vh;" src="https://chat8.live800.com/live800/chatClient/chatbox.jsp?companyID=70649&configID=83625&jid=6826038593"></iframe>
 			</div>
-		</div>
+		</div>-->
 
 		<script src="../../js/h.min.js"></script>
 		<script src="../../js/mui.min.js"></script>
 		<script src="../../js/immersed.js"></script>
 		<script src="../../js/com.js"></script>
 		<script src="../../js/xmui-globalEvent.js"></script>
+		<script src="../../js/jquery.min_1.8.3.js"></script>
 		<script src="../../js/mui.pullToRefresh.js"></script>
 		<script src="../../js/mui.pullToRefresh.material.js"></script>
 		<script src="../../js/com.js"></script>
@@ -49,54 +50,74 @@
 		<script src="../../js/com.mui.js"></script>
 
 		<script>
-			mui.ready(function() {
-				mui(".mui-scroll-wrapper").scroll({
-					bounce: true, //是否启用回弹
-					indicators: true, //是否显示滚动条
-					deceleration: 0.0005 //flick 减速系数，系数越大，滚动速度越慢，滚动距离越小，默认值0.0006
+			
+//			mui.ready(function() {
+//				mui(".mui-scroll-wrapper").scroll({
+//					bounce: true, //是否启用回弹
+//					indicators: true, //是否显示滚动条
+//					deceleration: 0.0005 //flick 减速系数，系数越大，滚动速度越慢，滚动距离越小，默认值0.0006
+//				});
+//				$('iframe').height(document.documentElement.clientHeight-70+'px');
+//			});
+//			mui.plusReady(function() {
+//				mui('body').on('tap', '#card_type', function() {
+//					//      	alert(1);
+//					var picker = new mui.PopPicker();
+//					picker.setData([{
+//						value: 1,
+//						text: '身份证'
+//					}, {
+//						value: 2,
+//						text: '护照'
+//					}]);
+//					picker.show(function(selectItems) {
+//						document.getElementById("card_type").innerHTML = selectItems[0].text;
+//						console.log(selectItems[0].text); //智子
+//						console.log(selectItems[0].value); //zz 
+//					})
+//				});
+//				mui('body').on('tap', '#bron_time', function() {
+//					//      	alert(1);
+//					var dtPicker = new mui.DtPicker({
+//						type: "date",
+//						beginDate: new Date(1900, 1),
+//						endDate: new Date()
+//					});
+//					dtPicker.show(function(selectItems) {
+//						//		    	alert(JSON.stringify(selectItems))
+//						//		    	var y = selectItems.y;//{text: "2016",value: 2016} 
+//						//		        var m = selectItems.m;//{text: "05",value: "05"} 
+//						//		        var d = selectItems.d;//{text: "05",value: "05"} 
+//
+//						document.getElementById("bron_time").innerHTML = selectItems.value;
+//
+//					})
+//				});
+//				mui('body').on('tap', '#next_step', function() {
+//					com.plus.openWindowX('../tools/bank_card_add.html', {});
+//				});
+//				mui('body').on('tap', '#jump', function() {
+//					com.plus.openWindowX('../home_user.html', {});
+//				});
+//			})
+			var weburl;
+			mui.plusReady(function() {
+				//alert(1111);
+				//plus.nativeUI.showWaiting();//这里是开始显示原生等待框
+//				weburl = plus.webview.currentWebview().weburl;
+//				alert(weburl);
+				mui.init({
+					subpages: [{
+						url: 'https://chat8.live800.com/live800/chatClient/chatbox.jsp?companyID=70649&configID=83625&jid=6826038593', //子页面HTML地址，支持本地地址和网络地址
+						id: 'kefu', //子页面标志
+						styles: {
+							top: '64px', //子页面顶部位置
+							bottom:'0',
+						},
+						extras: {} //额外扩展参数
+					}]
 				});
 			});
-			mui.plusReady(function() {
-				mui('body').on('tap', '#card_type', function() {
-					//      	alert(1);
-					var picker = new mui.PopPicker();
-					picker.setData([{
-						value: 1,
-						text: '身份证'
-					}, {
-						value: 2,
-						text: '护照'
-					}]);
-					picker.show(function(selectItems) {
-						document.getElementById("card_type").innerHTML = selectItems[0].text;
-						console.log(selectItems[0].text); //智子
-						console.log(selectItems[0].value); //zz 
-					})
-				});
-				mui('body').on('tap', '#bron_time', function() {
-					//      	alert(1);
-					var dtPicker = new mui.DtPicker({
-						type: "date",
-						beginDate: new Date(1900, 1),
-						endDate: new Date()
-					});
-					dtPicker.show(function(selectItems) {
-						//		    	alert(JSON.stringify(selectItems))
-						//		    	var y = selectItems.y;//{text: "2016",value: 2016} 
-						//		        var m = selectItems.m;//{text: "05",value: "05"} 
-						//		        var d = selectItems.d;//{text: "05",value: "05"} 
-
-						document.getElementById("bron_time").innerHTML = selectItems.value;
-
-					})
-				});
-				mui('body').on('tap', '#next_step', function() {
-					com.plus.openWindowX('../tools/bank_card_add.html', {});
-				});
-				mui('body').on('tap', '#jump', function() {
-					com.plus.openWindowX('../home_user.html', {});
-				});
-			})
 		</script>
 	</body>
 

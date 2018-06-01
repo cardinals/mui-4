@@ -1,0 +1,210 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="UTF-8">
+		<title>首页</title>
+		<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+		<link rel="stylesheet" href="../css/font-awesome-4.7.0/css/font-awesome.min.css">
+		<link href="../../css/mui.css" rel="stylesheet" />
+		<link href="../../css/gloab.css" rel="stylesheet" />
+		<link href="../../css/xmui.pullToRefresh.material.css" rel="stylesheet" />
+		<link href="../../css/swiper.min.css" rel="stylesheet">
+		<link href="../../css/new.css" rel="stylesheet">
+		<style>
+			body{
+				background: #FFFFFF;
+			}
+			.mui-icon {
+				background-size: contain;
+				background-position: center;
+				background-repeat: no-repeat;
+			}
+			
+			.bg-title {
+				background-color: #D42528;
+			}
+			
+			.detail{
+				margin-top: 84px;
+			}
+			.weui-article {
+			    padding: 20px 15px;
+			    font-size: 15px;
+			}
+			.demos-second-title{
+				line-height: 1.5;
+			}
+			[v-cloak] {
+			    display: none;
+			}
+		</style>
+
+	</head>
+
+	<body>
+		<header class="mui-bar mui-bar-nav bg-title">
+			<a class="mui-action-back mui-icon mui-icon-left-nav mui-pull-left color-white"></a>
+			<h1 class="mui-title color-white titlecolor">东证动态</h1>
+		</header>
+		<div class="detail" v-cloak="">
+		<div class='demos-header'>
+	          <h2 class="demos-second-title">{{ dzdtList.title }}</h2>
+	          <p class="demos-sub-title">
+	          	<span class="display_name" >东证动态</span> | <span class="display_time">{{getLocalTime(zuozhe.createDateTime)}}</span>
+	          </p>
+		</div>
+
+        <article class="weui-article">
+            <section>
+            	<div class="image_uri">
+            		<img v-if="dzdtList.imgUrl" :src="dzdtList.imgUrl" width="100%"/>
+            	</div>
+
+              <p class="content" id="neirong">
+              	
+              </p>
+
+            </section>
+
+        </article>
+		</div>
+		<script src="../../js/h.min.js"></script>
+		<script src="../../js/mui.min.js"></script>
+		<script src="../../js/immersed.js"></script>
+		<script src="../../js/com.js"></script>
+		<script src="../../js/xmui-globalEvent.js"></script>
+		<script src="../../js/mui.pullToRefresh.js"></script>
+		<script src="../../js/mui.pullToRefresh.material.js"></script>
+		<script src="../../js/com.js"></script>
+		<script src="../../js/com.data.js"></script>
+		<script src="../../js/com.mui.js"></script>
+		<script src="../../js/jquery.min_1.8.3.js"></script>
+		<script src="../../js/highcharts.js"></script>
+		<!--<script src="../quote/Highcharts-6.0.2/code/highcharts.js"></script>-->
+		<script src="../../js/vue.js"></script>
+		<script src="../../js/md5.js"></script>
+		<script src="../../js/fundsfunction.js"></script>
+		<script>
+			var dzdt_id;
+			mui.plusReady(function() {
+				//plus.nativeUI.showWaiting();//这里是开始显示原生等待框
+                dzdt_id = com.plus.getCurrWebview().self.dzdt_id;
+                var dzdtVue = new Vue({
+					el: '.detail',
+					data: {
+						dzdtList: [],
+						zuozhe:[]
+					},
+					created(){
+						this.queryNews()
+					},
+					methods: {
+						_queryData:function (url, success) {
+							$.ajax({
+								url: url,
+								type: 'get',
+								dataType: 'jsonp',
+								jsonp: 'jsoncallback',
+								date: {},
+								success: function (data) {
+									if (data.success_type === '1') {
+										success(data)
+									} else {
+										mui.toast(data.msg);
+									}
+								}
+							})
+						},
+						queryNews () {
+							var paras = 'news_id='+dzdt_id
+				      		paras = setQueryString(paras)
+							var url = 'https://xiu.dzqh.com.cn:11446/newsController.do?news_detail_query&' + paras
+							this._queryData(url, data => {
+							if (data.success_type === '1') {
+					          	this.dzdtList = data.result_map.result_map;
+					          	this.zuozhe = data.result_map.result_map.category;
+					          	alert(this.zuozhe.createDateTime)
+							} else {
+									mui.toast(data.msg);
+								}
+							})
+						},
+						getLocalTime:function (nS){     
+						   return new Date(parseInt(nS)).toLocaleString().replace(/:\d{1,2}$/,' ');     
+						},
+						encodeHtml:function (str){
+						    var encodedStr = "" ;
+						    if (str=="") return encodedStr ;
+						    else {
+						        for (var i = 0 ; i < str.length ; i ++){
+						            encodedStr += "&#" + str.substring(i, i + 1).charCodeAt().toString(10) + ";" ;
+						        }
+						    }
+						    return encodedStr ;
+						}
+					},
+					
+					mounted: function() {
+						
+					},
+					updated:function(){
+						$(".weui-article").html(this.dzdtList.content)
+					}
+				});	
+             
+            });
+			//获取实盘秀签名
+			function getSign(paras) {
+				var paras = paras.split('&')
+				// alert(JSON.stringify(str));
+				$.each(paras, function(idx, obj1) {
+					if(obj1 != null && isNaN(obj1)) {
+						if(obj1.indexOf("%25") >= 0) {
+							paras[idx] = decodeURIComponent(obj1);
+						}
+					}
+				});
+		//		for(var index in paras) {
+		//			changestr += "&" + index + "=" + paras[index];
+		//		} 
+				paras = gerSortedParas(paras)
+		
+				// para1=value1&para2=value2
+				var paraStr = paras.join('&')
+		//		changestr = changestr.substring(1);
+				console.log("===========>石盘秀md5加密字符串前为" + paraStr);
+				var sign = $.md5("57ea2d202e0947ed8631bd1b51e9adf3" + paraStr);
+				return sign.toUpperCase();
+			}
+		// 取得全参数
+		// 参数方式 para1=value1&para2=value2....
+		function setQueryString (paras) {
+			if (paras.indexOf('timestamp') < 0) {
+				var timestamp = new Date().Format('yyyyMMddHHmmss')
+				if (paras === '') {
+	//				paras = "timestamp=" + timestamp
+					paras = `timestamp=${timestamp}`
+				} else {
+	//				paras = paras + "&timestamp="+timestamp
+					paras = `${paras}&timestamp=${timestamp}`
+				}
+			}
+			
+			var sign = getSign(paras)
+			// 生产
+			var appKey = "orient_show_key_20180328";
+			// 测试
+			// const appKey = 'orient_show_key_20180326'
+			paras = paras + '&sign=' + sign + '&app_key=' + appKey;
+			console.log("==========>实盘秀请求地址为:" + paras)
+			return paras
+		}
+		function gerSortedParas (paras) {
+			return paras.sort()
+		}
+			
+		</script>
+	</body>
+
+</html>

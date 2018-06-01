@@ -11,7 +11,7 @@
 		<link href="../../css/swiper.min.css" rel="stylesheet">
 		<style>
 			.bg-title {
-				background-color: #c70321;
+				background-color: #D42528;
 			}
 			
 			.my_list {
@@ -76,14 +76,21 @@
 						</div>
 					</div>
 
-<!--                    <div id="qihuolist" class="wd100 bg-bai my_list" style="border-bottom: 1px solid #EEEEEE;margin-top: 0.2px;">-->
-<!--                        <div class="dis_table wd90" style="">-->
-<!--                            <div class="dis_table_cell wd80 pt10 pb10 textleft"><img src="../../images/icon/icon_card.png" style="position: relative;top:-3px;" alt="" width="28" height="28"> <span class="ft14 inline-block " style="color:#000000;line-height: 30px;margin-left: 3px;">-->
-<!--                        期货账户</span></div>-->
-<!--                            <div class="dis_table_cell textright"><img src="../../images/icon/right.png" width="15" height="20"></div>-->
-<!--                        </div>-->
-<!--                    </div>-->
-					<div id="jijinlist" class="wd100 bg-bai my_list" style="border-bottom: 1px solid #EEEEEE;margin-top: 0.2px;">
+                    <div id="qihuokaihu" class="wd100 bg-bai my_list" style="border-bottom: 1px solid #EEEEEE;margin-top: 10px;">
+                        <div class="dis_table wd90" style="">
+                            <div class="dis_table_cell wd80 pt10 pb10 textleft"><img src="../../images/icon/icon_card.png" style="position: relative;top:-3px;" alt="" width="28" height="28"> <span class="ft14 inline-block " style="color:#000000;line-height: 30px;margin-left: 3px;">
+                        		期货开户</span></div>
+                            <div class="dis_table_cell textright"><img src="../../images/icon/right.png" width="15" height="20"></div>
+                        </div>
+                    </div>
+                     <div id="qihuohangqing" class="wd100 bg-bai my_list" style="border-bottom: 1px solid #EEEEEE;margin-top: 0.2px;">
+                        <div class="dis_table wd90" style="">
+                            <div class="dis_table_cell wd80 pt10 pb10 textleft"><img src="../../images/icon/icon_card.png" style="position: relative;top:-3px;" alt="" width="28" height="28"> <span class="ft14 inline-block " style="color:#000000;line-height: 30px;margin-left: 3px;">
+                        		期货行情</span></div>
+                            <div class="dis_table_cell textright"><img src="../../images/icon/right.png" width="15" height="20"></div>
+                        </div>
+                    </div>
+					<div id="jijinlist" class="wd100 bg-bai my_list" style="border-bottom: 1px solid #EEEEEE;margin-top: 10px;">
 						<div class="dis_table wd90" style="">
 							<div class="dis_table_cell wd80 pt10 pb10 textleft"><img src="../../images/icon/icon_card.png" style="position: relative;top:-3px;" alt="" width="28" height="28"> <span class="ft14 inline-block " style="color:#000000;line-height: 30px;margin-left: 3px;">
 						基金账户</span></div>
@@ -205,7 +212,33 @@
 					vue_body.userInfo = com.data.userInfo.get();
 					mui.ge.callback(args, {})
 				});
+				// 期货开户
+				mui('body').on('tap', '#qihuokaihu', function() {
+					//					com.data.user.showMyInfo({}, function(data) {
+					//						var userInfo = data.result_map;
+					//						com.plus.openWindowX('../quotepage/qihuokaihu.html', {
+					//							phone: userInfo.mobile_tel
+					//						});
+					//					})
+					
+                
+                   com.data.user.showMyInfo({}, function(data) {
+                        var userInfo = data.result_map;
+                            com.plus.openWindowX('warn.html', {
+                                phone: userInfo.mobile_tel
+                            });
+                        })
+                   
+                               //开户sdk
 
+				});
+				// 期货行情
+				mui('body').on('tap', '#qihuohangqing', function() {
+					//com.plus.openWindowX('../quotepage/qihuohangqing.html', {});
+<!--                    interac();-->
+                               
+                               plus.bridge.exec( 'pbmobile', 'openPbmobilePage', [] );
+				});
 				mui('body').on('tap', '#my_card', function() {
 					com.plus.openWindowX('../userinfo/mycard.html', {});
 				});
@@ -262,7 +295,8 @@
 				});
 
 				mui('body').on('tap', '#my_suggest', function() {
-					com.plus.openWindowX('../tools/kefu.html', {});
+//					com.plus.openWindowX('../tools/kefu.html', {});
+					mui.openWindow({url: "../tools/kefu.html"});
 				});
 
 				mui('body').on('tap', '#my_kefu', function() {

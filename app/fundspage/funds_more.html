@@ -21,7 +21,7 @@
 			}
 			
 			.mui-bar {
-				background-color: #c70321;
+				background-color: #D42528;
 			}
 			
 			.title-desc {
@@ -309,7 +309,7 @@
 			mui.plusReady(function() {
 				code = com.plus.getCurrWebview().self.code;
 				name = com.plus.getCurrWebview().self.name;
-				//		alert(name);
+//						alert(name);
 				//添加监听
 
 				mui.ge.addListener("openOrderSuccess", function(args) {
@@ -506,13 +506,6 @@
 
 					}
 				});
-				//        mui('body').on('tap', '#tou', function (){
-				//
-				//        });
-				//        mui('body').on('tap', '#order', function (){
-				//
-				//
-				//        });
 
 			})
 
@@ -736,6 +729,7 @@
 							}
 
 						} else if(key == "024") {
+							//赎回费率20180601修改bug
 							if(list != null) {
 								var rateInfo = {
 									text: "赎回费率",
@@ -752,7 +746,7 @@
 										quinfo.qudecr = "费用比例"
 										quinfo.rate = map1.ratio;
 									} else {
-										quinfo.qudecr = map1.min_balance + "元~" + map1.max_balance + "元";
+										quinfo.qudecr = map1.min_hold + "天~" + map1.max_hold + "天";
 										quinfo.rate = map1.ratio;
 									}
 									n++;

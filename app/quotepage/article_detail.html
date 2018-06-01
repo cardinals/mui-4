@@ -18,7 +18,7 @@
 			}
 			
 			.bg-title {
-				background-color: #c70321;
+				background-color: #D42528;
 			}
 			
 		</style>
@@ -33,20 +33,36 @@
 		<script src="../../js/h.min.js"></script>
 		<script src="../../js/mui.min.js"></script>
 		<script src="../../js/immersed.js"></script>
+		<script src="../../js/com.js"></script>
+		<script src="../../js/xmui-globalEvent.js"></script>
+		<script src="../../js/mui.pullToRefresh.js"></script>
+		<script src="../../js/mui.pullToRefresh.material.js"></script>
+		<script src="../../js/com.js"></script>
+		<script src="../../js/com.data.js"></script>
+		<script src="../../js/com.mui.js"></script>
+
+		<script src="../../js/jquery.min_1.8.3.js"></script>
+		<script src="../../js/highcharts.js"></script>
+
+		<!--<script src="../quote/Highcharts-6.0.2/code/highcharts.js"></script>-->
+
+		<script src="../../js/vue.js"></script>
+		<script src="../../js/md5.js"></script>
+		<script src="../../js/fundsfunction.js"></script>
 
 		<script>
 			var title;
 			var article_id;
+			var aurl;
 			mui.plusReady(function() {
-				plus.nativeUI.showWaiting();//这里是开始显示原生等待框
-                title = plus.webview.currentWebview().title;
-                article_id = plus.webview.currentWebview().article_id;
-               
-            });
-			mui.init({
+				//plus.nativeUI.showWaiting();//这里是开始显示原生等待框
+                title = com.plus.getCurrWebview().self.title;
+                article_id = com.plus.getCurrWebview().self.article_id;
+                aurl ='https://newsjijin.dzqh.com.cn/page/article/article_detail.html?article_id=' + article_id + '&title=' + title;
+                mui.init({
 				subpages: [{
 //					url: 'https://newsjijin.dzqh.com.cn/page/livenews/live_news.html?'+Math.random(), //子页面HTML地址，支持本地地址和网络地址
-					url:'../../fund-web-news/page/article/article_detail.html?article_id=' + article_id + '&title=' + title,
+					url:aurl,
 					id: 'article_detail', //子页面标志
 					styles: {
 						top: '64px', //子页面顶部位置
@@ -60,6 +76,8 @@
 					} //额外扩展参数
 				}]
 			});
+            });
+			
 			
 		</script>
 	</body>

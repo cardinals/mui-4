@@ -1,0 +1,1237 @@
+<!DOCTYPE html>
+<html lang="en">
+
+	<head>
+		<meta charset="UTF-8">
+		<title>首页</title>
+		<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+		<link href="../../css/mui.css" rel="stylesheet" />
+		<link href="../../css/gloab.css" rel="stylesheet" />
+		<link href="../../css/swiper.min.css" rel="stylesheet">
+		<link rel="stylesheet" type="text/css" href="../../css/normalize.css" />
+		<link rel="stylesheet" type="text/css" href="../../css/default.css">
+		<script> 
+ 				document.write("<s"+"cript src='../../js/stopExecutionOnTimeout.js?"+Math.random()+"'></scr"+"ipt>"); 
+		</script>
+		<!--<link href="../../css/xmui.pullToRefresh.material.css" rel="stylesheet" />-->
+		<style type="text/css">
+			
+			.bg-title {
+				background-color: #c70321;
+			}
+			.mui-scroll{
+				background-color: #eeeff4;
+			}
+			.single-row {
+				overflow: hidden;
+				text-overflow: ellipsis;
+				white-space: nowrap;
+			}
+			
+			.scale-1px {
+				position: relative;
+				margin-bottom: 20px;
+				border: none;
+			}
+			
+			.scale-1px::after {
+				content: '';
+				position: absolute;
+				top: 0;
+				left: 0;
+				border: 1px solid #000;
+				-webkit-box-sizing: border-box;
+				box-sizing: border-box;
+				width: 200%;
+				height: 200%;
+				-webkit-transform: scale(0.5);
+				transform: scale(0.5);
+				-webkit-transform-origin: left top;
+				transform-origin: left top;
+			}
+			
+			.advance-list {
+				transition: background-color .2s!important
+			}
+			
+			.advance-list:active {
+				background-color: #FFE6E7!important;
+			}
+			#vue-content{
+				position: relative;
+				top: -85px;
+				z-index: 999;
+				margin-bottom: -75px;
+			}
+			#menu{
+				width: 95%;
+				margin-left: 2.5%;
+				border-radius: 6px;
+			}
+			
+			.notice{
+				width: 95%;
+				margin-left: 2.5%;
+				border-radius: 6px;
+			}
+			.leiji{
+				flex-wrap: wrap;
+				-webkit-flex-wrap: wrap;
+				justify-content: flex-end;
+				-webkit-justify-content: flex-end;
+			}
+			.news_list:first-of-type {
+				border-bottom: 1px  dashed #EEEEEE;
+			}
+			 .lunbo{
+			 	position: relative;
+				width: 100%;
+				height: 34px;
+				overflow: hidden;
+			 }
+			 #ulContent{
+				position:absolute;
+				left: 0;
+				top:0;
+				height: auto;
+			 }
+			 #ulContent li{
+				text-align: center;
+				overflow: hidden;
+			 }
+			[v-cloak] {
+			    display: none;
+			}
+			@-webkit-keyframes animation{from{opacity:0; -webkit-transform:scale(1.2) rotateX(45deg);transform:scale(1.2) rotateX(45deg);} to{ }}
+
+			@-webkit-keyframes animation2{from{opacity:0; -webkit-transform:scale(1.2) rotateX(45deg);transform:scale(1.2) rotateX(45deg);} to{ }}
+			
+			/*.slider div p{color:#1c1c1c;position:absolute;bottom:-55px; font-family:Raleway; font-size:16px;}*/
+			.slider{
+				-webkit-animation:animation ease 1s;animation-delay:.8s;animation-fill-mode:backwards;
+				margin: 30px auto;
+				
+				height: 200px;
+				width:95%
+				/*padding:0;*/
+				top:100px;
+				perspective:1000px;
+				transition:ease-in-out .2s;
+				/*-webkit-transform:rotateX(45deg);
+				-webkit-transform-style:preserve-3d;
+				position:absolute;*/
+			}
+			/*.slider:active{ -webkit-transform:rotateZ(10deg);}*/
+			/*.slide img { text-align:center;width:100%; height:100%; -webkit-user-drag:none;user-drag:none;-moz-user-drag:none; border-radius:2px; }*/
+			.slide{
+				-webkit-user-select:none;
+				user-select:none;
+				-moz-user-select:none;
+				position:absolute;
+				/*height:280px;
+				width:240px;*/
+				box-shadow: 0px 10px 30px 0px rgba(0,0,0,0.3);
+				background:#fcfcfc;
+				-webkit-transform-style:preserve-3d;
+				transform-style:preserve-3d;
+				-moz-transform-style:preserve-3d;
+				text-align:center;
+				overflow:hidden;
+				/*border:12px white solid;*/
+				box-sizing:border-box;
+				/*border-bottom:55px white solid;*/
+				/*border-radius:5px;*/ 
+			}
+			.transition {
+				-webkit-transition: cubic-bezier(0,1.95,.49,.73) .4s ;
+				-moz-transition: cubic-bezier(0,1.95,.49,.73) .4s ;
+				transition: cubic-bezier(0,1.95,.49,.73) .4s ;
+			}
+		</style> 
+
+	</head>
+
+	<body>
+		<header class="mui-bar mui-bar-nav bg-title" id="vue-header" style="opacity:0">
+			<h1 class="mui-title color-white titlecolor">东证赢家</h1>
+			<a id="kefu" class="mui-icon mui-pull-right color-white" style="font-size: 14px;margin-top: 7px;">客服</a>
+		</header>
+		<div class="mui-content mui-scroll-wrapper" id="pullrefresh" style="padding-top: 0;overflow:scroll;">
+			<div class="mui-scroll" id="index-div" style="">
+				<!--头部信息-->
+				<div class="wd100"  style="padding: 0px 0px; position: relative;z-index: 999;">
+					<div style="position:absolute;right:10px; top: 25px;">
+						<div id="kefu" style="display: inline-block;text-align: center;">
+							<img src="../../images/icon/icon_kefu.png" alt="" width="30" height="30" /><br />
+							<span class="" style="color: white;font-size: 10px;position: relative;top: -5px;">客服</span>
+						</div>
+					</div>
+				</div>
+				<!--头部信息 end-->
+
+				
+				<!-- 轮播广告 -->
+				<div class="swiper-container box-shadow" id="adImgs" style="margin:0px;max-height: 215px;">
+					<div class="swiper-wrapper" id="headerimg-list" v-cloak>
+						<!--<div v-for="(item,index) in sowingMapList" class="swiper-slide relative" >
+							<a href="" class="focuslink">
+								<img :src="sowingMapList[index].imgUrl" class="bg-gray" style="width: 100%;" />
+							</a>
+						</div>-->
+						
+					</div>
+					<!-- Add Pagination -->
+					<div class="swiper-pagination" style="bottom:80px;">
+						
+					</div>
+				</div>
+				<!-- 轮播广告end -->
+
+				<div id="vue-content" v-cloak>
+					<!--选项列表-->
+					<div class="pt15 pb15 bg-bai mt10 mb10" id="menu">
+						<div class="wd100 dis_table" style="margin-bottom: 5px;">
+							<div class="dis_table_cell " id="qihuokaihu">
+								<img src="../../images/icon/icon1@3x.png" height="50" width="50" />
+								<div style="padding-top: 5px;">
+									<span class="titlecolor" style="color: #000000;">期货开户</span>
+								</div>
+							</div>
+							<div class="dis_table_cell " id="qihuohangqing">
+								<img src="../../images/icon/icon2@3x.png" height="50" width="50" />
+								<div style="padding-top: 5px;">
+									<span class="titlecolor" style="color: #000000;">期货行情</span>
+								</div>
+							</div>
+							<div class="dis_table_cell " id="caijingcalander">
+								<img src="../../images/icon/icon3@3x.png" height="50" width="50" />
+								<div style="padding-top: 5px;">
+									<span class="titlecolor" style="color: #000000;">财经日历</span>
+								</div>
+							</div>
+
+							<div class="dis_table_cell " id="hotnews">
+								<img src="../../images/icon/icon4@3x.png" height="50" width="50" />
+								<div style="padding-top: 5px;">
+									<span class="titlecolor" style="color: #000000;">热点新闻</span>
+								</div>
+							</div>
+
+                            <div class="dis_table_cell " id="xiu">
+                                <img src="../../images/icon/icon5@3x.png" height="50" width="50" />
+                                <div style="padding-top: 5px;">
+                                    <span class="titlecolor" style="color: #000000;">实盘秀</span>
+                                </div>
+                            </div>
+						</div>
+						<!--<div style="border-bottom: 1px solid #EEEEEE;transform: scaleY(.5);"></div>-->
+						<div class="wd100 dis_table mt15">
+							<div class="dis_table_cell" id="jijinkaihu">
+								<img src="../../images/icon/icon8@3x.png" height="50" width="50" />
+								<div style="padding-top: 5px;">
+									<span class="titlecolor" style="color: #000000;">基金开户</span>
+								</div>
+							</div>
+
+							<div class="dis_table_cell" id="gongmujijin">
+								<img src="../../images/icon/icon7@3x.png" height="50" width="50" />
+								<div style="padding-top: 5px;">
+									<span class="titlecolor" style="color: #000000;">公募基金</span>
+								</div>
+							</div>
+<!--                            <div class="dis_table_cell" id="gaoduanlicai">-->
+<!--                                <img src="../../images/icon/icon6@3x.png" height="50" width="50" />-->
+<!--                                <div style="padding-top: 5px;">-->
+<!--                                    <span class="titlecolor" style="color: #000000;">高端理财</span>-->
+<!--                                </div>-->
+<!--                            </div>-->
+                            <div class="dis_table_cell" id="ziguan">
+                                <img src="../../images/icon/icon9@3x.png" height="50" width="50" />
+                                <div style="padding-top: 5px;">
+                                    <span class="titlecolor" style="color: #000000;">东方红资管</span>
+                                </div>
+                            </div>
+							<div class="dis_table_cell" id="wangzhebei">
+								<img src="../../images/icon/icon10@3x.png" height="50" width="50" />
+								<div style="padding-top: 5px;">
+									<span class="titlecolor" style="color: #000000;">东方杯</span>
+								</div>
+							</div>
+                            <div class="dis_table_cell " id="mycricle">
+                                <img src="../../images/icon/icon_10.png" height="50" width="50" />
+                                <div style="padding-top: 5px;"> 
+                                    <span class="titlecolor" style="color: #000000;">在线咨询</span>
+                                </div>
+                            </div>
+						</div>
+
+					</div>
+					<!--选项列表 end-->
+					<!--<hr style="border: 1px solid #E0E0E0;-webkit-transform: scaleY(0.5);padding: 0px;margin: 0px" />-->
+					<!--消息通知-->
+					<div class="bg-bai notice" style="padding: 15px 0px;">
+						<div class="wd90" style="display: flex;align-items:center;">
+							<div >
+							<img src="../../images/icon/notice.png" height="30" width="60"> 
+							</div>
+							<div id="dzdt" class="lunbo">
+								<ul id="ulContent" v-if="sowingMapList" class="text_clamp2" style="height:68px;margin:0 0 0 -25px;">
+									<li  v-for="item in sowingMapList" style="text-align: left;">
+										<a :href="item.hyperLink" class="focuslink" style="color: #414141;font-size: 12px;">
+											{{item.title}}
+										</a>
+									</li>
+								</ul>
+							</div>
+							
+						</div>
+					</div>
+					<!--消息通知 end-->
+					<!--推荐产品-->
+					<div>
+						<div class="flex flex-center flex-between" style="padding: 15px 0;padding-left:2.5%;background-color: white;border-bottom: 1px solid #EEEEEE;margin-top: 5px;">
+							<div style="font-size: 16px;color: black;border-left: 4px solid #fb5c5f;line-height: 16px;margin-left: 5px;padding-left:5px;box-sizing: border-box;">
+								精选产品
+							</div>
+							<div class="flex flex-center" style="margin-right: 2.5%">
+							<span id="gongmujijin" style="font-size: 16px;color: #b5b7c4;">查看更多</span>
+							<img src="../../images/icon/right.png" style="width: 20px;height: 20px;" alt="">
+							</div>
+						</div>
+
+						<div v-for="(item,index) in upFunds.slice(0,3)">
+						<div id="jingxuan" @click="showFundMore(upFunds[index].fund_code,upFunds[index].fund_name)" class="bg-bai flex flex-center" style="margin-left: 2.5%;padding: 13px 0;margin-top: 10px;">
+							<div class="flex flex-center leiji" style="background-color: #c80424;margin-left: -2.5%;padding: 12px 0px 12px 15px;border-radius:0 35px 35px 0;">
+								<div style="color: #FFFFFF;font-size: 20px;width: 75%;" v-text="upFunds[index].ofund_type==2?Math.round(upFunds[index].fund_curr_ratio*100)/100:Math.round(upFunds[index].nav_total*100)/100"></div>
+								<div v-if="upFunds[index].ofund_type==2" style="color: #FFFFFF;font-size: 12px;width: 75%;">累计净值</div>
+								<div v-else style="color: #FFFFFF;font-size: 12px;width: 75%;">近7日年化</div>
+							</div>
+							<div class="ml10">
+								<div class="text_clamp1" style="color: #333333;font-size: 14px;line-height: 30px;" v-text="upFunds[index].fund_name"></div>
+								<div>
+									<span style="padding: 3px;background-color: #f4e1d1;color:#db9b67;font-size: 12px;" v-text="fundtype(upFunds[index].ofund_type)">
+										
+									</span>
+									<span v-for="(item2,index2) in upFunds[index].TradeLimits">
+										<span style="padding: 3px;background-color: #f4e1d1;color:#db9b67;font-size: 12px;margin-left: 5px;" v-text="upFunds[index].TradeLimits[index2].min_value+'元起投'">
+										</span>
+									</span>
+								</div>
+							</div>
+						</div>
+						</div>
+					</div>
+					<!--推荐产品end-->
+				</div>
+				<!--描述：热点资讯-->
+					<div class="slider" id="zixunDiv" v-cloak>
+						<div class="slide bg-bai" v-for="(item,index) in newsList.slice(0, 4)" @click="goNewsDetail(newsList[index].id,newsList[index].title)" style="width: 95%; padding:15px 0;margin:10px 2.5%;border-radius: 6px;box-sizing: border-box;">
+							<div class="flex flex-center flex-between" style="padding:0 15px 10px 15px;">
+								<div style="font-size: 14px;color: black;box-sizing: border-box;">
+									<img src="../../images/icon/zixun_icon.png" width="22.5px" height="22.5" style="margin-right: 5px;"/>热点咨询
+								</div>
+							</div>
+							<div class="news_list">
+								<!--单个内容div-->
+								<div id="rdxiangqing"  class="flex flex-center flex-between"  style="padding:5px 15px">
+									<div class="newsleft"  style="padding-right: 20px;"> 
+										<img :src="newsList[index].image_uri" width="94" height="125" />
+									</div>
+									<div class="newsright" style="height: 125px;">
+										<div class="newstitle text_clamp2" style="font-size: 14px;color:#333333">
+											{{ newsList[index].title }}
+										</div>
+										<div class="text_clamp5" style="">
+											{{ newsList[index].content_short }}
+										</div>
+									</div>
+								</div>
+								<!--单个内容div end-->
+							</div>
+						</div>
+					</div>
+				<!--描述：热点资讯end-->
+				<!--热点新闻-->
+				<div id="newsDiv" v-cloak class=" bg-bai" style="width: 95%; padding:15px 0;margin-left: 2.5%;border-radius: 6px;box-sizing: border-box;">
+					<div class="flex flex-center flex-between" style="padding:0 10px 10px 15px;">
+						<div style="font-size: 14px;color: black;box-sizing: border-box;">
+							<img src="../../images/icon/news_icon.png" width="22.5px" height="22.5" style="margin-right: 5px;"/>热点新闻
+						</div>
+						<div class="flex flex-center" style="">
+						<span @click="lookmore()" id="more" style="font-size: 14px;color: #b5b7c4;">查看更多</span>
+						<img src="../../images/icon/right.png" style="width: 20px;height: 20px;" alt="">
+						</div>
+					</div>
+					<div class="news_list" v-for="(item,index) in commoditiesList.slice(0, 2)">
+						<!--单个内容div-->
+						<div id="rdxiangqing" @click="goNewsDetail(commoditiesList[index].id,commoditiesList[index].title)" class="flex flex-center flex-between"  style="padding:5px 15px">
+							<div class="newsleft"  style="padding-right: 20px;"> 
+								<div class="newstitle text_clamp2" style="font-size: 14px;color:#333333">
+									{{ commoditiesList[index].title }}
+								</div>
+								<div class="flex flex-center flex-between" style="margin-top: 23px;">
+									<span style="font-size: 12px;color:#b5b7c4;">{{ commoditiesList[index].author.display_name }}</span>
+									<span style="font-size: 12px;color:#b5b7c4;padding-left: 10px;border-left: 2px solid #b5b7c4;display:inline-block;line-height: 12px;">{{ formartDisplayDate(commoditiesList[index].display_time) }}</span>
+								</div>
+							</div>
+							<div class="newsright" >
+								<img :src="commoditiesList[index].image_uri" width="125" height="80" />
+							</div>
+						</div>
+						
+						<!--单个内容div end-->
+					</div>
+				</div>
+				<!--今日要闻end-->
+				<!-- 轮播广告 -->
+					<div class="swiper-container box-shadow" id="adImgs2" style="height: 37vw;width: 95%;margin-left: 2.5%;border-radius: 6px;margin-top: 15px;">
+						<div class="swiper-wrapper" id="headerimg-list2" v-cloak>
+							
+						</div>
+						<!-- Add Pagination -->
+						<div class="swiper-pagination"></div>
+					</div>
+					<!-- 轮播广告end -->
+					<!--实盘秀-->
+				<div id="shipanxiuDiv" v-cloak class="bg-bai" style="width: 95%; padding:15px 0 0 0;margin:10px 2.5%;border-radius: 6px;">
+					
+					<div class="flex flex-center flex-between" style="padding:0 10px 10px 15px;">
+						<div style="font-size: 14px;color: black;box-sizing: border-box;">
+							<img src="../../images/icon/news_icon.png" width="22.5px" height="22.5" style="margin-right: 5px;"/>
+							高手实盘秀
+						</div>
+						<div class="flex flex-center" style="" id="xiu">
+						<span style="font-size: 14px;color: #b5b7c4;">查看更多</span>
+						<img src="../../images/icon/right.png" style="width: 20px;height: 20px;" alt="">
+						</div>
+					</div>
+					<!--单个内容div-->
+					<div  class="flex flex-center flex-between shipanxiu_list" style="border-radius: 6px;">
+						<div class="xiuleft" style="width: 48%;" >
+							<!--<a :href="sowingMapList[0].hyperLink" class="focuslink">
+							<img style="border-radius: 0 0 0 6px;" :src="sowingMapList[0].imgUrl" width="100%" height="113" />
+							</a>-->
+						</div>
+						<div class="xiuright" style="width: 48%;">
+							<!--<a :href="sowingMapList[1].hyperLink" class="focuslink">
+							<img style="border-radius: 0 0 6px 0;" :src="sowingMapList[1].imgUrl" width="100%" height="113" />
+							</a>-->
+
+						</div>
+					</div>
+					<!--单个内容div end-->
+				</div>
+				<!--实盘秀 end-->
+				<!--拨打客服弹出窗-->
+				<div id="payWechartWindow" class="mui-popover mui-popover-action mui-popover-bottom" style="border: 1px solid #000">
+					<ul class="mui-table-view">
+						<li class="mui-table-view-cell">
+							<span style="color: #000;">
+							联系客服：请拨打客服电话（400-885-9999）
+								</span>
+						</li>
+						<li class="mui-table-view-cell">
+							<a href="#" class="choice">立刻拨号</a>
+						</li>
+					</ul>
+					<ul class="mui-table-view">
+						<li class="mui-table-view-cell">
+							<a href="#picture"><b>取消</b></a>
+						</li>
+					</ul>
+				</div>
+				<!--拨打客服弹出窗-->
+			</div>
+			<div class="pull-bottom-tips"></div>
+		</div>
+		<div id="loginDiv" style="position: fixed;bottom: 0px;opacity: .8;z-index: 1000;">
+			<template v-if="loginFlag==false">
+
+				<div class="dis_table wd100" style="height: 60px;background-color: #555;z-index: 1000;">
+					<div class="dis_table_cell wd70" style="color: white;text-align: left;font-size: 16px;padding-left: 10px;">千万投资者的放心之选</div>
+					<div class="dis_table_cell" style="">
+						<button id="btn-login" style="width: 60px;height: 30px;border: 0px;color: white;background-color: #FB6B6E;opacity: 1">登录</button>
+					</div>
+					<div class="dis_table_cell">
+						<img @click="closeDiv" style="width: 25px;height: 25px" src="../../images/icon/icon_close.png" />
+					</div>
+				</div>
+
+			</template>
+		</div>
+		
+		<script src="../../js/h.min.js"></script>
+		<script src="../../js/mui.min.js"></script>
+		<script src="../../js/immersed.js"></script>
+		<script src="../../js/xmui-globalEvent.js"></script>
+		<!--<script src="../../js/mui.pullToRefresh.js"></script>
+		<script src="../../js/mui.pullToRefresh.material.js"></script>-->
+		<!-- 滚动条 -->
+		<script src="../../js/swiper.min.js"></script>
+		<!-- 图片缓存-->
+		<script src="../../js/DMobileFrame.js"></script>
+		<script src="../../js/jquery.min_1.8.3.js"></script>
+
+		<script src="../../js/md5.js"></script>
+		<script src="../../js/com.js"></script>
+		<script src="../../js/com.data.js"></script>
+		<script src="../../js/com.data.huaerjie.js"></script>
+		<!--<script src="../../js/com.mui.js"></script>-->
+		<script src="../../js/vue.js"></script>
+		<script src="../../js/fundsfunction.js"></script>
+		<!--<script src="../../hqup.js"></script>-->
+		<!--<script src='../../js/stopExecutionOnTimeout.js?t=1'></script>-->
+		
+		<script type="text/javascript">
+			
+		$(document).ready(function(){
+			window.addEventListener('load', onWndLoad, false);
+		});
+		function onWndLoad() {
+			var slider = document.querySelector('.slider');
+			var sliders = slider.children;
+			var initX = null;
+			var transX = 0;
+			var rotZ = 0;
+			var transY = 0;
+			var curSlide = null;
+			var Z_DIS = 50;
+			var Y_DIS = 15;
+			var TRANS_DUR = 0.4;
+			var images = document.querySelectorAll('img');
+			for (var i = 0; i < images.length; i++) {
+				if (window.CP.shouldStopExecution(1)) {
+					break;
+				}
+				images[i].onmousemove = function (e) {
+					e.preventDefault();
+				};
+				images[i].ondragstart = function (e) {
+					return false;
+				};
+			}
+			window.CP.exitedLoop(1);
+			function init() {
+				var z = 0, y = 0;
+				for (var i = sliders.length - 1; i >= 0; i--) {
+					if (window.CP.shouldStopExecution(2)) {
+						break;
+					}
+					sliders[i].style.transform = 'translateZ(' + z + 'px) translateY(' + y + 'px)';
+					z -= Z_DIS;
+					y -= Y_DIS;
+				}
+				window.CP.exitedLoop(2);
+				attachEvents(sliders[sliders.length - 1]);
+			}
+			function attachEvents(elem) {
+				curSlide = elem;
+				curSlide.addEventListener('mousedown', slideMouseDown, false);
+				curSlide.addEventListener('touchstart', slideMouseDown, false);
+			}
+			init();
+			function slideMouseDown(e) {
+				if (e.touches) {
+					initX = e.touches[0].clientX;
+				} else {
+//					initX = e.pageX;
+				}
+				document.addEventListener('mousemove', slideMouseMove, false);
+				document.addEventListener('touchmove', slideMouseMove, false);
+				document.addEventListener('mouseup', slideMouseUp, false);
+				document.addEventListener('touchend', slideMouseUp, false);
+			}
+			var prevSlide = null;
+			function slideMouseMove(e) {
+				var mouseX;
+				if (e.touches) {
+					mouseX = e.touches[0].clientX;
+				} else {
+//					mouseX = e.pageX;
+				}
+				transX += mouseX - initX;
+				rotZ = transX / 20;
+				transY = Math.abs(transX / 15);
+				curSlide.style.transition = 'none';
+				curSlide.style.webkitTransform = 'translateX(' + transX + 'px)' + ' rotateZ(' + rotZ + 'deg)' + ' translateY(' + transY + 'px)';
+				curSlide.style.transform = 'translateX(' + transX + 'px)' + ' rotateZ(' + rotZ + 'deg)' + ' translateY(' + transY + 'px)';
+				var j = 1;
+				for (var i = sliders.length - 2; i >= 0; i--) {
+					if (window.CP.shouldStopExecution(3)) {
+						break;
+					}
+					sliders[i].style.webkitTransform = 'translateX(' + transX / (2 * j) + 'px)' + ' rotateZ(' + rotZ / (2 * j) + 'deg)' + ' translateY(' + - Y_DIS * j + 'px)' + ' translateZ(' + -Z_DIS * j + 'px)';
+					sliders[i].style.transform = 'translateX(' + transX / (2 * j) + 'px)' + ' rotateZ(' + rotZ / (2 * j) + 'deg)' + ' translateY(' + - Y_DIS * j + 'px)' + ' translateZ(' + -Z_DIS * j + 'px)';
+					sliders[i].style.transition = 'none';
+					j++;
+				}
+				window.CP.exitedLoop(3);
+				initX = mouseX;
+				e.preventDefault();
+				if (Math.abs(transX) >= curSlide.offsetWidth - 100) {
+					document.removeEventListener('mousemove', slideMouseMove, false);
+					document.removeEventListener('touchmove', slideMouseMove, false);
+					curSlide.style.transition = 'ease 0.2s';
+					curSlide.style.opacity = 0;
+					prevSlide = curSlide;
+					attachEvents(sliders[sliders.length - 2]);
+					slideMouseUp();
+					setTimeout(function () {
+						slider.insertBefore(prevSlide, slider.firstChild);
+						prevSlide.style.transition = 'none';
+						prevSlide.style.opacity = '1';
+						slideMouseUp();
+					}, 201);
+					return;
+				}
+			}
+			function slideMouseUp() {
+				transX = 0;
+				rotZ = 0;
+				transY = 0;
+				curSlide.style.transition = 'cubic-bezier(0,1.95,.49,.73) ' + TRANS_DUR + 's';
+				curSlide.style.webkitTransform = 'translateX(' + transX + 'px)' + 'rotateZ(' + rotZ + 'deg)' + ' translateY(' + transY + 'px)';
+				curSlide.style.transform = 'translateX(' + transX + 'px)' + 'rotateZ(' + rotZ + 'deg)' + ' translateY(' + transY + 'px)';
+				var j = 1;
+				for (var i = sliders.length - 2; i >= 0; i--) {
+					sliders[i].style.transition = 'cubic-bezier(0,1.95,.49,.73) ' + TRANS_DUR / (j + 0.9) + 's';
+					sliders[i].style.webkitTransform = 'translateX(' + transX + 'px)' + 'rotateZ(' + rotZ + 'deg)' + ' translateY(' + -Y_DIS * j + 'px)' + ' translateZ(' + -Z_DIS * j + 'px)';
+					sliders[i].style.transform = 'translateX(' + transX + 'px)' + 'rotateZ(' + rotZ + 'deg)' + ' translateY(' + -Y_DIS * j + 'px)' + ' translateZ(' + -Z_DIS * j + 'px)';
+					j++;
+				}
+				document.removeEventListener('mousemove', slideMouseMove, false);
+				document.removeEventListener('touchmove', slideMouseMove, false);
+			}
+		}
+		</script>
+		<script>
+			var mescroll;
+			var indexVue;
+			var newsVue;
+			var loginvue;
+			var sowingMap;
+			var sowingMap2;
+			var xiuVue;
+			var dzdt;
+			var zixunVue;
+			mui.ready(function() {
+                mui(".mui-scroll-wrapper").scroll({
+                    bounce: false, //是否启用回弹
+                    indicators: false, //是否显示滚动条
+                    deceleration: 0.003//flick 减速系数，系数越大，滚动速度越慢，滚动距离越小，默认值0.0006
+                });
+			});
+			mui.plusReady(function() {
+				
+//		        var deceleration = mui.os.ios ? 0.003 : 0.0009;
+//		        mui(".mui-scroll-wrapper").scroll({
+//		            bounce: true, //是否启用回弹
+//		            indicators: true //是否显示滚动条
+//		            deceleration: deceleration //flick 减速系数，系数越大，滚动速度越慢，滚动距离越小，默认值0.0006
+//		        });		
+				var newsWebURL = "";
+				com.data.huaerjie.getNewsWebURL({
+					sys_code: 'news_web_url'
+				}, function(data) {
+
+					var sysCfg = data.result_list;
+					if(sysCfg != null && sysCfg.length != 0) {
+						newsWebURL = sysCfg[0].sysValue;
+						newsWebURL = "https://newsjijin.dzqh.com.cn/";
+					}
+
+					//console.log('123'+JSON.stringify(data));
+					//console.log(newsWebURL);
+					//newsWebURL = data.items;
+				});
+
+				mui('body').on('tap', '#btn-login', function() {
+					com.plus.openWindowX('../login.html', {});
+				});
+				mui('body').on('tap', '#btn-reg', function() {
+					com.plus.openWindowX('../register.html', {});
+				});
+
+				//财经日历
+				mui('body').on('tap', '#caijingcalander', function() {
+					//					com.plus.openWindowX(newsWebURL + 'page/livenews/live_news.html', {});
+					com.plus.openWindowX('../quotepage/caijingrili.html', {});
+				});
+				//热点新闻
+				mui('body').on('tap', '#hotnews', function() {
+					//					com.plus.openWindowX(newsWebURL + 'page/article/articles.html', {});
+					com.plus.openWindowX('../quotepage/hotnews.html', {});
+				});
+				mui('body').on('tap', '#kefu', function() {
+					//                    mui('#payWechartWindow').popover('toggle');
+					//                  getFundChoices2();
+					com.plus.openWindowX('../tools/kefu.html', {});
+				});
+				mui('body').on('tap', '#mycricle', function() {
+					//com.plus.openWindowX('../mycircle/circle_index.html', {});
+<!--                    mui.alert("即将上线")-->
+                               com.plus.openWindowX('../tools/kefu.html', {});
+				});
+				mui('body').on('tap', '#xiu', function() {
+						com.plus.openWindowX('../quotepage/xiu.html', {});
+				});
+				// 期货开户
+				mui('body').on('tap', '#qihuokaihu', function() {
+					//					com.data.user.showMyInfo({}, function(data) {
+					//						var userInfo = data.result_map;
+					//						com.plus.openWindowX('../quotepage/qihuokaihu.html', {
+					//							phone: userInfo.mobile_tel
+					//						});
+					//					})
+					
+                
+                   com.data.user.showMyInfo({}, function(data) {
+                        var userInfo = data.result_map;
+                            com.plus.openWindowX('warn.html', {
+                                phone: userInfo.mobile_tel
+                            });
+                       })
+                          //开户sdk
+				});
+
+				// 期货行情
+				mui('body').on('tap', '#qihuohangqing', function() {
+					//com.plus.openWindowX('../quotepage/qihuohangqing.html', {});
+                   //interac();
+                    plus.bridge.exec( 'pbmobile', 'openPbmobilePage', [] );
+				});
+
+				// 王者杯
+				mui('body').on('tap', '#wangzhebei', function() {
+					com.plus.openWindowX('../quotepage/wangzhebei.html', {});
+				});
+
+				// 基金开户
+				mui('body').on('tap', '#jijinkaihu', function() {
+					com.plus.openWindowX('../register.html', {});
+				});
+
+				// 公募基金
+				mui('body').on('tap', '#gongmujijin', function() {
+					com.plus.openWindowX('../fundspage/fundslist_public.html', {
+						index: true
+					});
+				});
+
+				//高端理财
+				mui('body').on('tap', '#gaoduanlicai', function() {
+					mui.alert("即将上线")
+//					&ta_nos=98,99
+				});
+
+				// 东方红资管
+				mui('body').on('tap', '#ziguan', function() {
+					mui.alert("即将上线")
+				});
+
+				mui('body').on('tap', '.choice', function() {
+					plus.device.dial(4008859999, true);
+				});
+
+				
+				//东证动态
+
+				//轮播图1
+				sowingMap = new Vue({
+					el: '#headerimg-list',
+					data: {
+						sowingMapList: [],
+						loginFlag: false
+					},
+					created () {
+						this.queryNews ()
+					},
+					methods: {
+						
+						_queryData:function (url, success) {
+							
+							$.ajax({
+								url: url,
+								type: 'get',
+								dataType: 'jsonp',
+								jsonp: 'jsoncallback',
+								date: {},
+								success: function (data) {
+									if (data.success_type === '1') {
+										success(data)
+									} else {
+										mui.toast(data.msg);
+									}
+									
+								}
+							})
+						},
+						queryNews () {
+							$("#headerimg-list").html('');
+							var paras = 'current_page=1&num_per_page=10&category_code=0201'
+				      		paras = setQueryString(paras)
+							var url = 'https://xiu.dzqh.com.cn:11446/newsController.do?news_query&' + paras
+							this._queryData(url, data => {
+							if (data.success_type === '1') {
+					          	this.sowingMapList = data.result_map.result_map.recordList
+					          	for(var i in this.sowingMapList){
+					          		$("#headerimg-list").append('<div class="swiper-slide" data-swiper-autoplay="3000"><a href="'+this.sowingMapList[i].hyperLink+'" class="focuslink"><img src="'+this.sowingMapList[i].imgUrl+'" class="bg-gray" style="width: 100%;" /></a></div>')
+					          	}
+					          	new Swiper('#adImgs', {
+									pagination: '.swiper-pagination',
+									paginationClickable: true,
+									autoplay:true,
+								});
+								} else {
+									mui.toast(data.msg);
+								}
+							})
+						}
+					},
+					mounted: function() {
+//						new Swiper('#adImgs', {
+//							pagination: '.swiper-pagination',
+//							paginationClickable: true
+//						});
+					}
+				});
+				//轮播图2
+				sowingMap2 = new Vue({
+					el: '#headerimg-list2',
+					data: {
+						sowingMapList: [],
+						loginFlag: false
+					},
+					created () {
+						this.queryNews ()
+					},
+					methods: {
+						_queryData:function (url, success) {
+							$.ajax({
+								url: url,
+								type: 'get',
+								dataType: 'jsonp',
+								jsonp: 'jsoncallback',
+								date: {},
+								success: function (data) {
+									if (data.success_type === '1') {
+										success(data)
+									} else {
+										mui.toast(data.msg);
+									}
+									
+								}
+							})
+						},
+						queryNews () {
+							$("#headerimg-list2").html('');
+							var paras = 'current_page=1&num_per_page=10&category_code=0202'
+				      		paras = setQueryString(paras)
+							var url = 'https://xiu.dzqh.com.cn:11446/newsController.do?news_query&' + paras
+							this._queryData(url, data => {
+							if (data.success_type === '1') {
+					          	this.sowingMapList = data.result_map.result_map.recordList
+					          	for(var i in this.sowingMapList){
+					          		$("#headerimg-list2").append('<div class="swiper-slide" data-swiper-autoplay="3000"><a href="'+this.sowingMapList[i].hyperLink+'" class="focuslink"><img src="'+this.sowingMapList[i].imgUrl+'" class="bg-gray" style="width: 100%;" /></a></div>')
+					          	}
+					          	new Swiper('#adImgs2', {
+									pagination: '.swiper-pagination',
+									paginationClickable: true,
+									autoplay:true,
+								});
+								} else {
+									mui.toast(data.msg);
+								}
+							})
+						}
+					},
+					
+					mounted: function() {
+//						new Swiper('#adImgs', {
+//							pagination: '.swiper-pagination',
+//							paginationClickable: true
+//						});
+					}
+				});
+				//高手实盘秀
+				xiuVue = new Vue({
+					el: '#shipanxiuDiv',
+					data: {
+						sowingMapList: [],
+						loginFlag: false
+					},
+					
+					methods: {
+						_queryData:function (url, success) {
+							$.ajax({
+								url: url,
+								type: 'get',
+								dataType: 'jsonp',
+								jsonp: 'jsoncallback',
+								date: {},
+								success: function (data) {
+									if (data.success_type === '1') {
+										success(data)
+									} else {
+										mui.toast(data.msg);
+									}
+								}
+							})
+						},
+						queryNews () {
+							$('.xiuleft,.xiuright').html('');
+							var paras = 'current_page=1&num_per_page=10&category_code=0401'
+				      		paras = setQueryString(paras)
+							var url = 'https://xiu.dzqh.com.cn:11446/newsController.do?news_query&' + paras
+							this._queryData(url, data => {
+							if (data.success_type === '1') {
+					          	this.sowingMapList = data.result_map.result_map.recordList
+					          	
+					          	$('.xiuleft').append('<a href="'+this.sowingMapList[0].hyperLink+'" class="focuslink"><img style="border-radius: 0 0 0 6px;" src="'+this.sowingMapList[0].imgUrl+'" width="100%" height="113" /></a>')
+								$('.xiuright').append('<a href="'+this.sowingMapList[1].hyperLink+'" class="focuslink"><img style="border-radius: 0 0 6px 0;" src="'+this.sowingMapList[1].imgUrl+'" width="100%" height="113" /></a>')
+							} else {
+									mui.toast(data.msg);
+								}
+							})
+						}
+					},
+					
+					mounted: function() {
+
+					}
+				});
+				//热点资讯
+				zixunVue = new Vue({
+					el: '#zixunDiv',
+					data: {
+						newsList: [],
+						loginFlag: false
+					},
+					methods: {
+						goNewsDetail: function(article_id, title) {
+							title = encodeURIComponent(encodeURIComponent(title));
+//							var url = 'https://newsjijin.dzqh.com.cn/page/article/article_detail.html?article_id=' + article_id + '&title=' + title;
+//							var url="https://newsjijin.dzqh.com.cn/page/article/article_detail.html";
+//																com.plus.openWindowX(url, {});
+							setTimeout(function() {
+								com.plus.openWindowX('../quotepage/article_detail.html', {
+									title:title,
+									article_id:article_id
+								});
+							}, 200)
+						},
+						formartDisplayDate: function(time) {
+							return com.util.formatDate(parseInt(time + "000"), "yyyy-MM-dd HH:mm:ss", 1)
+						}
+					},
+					mounted: function() {
+						var this_ = this;
+						com.data.huaerjie.getMostReadNews({}, function(data) {
+							//alert(JSON.stringify(data.items));
+							this_.newsList = data.items;
+//							
+						});
+
+					}
+				});
+				//链接跳转
+				mui('body').on('tap', '.focuslink', function() {
+					var weburl = this.getAttribute('href');
+					//alert(go);
+					
+					if(weburl != "" && weburl != null) {
+						mui.openWindow({
+							url: "../quotepage/focus.html",
+							extras: {
+								weburl: weburl
+							}
+						});
+					}
+				});
+				//热点新闻
+				newsVue = new Vue({
+					el: '#newsDiv',
+					data: {
+						commoditiesList: [],
+						loginFlag: false
+					},
+					methods: {
+						goNewsDetail: function(article_id, title) {
+							title = encodeURIComponent(encodeURIComponent(title));
+//							var url = 'https://newsjijin.dzqh.com.cn/page/article/article_detail.html?article_id=' + article_id + '&title=' + title;
+//							var url="https://newsjijin.dzqh.com.cn/page/article/article_detail.html";
+//																com.plus.openWindowX(url, {});
+							
+							setTimeout(function() {
+								com.plus.openWindowX('../quotepage/article_detail.html', {
+									title:title,
+									article_id:article_id
+								});
+							}, 200)
+						},
+						formartDisplayDate: function(time) {
+							return com.util.formatDate(parseInt(time + "000"), "yyyy-MM-dd HH:mm:ss", 1)
+						},
+						lookmore: function() {
+							//									com.plus.openWindowX(newsWebURL + 'page/article/articles.html', {});
+							//								alert(newsWebURL)
+							com.plus.openWindowX('../quotepage/hotnews.html', {});
+						}
+					},
+					mounted: function() {
+						var this_ = this;
+						com.data.huaerjie.getCommoditiesNews({}, function(data) {
+							console.log(JSON.stringify(data.items));
+							//						    alert(JSON.stringify(data.items));
+							this_.commoditiesList = data.items;
+						});
+					}
+				});
+
+				indexVue = new Vue({
+					el: '#vue-content',
+					data: {
+						upFunds: [],
+						sowingMapList: [],
+						loginFlag: false
+					},
+					methods: {
+						riskLevel: function(fundRiskLevel) {
+							return getFundRiskLevelName(fundRiskLevel);
+						},
+						fundtype: function(fundtype) {
+							return getFundTypeNameByType(fundtype);
+						},
+						showFundMore: function(code, name) {
+							// com.plus.openWindowX('../fundspage/fundslist_public.html',{});
+							setTimeout(function() {
+								com.plus.openWindowX('../fundspage/funds_more.html', {
+									code: code,
+									name: name
+								});
+							}, 200)
+						},
+						_queryData:function (url, success) {
+							
+							$.ajax({
+								url: url,
+								type: 'get',
+								dataType: 'jsonp',
+								jsonp: 'jsoncallback',
+								date: {},
+								success: function (data) {
+									if (data.success_type === '1') {
+										success(data)
+									} else {
+										mui.toast(data.msg);
+									}
+								}
+							})
+						},
+						queryNews () {
+							var paras = 'current_page=1&num_per_page=10&category_code=0301'
+				      		paras = setQueryString(paras)
+							var url = 'https://xiu.dzqh.com.cn:11446/newsController.do?news_query&' + paras
+							this._queryData(url, data => {
+							if (data.success_type === '1') {
+					          	this.sowingMapList = data.result_map.result_map.recordList
+					          
+								} else {
+									mui.toast(data.msg);
+								}
+							})
+						}
+					},
+					mounted: function() {
+						var this_ = this;
+						com.data.funds.getUpFunds({}, function(data) {
+
+							this_.upFunds = data.result_list;
+						});
+						// 获取头部轮播图
+						
+						
+					}
+				});
+
+				loginvue = new Vue({
+					el: '#loginDiv',
+					data: {
+						loginFlag: false
+					},
+					methods: {
+						closeDiv: function() {
+							this.loginFlag = true;
+						}
+					},
+					mounted: function() {
+						var this_ = this;
+						this_.loginFlag = com.data.loginToken.get() != null;
+						mui.ge.addListener("reloadIndex", function(args) {
+							this_.loginFlag = com.data.loginToken.get() == null ? false : true;
+							mui.ge.callback(args, {})
+						});
+
+					}
+				});
+//				点击事件处理
+//				//查看更多
+				mui('body').on('tap', '#more', function (event) {
+					this.click();
+				});
+				//精选产品
+				mui('body').on('tap', '#jingxuan', function (event) {
+					this.click();
+				});
+				//热点资讯点击
+				mui('body').on('tap', '#rdxiangqing', function (event) {
+					this.click();
+				});
+
+//						var scroll = new com.mui.muiScroll(
+//							document.querySelector("#index-div"),
+//							function(index, size, do_success, do_error) {
+//								
+//								com.data.funds.getUpFunds({}, function(data) {
+//									console.log(JSON.stringify(data.items))
+//									indexVue.upFunds = data.result_list;
+//								});
+//								com.data.huaerjie.getMostReadNews({}, function(data) {
+//									console.log(JSON.stringify(data.items));
+//									newsVue.newsList = data.items;
+//								});
+//								loginvue.loginFlag = com.data.loginToken.get() == null ? false : true
+//								do_success(0);
+//							}
+//						)
+//						scroll.refresh();
+//						获取滚动条高度，显示头部
+						var scroll = mui('.mui-scroll-wrapper').scroll();
+						document.querySelector('.mui-scroll-wrapper').addEventListener('scroll', function(e) {
+							console.log(scroll.y)
+						    if(scroll.y < -120) {
+//								$('.mui-bar-nav').show();
+								$('.mui-bar-nav').css('opacity','1');
+							}else if(-120 < scroll.y < -100 ) {
+								$('.mui-bar-nav').css('opacity','0.8');
+							}else if(-100 < scroll.y < -80 ) {
+								$('.mui-bar-nav').css('opacity','0.5');
+							}else if(-80 < scroll.y < -50 ) {
+								$('.mui-bar-nav').css('opacity','0.3');
+							}else if(-50 < scroll.y < -30 ) {
+								$('.mui-bar-nav').css('opacity','0.2');
+							}else if(scroll.y >-20) {
+//								$('.mui-bar-nav').hide();
+								$('.mui-bar-nav').css('opacity','0');
+							}
+						})
+				//		获取滚动条高度，显示头部 安卓
+//						window.onscroll = function(){
+//							console.log(document.body.scrollTop)
+
+//							 if(document.body.scrollTop > 100) {
+//								$('.mui-bar-nav').show();
+//							} else if(document.body.scrollTop == 0) {
+//								$('.mui-bar-nav').hide();
+//							}
+//						}
+				mui.init({
+					pullRefresh: {
+						container: ".mui-scroll-wrapper", //下拉刷新容器标识，querySelector能定位的css选择器均可，比如：id、.class等
+						down: {
+							height: 50, //可选,默认50.触发下拉刷新拖动距离,
+							auto: true, //可选,默认false.首次加载自动下拉刷新一次
+							contentdown: "下拉可以刷新", //可选，在下拉可刷新状态时，下拉刷新控件上显示的标题内容
+//							contentover: "释放立即刷新", //可选，在释放可刷新状态时，下拉刷新控件上显示的标题内容
+//							contentrefresh: "正在刷新...", //可选，正在刷新状态时，下拉刷新控件上显示的标题内容
+							callback: pulldownRefresh
+						}
+					}
+				});
+
+				function pulldownRefresh() {
+					com.data.funds.getUpFunds({}, function(data) {
+						//console.log(JSON.stringify(data.items))
+						indexVue.upFunds = data.result_list;
+					});
+					com.data.huaerjie.getMostReadNews({}, function(data) {
+							console.log(JSON.stringify(data.items));
+							//						    alert(JSON.stringify(data.items));
+							zixunVue.newsList = data.items;
+						});
+					com.data.huaerjie.getCommoditiesNews({}, function(data) {
+						//alert(JSON.stringify(data.items));
+						newsVue.commoditiesList = data.items;
+					});
+					
+					xiuVue.queryNews();
+					indexVue.queryNews();
+					loginvue.loginFlag = com.data.loginToken.get() == null ? false : true;
+					setTimeout(function() {
+						mui('.mui-scroll-wrapper').pullRefresh().endPulldownToRefresh();
+					}, 1000); 
+
+				}
+			});
+			function lunbo(id,height){
+			  var ul=$(id);
+			  var liFirst=ul.find('li:first');
+			  $(id).animate({top:height},1000).animate({"top":0},0,function(){
+				  var clone=liFirst.clone();
+				  $(id).append(clone);
+				  liFirst.remove();
+			  })
+			 }
+			 setInterval("lunbo('#ulContent','-34px')",3000)
+	function getSign(paras) {
+		var paras = paras.split('&')
+		// alert(JSON.stringify(str));
+		$.each(paras, function(idx, obj1) {
+			if(obj1 != null && isNaN(obj1)) {
+				if(obj1.indexOf("%25") >= 0) {
+					paras[idx] = decodeURIComponent(obj1);
+				}
+			}
+		});
+//		for(var index in paras) {
+//			changestr += "&" + index + "=" + paras[index];
+//		} 
+		paras = gerSortedParas(paras)
+
+		// para1=value1&para2=value2
+		var paraStr = paras.join('&')
+//		changestr = changestr.substring(1);
+		console.log("===========>石盘秀md5加密字符串前为" + paraStr);
+		var sign = $.md5("57ea2d202e0947ed8631bd1b51e9adf3" + paraStr);
+		return sign.toUpperCase();
+	}
+	// 取得全参数
+	// 参数方式 para1=value1&para2=value2....
+	function setQueryString (paras) {
+		if (paras.indexOf('timestamp') < 0) {
+			var timestamp = new Date().Format('yyyyMMddHHmmss')
+			if (paras === '') {
+//				paras = "timestamp=" + timestamp
+				paras = `timestamp=${timestamp}`
+			} else {
+//				paras = paras + "&timestamp="+timestamp
+				paras = `${paras}&timestamp=${timestamp}`
+			}
+		}
+		
+		var sign = getSign(paras)
+		// 生产
+		var appKey = "orient_show_key_20180328";
+		// 测试
+		// const appKey = 'orient_show_key_20180326'
+		paras = paras + '&sign=' + sign + '&app_key=' + appKey;
+		console.log("==========>实盘秀请求地址为:" + paras)
+		return paras
+	}
+	function gerSortedParas (paras) {
+		return paras.sort()
+	}
+		</script>
+	</body>
+
+</html>

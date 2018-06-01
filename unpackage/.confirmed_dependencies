@@ -19,7 +19,8 @@
       "app/usermain/index.html",
       "app/home_user.html",
       "app/usermain/lottery_results.html",
-      "app/login.html"
+      "app/login.html",
+      "guide.html"
     ]
   },
   "app/home.html": {
@@ -2457,5 +2458,10 @@
       "app/fundspage/fundsbuy_success.html"
     ],
     "resources": []
+  },
+  "guide.html": {
+    "refer": [
+      "app/home_user.html"
+    ]
   }
 }

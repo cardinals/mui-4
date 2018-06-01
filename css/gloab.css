@@ -548,6 +548,7 @@ select {
 }
 
 /* 文本限制多少行 */
+
 .text_clamp1 {
     display: -webkit-box;
     -webkit-box-orient: vertical;
@@ -1061,4 +1062,5 @@ input[type='submit']:enabled:active {
 }
 .flex-between {
 	justify-content: space-between;
+	-webkit-justify-content: space-between;
 }

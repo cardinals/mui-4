@@ -16,44 +16,56 @@
 			}
 			
 			.change-color {
-				color: #c70321;
+				color: #D42528;
 				transform: scale(0.9);
 			}
 			
 			.mui-bar-tab .mui-tab-item.mui-active {
-				color: #c70321;
+				color: #D42528;
 			}
 			
 			.mui-active>.mui-tab-label {
-				color: #c70321;
+				color: #D42528;
 			}
-			
+			.mui-tab-label{
+				font-size: 14px;
+			}
 			.mui-bar {
 				box-shadow: 0 0 2px #DEDEDE;
 			}
 			
 			.home {
-				background-image: url(../img/home/home_def.png);
+				background-image: url(../images/icon/home_1.png);
 			}
 			
 			.mui-active .home {
-				background-image: url(../img/home/home_check.png);
+				background-image: url(../images/icon/home_2.png);
 			}
 			
 			.shop {
-				background-image: url(../img/home/shop_def.png);
+				background-image: url(../images/icon/shop_1.png);
 			}
 			
 			.mui-active .shop {
-				background-image: url(../img/home/shop_check.png);
+				background-image: url(../images/icon/shop_2.png);
 			}
-			
+			.jijin {
+				background-image: url(../images/icon/jijin_1.png);
+			}
+			.mui-active .jijin {
+				background-image: url(../images/icon/jijin_2.png);
+			}
+			.licai {
+				background-image: url(../images/icon/licai_1.png);
+			}
+			.mui-active .licai {
+				background-image: url(../images/icon/licai_2.png);
+			}
 			.me {
-				background-image: url(../img/home/me_def.png);
+				background-image: url(../images/icon/me_1.png);
 			}
-			
 			.mui-active .me {
-				background-image: url(../img/home/me_check.png);
+				background-image: url(../images/icon/me_2.png);
 			}
 			/**
             设置make显示的颜色
@@ -62,6 +74,14 @@
 			.mui-backdrop {
 				background-color: transparent !important;
 			}
+			.mui-bar-tab .mui-tab-item .mui-icon{
+				top: 7px;
+			}
+			.mui-tab-item{
+				border-top: 1px solid #E4E5EA !important;
+				box-shadow:none;
+			}
+			
 		</style>
 
 	</head>
@@ -71,25 +91,23 @@
 		<nav class="mui-bar mui-bar-tab">
 
 			<a id="defaultTab" class="mui-tab-item mui-active" href="mainpage/index.html" id='0' to_sub="0">
-				<span class="mui-icon home"><i class="icon-show fa fa-home change-color " style="transform: scale(0.8);"></i></span>
+				<span class="mui-icon home"><i class="" style="transform: scale(0.8);"></i></span>
 				<span class="mui-tab-label titlecolor" style="line-height: 22px;">首页</span>
 			</a>
 			<a class="mui-tab-item" to_sub="1" href="quotepage/qihuohangqing.html" id='1'>
-				<span class="mui-icon shop"><i class="icon-show fa fa-area-chart" style="transform: scale(0.8);"></i></span>
+				<span class="mui-icon shop"><i class="" style="transform: scale(0.8);"></i></span>
 				<span class="mui-tab-label titlecolor" style="line-height: 22px;">期货</span>
 			</a>
 			<a class="mui-tab-item" to_sub="2" href="fundspage/fundslist_public.html" id='2'>
-				<span class="mui-icon shop"><i class="icon-show fa fa-line-chart" style="transform: scale(0.8);"></i></span>
+				<span class="mui-icon jijin"><i class="" style="transform: scale(0.8);"></i></span>
 				<span class="mui-tab-label titlecolor" style="line-height: 22px;">基金</span>
 			</a>
-
-<!--            <a class="mui-tab-item" to_sub="3" href="mainpage/funds.html" id='3'>-->
-<!--                <span class="mui-icon shop"><i class="icon-show fa fa-diamond" style="transform: scale(0.8);"></i></span>-->
-<!--                <span class="mui-tab-label titlecolor" style="line-height: 22px;">高端理财</span>-->
-<!--            </a>-->
-
+            <!--<a class="mui-tab-item" to_sub="3" href="mainpage/funds.html" id='3'>
+                <span class="mui-icon licai"><i class="" style="transform: scale(0.8);"></i></span>
+                <span class="mui-tab-label titlecolor" style="line-height: 22px;">高端理财</span>
+            </a>-->
 			<a class="mui-tab-item" to_sub="4" href="mainpage/mypage.html" id='4'>
-				<span class="mui-icon me"><i class="icon-show fa fa-user-o " style="transform: scale(0.8);"></i></span>
+				<span class="mui-icon me"><i class="" style="transform: scale(0.8);"></i></span>
 				<span class="mui-tab-label titlecolor" style="line-height: 22px;">我</span>
 			</a>
 
@@ -131,8 +149,8 @@
 					active: false,
 					new: false,
 					id: '3'
-				}, {
-					url: 'mainpage/mypage.html',
+				},{
+					url: 'quotepage/hotnews.html',
 					active: false,
 					new: false,
 					id: '4'
@@ -141,15 +159,16 @@
 
 			var subpage_style = {
 				top: '0px',
-				bottom: '51px'
+				bottom: '52px'
 			};
 
 			var currWeb = null;
 
 			mui.plusReady(function() {
+				
 				com.plus.fullscreen.setNoFull();
 				currWeb = com.plus.getCurrWebview();
-
+				
 				var sub = plus.webview.create(subpages[0].url, subpages[0].url, subpage_style);
 				currWeb.self.append(sub);
 				subpages[0].new = true;

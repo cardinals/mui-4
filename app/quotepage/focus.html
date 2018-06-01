@@ -18,7 +18,7 @@
 			}
 			
 			.bg-title {
-				background-color: #c70321;
+				background-color: #D42528;
 			}
 		</style>
 
@@ -42,19 +42,19 @@
 				//alert(1111);
 				//plus.nativeUI.showWaiting();//这里是开始显示原生等待框
 				weburl = plus.webview.currentWebview().weburl;
-				//alert(weburl);
 				mui.init({
 					subpages: [{
 						url: weburl, //子页面HTML地址，支持本地地址和网络地址
-						id: 'focus', //子页面标志
+						id: 'focus1', //子页面标志
 						styles: {
-							top: '45px', //子页面顶部位置
+							top: '64px', //子页面顶部位置
+							bottom:'0'
 						},
 						extras: {} //额外扩展参数
 					}]
 				});
 			});
-
+				
 		</script>
 	</body>
 

@@ -860,7 +860,7 @@ com.plus.openWindowX = function (url, extras_, tip_, fun_load_) {
     var webviewContent = plus.webview.create(url, url, null, extras);//后台创建webview并打开show.html
     webviewContent.addEventListener("loaded", function () { //注册新webview的载入完成事件 
 //      nwaiting.close();
-        webviewContent.show("slide-in-right", 200); //把新webview窗体显示出来，显示动画效果为速度200毫秒的右侧移入动画
+        webviewContent.show("slide-in-right", 100); //把新webview窗体显示出来，显示动画效果为速度200毫秒的右侧移入动画
         if (fun_load_) {
             fun_load_();
         }

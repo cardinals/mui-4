@@ -21,12 +21,12 @@ com.data.ajax.param = function() {
 	this.async = true; //默认异步加载，同步，请设置为false
 	this.fun_error = null;
 	this.nologin = null; //如果没有登陆，会在合理回调，如果没有回调会重启应用
-//	this.loading = {
-//		title: '努力加载中....',
-//		options: {
-//			back: "none" //可取值"none"表示截获处理返回键，但不做任何响应；"close"表示截获处理返回键并关闭等待框；"transmit"表示不截获返回键，向后传递给Webview窗口继续处理（与未显示等待框的情况一致）
-//		}
-//	}
+	this.loading = {
+		title: '努力加载中....',
+		options: {
+			back: "none" //可取值"none"表示截获处理返回键，但不做任何响应；"close"表示截获处理返回键并关闭等待框；"transmit"表示不截获返回键，向后传递给Webview窗口继续处理（与未显示等待框的情况一致）
+		}
+	}
 }
 
 com.data.ajax.error = function(XMLHttpRequest, textStatus, errorThrown) {
@@ -95,6 +95,7 @@ com.data.ajax.jsonp = function(sendParams) {
 		success: function(data) {
 			// alert(JSON.stringify(data));
 			console.log("请求返回数据+=============》" + JSON.stringify(data))
+			
 			if("1" == data.success_type) {
 				sendParams.fun_success(data.result_map, data.msg, data.token, data.finish_info_flag);
 			} else {
@@ -109,13 +110,16 @@ com.data.ajax.jsonp = function(sendParams) {
 						sendParams.url.substring(sendParams.url.lastIndexOf('/')) != '/smsController.do?single_sms_send_check_mobile' &&
 						sendParams.url.substring(sendParams.url.lastIndexOf('/')) != '/registerController.do?register_info_save' &&
 						sendParams.url.substring(sendParams.url.lastIndexOf('/')) != '/loginController.do?verification_code_login_check') {
-//						                      mui.alert("请先登陆");
-						com.plus.openWindowX('/app/login.html', {});
+//						com.plus.openWindowX('/app/login.html', {});
+						mui.openWindow({url: "/app/login.html"});
+//						mui.toast("请先登录");
 					}
 				} else if(sendParams.fun_error) {
 					sendParams.fun_error(); //错误码
 				}
-				mui.toast("请先登录");//登陆错误提示
+//				mui.toast(data.msg);
+				mui.toast("请先登录");
+				//登陆错误提示
 				//用户状态错误的判断没有处理
 			}
 
@@ -285,7 +289,7 @@ function getMD5(str) {
 	}
 	changestr = changestr.substring(1);
 	console.log("===========>md5加密字符串前为" + changestr);
-	var sign = $.md5("9e787f77f3774fa7ac053321ed556bb4" + changestr);
+	var sign = $.md5("b7e7fccf2b0b4f49aa39ad678fd74ba5" + changestr);
 	return sign.toUpperCase();
 }
 Date.prototype.Format = function(fmt) { //author: meizz 
@@ -306,16 +310,15 @@ Date.prototype.Format = function(fmt) { //author: meizz
 
 //测试----
 
-com.data._BASE_URL = "http://101.132.181.5:18088/";
-com.data.APP_KEY = "orient_app_key_20171108_test";
-com.data.APP_SECRET = "9e787f77f3774fa7ac053321ed556bb4";
+//com.data._BASE_URL = "http://101.132.181.5:18088/";
+//com.data.APP_KEY = "orient_app_key_20171108_test";
+//com.data.APP_SECRET = "9e787f77f3774fa7ac053321ed556bb4";
 
 
 //生产-----
-//
-//com.data._BASE_URL = "https://apijijin.dzqh.com.cn:11443/";
-//com.data.APP_KEY = "orient_app_key_20180316";
-//com.data.APP_SECRET = "b7e7fccf2b0b4f49aa39ad678fd74ba5";
+com.data._BASE_URL = "https://apijijin.dzqh.com.cn:11443/";
+com.data.APP_KEY = "orient_app_key_20180316";
+com.data.APP_SECRET = "b7e7fccf2b0b4f49aa39ad678fd74ba5";
 
 //测试的相关，上架需要注释掉
 com.data.test = {
@@ -583,7 +586,7 @@ com.data.user = {
 			}
 		}
 		com.data.ajax.jsonp(params);
-	},
+	}, 
 	getPhoneCodeUncheck: function(do_data, do_success, do_error) {
 		var params = new com.data.ajax.param();
 
@@ -624,6 +627,7 @@ com.data.user = {
 				back: "none" //可取值"none"表示截获处理返回键，但不做任何响应；"close"表示截获处理返回键并关闭等待框；"transmit"表示不截获返回键，向后传递给Webview窗口继续处理（与未显示等待框的情况一致）
 			}
 		}
+		
 		com.data.ajax.jsonp(params);
 	},
 	loginByCode: function(do_data, do_success, do_error) {
@@ -869,6 +873,28 @@ com.data.funds = {
 		}
 		com.data.ajax.jsonp(params);
 	},
+	//东证动态
+//	getdzdt: function(do_data, do_success, do_error) {
+//		var params = new com.data.ajax.param();
+//		// do_data[""]=null;
+//		params.url = com.data._BASE_URL + "newsController.do?news_detail_query";
+//		params.fun_success = do_success;
+//		params.data = do_data;
+//		params.loading = {
+//			title: '处理中...',
+//			options: {
+//				back: "none" //可取值"none"表示截获处理返回键，但不做任何响应；"close"表示截获处理返回键并关闭等待框；"transmit"表示不截获返回键，向后传递给Webview窗口继续处理（与未显示等待框的情况一致）
+//			}
+//		}
+//		params.fun_error = function(msg, code) {
+//			if(do_error) {
+//				do_error(msg)
+//			} else {
+//				mui.toast(msg);
+//			}
+//		}
+//		com.data.ajax.jsonp(params);
+//	},
 	//我的基金-当前持有
 	fundMyNow: function(do_data, do_success, do_error) {
 		var params = new com.data.ajax.param();
@@ -966,7 +992,7 @@ com.data.funds = {
 		params.loading = {
 			title: '处理中...',
 			options: {
-				back: "none" //可取值"none"表示截获处理返回键，但不做任何响应；"close"表示截获处理返回键并关闭等待框；"transmit"表示不截获返回键，向后传递给Webview窗口继续处理（与未显示等待框的情况一致）
+				back: "close" //可取值"none"表示截获处理返回键，但不做任何响应；"close"表示截获处理返回键并关闭等待框；"transmit"表示不截获返回键，向后传递给Webview窗口继续处理（与未显示等待框的情况一致）
 			}
 		}
 		params.fun_error = function(msg, code) {
@@ -1485,3 +1511,6 @@ com.data.futures = {
 		com.data.ajax.jsonp(params);
 	}
 }
+
+	
+	
